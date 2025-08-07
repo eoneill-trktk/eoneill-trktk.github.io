@@ -303,11 +303,11 @@ body p a.bttn, body p button.bttn {
   margin: 0 0 0 3.5vw;
   left: 0;
   right: 0;
-  top: 240px;
+  top: 180px;
 }
 
 .carousel-caption h5 {
-  font-size: 2rem;
+  font-size: 2.1rem;
   color: #000f9f;
   line-height: 1.3;
 }
@@ -328,8 +328,9 @@ body p a.bttn, body p button.bttn {
 .carousel-control-prev-icon::before,
 .carousel-control-next-icon::before {
   display: inline-block;
-  font-size: 2rem;
-  color: rgba(0, 0, 0, 0.5);
+  font-size: 3rem;
+  color: white;
+  opacity: .5;
   content: '';
 }
 
