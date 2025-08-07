@@ -1,4 +1,12 @@
-  if (window.location.pathname.includes('/about/')) {
+if (window.location.pathname.includes('/about/')) {
+  const containerCheckInterval = setInterval(() => {
+    if (document.querySelector('.tl-carousel-container')) {
+      clearInterval(containerCheckInterval);
+      executeCarouselCode();
+    }
+  }, 100);
+
+  function executeCarouselCode() {
     const slickCSS = document.createElement('link');
     slickCSS.rel = 'stylesheet';
     slickCSS.href = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css';
@@ -77,24 +85,49 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: none;
-        border: none;
-        padding: 0;
-        width: auto;
-        height: auto;
-        display: flex;
+        background: white;
+        border: 2px solid #00074F;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex !important;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        color: #00074F;
         z-index: 10;
+        opacity: 1 !important;
+        visibility: visible !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       }
 
-      .tl-carousel-prev svg,
-      .tl-carousel-next svg {
-        stroke: #00074F;
-        width: 32px;
-        height: 32px;
+      .tl-carousel-prev:hover,
+      .tl-carousel-next:hover {
+        background: #00074F;
+      }
+
+      .tl-carousel-prev:hover::before,
+      .tl-carousel-next:hover::before {
+        border-color: white;
+      }
+
+      .tl-carousel-prev::before,
+      .tl-carousel-next::before {
+        content: "";
+        width: 15px;
+        height: 15px;
+        border-top: 3px solid #00074F;
+        border-right: 3px solid #00074F;
+        transition: all 0.3s ease;
+      }
+
+      .tl-carousel-prev::before {
+        transform: rotate(-135deg);
+        margin-right: -3px;
+      }
+
+      .tl-carousel-next::before {
+        transform: rotate(45deg);
+        margin-left: -3px;
       }
 
       .tl-carousel-prev {
@@ -153,10 +186,15 @@
         .tl-slide-title {
           font-size: 18px;
         }
+
+        .tl-carousel-prev,
+        .tl-carousel-next {
+          width: 35px;
+          height: 35px;
+        }
       }
     `;
     document.head.appendChild(styleTag);
-
 
     const jqueryScript = document.createElement('script');
     jqueryScript.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
@@ -164,7 +202,6 @@
       const slickScript = document.createElement('script');
       slickScript.src = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js';
       slickScript.onload = function () {
-
         (function() {
           function setEqualSlideHeights() {
             var maxHeight = 0;
@@ -182,18 +219,40 @@
 
             if ($carousel.find('.tl-slide').length > 0) {
               $carousel.slick({
-                slidesToShow: 5,
+                slidesToShow: 3,  // Changed from 5 to 3
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 6000,
                 speed: 800,
-                arrows: false,
+                arrows: true,
                 dots: true,
+                prevArrow: '<button type="button" class="tl-carousel-prev"></button>',
+                nextArrow: '<button type="button" class="tl-carousel-next"></button>',
                 responsive: [
-                  { breakpoint: 1200, settings: { slidesToShow: 4 } },
-                  { breakpoint: 992, settings: { slidesToShow: 3 } },
-                  { breakpoint: 768, settings: { slidesToShow: 2 } },
-                  { breakpoint: 576, settings: { slidesToShow: 1 } }
+                  { 
+                    breakpoint: 1200, 
+                    settings: { 
+                      slidesToShow: 3  // Kept same for large tablets
+                    } 
+                  },
+                  { 
+                    breakpoint: 992, 
+                    settings: { 
+                      slidesToShow: 2  // Changed from 3 to 2
+                    } 
+                  },
+                  { 
+                    breakpoint: 768, 
+                    settings: { 
+                      slidesToShow: 1  // Changed from 2 to 1
+                    } 
+                  },
+                  { 
+                    breakpoint: 576, 
+                    settings: { 
+                      slidesToShow: 1  // Unchanged
+                    } 
+                  }
                 ]
               });
 
@@ -232,3 +291,4 @@
     };
     document.body.appendChild(jqueryScript);
   }
+}
