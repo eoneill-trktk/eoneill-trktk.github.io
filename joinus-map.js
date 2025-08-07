@@ -1,113 +1,126 @@
 if (window.location.pathname.includes('/join-us/')) {
-    // Add Leaflet CSS
     const leafletCss = document.createElement('link');
     leafletCss.rel = 'stylesheet';
     leafletCss.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
     document.head.appendChild(leafletCss);
 
-    // Add Slick CSS
+
     const slickCSS = document.createElement('link');
     slickCSS.rel = 'stylesheet';
     slickCSS.href = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css';
     document.head.appendChild(slickCSS);
 
-    // Add custom styles
+
     const styleTag = document.createElement('style');
     styleTag.textContent = `
         #map {
             width: 100%;
-            height: 100vh;
+            height: 70vh; /* Reduced from 100vh */
         }
         .leaflet-popup-content {
-            margin: 13px 19px;
+            margin: 10px 15px;
             line-height: 1.4;
+            width: 300px !important; /* Fixed width for better control */
+            max-height: 400px; /* Prevent excessive height */
+            overflow-y: auto; /* Add scroll if content is too long */
+        }
+        .location-popup {
+            font-size: 14px;
         }
         .location-popup img {
-            max-width: 150px;
-            max-height: 100px;
-            margin-bottom: 10px;
+            max-width: 100%;
+            max-height: 120px;
+            margin-bottom: 8px;
+            display: block;
         }
         .location-popup h3 {
             margin: 5px 0;
             font-size: 16px;
+            line-height: 1.3;
         }
         .location-popup p {
-            margin: 5px 0;
-            font-size: 14px;
+            margin: 6px 0;
+            font-size: 13px;
+            line-height: 1.4;
         }
         .location-popup .address {
             font-weight: bold;
-            margin-top: 10px;
+            margin: 8px 0;
+            font-size: 13px;
         }
         .location-popup .contact-info {
             margin-top: 10px;
             font-size: 13px;
         }
+        .location-popup a {
+            word-break: break-all; /* Prevent long URLs from breaking layout */
+        }
         .locations-list {
-    display: block;
-    width: 100%;
-}
-
-.location {
-    display: flex;
-    margin-bottom: 2rem;
-    width: 100%;
-}
-
-.location-image {
-    flex: 0 0 auto;
-    width: 150px;
-    margin-right: 1rem;
-}
-
-.location-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.location-content {
-    flex: 1;
-}
-
-.location-category {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-.location-title {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
-}
-
-.location-description {
-    margin-bottom: 1rem;
-    line-height: 1.5;
-}
-
-.location-address {
-    line-height: 1.5;
-}
-
-.location-address div {
-    margin-bottom: 0.25rem;
-}
+            display: block;
+            width: 100%;
+        }
+        .location {
+            display: flex;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+        .location-image {
+            flex: 0 0 auto;
+            width: 150px;
+            margin-right: 1rem;
+        }
+        .location-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .location-content {
+            flex: 1;
+        }
+        .location-category {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .location-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
+        }
+        .location-description {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .location-address {
+            line-height: 1.5;
+        }
+        .location-address div {
+            margin-bottom: 0.25rem;
+        }
+        /* Custom scrollbar for popup */
+        .leaflet-popup-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .leaflet-popup-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .leaflet-popup-content::-webkit-scrollbar-thumb {
+            background: #888;
+        }
     `;
     document.head.appendChild(styleTag);
 
-    // Add Leaflet JS and initialize map after it loads
+    
     const leafletJs = document.createElement('script');
     leafletJs.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
     leafletJs.onload = function() {
-        // Initialize the map centered on Massachusetts
+    
         const map = L.map('map').setView([42.4072, -71.3824], 8);
 
-        // Add OpenStreetMap tiles
+    
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Location data
+    
         const locations = [
             {
                 name: "ABS Behavioral Health Services",
@@ -388,9 +401,7 @@ if (window.location.pathname.includes('/join-us/')) {
             }
         ];
 
-        
         locations.forEach(location => {
-            
             let popupContent = `<div class="location-popup">`;
             
             if (location.image) {
@@ -403,7 +414,12 @@ if (window.location.pathname.includes('/join-us/')) {
                 popupContent += `<p><strong>Category:</strong> ${location.category}</p>`;
             }
             
-            popupContent += `<p>${location.description}</p>`;
+            
+            const maxDescLength = 200;
+            const description = location.description.length > maxDescLength 
+                ? location.description.substring(0, maxDescLength) + '...' 
+                : location.description;
+            popupContent += `<p>${description}</p>`;
             
             if (location.website) {
                 popupContent += `<p><a href="${location.website}" target="_blank">Visit our website</a></p>`;
@@ -426,7 +442,6 @@ if (window.location.pathname.includes('/join-us/')) {
             }
             
             popupContent += `</div>`;
-            
             
             const marker = L.marker([location.lat, location.lng]).addTo(map);
             marker.bindPopup(popupContent);
