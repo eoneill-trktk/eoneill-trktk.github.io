@@ -1,0 +1,34 @@
+.wwl-gallery {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: 200px;
+  grid-auto-flow: dense;
+  margin: 10px auto;
+  padding: 0 10px;
+}
+
+.wwl-gallery__item {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.wwl-gallery__item > img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.wwl-gallery__item--hor {
+  grid-column: span 2;
+}
+
+.wwl-gallery__item--vert {
+  grid-row: span 2;
+}
+
+.wwl-gallery__item--lg {
+  grid-column: span 2;
+  grid-row: span 2;
+}
