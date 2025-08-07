@@ -219,7 +219,7 @@ if (window.location.pathname.includes('/about/')) {
 
             if ($carousel.find('.tl-slide').length > 0) {
               $carousel.slick({
-                slidesToShow: 3,  // Changed from 5 to 3
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 6000,
@@ -232,25 +232,25 @@ if (window.location.pathname.includes('/about/')) {
                   { 
                     breakpoint: 1200, 
                     settings: { 
-                      slidesToShow: 3  // Kept same for large tablets
+                      slidesToShow: 3
                     } 
                   },
                   { 
                     breakpoint: 992, 
                     settings: { 
-                      slidesToShow: 2  // Changed from 3 to 2
+                      slidesToShow: 2
                     } 
                   },
                   { 
                     breakpoint: 768, 
                     settings: { 
-                      slidesToShow: 1  // Changed from 2 to 1
+                      slidesToShow: 1
                     } 
                   },
                   { 
                     breakpoint: 576, 
                     settings: { 
-                      slidesToShow: 1  // Unchanged
+                      slidesToShow: 1
                     } 
                   }
                 ]
