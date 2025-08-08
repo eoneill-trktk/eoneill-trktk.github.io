@@ -15,14 +15,14 @@ if (window.location.pathname.includes('/join-us/')) {
     styleTag.textContent = `
         #map {
             width: 100%;
-            height: 70vh; /* Reduced from 100vh */
+            height: 70vh; 
         }
         .leaflet-popup-content {
             margin: 10px 15px;
             line-height: 1.4;
-            width: 300px !important; /* Fixed width for better control */
-            max-height: 400px; /* Prevent excessive height */
-            overflow-y: auto; /* Add scroll if content is too long */
+            width: 300px !important; 
+            max-height: 400px; 
+            overflow-y: auto; 
         }
         .location-popup {
             font-size: 14px;
@@ -53,7 +53,7 @@ if (window.location.pathname.includes('/join-us/')) {
             font-size: 13px;
         }
         .location-popup a {
-            word-break: break-all; /* Prevent long URLs from breaking layout */
+            word-break: break-all;
         }
         .locations-list {
             display: block;
@@ -91,6 +91,9 @@ if (window.location.pathname.includes('/join-us/')) {
         }
         .location-address {
             line-height: 1.5;
+        }
+        .locations-list hr{
+             color: rgba(0,0,0,.1);">
         }
         .location-address div {
             margin-bottom: 0.25rem;
