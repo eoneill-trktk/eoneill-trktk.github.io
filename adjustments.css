@@ -46,10 +46,10 @@ footer .footer-grid > .block:last-child{
 
 section[data-block-id="806871"] * {
   /* display: inline-grid; */
-  flex-direction: column;
+  /* flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: center; */
 }
 
   footer a.nav-link{
