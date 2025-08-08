@@ -45,7 +45,7 @@ footer .footer-grid > .block:last-child{
 }
 
 section[data-block-id="806871"] * {
-  display: inline-grid;
+  /* display: inline-grid; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
