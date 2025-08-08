@@ -2,8 +2,8 @@ html {
     scroll-behavior: smooth;
 }
   
-h1{
-  /* display: none; */
+.homepage h1{
+  display: none;
 }
 
 header{
