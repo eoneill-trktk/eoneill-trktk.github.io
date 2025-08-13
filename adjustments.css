@@ -6,6 +6,69 @@ html {
 	display: block;
 }
 
+.wwl-advice-block {
+  overflow: hidden;
+}
+
+.wwl-advice-block__image {
+  float: left;
+  width: min(38%, 420px);
+  margin: 0 1.5rem 1rem 0;
+}
+
+.wwl-advice-block__image img,
+.wwl-advice-block__svg svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wwl-advice-block__content {
+  overflow: hidden;
+}
+
+.wwl-advice-block__title h2 {
+  margin: 0 0 .35rem 0;
+  color: var(--brand-color, #00074F);
+  line-height: 1.2;
+}
+
+.wwl-advice-block__subtitle h3 {
+  margin: 0 0 .75rem 0;
+  line-height: 1.25;
+}
+
+.wwl-advice-block__description p {
+  margin: 0 0 1rem 0;
+}
+
+.wwl-advice-block__button {
+  margin-top: .5rem;
+}
+
+.wwl-advice-block__bttn {
+  display: inline-block;
+  padding: .6rem 1rem;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .wwl-advice-block__image {
+    float: none;
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .wwl-advice-block__bttn { font-size: .95rem; }
+  .wwl-advice-block__title h2 { font-size: 1.35rem; }
+  .wwl-advice-block__subtitle h3 { font-size: 1.05rem; }
+}
+
+
 .wwl-footer .menu-footer > ul > li > button,
 .wwl-footer .menu-footer > ul > li > span,
 .wwl-footer .menu-footer > ul > li > a {
