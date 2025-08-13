@@ -1,6 +1,16 @@
 html {
     scroll-behavior: smooth;
 }
+
+.wwl-footer .menu-footer > ul {
+	display: block;
+}
+
+.wwl-footer .menu-footer > ul > li > button,
+.wwl-footer .menu-footer > ul > li > span,
+.wwl-footer .menu-footer > ul > li > a {
+	text-transform:none;
+}
   
 .homepage h1{
   display: none;
