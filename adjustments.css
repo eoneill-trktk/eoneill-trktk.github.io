@@ -595,3 +595,96 @@ html, body {
   overflow-x: hidden;
   max-width: 100vw;
 }
+
+/* WWL at a Glance */
+
+.diagram-container {
+            position: relative;
+            max-width: 100%;
+            text-align: center;
+        }
+        
+        .diagram-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .diagram-link {
+            position: absolute;
+            display: block;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .diagram-link:hover {
+            background-color: rgba(0, 150, 255, 0.3);
+        }
+        
+        /* Default size (largest) */
+        #diagram {
+            width: 900px;
+        }
+        
+        /* Link positions for large size */
+        .link-1 { top: 15%; left: 25%; width: 50px; height: 50px; }
+        .link-2 { top: 20%; left: 50%; width: 50px; height: 50px; }
+        .link-3 { top: 25%; left: 75%; width: 50px; height: 50px; }
+        .link-4 { top: 50%; left: 15%; width: 50px; height: 50px; }
+        .link-5 { top: 50%; left: 85%; width: 50px; height: 50px; }
+        .link-6 { top: 70%; left: 25%; width: 50px; height: 50px; }
+        .link-7 { top: 75%; left: 50%; width: 50px; height: 50px; }
+        .link-8 { top: 80%; left: 75%; width: 50px; height: 50px; }
+        
+        /* Medium screens */
+        @media (max-width: 992px) {
+            #diagram {
+                width: 700px;
+            }
+            
+            /* Adjust link positions for medium size */
+            .link-1 { top: 15%; left: 25%; width: 40px; height: 40px; }
+            .link-2 { top: 20%; left: 50%; width: 40px; height: 40px; }
+            .link-3 { top: 25%; left: 75%; width: 40px; height: 40px; }
+            .link-4 { top: 50%; left: 15%; width: 40px; height: 40px; }
+            .link-5 { top: 50%; left: 85%; width: 40px; height: 40px; }
+            .link-6 { top: 70%; left: 25%; width: 40px; height: 40px; }
+            .link-7 { top: 75%; left: 50%; width: 40px; height: 40px; }
+            .link-8 { top: 80%; left: 75%; width: 40px; height: 40px; }
+        }
+        
+        /* Small screens */
+        @media (max-width: 768px) {
+            #diagram {
+                width: 500px;
+            }
+            
+            /* Adjust link positions for small size */
+            .link-1 { top: 15%; left: 25%; width: 30px; height: 30px; }
+            .link-2 { top: 20%; left: 50%; width: 30px; height: 30px; }
+            .link-3 { top: 25%; left: 75%; width: 30px; height: 30px; }
+            .link-4 { top: 50%; left: 15%; width: 30px; height: 30px; }
+            .link-5 { top: 50%; left: 85%; width: 30px; height: 30px; }
+            .link-6 { top: 70%; left: 25%; width: 30px; height: 30px; }
+            .link-7 { top: 75%; left: 50%; width: 30px; height: 30px; }
+            .link-8 { top: 80%; left: 75%; width: 30px; height: 30px; }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 576px) {
+            #diagram {
+                width: 350px;
+            }
+            
+            /* Adjust link positions for extra small size */
+            .link-1 { top: 15%; left: 25%; width: 20px; height: 20px; }
+            .link-2 { top: 20%; left: 50%; width: 20px; height: 20px; }
+            .link-3 { top: 25%; left: 75%; width: 20px; height: 20px; }
+            .link-4 { top: 50%; left: 15%; width: 20px; height: 20px; }
+            .link-5 { top: 50%; left: 85%; width: 20px; height: 20px; }
+            .link-6 { top: 70%; left: 25%; width: 20px; height: 20px; }
+            .link-7 { top: 75%; left: 50%; width: 20px; height: 20px; }
+            .link-8 { top: 80%; left: 75%; width: 20px; height: 20px; }
+        }
