@@ -10,6 +10,10 @@ html {
   overflow: hidden;
 }
 
+main.homepage h2.p1{
+  color: #00074F;
+}
+
 div.jobboard h2{
     font-size: 2em;
     color: #00074F;
@@ -386,6 +390,7 @@ body p a.bttn, body p button.bttn {
     }
 
 
+
 .carousel-caption {
   /* background-color: rgba(0, 7, 79, 0.8); */
   padding: 20px;
@@ -398,7 +403,7 @@ body p a.bttn, body p button.bttn {
 
 .carousel-caption h5 {
   font-size: 2.1rem;
-  color: #000f9f;
+  color: #00074F;
   line-height: 1.3;
 }
 
