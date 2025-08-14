@@ -16,6 +16,17 @@ div.jobboard h2{
     text-align: center;
 }
 
+.wwl-headline-banner .title{
+    background-color: #00074F;
+    padding: 2em 5vw;
+
+}
+
+.wwl-headline-banner .title h2{
+    color: #fff
+
+}
+
 .wwl-advice-block__image {
   float: left;
   width: min(38%, 420px);
