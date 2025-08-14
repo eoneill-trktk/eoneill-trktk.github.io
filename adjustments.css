@@ -198,8 +198,12 @@ body p a.bttn, body p button.bttn {
     }
 
     .d-block{
-      height: 720px;
+      height: 500px;
       object-fit: cover;
+      }
+
+      main.homepage .d-block{
+        height: 720px;
       }
 
     /* Responsive: Stack items vertically on small screens */
