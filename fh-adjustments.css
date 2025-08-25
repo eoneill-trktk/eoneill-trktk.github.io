@@ -1,3 +1,7 @@
+main.consulting section.hero-section.hero{
+    margin-bottom: 5em;
+}
+
 /*2 blocks image left, text grid right - until line 400*/
 :root{
     --white: #fff;
@@ -337,7 +341,7 @@ button:hover,html input[type=button]:hover,input[type=reset]:hover,input[type=su
     grid-column: 3/span 10
 }
 .fh-layout-side-by-side{
-    max-width: 1442px;
+    /* max-width: 1442px; */
     margin: 0 auto
 }
 @media (min-width: 1025px){.fh-layout-side-by-side{
