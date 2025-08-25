@@ -1882,3 +1882,11 @@ a.gb-button-f23c5128{
 .gb-grid-wrapper-35e89dc4 .gb-grid-column,.gb-grid-wrapper-de7460ab .gb-grid-column{
         width: 100%
     }}
+
+.fh-video-wrapper iframe{
+    max-height:800px;
+    display:block;
+    margin:0 auto;
+    aspect-ratio: 16 / 9; 
+    width: 100% !important
+}
