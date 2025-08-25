@@ -2695,3 +2695,11 @@ p.gb-headline-9d7d7083{
 .gb-grid-wrapper-35e89dc4 .gb-grid-column,.gb-grid-wrapper-de7460ab .gb-grid-column{
         width: 100%
     }}
+
+footer .footer-grid > .block:last-child{
+        margin-top: 0!important;
+}
+
+[data-block-id="816694"]{
+    padding: 2em 0 0!important;
+}
