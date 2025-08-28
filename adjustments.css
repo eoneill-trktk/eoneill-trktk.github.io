@@ -708,3 +708,11 @@ html, body {
             .link-7 { top: 75%; left: 50%; width: 20px; height: 20px; }
             .link-8 { top: 80%; left: 75%; width: 20px; height: 20px; }
         }
+
+
+    .simple-content-collection.two-column .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 2em;
+}
