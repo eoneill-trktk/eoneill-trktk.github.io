@@ -719,3 +719,15 @@ html, body {
 .wwl-footer{
   margin-top: 2em;
 }
+
+.statistics .basiccontentblock.bg-color .basic{
+    padding: 2em;
+}
+
+.statistics main .main-content>.block.basiccontentblock-layout {
+    padding: 0;
+}
+
+.statistics .basiccontentblock-layout .basic{
+  padding: 2em;
+}
