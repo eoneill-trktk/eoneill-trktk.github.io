@@ -651,16 +651,37 @@ html, body {
         #diagram {
             width: 1200px;
         }
-        
+      
         /* Link positions for large size */
         .link-1 { top: 130px; left: 131px; width: 220px; height: 100px; }
-        .link-2 { top: 20%; left: 50%; width: 50px; height: 50px; }
-        .link-3 { top: 25%; left: 75%; width: 50px; height: 50px; }
-        .link-4 { top: 50%; left: 15%; width: 50px; height: 50px; }
-        .link-5 { top: 50%; left: 85%; width: 50px; height: 50px; }
-        .link-6 { top: 70%; left: 25%; width: 50px; height: 50px; }
-        .link-7 { top: 75%; left: 50%; width: 50px; height: 50px; }
-        .link-8 { top: 80%; left: 75%; width: 50px; height: 50px; }
+        .link-2 { top: 32px;
+    left: 437px;
+    width: 300px;
+    height: 70px; }
+        .link-3 { top: 122px;
+    left: 807px;
+    width: 200px;
+    height: 100px; }
+        .link-4 { top: 344px;
+    left: 88px;
+    width: 172px;
+    height: 80px; }
+        .link-5 { top: 315px;
+    left: 899px;
+    width: 242px;
+    height: 160px; }
+        .link-6 { top: 575px;
+    left: 108px;
+    width: 222px;
+    height: 100px; }
+        .link-7 { top: 675px;
+    left: 408px;
+    width: 360px;
+    height: 90px; }
+        .link-8 { top: 575px;
+    left: 828px;
+    width: 190px;
+    height: 60px; }
         
         /* Medium screens */
         @media (max-width: 992px) {
