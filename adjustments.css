@@ -762,3 +762,11 @@ html, body {
 .statistics .basiccontentblock-layout .basic{
   padding: 2em;
 }
+
+header.site-header #site-logo {
+    padding-left: 2vw;
+}
+
+#main > section, footer > section, #second-footer.footer2 .description {
+    margin: 0;
+}
