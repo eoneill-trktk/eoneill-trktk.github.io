@@ -840,8 +840,9 @@ header.site-header #site-logo {
 
 /* Responsive behavior */
 @media (max-width: 768px) {
-  .row-with-icon .basic .button{
+  .basiccontentblock .row-with-icon .basic .button{
     align-self: center;
+    
   }
   .row-with-icon {
     grid-template-columns: 1fr;
