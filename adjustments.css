@@ -840,7 +840,7 @@ header.site-header #site-logo {
 
 /* Responsive behavior */
 @media (max-width: 768px) {
-  .basiccontentblock .row-with-icon .basic .button{
+  .row-with-icon .basic .button{
     align-self: center;
     
   }
