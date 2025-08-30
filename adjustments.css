@@ -839,8 +839,14 @@ header.site-header #site-logo {
   background: #004273;
 }
 
+.row-with-icon .title{
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
 /* Responsive behavior */
 @media (max-width: 768px) {
+  .row-with-icon .title{
+  border-bottom: none
+}
   .basiccontentblock .row-with-icon.basic .button{
     align-self: center;
     
