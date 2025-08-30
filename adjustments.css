@@ -787,10 +787,10 @@ header.site-header #site-logo {
 
 .row-with-icon {
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 10% 90%;
   gap: 2rem;
   align-items: start;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 2rem 1rem;
 }
@@ -821,13 +821,13 @@ header.site-header #site-logo {
 }
 
 .row-with-icon .button .bttn {
-  display: inline-block;
+  /* display: inline-block;
   background: #005fa3;
   color: #fff;
   padding: 0.75rem 1.5rem;
   text-decoration: none;
   border-radius: 4px;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease; */
 }
 
 .row-with-icon .button .bttn:hover {
@@ -841,7 +841,7 @@ header.site-header #site-logo {
     text-align: center;
   }
   .row-with-icon .image {
-    max-width: 200px;
+    max-width: 120px;
     margin: 0 auto;
   }
 }
