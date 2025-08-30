@@ -791,12 +791,16 @@ header.site-header #site-logo {
   gap: 2rem;
   align-items: start;
   /* max-width: 1200px; */
-  margin: 0 auto;
+  /* margin: 0 auto; */
   padding: 2rem 1rem;
 }
 
+.row-with-icon .image{
+  margin: 0 auto;
+}
+
 .row-with-icon .image img {
-  width: 100%;
+  width: auto;
   height: auto;
   display: block;
 }
