@@ -801,6 +801,7 @@ header.site-header #site-logo {
 
 .row-with-icon .image img {
   width: auto;
+  max-width: 120px;
   height: auto;
   display: block;
 }
