@@ -860,3 +860,7 @@ header.site-header #site-logo {
     margin: 0 auto;
   }
 }
+
+.tab-pages .image-hero{
+      padding-bottom: 0;
+}
