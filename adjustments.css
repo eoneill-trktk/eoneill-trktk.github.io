@@ -121,7 +121,7 @@ div[data-block-id="807631"] div.description, .biz-carousel-container{
 
 h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,h4.heading-bar.dark,h5.heading-bar.dark,h6.heading-bar.dark {
     color:var(--lightest);
-    background: var(--accent1);
+    background: #00074F;
 }
 
 h1.heading-bar.light,h2.heading-bar.light,h3.heading-bar.light,h4.heading-bar.light,h5.heading-bar.light,h6.heading-bar.light {
