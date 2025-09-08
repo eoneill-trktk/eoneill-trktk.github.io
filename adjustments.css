@@ -1084,3 +1084,15 @@ header.site-header #site-logo {
     width: 200px;
 }
 }
+
+.wwl-map-legend .title .h2{
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+    margin-bottom: 2em;
+}
+
+@media (max-width: 676px) {
+    .grid-container > .wwl-map-legend.block.sectionblock-cols.grid-3 > section > .sectionblock-grid, .grid-container > .block.sectionblock-cols.grid-5 > section > .sectionblock-grid, .grid-container > .block.sectionblock-cols.grid-4 > section > .sectionblock-grid {
+        grid-template-columns: auto;
+    }
+
+}
