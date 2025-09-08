@@ -964,33 +964,6 @@ header.site-header #site-logo {
 
 }
 
-@media (max-width: 1200px) {
-  h2.hero-caption-title{
-    font-size: 1em;
-  }
-    .hero-caption{
-    width: 400px;
-}
-.wwl-hero-carousel .hero-swiper-button-next {
-    right: -10px;
-}
-.wwl-hero-carousel .hero-swiper-button-prev {
-    left: -10px;
-}
-.wwl-hero-carousel .hero-swiper-slide img {
-    width: 100%;
-}
-}
-
-@media (max-width: 700px) {
-  h2.hero-caption-title{
-    font-size: 12px;
-  }
-    .hero-caption{
-    width: 200px;
-}
-}
-
 /* 
 @media (max-width: 600px) {
           .hero-caption{
@@ -1084,3 +1057,30 @@ header.site-header #site-logo {
     }
     .wwl-hero-carousel .hero-swiper-button-prev { left: 10px; }
     .wwl-hero-carousel .hero-swiper-button-next { right: 10px; }
+
+    @media (max-width: 1200px) {
+  h2.hero-caption-title{
+    font-size: 1em;
+  }
+    .hero-caption{
+    width: 400px;
+}
+.wwl-hero-carousel .hero-swiper-button-next {
+    right: -10px;
+}
+.wwl-hero-carousel .hero-swiper-button-prev {
+    left: -10px;
+}
+.wwl-hero-carousel .hero-swiper-slide img {
+    width: 100%;
+}
+}
+
+@media (max-width: 700px) {
+  h2.hero-caption-title{
+    font-size: 12px;
+  }
+    .hero-caption{
+    width: 200px;
+}
+}
