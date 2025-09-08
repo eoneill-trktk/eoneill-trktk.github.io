@@ -960,18 +960,17 @@ header.site-header #site-logo {
     position: absolute;
     top: 10px;
     width: 800px;
-    padding: 5vw;
+    padding: 2vw 5vw;
 
 }
 
 @media (max-width: 1200px) {
-          .hero-caption{
-    position: absolute;
-    top: 10px;
+  h2.hero-caption-title{
+    font-size: 1.5em;
+  }
+    .hero-caption{
     font-size: 1.5em;
     width: 400px;
-    padding: 5vw;
-
 }
 }
 
