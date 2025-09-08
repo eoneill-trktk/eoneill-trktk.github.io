@@ -957,13 +957,34 @@ header.site-header #site-logo {
   right: 10px;
 }
 .hero-caption{
-
     position: absolute;
     top: 10px;
     width: 800px;
-    padding: 2em 2em;
+    padding: 5vw;
 
 }
+
+/* @media (max-width: 1200px) {
+          .hero-caption{
+    position: absolute;
+    top: 10px;
+    width: 800px;
+    padding: 5vw;
+
+}
+}
+
+
+@media (max-width: 600px) {
+          .hero-caption{
+    position: absolute;
+    top: 10px;
+    width: 800px;
+    padding: 5vw;
+
+}
+} */
+
 
 .wwl-hero-carousel .hero-swiper-slide {
   width: 100% !important;
