@@ -1091,7 +1091,7 @@ header.site-header #site-logo {
 }
 
 @media (max-width: 676px) {
-    .grid-container > .wwl-map-legend.block.sectionblock-cols.grid-3 > section > .sectionblock-grid, .grid-container > .block.sectionblock-cols.grid-5 > section > .sectionblock-grid, .grid-container > .block.sectionblock-cols.grid-4 > section > .sectionblock-grid {
+    .grid-container > .wwl-footer.block.sectionblock-cols.grid-3 > section > .sectionblock-grid,.grid-container > .wwl-map-legend.block.sectionblock-cols.grid-3 > section > .sectionblock-grid, .grid-container > .block.sectionblock-cols.grid-5 > section > .sectionblock-grid, .grid-container > .block.sectionblock-cols.grid-4 > section > .sectionblock-grid {
         grid-template-columns: auto;
     }
 
