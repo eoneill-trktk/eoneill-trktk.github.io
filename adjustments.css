@@ -964,3 +964,85 @@ header.site-header #site-logo {
     padding: 2em 2em;
 
 }
+
+.wwl-hero-carousel .hero-swiper-slide {
+  width: 100% !important;
+  flex-shrink: 0;
+}
+.wwl-hero-carousel .hero-swiper-wrapper {
+  display: flex;
+  width: 100% !important;
+}
+
+    .wwl-hero-carousel .hero-swiper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .wwl-hero-carousel .hero-swiper-wrapper {
+      display: flex;
+      transition-property: transform;
+      box-sizing: content-box;
+    }
+    .wwl-hero-carousel .hero-swiper-slide {
+      flex-shrink: 0;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .wwl-hero-carousel .hero-swiper-slide img {
+      width: 100vw;
+      height: 100%;
+      object-fit: cover;
+    }
+    .wwl-hero-carousel .hero-swiper-pagination {
+      position: absolute;
+      text-align: center;
+      transition: 300ms opacity;
+      transform: translate3d(0,0,0);
+      z-index: 10;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+    }
+    .wwl-hero-carousel .hero-swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      border-radius: 50%;
+      background: #00074F;
+      opacity: 0.3;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+    .wwl-hero-carousel .hero-swiper-pagination-bullet-active {
+      opacity: 1;
+      background: #00074F;
+    }
+    .wwl-hero-carousel .hero-swiper-button-prev,
+    .wwl-hero-carousel .hero-swiper-button-next {
+      position: absolute;
+      top: 50%;
+      width: 44px;
+      height: 44px;
+      margin-top: -22px;
+      z-index: 10;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00074F;
+      font-size: 2rem;
+      font-weight: bold;
+      transition: opacity 0.3s;
+    }
+    .wwl-hero-carousel .hero-swiper-button-prev:hover,
+    .wwl-hero-carousel .hero-swiper-button-next:hover {
+      opacity: 0.7;
+    }
+    .wwl-hero-carousel .hero-swiper-button-prev { left: 10px; }
+    .wwl-hero-carousel .hero-swiper-button-next { right: 10px; }
