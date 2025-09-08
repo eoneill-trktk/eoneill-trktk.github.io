@@ -1085,7 +1085,7 @@ header.site-header #site-logo {
 }
 }
 
-.wwl-map-legend .title .h2{
+.wwl-map-legend .title h2{
   border-bottom: 1px solid rgba(0, 0, 0, .1);
     margin-bottom: 2em;
 }
