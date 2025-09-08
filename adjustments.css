@@ -966,10 +966,9 @@ header.site-header #site-logo {
 
 @media (max-width: 1200px) {
   h2.hero-caption-title{
-    font-size: 1.5em;
+    font-size: 1em;
   }
     .hero-caption{
-    font-size: 1.5em;
     width: 400px;
 }
 }
