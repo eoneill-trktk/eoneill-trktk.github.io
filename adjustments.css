@@ -1096,3 +1096,7 @@ header.site-header #site-logo {
     }
 
 }
+
+.wwl-aside-main.main-content>h1 {
+    padding: 2em;
+}
