@@ -219,7 +219,7 @@ if (window.location.pathname.includes('/about/')) {
 
             if ($carousel.find('.tl-slide').length > 0) {
               $carousel.slick({
-                slidesToShow: 3,
+                slidesToShow: 5,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 6000,
