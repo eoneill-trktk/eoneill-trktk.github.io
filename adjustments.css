@@ -964,17 +964,18 @@ header.site-header #site-logo {
 
 }
 
-/* @media (max-width: 1200px) {
+@media (max-width: 1200px) {
           .hero-caption{
     position: absolute;
     top: 10px;
-    width: 800px;
+    font-size: 1.5em;
+    width: 400px;
     padding: 5vw;
 
 }
 }
 
-
+/* 
 @media (max-width: 600px) {
           .hero-caption{
     position: absolute;
