@@ -971,6 +971,24 @@ header.site-header #site-logo {
     .hero-caption{
     width: 400px;
 }
+.wwl-hero-carousel .hero-swiper-button-next {
+    right: -10px;
+}
+.wwl-hero-carousel .hero-swiper-button-prev {
+    left: -10px;
+}
+.wwl-hero-carousel .hero-swiper-slide img {
+    width: 100%;
+}
+}
+
+@media (max-width: 700px) {
+  h2.hero-caption-title{
+    font-size: 12px;
+  }
+    .hero-caption{
+    width: 200px;
+}
 }
 
 /* 
