@@ -956,3 +956,11 @@ header.site-header #site-logo {
 .wwl-hero-carousel .hero-swiper-button-next {
   right: 10px;
 }
+.hero-caption{
+
+    position: absolute;
+    top: 10px;
+    width: 800px;
+    padding: 2em 2em;
+
+}
