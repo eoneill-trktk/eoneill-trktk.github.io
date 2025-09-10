@@ -1,3 +1,4 @@
+
 if (window.location.pathname.includes('/join-us/')) {
     // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {
@@ -18,6 +19,10 @@ function scrollToMap() {
             top: offsetTop,
             behavior: 'smooth'
         });
+        
+        console.log('Scrolling to map position:', offsetTop);
+    } else {
+        console.error('Map element not found for scrolling');
     }
 }
 
@@ -282,7 +287,9 @@ function initMap() {
             locationEl.addEventListener('click', function() {
                 map.setView([lat, lng], 13);
                 marker.openPopup();
-                scrollToMap(); // Scroll to the map
+                
+                // Add a small delay to ensure the map is fully rendered before scrolling
+                setTimeout(scrollToMap, 100);
             });
         });
         
