@@ -1,114 +1,25 @@
 (function() {
-            // Inject Swiper CSS
-            const swiperCSS = document.createElement('link');
-            swiperCSS.rel = 'stylesheet';
-            swiperCSS.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
-            document.head.appendChild(swiperCSS);
-            
-            // Inject custom styles
-            const customStyles = document.createElement('style');
-            customStyles.textContent = `
-                .bis-carousel-container {
-                    position: relative;
-                    width: 100%;
-                    height: 200px;
-                    margin: 0 auto;
-                    overflow: hidden;
-                }
-                
-                .bis-carousel-container .swiper {
-                    width: 100%;
-                    height: 100%;
-                }
-                
-                .bis-carousel-container .bis-carousel-item {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100%;
-                    transition: transform 1s ease, opacity 1s ease;
-                    opacity: 0.5;
-                }
-                
-                .bis-carousel-container .bis-carousel-item.swiper-slide-active {
-                    opacity: 1;
-                    transform: scale(1.2);
-                    z-index: 2;
-                }
-                
-                .bis-carousel-container .bis-carousel-image-wrapper {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100%;
-                    padding: 10px;
-                }
-                
-                .bis-carousel-container .bis-carousel-image-wrapper img {
-                    max-height: 100%;
-                    max-width: 100%;
-                    object-fit: contain;
-                    transition: transform 1s ease;
-                }
-                
-                .bis-carousel-container .bis-carousel-nav {
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 40px;
-                    height: 40px;
-                    background: rgba(255, 255, 255, 0.9);
-                    border: none;
-                    border-radius: 50%;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-                    z-index: 10;
-                    cursor: pointer;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 18px;
-                    font-weight: bold;
-                    transition: all 0.3s ease;
-                }
-                
-                .bis-carousel-container .bis-carousel-nav:hover {
-                    background: white;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-                }
-                
-                .bis-carousel-container .bis-carousel-prev {
-                    left: 15px;
-                }
-                
-                .bis-carousel-container .bis-carousel-next {
-                    right: 15px;
-                }
-                
-                /* Responsive adjustments */
-                @media (max-width: 768px) {
-                    .bis-carousel-container {
-                        height: 180px;
-                    }
-                    
-                    .bis-carousel-container .bis-carousel-nav {
-                        width: 35px;
-                        height: 35px;
-                        font-size: 16px;
-                    }
-                }
-                
-                @media (max-width: 480px) {
-                    .bis-carousel-container {
-                        height: 150px;
-                    }
-                    
-                    .bis-carousel-container .bis-carousel-nav {
-                        width: 30px;
-                        height: 30px;
-                        font-size: 14px;
-                    }
-                }
-                    .bis-carousel-container {
+    'use strict';
+    
+    // Check if Swiper is available
+    function initBisCarousel() {
+        if (typeof Swiper === 'undefined') {
+            console.log('Swiper not loaded yet, retrying in 100ms...');
+            setTimeout(initBisCarousel, 100);
+            return;
+        }
+        
+        // Check if our carousel exists
+        const carouselContainer = document.getElementById('bis-carousel');
+        if (!carouselContainer) {
+            console.error('bis-carousel container not found');
+            return;
+        }
+        
+        // Add our custom styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .bis-carousel-container {
                 position: relative;
                 width: 100%;
                 height: 240px; /* Increased height to accommodate labels */
@@ -148,9 +59,10 @@
                 align-items: center;
                 width: 200px;
                 height: 200px;
-                background-color: #fff;
+                background-color: #f8f9fa;
                 border-radius: 8px;
                 padding: 15px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
             
             .bis-carousel-container .bis-carousel-image-wrapper img {
@@ -178,6 +90,7 @@
                 background: rgba(255, 255, 255, 0.9);
                 border: none;
                 border-radius: 50%;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
                 z-index: 10;
                 cursor: pointer;
                 display: flex;
@@ -190,6 +103,7 @@
             
             .bis-carousel-container .bis-carousel-nav:hover {
                 background: white;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             }
             
             .bis-carousel-container .bis-carousel-prev {
@@ -245,104 +159,88 @@
                     font-size: 12px;
                 }
             }
-            `;
-            document.head.appendChild(customStyles);
+        `;
+        document.head.appendChild(style);
+        
+        // Prepare the carousel for Swiper
+        const track = document.getElementById('bis-carousel-track');
+        if (track) {
+            track.classList.add('swiper-wrapper');
             
-            // Load Swiper JS and initialize when ready
-            function loadSwiperAndInit() {
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
-                script.onload = function() {
-                    initSwiperWhenReady();
-                };
-                document.head.appendChild(script);
-            }
+            const items = track.querySelectorAll('.bis-carousel-item');
+            items.forEach(item => {
+                item.classList.add('swiper-slide');
+            });
             
-            // Initialize Swiper when available
-            function initSwiperWhenReady() {
-                if (typeof Swiper === 'undefined') {
-                    setTimeout(initSwiperWhenReady, 100);
-                    return;
-                }
-                
-                // Check if our carousel container exists
-                const carouselContainer = document.getElementById('bis-carousel');
-                if (!carouselContainer) {
-                    console.warn('bis-carousel container not found');
-                    return;
-                }
-                
-                // Modify the HTML structure for Swiper
-                const track = document.getElementById('bis-carousel-track');
-                if (track) {
-                    track.classList.add('swiper-wrapper');
-                    const items = track.querySelectorAll('.bis-carousel-item');
-                    items.forEach(item => {
-                        item.classList.add('swiper-slide');
-                    });
-                    
-                    // Create swiper container
-                    const swiperEl = document.createElement('div');
-                    swiperEl.classList.add('swiper');
-                    swiperEl.appendChild(track.cloneNode(true));
-                    track.parentNode.replaceChild(swiperEl, track);
-                    
-                    // Initialize Swiper
-                    const swiper = new Swiper(swiperEl, {
-                        loop: true,
-                        centeredSlides: true,
-                        slidesPerView: 'auto',
-                        spaceBetween: 20,
-                        speed: 1000,
-                        autoplay: {
-                            delay: 5000,
-                            disableOnInteraction: false,
-                            pauseOnMouseEnter: true
+            // Create swiper container
+            const swiperEl = document.createElement('div');
+            swiperEl.classList.add('swiper');
+            swiperEl.appendChild(track.cloneNode(true));
+            
+            // Replace the track with the swiper structure
+            track.parentNode.replaceChild(swiperEl, track);
+            
+            // Initialize Swiper
+            try {
+                new Swiper(swiperEl, {
+                    loop: true,
+                    centeredSlides: true,
+                    slidesPerView: 'auto',
+                    spaceBetween: 20,
+                    speed: 1000,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: true,
+                        pauseOnMouseEnter: true
+                    },
+                    navigation: {
+                        nextEl: '.bis-carousel-next',
+                        prevEl: '.bis-carousel-prev',
+                    },
+                    breakpoints: {
+                        320: {
+                            slidesPerView: 1.5,
+                            spaceBetween: 10
                         },
-                        navigation: {
-                            nextEl: '.bis-carousel-next',
-                            prevEl: '.bis-carousel-prev',
+                        640: {
+                            slidesPerView: 3,
+                            spaceBetween: 15
                         },
-                        breakpoints: {
-                            320: {
-                                slidesPerView: 1.5,
-                                spaceBetween: 10
-                            },
-                            640: {
-                                slidesPerView: 3,
-                                spaceBetween: 15
-                            },
-                            1024: {
-                                slidesPerView: 5,
-                                spaceBetween: 20
+                        1024: {
+                            slidesPerView: 5,
+                            spaceBetween: 20
+                        }
+                    },
+                    on: {
+                        init: function() {
+                            const activeSlide = this.slides[this.activeIndex];
+                            if (activeSlide) {
+                                activeSlide.classList.add('swiper-slide-active');
                             }
+                            console.log('BIS Carousel initialized successfully!');
                         },
-                        on: {
-                            init: function() {
-                                const activeSlide = this.slides[this.activeIndex];
-                                if (activeSlide) {
-                                    activeSlide.classList.add('swiper-slide-active');
-                                }
-                            },
-                            slideChange: function() {
-                                this.slides.forEach(slide => {
-                                    slide.classList.remove('swiper-slide-active');
-                                });
-                                
-                                const activeSlide = this.slides[this.activeIndex];
-                                if (activeSlide) {
-                                    activeSlide.classList.add('swiper-slide-active');
-                                }
+                        slideChange: function() {
+                            this.slides.forEach(slide => {
+                                slide.classList.remove('swiper-slide-active');
+                            });
+                            
+                            const activeSlide = this.slides[this.activeIndex];
+                            if (activeSlide) {
+                                activeSlide.classList.add('swiper-slide-active');
                             }
                         }
-                    });
-                }
+                    }
+                });
+            } catch (e) {
+                console.error('Error initializing BIS Carousel:', e);
             }
-            
-            // Start the process when DOM is ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', loadSwiperAndInit);
-            } else {
-                loadSwiperAndInit();
-            }
-        })();
+        }
+    }
+    
+    // Start the initialization process
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initBisCarousel);
+    } else {
+        initBisCarousel();
+    }
+})();
