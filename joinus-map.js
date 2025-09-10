@@ -225,7 +225,7 @@ function initMap() {
             if (category) {
                 // Extract the base category name (before any hyphens)
                 const baseCategory = category.split('-')[0];
-                if (baseCategory) categories.add(baseCategory);
+                categories.add(baseCategory);
             }
         });
         
@@ -256,17 +256,7 @@ function initMap() {
         // Create pagination container
         const paginationContainer = document.createElement('div');
         paginationContainer.className = 'locations-pagination';
-        // SAFETY: some templates don't include .locations-list; fall back to a sane parent
-        const locationsListEl = document.querySelector('.locations-list');
-        if (locationsListEl && locationsListEl.parentNode) {
-            locationsListEl.parentNode.appendChild(paginationContainer);
-        } else if (locationElements.length) {
-            // append to the first location's parent (your markup shows locations are direct children of a block)
-            locationElements[0].parentNode.appendChild(paginationContainer);
-        } else {
-            // last resort
-            document.body.appendChild(paginationContainer);
-        }
+        document.querySelector('.locations-list').parentNode.appendChild(paginationContainer);
         
         // Function to update pagination
         function updatePagination() {
@@ -276,7 +266,7 @@ function initMap() {
             );
             
             // Calculate total pages
-            const totalPages = Math.ceil(visibleLocations.length / itemsPerPage) || 1;
+            const totalPages = Math.ceil(visibleLocations.length / itemsPerPage);
             
             // Update pagination buttons
             paginationContainer.innerHTML = '';
@@ -345,8 +335,7 @@ function initMap() {
             const description = descriptionElement ? descriptionElement.textContent.trim() : '';
             
             // Extract address
-            // Defensive: address could be in .location-address, .fc-location-marker, or <address>
-            const addressElement = locationEl.querySelector('.location-address') || locationEl.querySelector('.fc-location-marker') || locationEl.querySelector('address');
+            const addressElement = locationEl.querySelector('.location-address');
             const address = addressElement ? addressElement.textContent.trim() : '';
             
             // Parse coordinates
@@ -383,11 +372,9 @@ function initMap() {
             // Store marker for later reference
             markers[name] = marker;
             
-            // Add geo and name attributes to the marker icon and popup (guarded)
-            if (marker._icon) {
-                marker._icon.setAttribute('geo', geo);
-                marker._icon.setAttribute('name', name);
-            }
+            // Add geo and name attributes to the marker icon and popup
+            marker._icon.setAttribute('geo', geo);
+            marker._icon.setAttribute('name', name);
             
             // Add event listener to set attributes on popup when it opens
             marker.on('popupopen', function() {
@@ -421,16 +408,12 @@ function initMap() {
             
             locationElements.forEach(locationEl => {
                 const category = locationEl.classList[1] || '';
-                const nameAttr = locationEl.getAttribute('name') || '';
-                const name = nameAttr.toLowerCase();
-                const descriptionEl = locationEl.querySelector('.location-description');
-                const description = descriptionEl ? descriptionEl.textContent.toLowerCase() : '';
-                // tolerant address lookup: .location-address, .fc-location-marker, <address>
-                const addressEl = locationEl.querySelector('.location-address') || locationEl.querySelector('.fc-location-marker') || locationEl.querySelector('address');
-                const address = addressEl ? addressEl.textContent.toLowerCase() : '';
+                const name = locationEl.getAttribute('name').toLowerCase();
+                const description = locationEl.querySelector('.location-description').textContent.toLowerCase();
+                const address = locationEl.querySelector('.location-address') ? locationEl.querySelector('.location-address').textContent.toLowerCase() : '';
                 
                 // Extract base category for matching (e.g., "Business-Network" becomes "Business")
-                const baseCategory = (category.split('-')[0] || '').toString();
+                const baseCategory = category.split('-')[0];
                 
                 // Check if category matches (or if "all" is selected)
                 const categoryMatch = categoryValue === 'all' || baseCategory === categoryValue;
@@ -443,7 +426,7 @@ function initMap() {
                     
                     // Show corresponding marker on map
                     const marker = markers[locationEl.getAttribute('name')];
-                    if (marker && !map.hasLayer(marker)) {
+                    if (marker) {
                         map.addLayer(marker);
                     }
                 } else {
@@ -451,7 +434,7 @@ function initMap() {
                     
                     // Hide corresponding marker on map
                     const marker = markers[locationEl.getAttribute('name')];
-                    if (marker && map.hasLayer(marker)) {
+                    if (marker) {
                         map.removeLayer(marker);
                     }
                 }
@@ -464,26 +447,8 @@ function initMap() {
         categoryFilter.addEventListener('change', filterLocations);
         searchInput.addEventListener('input', filterLocations);
         
-        // Run an initial filter pass to ensure list + markers + pagination are in sync
+        // Run an initial filter pass
         filterLocations();
-        
-        // Initialize pagination
-        updatePagination();
-        
-        // MutationObserver to watch for changes in location elements
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                    // If class changes, re-run filtering to account for changes
-                    filterLocations();
-                }
-            });
-        });
-        
-        // Observe each location element for class changes
-        locationElements.forEach(locationEl => {
-            observer.observe(locationEl, { attributes: true });
-        });
     };
     
     leafletJs.onerror = function() {
@@ -491,4 +456,4 @@ function initMap() {
     };
     
     document.head.appendChild(leafletJs);
-} 
+}
