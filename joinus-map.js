@@ -31,35 +31,179 @@ function initMap() {
     leafletCss.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
     document.head.appendChild(leafletCss);
 
-    // Add debugging console
-    const debugDiv = document.createElement('div');
-    debugDiv.id = 'debug-console';
-    debugDiv.style = 'position:fixed; bottom:0; left:0; right:0; background:#333; color:#fff; padding:10px; z-index:9999; font-family:monospace; font-size:12px; max-height:200px; overflow:auto;';
-    document.body.appendChild(debugDiv);
-    
-    function debugLog(message) {
-        const debugConsole = document.getElementById('debug-console');
-        debugConsole.innerHTML += '<div>' + new Date().toLocaleTimeString() + ': ' + message + '</div>';
-        debugConsole.scrollTop = debugConsole.scrollHeight;
-    }
+    // Add Slick Carousel CSS
+    const slickCSS = document.createElement('link');
+    slickCSS.rel = 'stylesheet';
+    slickCSS.href = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css';
+    document.head.appendChild(slickCSS);
 
-    debugLog('Script loaded for /join-us/ page');
+    // Add custom styles
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `
+        #map {
+            width: 100%;
+            height: 70vh; 
+        }
+        .leaflet-popup-content {
+            margin: 10px 15px;
+            line-height: 1.4;
+            width: 400px !important; 
+            max-height: 500px; 
+            overflow-y: auto; 
+        }
+        .location-popup {
+            font-size: 14px;
+        }
+        .location-popup img {
+            max-width: 100%;
+            max-height: 120px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .location-popup h3 {
+            margin: 5px 0;
+            font-size: 16px;
+            line-height: 1.3;
+        }
+        .location-popup p {
+            margin: 6px 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .location-popup .address {
+            font-weight: bold;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+        .location-popup .contact-info {
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        .location-popup a {
+            word-break: break-all;
+        }
+        .locations-list {
+            display: block;
+            width: 100%;
+            position: relative;
+        }
+        .location {
+            display: flex;
+            margin-bottom: 2rem;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .location:hover {
+            background-color: #f5f7fa;
+            transform: translateY(-2px);
+        }
+        .location-image {
+            flex: 0 0 auto;
+            width: 150px;
+            margin-right: 1rem;
+        }
+        .location-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .location-content {
+            flex: 1;
+        }
+        .location-category {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #00074F;
+        }
+        .location-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
+            color: #2c3e50;
+        }
+        .location-description {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .location-address {
+            line-height: 1.5;
+        }
+        .locations-list hr {
+            color: rgba(0,0,0,.1);
+        }
+        .location-address div {
+            margin-bottom: 0.25rem;
+        }
+        /* Custom scrollbar for popup */
+        .leaflet-popup-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .leaflet-popup-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .leaflet-popup-content::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+        /* Filter controls */
+        .map-filter-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .map-filter-controls select, 
+        .map-filter-controls input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .map-container {
+            position: relative;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        /* Pagination styles */
+        .locations-pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 8px;
+        }
+        .pagination-btn {
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .pagination-btn.active {
+            background: #00074F;
+            color: white;
+            border-color: #00074F;
+        }
+        .location.hidden {
+            display: none !important;
+        }
+        .location.page-hidden {
+            display: none !important;
+        }
+    `;
+    document.head.appendChild(styleTag);
 
     // Add Leaflet JS
     const leafletJs = document.createElement('script');
     leafletJs.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
     leafletJs.onload = function() {
-        debugLog('Leaflet library loaded successfully');
-        
         // Initialize the map
         const map = L.map('map').setView([42.4072, -71.3824], 8);
-        debugLog('Map initialized');
 
         // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        debugLog('Tile layer added to map');
 
         // Create an object to store markers by name for easy access
         const markers = {};
@@ -70,13 +214,7 @@ function initMap() {
 
         // Get all location elements
         const locationElements = document.querySelectorAll('.location');
-        debugLog('Found ' + locationElements.length + ' location elements');
         
-        if (locationElements.length === 0) {
-            debugLog('ERROR: No elements with class "location" found');
-            return;
-        }
-
         // Get unique categories from location elements
         const categories = new Set(['all']);
         locationElements.forEach(locationEl => {
@@ -87,12 +225,10 @@ function initMap() {
                 categories.add(baseCategory);
             }
         });
-        debugLog('Categories found: ' + Array.from(categories).join(', '));
         
         // Create filter controls
         const filterControls = document.createElement('div');
         filterControls.className = 'map-filter-controls';
-        filterControls.style = 'display:flex; gap:1rem; margin-bottom:1rem; flex-wrap:wrap;';
         
         // Build category options
         let categoryOptions = '<option value="all">All Categories</option>';
@@ -104,23 +240,20 @@ function initMap() {
         });
         
         filterControls.innerHTML = `
-            <select id="category-filter" style="padding:0.5rem; border:1px solid #ddd; border-radius:4px; font-size:0.9rem;">
+            <select id="category-filter">
                 ${categoryOptions}
             </select>
-            <input type="text" id="search-locations" placeholder="Search organizations..." style="padding:0.5rem; border:1px solid #ddd; border-radius:4px; font-size:0.9rem;">
+            <input type="text" id="search-locations" placeholder="Search organizations...">
         `;
         
         // Insert filter controls before the map
         const mapContainer = document.getElementById('map').parentNode;
         mapContainer.insertBefore(filterControls, document.getElementById('map'));
-        debugLog('Filter controls added to page');
         
         // Create pagination container
         const paginationContainer = document.createElement('div');
         paginationContainer.className = 'locations-pagination';
-        paginationContainer.style = 'display:flex; justify-content:center; margin-top:20px; gap:8px;';
         document.querySelector('.locations-list').parentNode.appendChild(paginationContainer);
-        debugLog('Pagination container added to page');
         
         // Function to update pagination
         function updatePagination() {
@@ -129,27 +262,17 @@ function initMap() {
                 !locationEl.classList.contains('hidden')
             );
             
-            debugLog('Visible locations after filtering: ' + visibleLocations.length);
-            
             // Calculate total pages
             const totalPages = Math.ceil(visibleLocations.length / itemsPerPage);
-            debugLog('Total pages: ' + totalPages);
             
             // Update pagination buttons
             paginationContainer.innerHTML = '';
             
             for (let i = 1; i <= totalPages; i++) {
                 const pageBtn = document.createElement('button');
-                pageBtn.className = `pagination-btn`;
-                pageBtn.style = 'padding:8px 12px; background:#f0f0f0; border:1px solid #ddd; border-radius:4px; cursor:pointer;';
-                if (i === currentPage) {
-                    pageBtn.style.background = '#00074F';
-                    pageBtn.style.color = 'white';
-                    pageBtn.style.borderColor = '#00074F';
-                }
+                pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
                 pageBtn.textContent = i;
                 pageBtn.addEventListener('click', () => {
-                    debugLog('Page button clicked: ' + i);
                     currentPage = i;
                     updateVisibleItems();
                     updatePagination();
@@ -175,66 +298,101 @@ function initMap() {
             visibleLocations.forEach((locationEl, index) => {
                 if (index < startIndex || index >= endIndex) {
                     locationEl.classList.add('page-hidden');
-                    debugLog('Adding page-hidden to location: ' + locationEl.getAttribute('name'));
                 }
             });
-            
-            debugLog('Updated visible items for page ' + currentPage + ' (showing ' + 
-                    Math.min(itemsPerPage, visibleLocations.length - startIndex) + ' items)');
         }
         
         // Loop through each location element
-        locationElements.forEach((locationEl, index) => {
-            debugLog('Processing location element #' + index);
-            
+        locationElements.forEach(locationEl => {
             // Extract data from the element
             const geo = locationEl.getAttribute('geo');
-            if (!geo) {
-                debugLog('ERROR: No geo attribute found for element #' + index);
-                return;
-            }
-            
             const name = locationEl.getAttribute('name');
-            if (!name) {
-                debugLog('ERROR: No name attribute found for element #' + index);
-                return;
-            }
-            
             const category = locationEl.classList[1] || '';
-            debugLog('Element #' + index + ' category: ' + category);
+            
+            // Determine icon based on category
+            let iconUrl = '/siteassets/markers/marker_gray.png'; // Default
+            if (category.startsWith('Colleges')) iconUrl = '/siteassets/markers/marker_green.png';
+            else if (category.startsWith('Human')) iconUrl = '/siteassets/markers/marker_orange.png';
+            else if (category.startsWith('Business')) iconUrl = '/siteassets/markers/marker_purple.png';
+            else if (category.startsWith('Massachusetts')) iconUrl = '/siteassets/markers/marker_blue.png';
+            else if (category.startsWith('MassHire')) iconUrl = '/siteassets/markers/marker_gray.png';
+            else if (category.startsWith('Regional')) iconUrl = '/siteassets/markers/marker_pink.png';
+            else if (category.startsWith('Youth')) iconUrl = '/siteassets/markers/marker_red.png';
+            
+            // Create custom icon
+            const customIcon = L.icon({
+                iconUrl: iconUrl,
+                iconSize: [25, 41],
+                iconAnchor = [12, 41],
+                popupAnchor = [1, -34]
+            });
+            
+            // Extract image source if available
+            const imgElement = locationEl.querySelector('.location-image img');
+            const image = imgElement ? imgElement.src : '';
+            
+            // Extract description
+            const descriptionElement = locationEl.querySelector('.location-description');
+            const description = descriptionElement ? descriptionElement.textContent.trim() : '';
+            
+            // Extract address
+            const addressElement = locationEl.querySelector('.location-address');
+            const address = addressElement ? addressElement.textContent.trim() : '';
             
             // Parse coordinates
-            const coords = geo.split(',');
-            if (coords.length !== 2) {
-                debugLog('ERROR: Invalid geo format for element #' + index);
-                return;
+            const [lat, lng] = geo.split(',').map(coord => parseFloat(coord.trim()));
+            
+            // Create popup content (without description limiter)
+            let popupContent = `<div class="location-popup">`;
+            
+            if (image) {
+                popupContent += `<img src="${image}" alt="${name}">`;
             }
             
-            const lat = parseFloat(coords[0].trim());
-            const lng = parseFloat(coords[1].trim());
+            popupContent += `<h3>${name}</h3>`;
             
-            if (isNaN(lat) || isNaN(lng)) {
-                debugLog('ERROR: Invalid coordinates for element #' + index + ': ' + lat + ', ' + lng);
-                return;
+            if (category) {
+                const categoryName = category.replace(/-/g, ' ');
+                popupContent += `<p><strong>Category:</strong> ${categoryName}</p>`;
+            }
+                
+            if (description) {
+                popupContent += `<p>${description}</p>`;
             }
             
-            // Create marker
-            const marker = L.marker([lat, lng]).addTo(map);
-            debugLog('Marker created for element #' + index);
+            if (address) {
+                popupContent += `<p class="address"><strong>Address:</strong> ${address}</p>`;
+            }
             
-            // Create simple popup content
-            const popupContent = `<div><strong>${name}</strong></div>`;
+            popupContent += `</div>`;
+            
+            // Create marker with custom icon
+            const marker = L.marker([lat, lng], {icon: customIcon}).addTo(map);
             marker.bindPopup(popupContent);
-            debugLog('Popup bound to marker for element #' + index);
             
             // Store marker for later reference - use the exact name from the attribute
             markers[name] = {marker, element: locationEl, category};
-            debugLog('Marker stored for: ' + name);
+            
+            // Add geo and name attributes to the marker icon and popup
+            marker._icon.setAttribute('geo', geo);
+            marker._icon.setAttribute('name', name);
+            
+            // Add event listener to set attributes on popup when it opens
+            marker.on('popupopen', function() {
+                const popup = marker.getPopup();
+                const popupElement = popup.getElement();
+                if (popupElement) {
+                    popupElement.setAttribute('geo', geo);
+                    popupElement.setAttribute('name', name);
+                }
+            });
             
             // Make location elements clickable to open corresponding popup and scroll to map
             locationEl.addEventListener('click', function() {
                 map.setView([lat, lng], 13);
                 marker.openPopup();
+                
+                // Add a small delay to ensure the map is fully rendered before scrolling
                 setTimeout(scrollToMap, 100);
             });
         });
@@ -243,22 +401,15 @@ function initMap() {
         const categoryFilter = document.getElementById('category-filter');
         const searchInput = document.getElementById('search-locations');
         
-        debugLog('Category filter element: ' + (categoryFilter ? 'found' : 'not found'));
-        debugLog('Search input element: ' + (searchInput ? 'found' : 'not found'));
-        
         function filterLocations() {
             const categoryValue = categoryFilter.value;
             const searchValue = searchInput.value.toLowerCase();
-            
-            debugLog('Filtering - Category: ' + categoryValue + ', Search: ' + searchValue);
-            
             currentCategory = categoryValue;
             currentPage = 1; // Reset to first page when filtering
             
             // First, reset all locations and markers
             locationElements.forEach(locationEl => {
                 locationEl.classList.remove('hidden');
-                debugLog('Removing hidden class from: ' + locationEl.getAttribute('name'));
             });
             
             Object.values(markers).forEach(({marker}) => {
@@ -267,7 +418,6 @@ function initMap() {
             
             // If "all" is selected and no search term, show everything
             if (categoryValue === 'all' && !searchValue) {
-                debugLog('Showing all locations (no filters applied)');
                 updatePagination();
                 return;
             }
@@ -287,11 +437,7 @@ function initMap() {
                 
                 // Get the marker for this location - use the exact name from the attribute
                 const markerInfo = markers[name];
-                if (!markerInfo) {
-                    debugLog('WARNING: No marker info found for: ' + name);
-                    debugLog('Available markers: ' + Object.keys(markers).join(', '));
-                    return;
-                }
+                if (!markerInfo) return;
                 
                 // Extract base category for matching
                 const baseCategory = markerInfo.category.split('-')[0];
@@ -302,45 +448,31 @@ function initMap() {
                                   description.includes(searchValue) || 
                                   address.includes(searchValue);
                 
-                debugLog('Checking: ' + name + ' - Category match: ' + categoryMatch + ', Search match: ' + searchMatch);
-                
                 if (categoryMatch && searchMatch) {
                     // Show this location and marker
                     locationEl.classList.remove('hidden');
                     map.addLayer(markerInfo.marker);
-                    debugLog('Showing: ' + name);
                 } else {
                     // Hide this location and marker
                     locationEl.classList.add('hidden');
                     map.removeLayer(markerInfo.marker);
-                    debugLog('Hiding: ' + name);
                 }
             });
             
-            debugLog('Finished applying filters');
             // Update pagination after filtering
             updatePagination();
         }
         
-        // Add event listeners with debug logging
-        categoryFilter.addEventListener('change', function() {
-            debugLog('Category filter changed to: ' + this.value);
-            filterLocations();
-        });
-        
-        searchInput.addEventListener('input', function() {
-            debugLog('Search input changed to: ' + this.value);
-            filterLocations();
-        });
-        
-        debugLog('Event listeners attached to filter controls');
+        // Add event listeners
+        categoryFilter.addEventListener('change', filterLocations);
+        searchInput.addEventListener('input', filterLocations);
         
         // Initialize pagination
         updatePagination();
     };
     
     leafletJs.onerror = function() {
-        debugLog('ERROR: Failed to load Leaflet library');
+        console.error('Failed to load Leaflet library');
     };
     
     document.head.appendChild(leafletJs);
