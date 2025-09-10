@@ -151,8 +151,7 @@ function initMap() {
             margin-bottom: 1rem;
             flex-wrap: wrap;
         }
-        .map-filter-controls select, 
-        .map-filter-controls input {
+        .map-filter-controls select {
             padding: 0.5rem;
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -208,7 +207,7 @@ function initMap() {
         // Create an object to store markers by name for easy access
         const markers = {};
         let currentPage = 1;
-        let itemsPerPage = 2;
+        let itemsPerPage = 5; // Changed from 2 to 5
         let currentCategory = 'all';
         let visibleLocations = [];
 
@@ -243,7 +242,6 @@ function initMap() {
             <select id="category-filter">
                 ${categoryOptions}
             </select>
-            <input type="text" id="search-locations" placeholder="Search organizations...">
         `;
         
         // Insert filter controls before the map
@@ -302,6 +300,17 @@ function initMap() {
             });
         }
         
+        // Function to format contact information with line breaks
+        function formatContactInfo(text) {
+            if (!text) return text;
+            
+            // Add line breaks before Contact, Email, and Phone if they exist
+            return text
+                .replace(/\bContact:\s*/g, '<br><strong>Contact:</strong> ')
+                .replace(/\bEmail:\s*/g, '<br><strong>Email:</strong> ')
+                .replace(/\bPhone:\s*/g, '<br><strong>Phone:</strong> ');
+        }
+        
         // Loop through each location element
         locationElements.forEach(locationEl => {
             // Extract data from the element
@@ -319,7 +328,7 @@ function initMap() {
             else if (category.startsWith('Regional')) iconUrl = '/siteassets/markers/marker_pink.png';
             else if (category.startsWith('Youth')) iconUrl = '/siteassets/markers/marker_red.png';
             
-            // Create custom icon - FIXED: Using : instead of = for object properties
+            // Create custom icon
             const customIcon = L.icon({
                 iconUrl: iconUrl,
                 iconSize: [25, 41],
@@ -338,6 +347,13 @@ function initMap() {
             // Extract address
             const addressElement = locationEl.querySelector('.location-address');
             const address = addressElement ? addressElement.textContent.trim() : '';
+            
+            // Extract contact info
+            const contactInfoElement = locationEl.querySelector('.location-contact');
+            let contactInfo = contactInfoElement ? contactInfoElement.innerHTML.trim() : '';
+            
+            // Format contact info with line breaks
+            contactInfo = formatContactInfo(contactInfo);
             
             // Parse coordinates
             const [lat, lng] = geo.split(',').map(coord => parseFloat(coord.trim()));
@@ -362,6 +378,10 @@ function initMap() {
             
             if (address) {
                 popupContent += `<p class="address"><strong>Address:</strong> ${address}</p>`;
+            }
+            
+            if (contactInfo) {
+                popupContent += `<div class="contact-info">${contactInfo}</div>`;
             }
             
             popupContent += `</div>`;
@@ -399,11 +419,9 @@ function initMap() {
         
         // Add filtering functionality
         const categoryFilter = document.getElementById('category-filter');
-        const searchInput = document.getElementById('search-locations');
         
         function filterLocations() {
             const categoryValue = categoryFilter.value;
-            const searchValue = searchInput.value.toLowerCase();
             currentCategory = categoryValue;
             currentPage = 1; // Reset to first page when filtering
             
@@ -416,24 +434,15 @@ function initMap() {
                 map.addLayer(marker);
             });
             
-            // If "all" is selected and no search term, show everything
-            if (categoryValue === 'all' && !searchValue) {
+            // If "all" is selected, show everything
+            if (categoryValue === 'all') {
                 updatePagination();
                 return;
             }
             
-            // Filter locations and markers based on criteria
+            // Filter locations and markers based on category
             locationElements.forEach(locationEl => {
                 const name = locationEl.getAttribute('name');
-                const nameLower = name.toLowerCase();
-                
-                // Safely get description text (handle case where element doesn't exist)
-                const descriptionElement = locationEl.querySelector('.location-description');
-                const description = descriptionElement ? descriptionElement.textContent.toLowerCase() : '';
-                
-                // Safely get address text (handle case where element doesn't exist)
-                const addressElement = locationEl.querySelector('.location-address');
-                const address = addressElement ? addressElement.textContent.toLowerCase() : '';
                 
                 // Get the marker for this location - use the exact name from the attribute
                 const markerInfo = markers[name];
@@ -444,11 +453,8 @@ function initMap() {
                 
                 // Check if category matches (or if "all" is selected)
                 const categoryMatch = categoryValue === 'all' || baseCategory === categoryValue;
-                const searchMatch = !searchValue || nameLower.includes(searchValue) || 
-                                  description.includes(searchValue) || 
-                                  address.includes(searchValue);
                 
-                if (categoryMatch && searchMatch) {
+                if (categoryMatch) {
                     // Show this location and marker
                     locationEl.classList.remove('hidden');
                     map.addLayer(markerInfo.marker);
@@ -463,9 +469,8 @@ function initMap() {
             updatePagination();
         }
         
-        // Add event listeners
+        // Add event listener
         categoryFilter.addEventListener('change', filterLocations);
-        searchInput.addEventListener('input', filterLocations);
         
         // Initialize pagination
         updatePagination();
