@@ -1,4 +1,3 @@
-
 if (window.location.pathname.includes('/join-us/')) {
     // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {
@@ -19,10 +18,6 @@ function scrollToMap() {
             top: offsetTop,
             behavior: 'smooth'
         });
-        
-        console.log('Scrolling to map position:', offsetTop);
-    } else {
-        console.error('Map element not found for scrolling');
     }
 }
 
@@ -199,9 +194,13 @@ function initMap() {
         filterControls.innerHTML = `
             <select id="category-filter">
                 <option value="all">All Categories</option>
-                <option value="Business-Network">Business Network</option>
-                <option value="Human-Services">Human Services</option>
-                <option value="Education">Education</option>
+                <option value="Colleges">Colleges</option>
+                <option value="Human">Human Services</option>
+                <option value="Business">Business Network</option>
+                <option value="Massachusetts">Massachusetts</option>
+                <option value="MassHire">MassHire</option>
+                <option value="Regional">Regional</option>
+                <option value="Youth">Youth</option>
             </select>
             <input type="text" id="search-locations" placeholder="Search organizations...">
         `;
@@ -216,6 +215,24 @@ function initMap() {
             const geo = locationEl.getAttribute('geo');
             const name = locationEl.getAttribute('name');
             const category = locationEl.classList[1] || '';
+            
+            // Determine icon based on category
+            let iconUrl = '/siteassets/markers/marker_gray.png'; // Default
+            if (category.startsWith('Colleges')) iconUrl = '/siteassets/markers/marker_green.png';
+            else if (category.startsWith('Human')) iconUrl = '/siteassets/markers/marker_orange.png';
+            else if (category.startsWith('Business')) iconUrl = '/siteassets/markers/marker_purple.png';
+            else if (category.startsWith('Massachusetts')) iconUrl = '/siteassets/markers/marker_blue.png';
+            else if (category.startsWith('MassHire')) iconUrl = '/siteassets/markers/marker_gray.png';
+            else if (category.startsWith('Regional')) iconUrl = '/siteassets/markers/marker_pink.png';
+            else if (category.startsWith('Youth')) iconUrl = '/siteassets/markers/marker_red.png';
+            
+            // Create custom icon
+            const customIcon = L.icon({
+                iconUrl: iconUrl,
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34]
+            });
             
             // Extract image source if available
             const imgElement = locationEl.querySelector('.location-image img');
@@ -262,8 +279,8 @@ function initMap() {
             
             popupContent += `</div>`;
             
-            // Create marker with extracted data
-            const marker = L.marker([lat, lng]).addTo(map);
+            // Create marker with custom icon
+            const marker = L.marker([lat, lng], {icon: customIcon}).addTo(map);
             marker.bindPopup(popupContent);
             
             // Store marker for later reference
@@ -307,7 +324,15 @@ function initMap() {
                 const description = locationEl.querySelector('.location-description').textContent.toLowerCase();
                 const address = locationEl.querySelector('.location-address').textContent.toLowerCase();
                 
-                const categoryMatch = categoryValue === 'all' || category === categoryValue;
+                const categoryMatch = categoryValue === 'all' || 
+                                    (categoryValue === 'Colleges' && category.startsWith('Colleges')) ||
+                                    (categoryValue === 'Human' && category.startsWith('Human')) ||
+                                    (categoryValue === 'Business' && category.startsWith('Business')) ||
+                                    (categoryValue === 'Massachusetts' && category.startsWith('Massachusetts')) ||
+                                    (categoryValue === 'MassHire' && category.startsWith('MassHire')) ||
+                                    (categoryValue === 'Regional' && category.startsWith('Regional')) ||
+                                    (categoryValue === 'Youth' && category.startsWith('Youth'));
+                
                 const searchMatch = name.includes(searchValue) || 
                                   description.includes(searchValue) || 
                                   address.includes(searchValue);
