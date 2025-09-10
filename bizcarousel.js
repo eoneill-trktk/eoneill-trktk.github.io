@@ -108,6 +108,143 @@
                         font-size: 14px;
                     }
                 }
+                    .bis-carousel-container {
+                position: relative;
+                width: 100%;
+                height: 240px; /* Increased height to accommodate labels */
+                margin: 20px 0;
+                overflow: hidden;
+            }
+            
+            .bis-carousel-container .swiper {
+                width: 100%;
+                height: 100%;
+            }
+            
+            .bis-carousel-container .swiper-wrapper {
+                align-items: center;
+            }
+            
+            .bis-carousel-container .bis-carousel-item {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                transition: all 0.5s ease;
+                opacity: 0.5;
+                width: 200px;
+            }
+            
+            .bis-carousel-container .bis-carousel-item.swiper-slide-active {
+                opacity: 1;
+                transform: scale(1.2);
+                z-index: 2;
+            }
+            
+            .bis-carousel-container .bis-carousel-image-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 200px;
+                height: 200px;
+                background-color: #fff;
+                border-radius: 8px;
+                padding: 15px;
+            }
+            
+            .bis-carousel-container .bis-carousel-image-wrapper img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                display: block;
+            }
+            
+            .bis-carousel-container .bis-carousel-label {
+                margin-top: 10px;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 600;
+                color: #333;
+                width: 100%;
+            }
+            
+            .bis-carousel-container .bis-carousel-nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.9);
+                border: none;
+                border-radius: 50%;
+                z-index: 10;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 18px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+            
+            .bis-carousel-container .bis-carousel-nav:hover {
+                background: white;
+            }
+            
+            .bis-carousel-container .bis-carousel-prev {
+                left: 15px;
+            }
+            
+            .bis-carousel-container .bis-carousel-next {
+                right: 15px;
+            }
+            
+            @media (max-width: 768px) {
+                .bis-carousel-container {
+                    height: 220px;
+                }
+                
+                .bis-carousel-container .bis-carousel-image-wrapper {
+                    width: 180px;
+                    height: 180px;
+                }
+                
+                .bis-carousel-container .bis-carousel-nav {
+                    width: 35px;
+                    height: 35px;
+                    font-size: 16px;
+                }
+                
+                .bis-carousel-container .bis-carousel-item {
+                    width: 180px;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .bis-carousel-container {
+                    height: 200px;
+                }
+                
+                .bis-carousel-container .bis-carousel-image-wrapper {
+                    width: 160px;
+                    height: 160px;
+                }
+                
+                .bis-carousel-container .bis-carousel-nav {
+                    width: 30px;
+                    height: 30px;
+                    font-size: 14px;
+                }
+                
+                .bis-carousel-container .bis-carousel-item {
+                    width: 160px;
+                }
+                
+                .bis-carousel-container .bis-carousel-label {
+                    font-size: 12px;
+                }
+            }
             `;
             document.head.appendChild(customStyles);
             
