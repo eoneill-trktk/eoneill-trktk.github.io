@@ -471,4 +471,4 @@ function initMap() {
     };
     
     document.head.appendChild(leafletJs);
-}
+} 
