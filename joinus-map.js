@@ -403,7 +403,7 @@ function initMap() {
             currentCategory = categoryValue;
             currentPage = 1; // Reset to first page when filtering
             
-            // First, reset all locations and markers
+            // First, reset all locations and markers to be visible
             locationElements.forEach(locationEl => {
                 locationEl.classList.remove('hidden');
             });
@@ -444,9 +444,11 @@ function initMap() {
                                   address.includes(searchValue);
                 
                 if (categoryMatch && searchMatch) {
+                    // Show this location and marker
                     locationEl.classList.remove('hidden');
                     map.addLayer(markerInfo.marker);
                 } else {
+                    // Hide this location and marker
                     locationEl.classList.add('hidden');
                     map.removeLayer(markerInfo.marker);
                 }
@@ -456,6 +458,7 @@ function initMap() {
             updatePagination();
         }
         
+        // Add event listeners
         categoryFilter.addEventListener('change', filterLocations);
         searchInput.addEventListener('input', filterLocations);
         
