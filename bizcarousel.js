@@ -147,7 +147,7 @@
                 justify-content: center;
                 align-items: center;
                 width: 200px;
-                height: 200px;
+                height: 100px;
                 background-color: #fff;
                 border-radius: 8px;
                 padding: 15px;
