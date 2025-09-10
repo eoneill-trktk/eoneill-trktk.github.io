@@ -223,7 +223,9 @@ function initMap() {
         locationElements.forEach(locationEl => {
             const category = locationEl.classList[1] || '';
             if (category) {
-                categories.add(category);
+                // Extract the base category name (before any hyphens)
+                const baseCategory = category.split('-')[0];
+                categories.add(baseCategory);
             }
         });
         
@@ -410,7 +412,11 @@ function initMap() {
                 const description = locationEl.querySelector('.location-description').textContent.toLowerCase();
                 const address = locationEl.querySelector('.location-address').textContent.toLowerCase();
                 
-                const categoryMatch = categoryValue === 'all' || category === categoryValue;
+                // Extract base category for matching (e.g., "Business-Network" becomes "Business")
+                const baseCategory = category.split('-')[0];
+                
+                // Check if category matches (or if "all" is selected)
+                const categoryMatch = categoryValue === 'all' || baseCategory === categoryValue;
                 const searchMatch = name.includes(searchValue) || 
                                   description.includes(searchValue) || 
                                   address.includes(searchValue);
