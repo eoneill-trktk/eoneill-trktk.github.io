@@ -161,7 +161,6 @@
             }
             
             .bis-carousel-container .bis-carousel-label {
-                margin-top: 10px;
                 text-align: center;
                 font-size: 14px;
                 font-weight: 600;
