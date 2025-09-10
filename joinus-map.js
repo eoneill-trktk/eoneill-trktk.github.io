@@ -7,6 +7,20 @@ if (window.location.pathname.includes('/join-us/')) {
     }
 }
 
+function scrollToMap() {
+    const mapElement = document.getElementById('map');
+    if (mapElement) {
+        // Calculate the position to scroll to (slightly above the map for better visibility)
+        const offsetTop = mapElement.offsetTop - 20;
+        
+        // Smooth scroll to the map
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+    }
+}
+
 function initMap() {
     // Check if head element exists
     if (!document.head) {
@@ -264,10 +278,11 @@ function initMap() {
                 }
             });
             
-            // Make location elements clickable to open corresponding popup
+            // Make location elements clickable to open corresponding popup and scroll to map
             locationEl.addEventListener('click', function() {
                 map.setView([lat, lng], 13);
                 marker.openPopup();
+                scrollToMap(); // Scroll to the map
             });
         });
         
