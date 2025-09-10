@@ -412,10 +412,10 @@ function initMap() {
                 const description = locationEl.querySelector('.location-description').textContent.toLowerCase();
                 const address = locationEl.querySelector('.location-address').textContent.toLowerCase();
                 
-                // Extract base category for matching (e.g., "Business-Network" becomes "Business")
+                // Extract base category for matching
                 const baseCategory = category.split('-')[0];
                 
-                // Check if category matches (or if "all" is selected)
+                // ✅ FIX: compare baseCategory to dropdown value
                 const categoryMatch = categoryValue === 'all' || baseCategory === categoryValue;
                 const searchMatch = name.includes(searchValue) || 
                                   description.includes(searchValue) || 
@@ -426,7 +426,7 @@ function initMap() {
                     
                     // Show corresponding marker on map
                     const marker = markers[locationEl.getAttribute('name')];
-                    if (marker) {
+                    if (marker && !map.hasLayer(marker)) {
                         map.addLayer(marker);
                     }
                 } else {
@@ -434,7 +434,7 @@ function initMap() {
                     
                     // Hide corresponding marker on map
                     const marker = markers[locationEl.getAttribute('name')];
-                    if (marker) {
+                    if (marker && map.hasLayer(marker)) {
                         map.removeLayer(marker);
                     }
                 }
