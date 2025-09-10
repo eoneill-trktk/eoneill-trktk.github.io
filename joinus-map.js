@@ -319,12 +319,12 @@ function initMap() {
             else if (category.startsWith('Regional')) iconUrl = '/siteassets/markers/marker_pink.png';
             else if (category.startsWith('Youth')) iconUrl = '/siteassets/markers/marker_red.png';
             
-            // Create custom icon
+            // Create custom icon - FIXED: Using : instead of = for object properties
             const customIcon = L.icon({
                 iconUrl: iconUrl,
                 iconSize: [25, 41],
-                iconAnchor = [12, 41],
-                popupAnchor = [1, -34]
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34]
             });
             
             // Extract image source if available
