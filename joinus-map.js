@@ -449,12 +449,18 @@ function initMap() {
                 
                 if (categoryMatch && searchMatch) {
                     // Show this location and marker
+                    console.log("categoryMatch && searchMatch yes start")
+
                     locationEl.classList.remove('hidden');
                     map.addLayer(markerInfo.marker);
+                    console.log("categoryMatch && searchMatch yes end")
                 } else {
                     // Hide this location and marker
+                    console.log("categoryMatch && searchMatch else start")
                     locationEl.classList.add('hidden');
                     map.removeLayer(markerInfo.marker);
+                    console.log("categoryMatch && searchMatch else end")
+
                 }
             });
             
