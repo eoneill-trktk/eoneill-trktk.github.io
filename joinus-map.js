@@ -79,12 +79,6 @@ function initMap() {
             display: flex;
             margin-bottom: 2rem;
             width: 100%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .location:hover {
-            background-color: #f5f7fa;
-            transform: translateY(-2px);
         }
         .location-image {
             flex: 0 0 auto;
@@ -102,12 +96,10 @@ function initMap() {
         .location-category {
             font-weight: bold;
             margin-bottom: 0.5rem;
-            color: #4ecdc4;
         }
         .location-title {
             margin: 0 0 0.5rem 0;
             font-size: 1.25rem;
-            color: #2c3e50;
         }
         .location-description {
             margin-bottom: 1rem;
@@ -116,8 +108,8 @@ function initMap() {
         .location-address {
             line-height: 1.5;
         }
-        .locations-list hr {
-            color: rgba(0,0,0,.1);
+        .locations-list hr{
+             color: rgba(0,0,0,.1);">
         }
         .location-address div {
             margin-bottom: 0.25rem;
@@ -131,27 +123,6 @@ function initMap() {
         }
         .leaflet-popup-content::-webkit-scrollbar-thumb {
             background: #888;
-        }
-        /* Filter controls */
-        .map-filter-controls {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        .map-filter-controls select, 
-        .map-filter-controls input {
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-        .map-container {
-            position: relative;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
     `;
     document.head.appendChild(styleTag);
