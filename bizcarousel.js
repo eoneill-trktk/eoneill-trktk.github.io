@@ -8,7 +8,7 @@
             // Inject custom styles
             const customStyles = document.createElement('style');
             customStyles.textContent = `
-                .biz-carousel-container {
+                .bis-carousel-container {
                     position: relative;
                     width: 100%;
                     height: 200px;
@@ -16,12 +16,12 @@
                     overflow: hidden;
                 }
                 
-                .biz-carousel-container .swiper {
+                .bis-carousel-container .swiper {
                     width: 100%;
                     height: 100%;
                 }
                 
-                .biz-carousel-container .biz-carousel-item {
+                .bis-carousel-container .bis-carousel-item {
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -30,13 +30,13 @@
                     opacity: 0.5;
                 }
                 
-                .biz-carousel-container .biz-carousel-item.swiper-slide-active {
+                .bis-carousel-container .bis-carousel-item.swiper-slide-active {
                     opacity: 1;
                     transform: scale(1.2);
                     z-index: 2;
                 }
                 
-                .biz-carousel-container .biz-carousel-image-wrapper {
+                .bis-carousel-container .bis-carousel-image-wrapper {
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -44,14 +44,14 @@
                     padding: 10px;
                 }
                 
-                .biz-carousel-container .biz-carousel-image-wrapper img {
+                .bis-carousel-container .bis-carousel-image-wrapper img {
                     max-height: 100%;
                     max-width: 100%;
                     object-fit: contain;
                     transition: transform 1s ease;
                 }
                 
-                .biz-carousel-container .biz-carousel-nav {
+                .bis-carousel-container .bis-carousel-nav {
                     position: absolute;
                     top: 50%;
                     transform: translateY(-50%);
@@ -71,26 +71,26 @@
                     transition: all 0.3s ease;
                 }
                 
-                .biz-carousel-container .biz-carousel-nav:hover {
+                .bis-carousel-container .bis-carousel-nav:hover {
                     background: white;
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
                 }
                 
-                .biz-carousel-container .biz-carousel-prev {
+                .bis-carousel-container .bis-carousel-prev {
                     left: 15px;
                 }
                 
-                .biz-carousel-container .biz-carousel-next {
+                .bis-carousel-container .bis-carousel-next {
                     right: 15px;
                 }
                 
                 /* Responsive adjustments */
                 @media (max-width: 768px) {
-                    .biz-carousel-container {
+                    .bis-carousel-container {
                         height: 180px;
                     }
                     
-                    .biz-carousel-container .biz-carousel-nav {
+                    .bis-carousel-container .bis-carousel-nav {
                         width: 35px;
                         height: 35px;
                         font-size: 16px;
@@ -98,11 +98,11 @@
                 }
                 
                 @media (max-width: 480px) {
-                    .biz-carousel-container {
+                    .bis-carousel-container {
                         height: 150px;
                     }
                     
-                    .biz-carousel-container .biz-carousel-nav {
+                    .bis-carousel-container .bis-carousel-nav {
                         width: 30px;
                         height: 30px;
                         font-size: 14px;
@@ -129,17 +129,17 @@
                 }
                 
                 // Check if our carousel container exists
-                const carouselContainer = document.getElementById('biz-carousel');
+                const carouselContainer = document.getElementById('bis-carousel');
                 if (!carouselContainer) {
-                    console.warn('biz-carousel container not found');
+                    console.warn('bis-carousel container not found');
                     return;
                 }
                 
                 // Modify the HTML structure for Swiper
-                const track = document.getElementById('biz-carousel-track');
+                const track = document.getElementById('bis-carousel-track');
                 if (track) {
                     track.classList.add('swiper-wrapper');
-                    const items = track.querySelectorAll('.biz-carousel-item');
+                    const items = track.querySelectorAll('.bis-carousel-item');
                     items.forEach(item => {
                         item.classList.add('swiper-slide');
                     });
@@ -163,8 +163,8 @@
                             pauseOnMouseEnter: true
                         },
                         navigation: {
-                            nextEl: '.biz-carousel-next',
-                            prevEl: '.biz-carousel-prev',
+                            nextEl: '.bis-carousel-next',
+                            prevEl: '.bis-carousel-prev',
                         },
                         breakpoints: {
                             320: {
