@@ -370,7 +370,7 @@ function initMap() {
             marker.bindPopup(popupContent);
             
             // Store marker for later reference
-            markers[name] = marker;
+            markers[name] = {marker, element: locationEl, category};
             
             // Add geo and name attributes to the marker icon and popup
             marker._icon.setAttribute('geo', geo);
@@ -406,37 +406,46 @@ function initMap() {
             currentCategory = categoryValue;
             currentPage = 1; // Reset to first page when filtering
             
+            // First, reset all locations and markers
             locationElements.forEach(locationEl => {
-                const category = locationEl.classList[1] || '';
+                locationEl.classList.remove('hidden');
+            });
+            
+            Object.values(markers).forEach(({marker}) => {
+                map.addLayer(marker);
+            });
+            
+            // If "all" is selected and no search term, show everything
+            if (categoryValue === 'all' && !searchValue) {
+                updatePagination();
+                return;
+            }
+            
+            // Filter locations and markers based on criteria
+            locationElements.forEach(locationEl => {
                 const name = locationEl.getAttribute('name').toLowerCase();
                 const description = locationEl.querySelector('.location-description').textContent.toLowerCase();
-                const address = locationEl.querySelector('.location-address') ? locationEl.querySelector('.location-address').textContent.toLowerCase() : '';
+                const address = locationEl.querySelector('.location-address').textContent.toLowerCase();
                 
-                // Extract base category for matching (e.g., "Business-Network" becomes "Business")
-                const baseCategory = category.split('-')[0];
+                // Get the marker for this location
+                const markerInfo = markers[name];
+                if (!markerInfo) return;
+                
+                // Extract base category for matching
+                const baseCategory = markerInfo.category.split('-')[0];
                 
                 // Check if category matches (or if "all" is selected)
                 const categoryMatch = categoryValue === 'all' || baseCategory === categoryValue;
-                const searchMatch = name.includes(searchValue) || 
+                const searchMatch = !searchValue || name.includes(searchValue) || 
                                   description.includes(searchValue) || 
                                   address.includes(searchValue);
                 
                 if (categoryMatch && searchMatch) {
                     locationEl.classList.remove('hidden');
-                    
-                    // Show corresponding marker on map
-                    const marker = markers[locationEl.getAttribute('name')];
-                    if (marker) {
-                        map.addLayer(marker);
-                    }
+                    map.addLayer(markerInfo.marker);
                 } else {
                     locationEl.classList.add('hidden');
-                    
-                    // Hide corresponding marker on map
-                    const marker = markers[locationEl.getAttribute('name')];
-                    if (marker) {
-                        map.removeLayer(marker);
-                    }
+                    map.removeLayer(markerInfo.marker);
                 }
             });
             
@@ -447,8 +456,8 @@ function initMap() {
         categoryFilter.addEventListener('change', filterLocations);
         searchInput.addEventListener('input', filterLocations);
         
-        // Run an initial filter pass
-        filterLocations();
+        // Initialize pagination
+        updatePagination();
     };
     
     leafletJs.onerror = function() {
