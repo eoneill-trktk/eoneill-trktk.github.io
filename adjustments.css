@@ -439,8 +439,8 @@ body p a.bttn, body p button.bttn {
 .carousel-control-next-icon::before {
   content: '>';
 }
-/*
 
+/*Biz carousel*/
 .biz-carousel-container {
       width: 90vw;
       margin: auto;
@@ -454,7 +454,7 @@ body p a.bttn, body p button.bttn {
     }
 
     .biz-carousel-item {
-      flex: 0 0 20%; 
+      flex: 0 0 20%; /* 5 visible at a time */
       padding: 5px;
     }
 
@@ -471,7 +471,7 @@ body p a.bttn, body p button.bttn {
       display: block;
     }
 
-
+    /* Responsive adjustments */
     @media (max-width: 768px) {
       .biz-carousel-item {
         flex: 0 0 33.33%;
@@ -484,7 +484,7 @@ body p a.bttn, body p button.bttn {
       }
     }
 
-
+    /* Navigation buttons */
     .biz-carousel-nav {
       position: absolute;
       top: 50%;
@@ -511,7 +511,7 @@ body p a.bttn, body p button.bttn {
       right: 10px;
     }
 
-
+    /*Biz Carousel*/
 
     .biz-carousel-container {
 margin: auto;
@@ -521,13 +521,13 @@ overflow: hidden;
 
 .biz-carousel-track {
 display: flex;
-transition: transform 0.5s ease-in-out;
+transition: transform 0.5s ease-in-out; /* Smooth transition for sliding */
 }
 
 .biz-carousel-item {
-flex: 0 0 20%; 
+flex: 0 0 20%; /* 5 visible at a time */
 padding: 5px;
-display: flex;
+display: flex; /* Center the wrapper */
 justify-content: center;
 align-items: center;
 }
@@ -539,8 +539,8 @@ height: 100%;
 }
 
 .biz-carousel-image-wrapper {
-width: 150px; 
-height: 150px; 
+width: 150px; /* Fixed width for uniform size */
+height: 150px; /* Fixed height for uniform size */
 display: flex;
 justify-content: center;
 align-items: center;
@@ -554,31 +554,31 @@ width: auto;
 height: auto;
 border-radius: 8px;
 display: block;
-object-fit: contain; 
+object-fit: contain; /* Preserve aspect ratio */
 }
 body main > section{ grid-template-columns: auto!important}
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
 .biz-carousel-item {
-flex: 0 0 33.33%; 
+flex: 0 0 33.33%; /* 3 visible */
 }
 .biz-carousel-image-wrapper {
-width: 120px; 
+width: 120px; /* Slightly smaller for medium screens */
 height: 120px;
 }
 }
 
 @media (max-width: 500px) {
 .biz-carousel-item {
-flex: 0 0 50%; 
+flex: 0 0 50%; /* 2 visible */
 }
 .biz-carousel-image-wrapper {
-width: 100px; 
+width: 100px; /* Smaller for small screens */
 height: 100px;
 }
 }
 
-
+/* Navigation buttons */
 .biz-carousel-nav {
 position: absolute;
 top: 50%;
@@ -586,11 +586,11 @@ transform: translateY(-50%);
 background: rgba(0, 0, 0, 0.5);
 color: white;
 border: none;
-width: 30px; 
-height: 30px; 
-border-radius: 50%; 
+width: 30px; /* Smaller size */
+height: 30px; /* Circular */
+border-radius: 50%; /* Circular shape */
 cursor: pointer;
-font-size: 1rem;
+font-size: 1rem; /* Smaller arrow */
 display: flex;
 align-items: center;
 justify-content: center;
@@ -609,7 +609,7 @@ left: 10px;
 right: 10px;
 }
 
-*/
+
 html, body {
   overflow-x: hidden;
   max-width: 100vw;
