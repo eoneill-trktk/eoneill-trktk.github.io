@@ -261,8 +261,14 @@ function initMap() {
             // Filter locations and markers based on criteria
             locationElements.forEach(locationEl => {
                 const name = locationEl.getAttribute('name').toLowerCase();
-                const description = locationEl.querySelector('.location-description').textContent.toLowerCase();
-                const address = locationEl.querySelector('.location-address').textContent.toLowerCase();
+                
+                // Safely get description text (handle case where element doesn't exist)
+                const descriptionElement = locationEl.querySelector('.location-description');
+                const description = descriptionElement ? descriptionElement.textContent.toLowerCase() : '';
+                
+                // Safely get address text (handle case where element doesn't exist)
+                const addressElement = locationEl.querySelector('.location-address');
+                const address = addressElement ? addressElement.textContent.toLowerCase() : '';
                 
                 // Get the marker for this location
                 const markerInfo = markers[name];
