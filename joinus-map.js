@@ -286,13 +286,17 @@ function initMap() {
         
         // Function to update visible items based on current page
         function updateVisibleItems() {
+            // First remove all page-hidden classes
+            locationElements.forEach(locationEl => {
+                locationEl.classList.remove('page-hidden');
+            });
+            
+            // Then apply page-hidden to items not on current page
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             
             visibleLocations.forEach((locationEl, index) => {
-                if (index >= startIndex && index < endIndex) {
-                    locationEl.classList.remove('page-hidden');
-                } else {
+                if (index < startIndex || index >= endIndex) {
                     locationEl.classList.add('page-hidden');
                 }
             });
