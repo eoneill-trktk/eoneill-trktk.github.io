@@ -225,7 +225,7 @@ function initMap() {
             if (category) {
                 // Extract the base category name (before any hyphens)
                 const baseCategory = category.split('-')[0];
-                categories.add(baseCategory);
+                if (baseCategory) categories.add(baseCategory);
             }
         });
         
@@ -256,7 +256,17 @@ function initMap() {
         // Create pagination container
         const paginationContainer = document.createElement('div');
         paginationContainer.className = 'locations-pagination';
-        document.querySelector('.locations-list').parentNode.appendChild(paginationContainer);
+        // SAFETY: some templates don't include .locations-list; fall back to a sane parent
+        const locationsListEl = document.querySelector('.locations-list');
+        if (locationsListEl && locationsListEl.parentNode) {
+            locationsListEl.parentNode.appendChild(paginationContainer);
+        } else if (locationElements.length) {
+            // append to the first location's parent (your markup shows locations are direct children of a block)
+            locationElements[0].parentNode.appendChild(paginationContainer);
+        } else {
+            // last resort
+            document.body.appendChild(paginationContainer);
+        }
         
         // Function to update pagination
         function updatePagination() {
@@ -266,7 +276,7 @@ function initMap() {
             );
             
             // Calculate total pages
-            const totalPages = Math.ceil(visibleLocations.length / itemsPerPage);
+            const totalPages = Math.ceil(visibleLocations.length / itemsPerPage) || 1;
             
             // Update pagination buttons
             paginationContainer.innerHTML = '';
@@ -335,7 +345,8 @@ function initMap() {
             const description = descriptionElement ? descriptionElement.textContent.trim() : '';
             
             // Extract address
-            const addressElement = locationEl.querySelector('.location-address');
+            // Defensive: address could be in .location-address, .fc-location-marker, or <address>
+            const addressElement = locationEl.querySelector('.location-address') || locationEl.querySelector('.fc-location-marker') || locationEl.querySelector('address');
             const address = addressElement ? addressElement.textContent.trim() : '';
             
             // Parse coordinates
@@ -372,9 +383,11 @@ function initMap() {
             // Store marker for later reference
             markers[name] = marker;
             
-            // Add geo and name attributes to the marker icon and popup
-            marker._icon.setAttribute('geo', geo);
-            marker._icon.setAttribute('name', name);
+            // Add geo and name attributes to the marker icon and popup (guarded)
+            if (marker._icon) {
+                marker._icon.setAttribute('geo', geo);
+                marker._icon.setAttribute('name', name);
+            }
             
             // Add event listener to set attributes on popup when it opens
             marker.on('popupopen', function() {
@@ -408,14 +421,18 @@ function initMap() {
             
             locationElements.forEach(locationEl => {
                 const category = locationEl.classList[1] || '';
-                const name = locationEl.getAttribute('name').toLowerCase();
-                const description = locationEl.querySelector('.location-description').textContent.toLowerCase();
-                const address = locationEl.querySelector('.location-address').textContent.toLowerCase();
+                const nameAttr = locationEl.getAttribute('name') || '';
+                const name = nameAttr.toLowerCase();
+                const descriptionEl = locationEl.querySelector('.location-description');
+                const description = descriptionEl ? descriptionEl.textContent.toLowerCase() : '';
+                // tolerant address lookup: .location-address, .fc-location-marker, <address>
+                const addressEl = locationEl.querySelector('.location-address') || locationEl.querySelector('.fc-location-marker') || locationEl.querySelector('address');
+                const address = addressEl ? addressEl.textContent.toLowerCase() : '';
                 
-                // Extract base category for matching
-                const baseCategory = category.split('-')[0];
+                // Extract base category for matching (e.g., "Business-Network" becomes "Business")
+                const baseCategory = (category.split('-')[0] || '').toString();
                 
-                // ✅ FIX: compare baseCategory to dropdown value
+                // Check if category matches (or if "all" is selected)
                 const categoryMatch = categoryValue === 'all' || baseCategory === categoryValue;
                 const searchMatch = name.includes(searchValue) || 
                                   description.includes(searchValue) || 
@@ -446,6 +463,9 @@ function initMap() {
         
         categoryFilter.addEventListener('change', filterLocations);
         searchInput.addEventListener('input', filterLocations);
+        
+        // Run an initial filter pass to ensure list + markers + pagination are in sync
+        filterLocations();
         
         // Initialize pagination
         updatePagination();
