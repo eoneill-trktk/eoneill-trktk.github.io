@@ -227,9 +227,9 @@ function initMap() {
             marker.bindPopup(popupContent);
             debugLog('Popup bound to marker for element #' + index);
             
-            // Store marker for later reference
+            // Store marker for later reference - use the exact name from the attribute
             markers[name] = {marker, element: locationEl, category};
-            debugLog('Marker stored for element #' + index);
+            debugLog('Marker stored for: ' + name);
             
             // Make location elements clickable to open corresponding popup and scroll to map
             locationEl.addEventListener('click', function() {
@@ -274,7 +274,8 @@ function initMap() {
             
             // Filter locations and markers based on criteria
             locationElements.forEach(locationEl => {
-                const name = locationEl.getAttribute('name').toLowerCase();
+                const name = locationEl.getAttribute('name');
+                const nameLower = name.toLowerCase();
                 
                 // Safely get description text (handle case where element doesn't exist)
                 const descriptionElement = locationEl.querySelector('.location-description');
@@ -284,10 +285,11 @@ function initMap() {
                 const addressElement = locationEl.querySelector('.location-address');
                 const address = addressElement ? addressElement.textContent.toLowerCase() : '';
                 
-                // Get the marker for this location
+                // Get the marker for this location - use the exact name from the attribute
                 const markerInfo = markers[name];
                 if (!markerInfo) {
                     debugLog('WARNING: No marker info found for: ' + name);
+                    debugLog('Available markers: ' + Object.keys(markers).join(', '));
                     return;
                 }
                 
@@ -296,7 +298,7 @@ function initMap() {
                 
                 // Check if category matches (or if "all" is selected)
                 const categoryMatch = categoryValue === 'all' || baseCategory === categoryValue;
-                const searchMatch = !searchValue || name.includes(searchValue) || 
+                const searchMatch = !searchValue || nameLower.includes(searchValue) || 
                                   description.includes(searchValue) || 
                                   address.includes(searchValue);
                 
