@@ -1136,6 +1136,9 @@ div.hero-button-wrapper img.hero-button-image{
     display: inline-block;
     margin-right: 5px;
 }
+div.hero-button-wrapper a, .hero-button {
+    font-size: 1.45em;
+}
 
 
 }
