@@ -1104,3 +1104,25 @@ header.site-header #site-logo {
 .wwl-aside-main.main-content>h1 {
     padding: 0 0 0 26px;
 }
+
+div.hero-button-wrapper{
+  position: absolute;
+  bottom: 55px;
+  width: 800px;
+  padding: 2vw 5vw;
+}
+
+div.hero-button-wrapper img{
+  width: 60px;
+  height: auto;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+div.hero-button-wrapper a, .hero-button{
+    display: inline-block;
+    font-size: 1.75em;
+    vertical-align: middle;
+    font-weight: 700;
+
+}
