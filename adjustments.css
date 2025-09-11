@@ -1057,30 +1057,37 @@ header.site-header #site-logo {
     .wwl-hero-carousel .hero-swiper-button-next { right: 10px; }
 
     @media (max-width: 1200px) {
-  h2.hero-caption-title{
+  /* h2.hero-caption-title{
     font-size: 1.5em;
   }
     .hero-caption{
     width: 400px;
-}
-.wwl-hero-carousel .hero-swiper-button-next {
+} */
+/* .wwl-hero-carousel .hero-swiper-button-next {
     right: -10px;
 }
 .wwl-hero-carousel .hero-swiper-button-prev {
     left: -10px;
-}
+} */
 .wwl-hero-carousel .hero-swiper-slide img {
     width: 100%;
 }
+.wwl-hero-carousel .hero-swiper-slide img.hero-slide-img {
+    width: 100vw;
+    height: 700px;
+    object-fit: cover;
+    object-position: left;
+}
+
 }
 
 @media (max-width: 700px) {
-  h2.hero-caption-title{
+  /* h2.hero-caption-title{
     font-size: 12px;
   }
     .hero-caption{
     width: 200px;
-}
+} */
 }
 
 .wwl-map-legend .title h2{
@@ -1124,3 +1131,12 @@ div.hero-button-wrapper a, .hero-button{
 h2.hero-caption-title{
   color: #00074F; 
 }
+/* 
+@media (max-width: 1000px) {
+  h2.hero-caption-title{
+    font-size: 12px;
+  }
+    .hero-caption{
+    width: 200px;
+}
+} */
