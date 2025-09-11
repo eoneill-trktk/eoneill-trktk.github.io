@@ -87,7 +87,7 @@
                 /* Responsive adjustments */
                 @media (max-width: 768px) {
                     .bis-carousel-container {
-                        height: 180px;
+                        height: 100px;
                     }
                     
                     .bis-carousel-container .bis-carousel-nav {

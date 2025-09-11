@@ -957,7 +957,7 @@ header.site-header #site-logo {
 .hero-caption{
     position: absolute;
     top: 10px;
-    width: 800px;
+    width: 780px;
     padding: 2vw 5vw;
 
 }
@@ -1088,6 +1088,36 @@ header.site-header #site-logo {
     .hero-caption{
     width: 200px;
 } */
+.wwl-hero-carousel .hero-swiper-slide img.hero-slide-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: left;
+}
+.hero-caption {
+    position: absolute;
+    top: 10px;
+    width: 88vw;
+    text-align: left;
+    margin-left: 8vw;
+}
+
+div.hero-button-wrapper {
+    position: absolute;
+    bottom: 80px;
+    width: 400px;
+    margin-left: 8vw;
+}
+
+.wwl-hero-carousel .hero-swiper-button-next {
+    right: 0;
+}
+
+.wwl-hero-carousel .hero-swiper-button-prev {
+    left: 0;
+}
+
+
 }
 
 .wwl-map-legend .title h2{
