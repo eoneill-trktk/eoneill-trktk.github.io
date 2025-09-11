@@ -1112,7 +1112,7 @@ div.hero-button-wrapper{
   padding: 2vw 5vw;
 }
 
-div.hero-button-wrapper img{
+div.hero-button-wrapper a img{
   width: 60px;
   height: auto;
   display: inline-block;
