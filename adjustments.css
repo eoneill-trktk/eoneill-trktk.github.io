@@ -1262,3 +1262,8 @@ grid-column: 2 / 12;
 body.success-columns .aside-area{
   display: none;
 }
+@media (max-width: 1000px) {
+body.success-columns .main-content.wwl-aside-main {
+    grid-template-columns: 100%;
+}
+}
