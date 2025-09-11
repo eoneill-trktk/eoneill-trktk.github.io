@@ -1191,3 +1191,8 @@ h2.hero-caption-title{
     width: 200px;
 }
 } */
+.hero-caption-description p{
+font-size: 1.75em;
+    line-height: 1.1;
+    font-weight: 500;
+}
