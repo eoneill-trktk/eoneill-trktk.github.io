@@ -1254,3 +1254,11 @@ body.success-columns .main-content.wwl-aside-main{
   grid-row: unset;
 
 }
+
+body.success-columns main .main > aside + .wwl-aside-main.main-content > *{
+grid-column: 2 / 12;
+}
+
+body.success-columns .aside-area{
+  display: none;
+}
