@@ -36,8 +36,6 @@ div.jobboard h2{
 }
 
 .wwl-advice-block__image {
-  float: left;
-  width: min(38%, 420px);
   margin: 0 1.5rem 1rem 0;
 }
 
@@ -1248,4 +1246,9 @@ font-size: 1.75em;
 
 .advicecontentblock{
   background-color: rgba(0, 150, 255, 0.1);
+}
+
+.success-columns{
+  grid-template-columns: 70% 30%;
+
 }
