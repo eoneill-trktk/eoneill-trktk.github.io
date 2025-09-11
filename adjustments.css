@@ -895,12 +895,6 @@ header.site-header #site-logo {
   align-items: center;
 }
 
-.wwl-hero-carousel .hero-swiper-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 /* === Pagination === */
 .wwl-hero-carousel .hero-swiper-pagination {
   position: absolute;
