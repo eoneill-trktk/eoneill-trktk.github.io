@@ -686,19 +686,17 @@ html, body {
     left: 828px;
     width: 190px;
     height: 60px; }
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
     .diagram-image-container {
     width: 100%;
     }
   }
         
-        /* Medium screens */
         @media (max-width: 992px) {
             #diagram {
                 width: 700px;
             }
             
-            /* Adjust link positions for medium size */
             .link-1 { top: 15%; left: 25%; width: 40px; height: 40px; }
             .link-2 { top: 20%; left: 50%; width: 40px; height: 40px; }
             .link-3 { top: 25%; left: 75%; width: 40px; height: 40px; }
@@ -709,13 +707,11 @@ html, body {
             .link-8 { top: 80%; left: 75%; width: 40px; height: 40px; }
         }
         
-        /* Small screens */
         @media (max-width: 768px) {
             #diagram {
                 width: 500px;
             }
             
-            /* Adjust link positions for small size */
             .link-1 { top: 15%; left: 25%; width: 30px; height: 30px; }
             .link-2 { top: 20%; left: 50%; width: 30px; height: 30px; }
             .link-3 { top: 25%; left: 75%; width: 30px; height: 30px; }
@@ -726,13 +722,11 @@ html, body {
             .link-8 { top: 80%; left: 75%; width: 30px; height: 30px; }
         }
         
-        /* Extra small screens */
         @media (max-width: 576px) {
             #diagram {
                 width: 350px;
             }
             
-            /* Adjust link positions for extra small size */
             .link-1 { top: 15%; left: 25%; width: 20px; height: 20px; }
             .link-2 { top: 20%; left: 50%; width: 20px; height: 20px; }
             .link-3 { top: 25%; left: 75%; width: 20px; height: 20px; }
@@ -741,8 +735,63 @@ html, body {
             .link-6 { top: 70%; left: 25%; width: 20px; height: 20px; }
             .link-7 { top: 75%; left: 50%; width: 20px; height: 20px; }
             .link-8 { top: 80%; left: 75%; width: 20px; height: 20px; }
+        } */
+.link-1 { top: 130px; left: 131px; width: 220px; height: 100px; }
+        .link-2 { top: 32px; left: 437px; width: 300px; height: 70px; }
+        .link-3 { top: 122px; left: 807px; width: 200px; height: 100px; }
+        .link-4 { top: 344px; left: 88px; width: 172px; height: 80px; }
+        .link-5 { top: 315px; left: 899px; width: 242px; height: 160px; }
+        .link-6 { top: 575px; left: 108px; width: 222px; height: 100px; }
+        .link-7 { top: 675px; left: 408px; width: 360px; height: 90px; }
+        .link-8 { top: 575px; left: 828px; width: 190px; height: 60px; }
+        
+        /* Media Query for 800px width (1199px to 800px) */
+        @media (max-width: 1199px) {
+            .diagram-image-container {
+                width: 800px;
+            }
+            
+            .link-1 { top: 86.67px; left: 87.33px; width: 146.67px; height: 66.67px; }
+            .link-2 { top: 21.33px; left: 291.33px; width: 200px; height: 46.67px; }
+            .link-3 { top: 81.33px; left: 538px; width: 133.33px; height: 66.67px; }
+            .link-4 { top: 229.33px; left: 58.67px; width: 114.67px; height: 53.33px; }
+            .link-5 { top: 210px; left: 599.33px; width: 161.33px; height: 106.67px; }
+            .link-6 { top: 383.33px; left: 72px; width: 148px; height: 66.67px; }
+            .link-7 { top: 450px; left: 272px; width: 240px; height: 60px; }
+            .link-8 { top: 383.33px; left: 552px; width: 126.67px; height: 40px; }
         }
-
+        
+        /* Media Query for 500px width (799px to 500px) */
+        @media (max-width: 799px) {
+            .diagram-image-container {
+                width: 500px;
+            }
+            
+            .link-1 { top: 54.17px; left: 54.58px; width: 91.67px; height: 41.67px; }
+            .link-2 { top: 13.33px; left: 182.08px; width: 125px; height: 29.17px; }
+            .link-3 { top: 50.83px; left: 336.25px; width: 83.33px; height: 41.67px; }
+            .link-4 { top: 143.33px; left: 36.67px; width: 71.67px; height: 33.33px; }
+            .link-5 { top: 131.25px; left: 374.58px; width: 100.83px; height: 66.67px; }
+            .link-6 { top: 239.58px; left: 45px; width: 92.5px; height: 41.67px; }
+            .link-7 { top: 281.25px; left: 170px; width: 150px; height: 37.5px; }
+            .link-8 { top: 239.58px; left: 345px; width: 79.17px; height: 25px; }
+        }
+        
+        /* Media Query for 380px width (499px to 380px) */
+        @media (max-width: 499px) {
+            .diagram-image-container {
+                width: 380px;
+            }
+            
+            .link-1 { top: 41.17px; left: 41.48px; width: 69.67px; height: 31.67px; }
+            .link-2 { top: 10.13px; left: 138.38px; width: 95px; height: 22.17px; }
+            .link-3 { top: 38.63px; left: 255.55px; width: 63.33px; height: 31.67px; }
+            .link-4 { top: 108.93px; left: 27.87px; width: 54.47px; height: 25.33px; }
+            .link-5 { top: 99.75px; left: 284.68px; width: 76.63px; height: 50.67px; }
+            .link-6 { top: 182.08px; left: 34.2px; width: 70.3px; height: 31.67px; }
+            .link-7 { top: 213.75px; left: 129.2px; width: 114px; height: 28.5px; }
+            .link-8 { top: 182.08px; left: 262.2px; width: 60.17px; height: 19px; }
+        }
 
     .simple-content-collection.two-column .list {
     display: grid;
