@@ -1256,7 +1256,7 @@ body.success-columns .main-content.wwl-aside-main{
 }
 
 body.success-columns main .main > aside + .wwl-aside-main.main-content > *{
-grid-column: 2 / 12;
+grid-column: unset;
 }
 
 body.success-columns .aside-area{
