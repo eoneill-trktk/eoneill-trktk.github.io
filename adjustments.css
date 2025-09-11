@@ -1055,7 +1055,13 @@ header.site-header #site-logo {
     }
     .wwl-hero-carousel .hero-swiper-button-prev { left: 10px; }
     .wwl-hero-carousel .hero-swiper-button-next { right: 10px; }
+div.hero-button-wrapper a, .hero-button{
+    display: inline-block;
+    font-size: 1.75em;
+    vertical-align: middle;
+    font-weight: 700;
 
+}
     @media (max-width: 1200px) {
   /* h2.hero-caption-title{
     font-size: 1.5em;
@@ -1171,14 +1177,6 @@ div.hero-button-wrapper img.hero-button-image{
   height: auto;
   display: inline-block;
   margin-right: 10px;
-}
-
-div.hero-button-wrapper a, .hero-button{
-    display: inline-block;
-    font-size: 1.75em;
-    vertical-align: middle;
-    font-weight: 700;
-
 }
 
 h2.hero-caption-title{
