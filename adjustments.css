@@ -1245,3 +1245,7 @@ font-size: 1.75em;
     line-height: 1.1;
     font-weight: 500;
 }
+
+.advicecontentblock{
+  background-color: rgba(0, 150, 255, 0.1);
+}
