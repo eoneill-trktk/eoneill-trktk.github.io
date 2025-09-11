@@ -1074,9 +1074,15 @@ header.site-header #site-logo {
 }
 .wwl-hero-carousel .hero-swiper-slide img.hero-slide-img {
     width: 100vw;
-    height: 700px;
+    height: 620px;
     object-fit: cover;
     object-position: left;
+}
+div.hero-button-wrapper {
+    position: absolute;
+    bottom: 105px;
+    width: 800px;
+    padding: 2vw 5vw;
 }
 
 }
@@ -1099,15 +1105,17 @@ header.site-header #site-logo {
     top: 10px;
     width: 88vw;
     text-align: left;
-    margin-left: 8vw;
+    margin-left: 5vw;
 }
 
 div.hero-button-wrapper {
     position: absolute;
     bottom: 80px;
     width: 400px;
-    margin-left: 8vw;
+    margin-left: 4vw;
 }
+
+.hero-caption h2{font-size: 1.6em;}
 
 .wwl-hero-carousel .hero-swiper-button-next {
     right: 0;
@@ -1115,6 +1123,18 @@ div.hero-button-wrapper {
 
 .wwl-hero-carousel .hero-swiper-button-prev {
     left: 0;
+}
+
+div.hero-button-wrapper a, .hero-button {
+    display: inline-block;
+    font-size: 1.5em;
+}
+
+div.hero-button-wrapper img.hero-button-image{
+    width: 45px;
+    height: auto;
+    display: inline-block;
+    margin-right: 5px;
 }
 
 
