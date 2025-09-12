@@ -1268,3 +1268,16 @@ body.success-columns .main-content.wwl-aside-main {
     grid-template-columns: 100%;
 }
 }
+
+main > section > * {
+    /* grid-column: 1 / 13; */
+}
+
+
+@media (max-width: 800px) {
+
+}
+
+.swiper-navigation-icon{
+  display: none!important;
+}
