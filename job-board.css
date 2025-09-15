@@ -36,11 +36,10 @@
 
 .wwl-gallery__item img {
   max-width: 100%;
-  max-height: 100%;   /* don’t stretch beyond container */
+  max-height: calc(100% - 40px); /* leave room for label */
   object-fit: contain;
   object-position: center;
   display: block;
-  flex: 1;            /* take available space but leave room for label */
 }
 
 .wwl-gallery__item--hor {
@@ -75,5 +74,6 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: #333;
-  flex-shrink: 0;     /* label always stays visible */
+  text-align: center;
+  flex-shrink: 0;     /* label never shrinks away */
 }
