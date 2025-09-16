@@ -1,3 +1,11 @@
+.about h2 { border-bottom: 1px solid #00074F;    
+    font-size: 2.5rem;
+    line-height: 1.2em;
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    font-weight: 600; 
+}
+
 /* Staff Section Heading */
 .wwl-staff-heading {
   text-align: center;
