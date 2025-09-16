@@ -206,7 +206,7 @@
                 
                 .bis-carousel-container .bis-carousel-image-wrapper {
                     width: 180px;
-                    height: 180px;
+                    height: 140px;
                 }
                 
                 .bis-carousel-container .bis-carousel-nav {
@@ -227,7 +227,7 @@
                 
                 .bis-carousel-container .bis-carousel-image-wrapper {
                     width: 160px;
-                    height: 160px;
+                    height: 100px;
                 }
                 
                 .bis-carousel-container .bis-carousel-nav {
