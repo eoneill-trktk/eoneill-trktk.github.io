@@ -1,0 +1,134 @@
+/* Staff Section Heading */
+.wwl-staff-heading {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+/* Grid Container */
+.wwl-staff-list {
+  list-style: none;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
+  padding: 0;
+}
+
+@media (min-width: 600px) {
+  .wwl-staff-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .wwl-staff-list { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1400px) {
+  .wwl-staff-list { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Each Card */
+.wwl-list-item {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Person Wrapper */
+.wwl-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Image */
+.wwl-image {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wwl-image img,
+.wwl-image svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name */
+.wwl-displayname {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.wwl-displayname a {
+  color: #222;
+  text-decoration: none;
+}
+
+.wwl-displayname a:hover {
+  color: #0073e6;
+  text-decoration: underline;
+}
+
+/* Summary */
+.wwl-summary {
+  font-size: 0.9rem;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Titles */
+.wwl-person-title {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Email */
+.wwl-email a {
+  color: #0073e6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.wwl-email a:hover {
+  text-decoration: underline;
+}
+
+/* Phone */
+.wwl-phone a {
+  color: #444;
+  text-decoration: none;
+}
+
+.wwl-phone a:hover {
+  color: #0073e6;
+}
+
+/* Website Links */
+.wwl-person-sites a {
+  display: inline-block;
+  margin: 2px 5px;
+  font-size: 0.85rem;
+  color: #0073e6;
+  text-decoration: none;
+}
+
+.wwl-person-sites a:hover {
+  text-decoration: underline;
+}
