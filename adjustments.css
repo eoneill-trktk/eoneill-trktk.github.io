@@ -1274,8 +1274,10 @@ main > section > * {
 }
 
 
-@media (max-width: 800px) {
-
+@media (max-width: 768px) {
+.simple-content-collection.two-column .list {
+    grid-template-columns: 1fr;
+}
 }
 
 .swiper-navigation-icon{
