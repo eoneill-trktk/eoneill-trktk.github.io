@@ -1283,3 +1283,25 @@ main > section > * {
 .swiper-navigation-icon{
   display: none!important;
 }
+
+.wwl-fw-text-banner {
+    width: 102vw;
+    margin-left: -2vw;
+    font-size: 2em;
+    padding: 10px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 150, 255);
+}
+
+.lightblue-bg{
+  background-color: rgba(0, 150, 255);
+  color: white;
+}
+
+.brandblue-bg{
+  background-color: #00074F;
+  color: white;
+}
