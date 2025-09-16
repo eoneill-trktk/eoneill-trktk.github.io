@@ -6,14 +6,6 @@
     font-weight: 600; 
 }
 
-/* Staff Section Heading */
-.wwl-staff-heading {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #222;
-}
-
 /* Grid Container */
 .wwl-staff-list {
   list-style: none;
