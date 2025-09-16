@@ -15,10 +15,10 @@ if (window.location.pathname.includes('/about/')) {
     const styleTag = document.createElement('style');
     styleTag.textContent = `
       .tl-carousel-container {
-        position: relative;
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 0 15px;
+            position: relative;
+            max-width: 90vw;
+            margin: 40px auto;
+            padding: 0 15px;
       }
 
       .tl-timeline-carousel:not(.slick-initialized) {
