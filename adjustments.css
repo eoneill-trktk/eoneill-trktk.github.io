@@ -1437,3 +1437,7 @@ main > section > * {
   a.child-item{
     font-size: 10px;
   }
+
+  .search-results .search-list ul li:nth-child(even) {
+    background: rgba(0, 113, 206,.2)!important
+}
