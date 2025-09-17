@@ -1433,3 +1433,7 @@ main > section > * {
     margin-left: -50vw;
     margin-right: -50vw;
   }
+
+  a.child-item{
+    font-size: 10px;
+  }
