@@ -1,4 +1,4 @@
-if (window.location.pathname.includes('/join-us/')) {
+if (window.location.pathname.includes('community-employer-partners')) {
     // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMap);
