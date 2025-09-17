@@ -1385,9 +1385,8 @@ main > section > * {
 }
 
 .career-fair-for-individuals-with-disabilities .cf-nav-container a {
-    text-decoration: none;
-    color: #333;
-    padding: 0.5rem 1rem;
+    color: #00074F;
+    font-size: 1.25em;
     transition: all 0.3s ease;
 }
 
