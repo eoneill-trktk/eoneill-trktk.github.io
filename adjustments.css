@@ -1337,3 +1337,14 @@ main > section > * {
 .basiccontentblock-fullwidthbanner{
   margin: 2em 0;
 }
+
+.four-column.simple-content-collection .list{
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media (max-width: 767px) {
+.four-column.simple-content-collection .list{
+  grid-template-columns: 1fr;
+}
+}
+
