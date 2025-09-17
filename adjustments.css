@@ -1414,3 +1414,22 @@ main > section > * {
         border-bottom: none;
     }
 }
+
+.thick-headline .image-hero{
+  padding: 0;
+}
+
+.thick-headline h1{    
+    margin: 0;
+    text-align: center;
+    padding: 1em;
+    font-size: 2em;
+    background-color: #00074F;
+    color: white;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
