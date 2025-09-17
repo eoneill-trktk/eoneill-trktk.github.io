@@ -1284,7 +1284,7 @@ main > section > * {
   display: none!important;
 }
 
-.wwl-fw-text-banner {
+/* .wwl-fw-text-banner {
     width: 102vw;
     margin-left: -2vw;
     font-size: 2em;
@@ -1293,7 +1293,36 @@ main > section > * {
     display: flex;
     justify-content: center;
     align-items: center;
+} */
+
+.wwl-fw-text-banner {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;          /* always match viewport width */
+  margin-left: -50vw;    /* shift left edge out of parent */
+  margin-right: -50vw;   /* shift right edge out of parent */
+
+  padding: 10px 0;       /* thin banner spacing */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent; /* text-only look */
 }
+
+.wwl-fw-text-banner span {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.wwl-fw-text-banner a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
 
 .lightblue-bg{
   background-color: rgba(0, 113, 206, .2);
