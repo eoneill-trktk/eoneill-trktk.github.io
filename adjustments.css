@@ -1333,3 +1333,7 @@ main > section > * {
   background-color: #00074F;
   color: white;
 }
+
+.basiccontentblock-fullwidthbanner{
+  margin: 2em 0;
+}
