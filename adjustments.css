@@ -1381,12 +1381,12 @@ main > section > * {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    font-size: 1.25em;
+    font-size: 1em;
 }
 
 .career-fair-for-individuals-with-disabilities .cf-nav-container a {
     color: #00074F;
-    font-size: 1.25em;
+    font-size: 1em;
     transition: all 0.3s ease;
 }
 
