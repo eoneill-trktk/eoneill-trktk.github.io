@@ -1455,3 +1455,9 @@ main > section > * {
   display: none!important;
 }
 }
+
+@media (max-width: 768px) {
+  .thick-headline h1{
+      width: 88vw;
+}
+}
