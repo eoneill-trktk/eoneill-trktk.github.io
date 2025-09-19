@@ -1458,6 +1458,24 @@ main > section > * {
 
 @media (max-width: 768px) {
   .thick-headline h1{
-      width: 88vw;
+      width: 92vw;
+}
+}
+
+@media (max-width: 680px) {
+  .thick-headline h1{
+      width: 91vw;
+}
+}
+
+@media (max-width: 580px) {
+  .thick-headline h1{
+      width: 90vw;
+}
+}
+
+@media (max-width: 460px) {
+  .thick-headline h1{
+      width: 87vw;
 }
 }
