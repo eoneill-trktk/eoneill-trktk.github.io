@@ -1442,16 +1442,16 @@ main > section > * {
     background: rgba(0, 113, 206,.2)!important
 }
 
-.aside-menu-root.wwl-mobile-menu-hide {
+.main > aside.aside-area ul.aside-menu-root, .main > aside.aside-area ul.aside-menu-root li ul.aside-menu-root.wwl-mobile-menu-hide {
   display: none;
 }
 
-.aside-menu-root.wwl-mobile-menu-show {
+.main > aside.aside-area ul.aside-menu-root, .main > aside.aside-area ul.aside-menu-root li ul.aside-menu-root.wwl-mobile-menu-show {
   display: block;
 }
 
 @media (min-width: 768px) {
-  body .aside-menu-root.wwl-mobile-menu-hide {
+  .main > aside.aside-area ul.aside-menu-root, .main > aside.aside-area ul.aside-menu-root li ul.aside-menu-root.wwl-mobile-menu-hide {
   display: none;
 }
 }
