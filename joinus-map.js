@@ -207,7 +207,7 @@ function initMap() {
         // Create an object to store markers by name for easy access
         const markers = {};
         let currentPage = 1;
-        let itemsPerPage = 5; // Changed from 2 to 5
+        let itemsPerPage = 20; // Changed from 2 to 5
         let currentCategory = 'all';
         let visibleLocations = [];
 
