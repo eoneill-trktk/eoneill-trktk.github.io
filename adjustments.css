@@ -1441,3 +1441,17 @@ main > section > * {
   .search-results .search-list ul li:nth-child(even) {
     background: rgba(0, 113, 206,.2)!important
 }
+
+.aside-menu-root.wwl-mobile-menu-hide {
+  display: none;
+}
+
+.aside-menu-root.wwl-mobile-menu-show {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  body .aside-menu-root.wwl-mobile-menu-hide {
+  display: none;
+}
+}
