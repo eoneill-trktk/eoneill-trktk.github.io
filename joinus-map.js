@@ -234,7 +234,24 @@ function initMap() {
         categories.forEach(category => {
             if (category !== 'all') {
                 const categoryName = category.replace(/-/g, ' ');
-                categoryOptions += `<option value="${category}">${categoryName}</option>`;
+                if (categoryName === 'Colleges'){
+                   categoryOptions += `<option value="${category}">Colleges and Universities</option>`;
+                } else if (categoryName === 'Business'){
+                    categoryOptions += `<option value="${category}">Business Network</option>`;
+                } else if (categoryName === 'Human'){
+                    categoryOptions += `<option value="${category}">Human Service Agencies</option>`;
+                } else if (categoryName === 'Massachusetts'){
+                    categoryOptions += `<option value="${category}">Massachusetts and RI State Agencies</option>`;
+                } else if (categoryName === 'MassHire'){
+                    categoryOptions += `<option value="${category}">MassHire Career Centers</option>`;
+                } else if (categoryName === 'Regional'){
+                    categoryOptions += `<option value="${category}">Regional Employment Collaboratives</option>`;
+                } else if (categoryName === 'Youth'){
+                    categoryOptions += `<option value="${category}">Youth and Young Adults</option>`;
+                } else{
+                   categoryOptions += `<option value="${category}">${categoryName}</option>`;
+                }
+                // categoryOptions += `<option value="${category}">${categoryName}</option>`;
             }
         });
         
