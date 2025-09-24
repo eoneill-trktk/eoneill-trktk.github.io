@@ -1479,3 +1479,7 @@ main > section > * {
       width: 87vw;
 }
 }
+
+.wwl-map-page main .main-content>.block.medialistingblock{
+  padding: 0;
+}
