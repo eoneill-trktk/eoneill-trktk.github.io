@@ -1483,3 +1483,10 @@ main > section > * {
 .wwl-map-page main .main-content>.block.medialistingblock{
   padding: 0;
 }
+
+
+
+.asidemenu .menu-item>a:hover {
+    color: var(--accent1);
+    background-color: rgba(0, 0, 0, 0.02);
+}
