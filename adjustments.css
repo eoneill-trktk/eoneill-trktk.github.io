@@ -1486,7 +1486,7 @@ main > section > * {
 
 
 
-.asidemenu .menu-item>a:hover {
+.main > aside.aside-area ul.aside-menu-root li a:hover {
     color: var(--accent1);
     background-color: rgba(0, 0, 0, 0.02);
 }
