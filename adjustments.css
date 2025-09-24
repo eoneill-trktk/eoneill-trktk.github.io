@@ -1269,6 +1269,15 @@ main.success-columns .main-content.wwl-aside-main {
 }
 }
 
+ main.success-columns .main-content > h1:first-child,
+  main.success-columns .main-content > .standard-width,
+  main.success-columns .main-content > .date-posted,
+  main.success-columns .main-content > div.simple-content,
+  .main.grid-container > .main-content,
+  .success-columns main .main > .success-columns aside + .main-content > * {
+    grid-column: auto !important;
+  }
+
 main > section > * {
     /* grid-column: 1 / 13; */
 }
