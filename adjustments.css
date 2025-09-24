@@ -1249,22 +1249,22 @@ font-size: 1.75em;
   background-color: rgba(0, 150, 255, 0.1);
 }
 
-body.success-columns .main-content.wwl-aside-main{
+main.success-columns .main-content.wwl-aside-main{
   grid-template-columns: 70% 30%;
   grid-column: unset;
   grid-row: unset;
 
 }
 
-body.success-columns main .main > aside + .wwl-aside-main.main-content > *{
+main.success-columns main .main > aside + .wwl-aside-main.main-content > *{
 grid-column: unset;
 }
 
-body.success-columns .aside-area{
+main.success-columns .aside-area{
   display: none;
 }
 @media (max-width: 1000px) {
-body.success-columns .main-content.wwl-aside-main {
+main.success-columns .main-content.wwl-aside-main {
     grid-template-columns: 100%;
 }
 }
