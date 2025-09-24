@@ -42,7 +42,7 @@ function initMap() {
     styleTag.textContent = `
         #map {
             width: 100%;
-            height: 70vh; 
+            height: 60vh; 
         }
         .leaflet-popup-content {
             margin: 10px 15px;
