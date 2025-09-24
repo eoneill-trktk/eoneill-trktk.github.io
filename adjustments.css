@@ -1251,8 +1251,8 @@ font-size: 1.75em;
 
 main.success-columns .main-content.wwl-aside-main{
   grid-template-columns: 70% 30%;
-  grid-column: unset;
-  grid-row: unset;
+  grid-column: unset!important;
+  grid-row: unset!important;
 
 }
 
