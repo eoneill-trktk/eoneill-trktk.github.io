@@ -1496,3 +1496,6 @@ main > section > * {
 }
 
 
+header ul.menu .menu-item{
+  text-align: center;
+}
