@@ -1499,3 +1499,7 @@ main > section > * {
 header ul.menu .menu-item{
   text-align: left;
 }
+
+body a:not(header a):not(.aside-menu-root a):not(.horizontal-menu a) {
+  text-decoration: underline !important;
+}
