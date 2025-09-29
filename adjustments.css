@@ -799,7 +799,7 @@ html, body {
     gap: 2em;
 }
 
-.wwl-footer{
+.wwl-footer-inner{
   max-width: 1440px;
   margin: 0 auto;
   margin-top: 2em;
