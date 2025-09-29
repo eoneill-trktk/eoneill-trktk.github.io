@@ -54,6 +54,7 @@ if (window.location.pathname.includes('/about/')) {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        background: rgba(229, 240, 250, .5);
       }
 
       .tl-slide-year {
