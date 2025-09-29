@@ -16,7 +16,7 @@ if (window.location.pathname.includes('/about/')) {
     styleTag.textContent = `
       .tl-carousel-container {
             position: relative;
-            max-width: 90vw;
+            max-width: 1440px;
             margin: 40px auto;
             padding: 0 15px;
       }
