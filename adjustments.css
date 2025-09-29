@@ -1548,3 +1548,23 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   display: block;
   margin: 0 auto;
 }
+
+.full-bleed-bg-color-row {
+  position: relative; /* establish positioning for ::before */
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1rem; /* whatever your site’s side spacing is */
+}
+
+.full-bleed-bg-color-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;              
+  margin-left: calc(-50vw + 50%); 
+  background: inherit;      
+  z-index: -1;               
+}
