@@ -573,6 +573,14 @@ flex: 0 0 33.33%; /* 3 visible */
 width: 120px; /* Slightly smaller for medium screens */
 height: 120px;
 }
+.grid-container > .block.sectionblock-cols.grid-3 > section > .sectionblock-grid {
+    grid-template-columns: 1fr;
+}
+section.block.sectionblock[data-block-id="806871"] {
+    justify-content: left;
+
+}
+
 }
 
 @media (max-width: 500px) {
