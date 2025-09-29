@@ -861,6 +861,7 @@ header.site-header #site-logo {
   width: auto;
   max-width: 120px;
   height: auto;
+  padding-right: 30px;
   display: block;
 }
 
