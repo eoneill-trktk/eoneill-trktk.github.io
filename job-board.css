@@ -25,9 +25,9 @@
   justify-content: center;
   padding: 15px;
   max-width: 300px;
-  background: #fff;
+  background: #fcfcfc;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  /* box-shadow: 0 2px 6px rgba(0,0,0,0.05); */
   aspect-ratio: 4 / 3;
   margin: 0 auto;
   text-align: center;
