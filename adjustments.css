@@ -1519,7 +1519,7 @@ main .main-content>.block.careerfairnav{
 }
 
 body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simple-content-collection .list>.has-link:active, .simple-content-collection .list>.has-link:hover{
-    background-color: none;
+    background-color: inherit;
     transition: none;
     box-shadow: none;
 }
