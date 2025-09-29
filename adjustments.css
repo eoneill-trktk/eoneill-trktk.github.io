@@ -19,10 +19,9 @@ div.jobboard h2{
     color: #00074F;
     text-align: center;
 }
-main.homepage .bizcarouselblock, main.homepage .wwl-headline-banner {
+main.homepage .bizcarouselblock, main.homepage .wwl-headline-banner, main.homepage {
     margin: 0 auto;
     max-width: 1440px;
-    display: contents;
 }
 
 .wwl-headline-banner .title{
@@ -1515,7 +1514,3 @@ body a:not(header a):not(.aside-menu-root a):not(.horizontal-menu a):not(.wwl-he
 main .main-content>.block.careerfairnav{
   padding: 2em 0 0 0;
 }
-
-/* footer{
-  display: none!important;
-} */
