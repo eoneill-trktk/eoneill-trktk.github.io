@@ -78,7 +78,7 @@ if (window.location.pathname.includes('/about/')) {
       }
 
       .tl-slide-description h4{
-        font-size: 14px;
+        font-size: 20px;
       }
 
       .tl-carousel-prev,
