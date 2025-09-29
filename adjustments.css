@@ -800,6 +800,8 @@ html, body {
 }
 
 .wwl-footer{
+  max-width: 1440px;
+  margin: 0 auto;
   margin-top: 2em;
 }
 
