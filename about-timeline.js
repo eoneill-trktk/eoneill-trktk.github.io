@@ -170,6 +170,12 @@ if (window.location.pathname.includes('/about/')) {
         border-radius: 6px;
       }
 
+      @media (max-width: 1440px) {
+.tl-carousel-container{
+max-width: 90vw;
+}
+  }
+
       @media (max-width: 768px) {
         .tl-carousel-prev {
           left: 5px;
