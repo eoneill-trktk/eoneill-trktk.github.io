@@ -19,7 +19,7 @@ div.jobboard h2{
     color: #00074F;
     text-align: center;
 }
-main.homepage .bizcarouselblock, main.homepage .wwl-headline-banner, main.homepage {
+main.homepage .bizcarouselblock, main.homepage .wwl-headline-banner {
     margin: 0 auto;
     max-width: 1440px;
 }
