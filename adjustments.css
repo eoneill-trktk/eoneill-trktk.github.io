@@ -1536,8 +1536,8 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
 .full-bleed-bg-color{
   width: 100vw;
   position: relative;
-  left: 50%;
-  right: 50%;
+  /* left: 50%;
+  right: 50%; */
   margin-left: -50vw;
   margin-right: -50vw;
 }
@@ -1569,6 +1569,6 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   z-index: -1;               
 }
 
-.bg-color .light-blue{
+.bg-color.light-blue{
   background-color: rgb(189,227,241);
 }
