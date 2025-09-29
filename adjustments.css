@@ -1568,3 +1568,7 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   background: inherit;      
   z-index: -1;               
 }
+
+.bg-color .light-blue{
+  background-color: rgb(189,227,241);
+}
