@@ -1514,3 +1514,7 @@ body a:not(header a):not(.aside-menu-root a):not(.horizontal-menu a):not(.wwl-he
 main .main-content>.block.careerfairnav{
   padding: 2em 0 0 0;
 }
+
+footer{
+  display: none!important;
+}
