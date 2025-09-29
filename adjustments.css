@@ -22,6 +22,7 @@ div.jobboard h2{
 main.homepage .bizcarouselblock, main.homepage .wwl-headline-banner {
     margin: 0 auto;
     max-width: 1440px;
+    display: contents;
 }
 
 .wwl-headline-banner .title{
