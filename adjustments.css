@@ -1545,7 +1545,7 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
 /*This sets the child basic, w/ title and desc. children, to centered, max-width 1440px*/
 .full-bleed-bg-color .basic{
   max-width: 1440px;
-  display: block;
+  display: flex;
   margin: 0 auto;
 }
 
