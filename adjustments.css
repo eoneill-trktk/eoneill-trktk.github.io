@@ -103,7 +103,6 @@ div.jobboard h2{
   text-align: left;
   vertical-align: top;
 }
-
 #backToTop {
   position: fixed;
   bottom: 30px;
@@ -111,29 +110,37 @@ div.jobboard h2{
   width: 50px;
   height: 50px;
   background-color: #00074F;
-  color: white;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
   z-index: 9999;
 }
 
 #backToTop svg {
   width: 24px;
   height: 24px;
-  fill: #fff; /* white arrow */
+  fill: #fff;
+  transition: transform 0.3s ease;
 }
 
 #backToTop.show {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Hover effect */
+#backToTop:hover {
+  background-color: #001080; /* lighter navy */
+}
+
+#backToTop:hover svg {
+  transform: scale(1.15); /* arrow grows slightly */
 }
 
 
