@@ -125,10 +125,17 @@ div.jobboard h2{
   z-index: 9999;
 }
 
+#backToTop svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff; /* white arrow */
+}
+
 #backToTop.show {
   opacity: 1;
   pointer-events: auto;
 }
+
 
 /* Collapse columns into stacked rows at ≤ 768px */
 @media (max-width: 768px) {
