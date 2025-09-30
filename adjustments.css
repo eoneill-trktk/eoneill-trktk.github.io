@@ -213,6 +213,13 @@ body header.site-header::before {
     width: 100%;
     margin: 0 0 1rem 0;
   }
+  .benefits-counseling h1{
+  width: 91vw;
+  }
+}
+
+.benefits-counseling h1{
+  margin-bottom: 1.25em;
 }
 
 @media (max-width: 420px) {
