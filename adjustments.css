@@ -830,11 +830,18 @@ html, body {
 }
 
 header.site-header #site-logo {
-    padding-left: 5vw;
+    padding-left: 0;
+}
+body header.site-header{
+  width: 1440px;
+  margin: 0 auto;
+  box-shadow: none;
 }
 
 #second-footer.footer2 .description {
-    margin: 0;
+    margin: auto;
+    display: block;
+    width: 1440px;
 }
 
 /* .rowwithicon .image, .rowwithicon .tab-copy{display: inline-block; width: 90%;}
@@ -1580,4 +1587,13 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
 
 .bg-color.light-blue{
   background-color: rgb(189,227,241);
+}
+
+footer.wwl-footer-inner .sectionblock-grid{
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.grid-container > [data-block-id="806861"].block.sectionblock-cols.grid-3 > section > .sectionblock-grid{
+  gap: 2em 14em;
 }
