@@ -179,6 +179,18 @@ div.jobboard h2{
   left: 0;
   right: 0;
 }
+
+body header.site-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 100%;
+    transform: translateX(-50%);
+    background: white;
+    z-index: -1;
+}
 }
 
 @media (max-width: 768px) {
