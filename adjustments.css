@@ -1598,7 +1598,16 @@ footer .wwl-footer-inner .sectionblock-grid{
   gap: 2em 14em;
 }
 
-/* .site-header #site-search-form .nav-search-button>svg {
-    width: 40px;
-    justify-self: flex-start;
-} */
+.site-header {
+  position: relative; 
+  background: #fff;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.site-header.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
