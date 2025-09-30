@@ -87,10 +87,10 @@ section.hero-section .image-hero {
 }
 
 .wwl-toc {
-  background-color: #efefef;
+  background-color: #fff;
   padding: 1em;
   border: 1px solid black;
-  border-radius: 30px;
+  border-radius: 4px;
 }
 
 .wwl-toc .table {
