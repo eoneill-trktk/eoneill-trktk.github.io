@@ -173,7 +173,8 @@ div.jobboard h2{
 } */
 
 .site-header.is-fixed {
-  position: relative;
+  position: fixed;
+  background: #fff;
   top: 0;
   left: 0;
   right: 0;
