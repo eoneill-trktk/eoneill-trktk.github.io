@@ -1740,3 +1740,47 @@ footer .wwl-footer-inner .sectionblock-grid{
 main#main section:not(.hero-section):not(.hero) {
   padding: 0 2em;
 }
+
+/* Base table styling */
+.wwl-table-jobspricing {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #000;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.wwl-table-jobspricing th,
+.wwl-table-jobspricing td {
+  padding: 12px;
+  border: none; /* Matches original "border-style: none" look */
+}
+
+.wwl-table-jobspricing th {
+  background-color: #d9dbf7;
+}
+
+.wwl-table-jobspricing td {
+  background-color: #eaecf8;
+}
+
+.wwl-table-jobspricing h4 {
+  margin: 0;
+}
+
+/* First row special background */
+.wwl-table-jobspricing th:first-child {
+  background-color: #d9dbf7;
+}
+
+/* Accent table background (from original inline) */
+.wwl-table-jobspricing {
+  background-color: #84dade;
+}
+
+/* Responsive font size */
+@media (max-width: 768px) {
+  .wwl-table-jobspricing {
+    font-size: 0.9rem;
+  }
+}
