@@ -833,7 +833,7 @@ header.site-header #site-logo {
     padding-left: 0;
 }
 body header.site-header{
-  width: 1440px;
+  max-width: 1440px;
   margin: 0 auto;
   box-shadow: none;
 }
