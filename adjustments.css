@@ -240,6 +240,12 @@ div[data-block-id="807631"] div.description, .biz-carousel-container{
 
 h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,h4.heading-bar.dark,h5.heading-bar.dark,h6.heading-bar.dark {
     color:var(--lightest);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     background: #00074F;
 }
 
