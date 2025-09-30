@@ -82,6 +82,10 @@ div.jobboard h2{
   font-size: 1rem;
 }
 
+section.hero-section .image-hero {
+    padding-bottom: 4vw;
+}
+
 .wwl-toc {
   background-color: #efefef;
   padding: 1em;
