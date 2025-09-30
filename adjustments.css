@@ -238,7 +238,7 @@ div[data-block-id="807631"] div.description, .biz-carousel-container{
   font-family: 'Barlow'
 }
 
-h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,h4.heading-bar.dark,h5.heading-bar.dark,h6.heading-bar.dark {
+h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,h4.heading-bar.dark,h5.heading-bar.dark,h6.heading-bar.dark,h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,div.heading-bar.dark {
     color:var(--lightest);
     width: 100vw;
     position: relative;
@@ -249,7 +249,7 @@ h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,h4.heading-bar.dark,
     background: #00074F;
 }
 
-h1.heading-bar.light,h2.heading-bar.light,h3.heading-bar.light,h4.heading-bar.light,h5.heading-bar.light,h6.heading-bar.light {
+h1.heading-bar.light,h2.heading-bar.light,h3.heading-bar.light,h4.heading-bar.light,h5.heading-bar.light,h6.heading-bar.light,div.heading-bar.dark {
     color: var(--brand-color);
     background: var(--brand-light-85p);
 }
@@ -948,7 +948,7 @@ html, body {
 }
 
 header.site-header #site-logo {
-    padding-left: 0;
+    padding-left: 1em;
 }
 body header.site-header{
   max-width: 1440px;
