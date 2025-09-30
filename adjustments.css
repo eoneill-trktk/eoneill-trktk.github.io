@@ -1589,7 +1589,7 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   background-color: rgb(189,227,241);
 }
 
-footer.wwl-footer-inner .sectionblock-grid{
+footer .wwl-footer-inner .sectionblock-grid{
     max-width: 1440px;
     margin: 0 auto;
 }
