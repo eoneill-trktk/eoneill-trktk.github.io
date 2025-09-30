@@ -238,6 +238,10 @@ div[data-block-id="807631"] div.description, .biz-carousel-container{
   font-family: 'Barlow'
 }
 
+h4{
+  margin-top: 0!important;
+}
+
 h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,h4.heading-bar.dark,h5.heading-bar.dark,h6.heading-bar.dark,h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,div.heading-bar.dark {
     color:var(--lightest);
     width: 100vw;
@@ -273,6 +277,10 @@ section[data-block-id="806871"] * {
   footer a.nav-link{
     color:#00074F;
     font-family:Arial, Helvetica, sans-serif;
+  }
+
+  p{
+    font-family:Arial, Helvetica, sans-serif!important;
   }
   
 .menu-footer > ul > li a {
@@ -1714,4 +1722,8 @@ footer .wwl-footer-inner .sectionblock-grid{
 
 .grid-container > [data-block-id="806861"].block.sectionblock-cols.grid-3 > section > .sectionblock-grid{
   gap: 2em 14em;
+}
+
+main#main section:not(.hero-section):not(.hero) {
+  padding: 0 2em;
 }
