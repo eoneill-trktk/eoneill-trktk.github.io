@@ -218,10 +218,6 @@ body header.site-header::before {
   }
 }
 
-.benefits-counseling h1{
-  margin-bottom: 1.25em;
-}
-
 @media (max-width: 420px) {
   .wwl-advice-block__bttn { font-size: .95rem; }
   .wwl-advice-block__title h2 { font-size: 1.35rem; }
@@ -1524,7 +1520,8 @@ main > section > * {
 }
 
 .benefits-counseling h1{
-  margin: 0;
+    margin-top: 0;
+    margin-bottom: 1.25em;
     text-align: center;
     padding: 1em;
     font-size: 2em;
