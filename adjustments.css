@@ -82,6 +82,48 @@ div.jobboard h2{
   font-size: 1rem;
 }
 
+.wwl-toc {
+  background-color: #efefef;
+  padding: 1em;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+
+.wwl-toc .table {
+  width: 100%;
+  border-style: none;
+  border-collapse: collapse;
+}
+
+.wwl-toc col {
+  width: 24.9841%;
+}
+
+.wwl-toc td {
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Collapse columns into stacked rows at ≤ 768px */
+@media (max-width: 768px) {
+  .wwl-toc .table,
+  .wwl-toc tbody,
+  .wwl-toc tr,
+  .wwl-toc td {
+    display: block;
+    width: 100%;
+  }
+
+  .wwl-toc h5 {
+    margin-bottom: 1em;
+  }
+
+  .wwl-toc td p {
+    margin: 0.5em 0;
+  }
+}
+
+
 @media (min-width: 768px) {
   /* .site-header {
   position: relative; 
