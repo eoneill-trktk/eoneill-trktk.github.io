@@ -841,7 +841,7 @@ body header.site-header{
 #second-footer.footer2 .description {
     margin: auto;
     display: block;
-    width: 1440px;
+    max-width: 1440px;
 }
 
 /* .rowwithicon .image, .rowwithicon .tab-copy{display: inline-block; width: 90%;}
@@ -1597,3 +1597,8 @@ footer .wwl-footer-inner .sectionblock-grid{
 .grid-container > [data-block-id="806861"].block.sectionblock-cols.grid-3 > section > .sectionblock-grid{
   gap: 2em 14em;
 }
+
+/* .site-header #site-search-form .nav-search-button>svg {
+    width: 40px;
+    justify-self: flex-start;
+} */
