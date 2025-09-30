@@ -104,6 +104,32 @@ div.jobboard h2{
   vertical-align: top;
 }
 
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #00074F;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* Collapse columns into stacked rows at ≤ 768px */
 @media (max-width: 768px) {
   .wwl-toc .table,
