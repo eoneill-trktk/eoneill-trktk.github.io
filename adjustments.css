@@ -1823,3 +1823,7 @@ main#main.success-columns {
 .success-stories .wwl-aside-main.main-content>.successstoriesgrid.block{
   padding-top: 0;
 }
+
+.success-stories .successstoriesgrid.block h2{
+  margin-top: 0;
+}
