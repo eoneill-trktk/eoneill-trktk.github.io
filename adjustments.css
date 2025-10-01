@@ -1022,8 +1022,12 @@ body header.site-header{
   width: auto;
   max-width: 120px;
   height: auto;
-  padding-right: 30px;
+  padding: 0 30px;
   display: block;
+}
+
+.block.basiccontentblock.rowwithicon{
+  margin-top: 1em;
 }
 
 .row-with-icon .tab-copy {
