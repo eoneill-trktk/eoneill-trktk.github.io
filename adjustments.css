@@ -1842,3 +1842,15 @@ main#main.success-columns {
     max-width: 1440px;
     margin: 0 auto;
 }
+
+.homepage .wwl-headline-banner .title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;            /* full viewport width */
+  height: 100%;
+  background-color: #00074F;
+  transform: translateX(-50%); /* center the bleed */
+  z-index: -1;             /* behind the content */
+}
