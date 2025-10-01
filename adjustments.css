@@ -179,6 +179,15 @@ padding-left: 1em;
   transition: all 0.3s ease;
 } */
 
+
+/*Full Bleed BG color, must be assigened in BC top parent */
+.full-bleed-bg-color{
+  width: 100vw;
+  position: relative;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
 .site-header.is-fixed {
   position: fixed;
   background: #fff;
@@ -1707,14 +1716,6 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
 .bg-color .light-grey{
   background-color: #eeeeec
 }
-
-/*Full Bleed BG color, must be assigened in BC top parent */
-/* .full-bleed-bg-color{
-  width: 100vw;
-  position: relative;
-  margin-left: -50vw;
-  margin-right: -50vw;
-} */
 
 /*This sets the child basic, w/ title and desc. children, to centered, max-width 1440px*/
 .row-with-icon.full-bleed-bg-color .basic{
