@@ -168,7 +168,7 @@ section.hero-section .image-hero {
 }
 @media (max-width: 1440px) {
 section.homepage-section div[data-block-id="807631"] div.description, section.homepage-section .wwl-headline-banner .title {
-padding: 0 2em;
+padding-left: 1em;
 }
 }
 @media (min-width: 768px) {
