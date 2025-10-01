@@ -1420,12 +1420,12 @@ h2.hero-caption-title{
   background-color: rgba(0, 150, 255, 0.1);
 }
 
-main.success-columns .main-content.wwl-aside-main{
+/* main.success-columns .main-content.wwl-aside-main{
   grid-template-columns: 70% 30%;
   grid-column: unset!important;
   grid-row: unset!important;
 
-}
+} */
 
 main.success-columns main .main > aside + .wwl-aside-main.main-content > *{
 grid-column: unset;
@@ -1791,4 +1791,26 @@ main#main section:not(.hero-section):not(.hero):not(.homepage-section) {
   .wwl-table-jobspricing {
     font-size: 0.9rem;
   }
+}
+
+main#main.success-columns {
+    display: grid;
+    grid-template-columns: auto !important;
+    grid-template-rows: auto;
+    gap: 0 2em;
+}
+
+.success-columns section.main.shell.top-padding.grid-container{
+    max-width: 1440px;
+    display: grid;
+    margin: 0 auto;
+}
+
+.success-columns aside.aside-area{
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+    width: 100%;
+    padding-top: 2em;
+    position: relative;
+    z-index: 1;
 }
