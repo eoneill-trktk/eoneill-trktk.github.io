@@ -244,9 +244,11 @@ header{
 }
 
 div[data-block-id="807631"] div.description, .biz-carousel-container{
-    display: block; 
-    padding: 0 5vw;
+    display: block;
+    max-width: 1440px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .grid-container > [data-block-id="806861"].block.sectionblock-cols.grid-3 > section > .sectionblock-grid {
