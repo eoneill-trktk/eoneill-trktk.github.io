@@ -1709,14 +1709,12 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
 }
 
 /*Full Bleed BG color, must be assigened in BC top parent */
-.full-bleed-bg-color{
+/* .full-bleed-bg-color{
   width: 100vw;
   position: relative;
-  /* left: 50%;
-  right: 50%; */
   margin-left: -50vw;
   margin-right: -50vw;
-}
+} */
 
 /*This sets the child basic, w/ title and desc. children, to centered, max-width 1440px*/
 .row-with-icon.full-bleed-bg-color .basic{
