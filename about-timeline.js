@@ -17,6 +17,7 @@ if (window.location.pathname.includes('/about/')) {
       .tl-carousel-container {
             position: relative;
             max-width: 1440px;
+            min-height: 800px;
             margin: 40px auto;
             padding: 0 15px;
       }
