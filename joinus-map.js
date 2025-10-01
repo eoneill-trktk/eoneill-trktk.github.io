@@ -1,35 +1,4 @@
 if (window.location.pathname.includes('community-employer-partners')) {
-    (function() {
-  function sortLocations() {
-    const container = document.querySelector('.medialistingblock.medialisttest');
-    if (!container) return;
-
-    const locations = Array.from(container.querySelectorAll(':scope > .location'));
-
-    locations.sort((a, b) => {
-      const nameA = (a.getAttribute('name') || '').toLowerCase();
-      const nameB = (b.getAttribute('name') || '').toLowerCase();
-      return nameA.localeCompare(nameB);
-    });
-
-    locations.forEach(el => container.appendChild(el));
-  }
-
-  // Wait until the block is on the page (for async loading)
-  const observer = new MutationObserver(() => {
-    const container = document.querySelector('.medialistingblock.medialisttest');
-    if (container) {
-      observer.disconnect();
-      sortLocations();
-    }
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
-
-  // Also try once on DOM ready in case it's already there
-  if (document.readyState !== 'loading') sortLocations();
-  else document.addEventListener('DOMContentLoaded', sortLocations);
-})();
     // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMap);
@@ -529,4 +498,35 @@ function initMap() {
     };
     
     document.head.appendChild(leafletJs);
+    (function() {
+  function sortLocations() {
+    const container = document.querySelector('.medialistingblock.medialisttest');
+    if (!container) return;
+
+    const locations = Array.from(container.querySelectorAll(':scope > .location'));
+
+    locations.sort((a, b) => {
+      const nameA = (a.getAttribute('name') || '').toLowerCase();
+      const nameB = (b.getAttribute('name') || '').toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
+
+    locations.forEach(el => container.appendChild(el));
+  }
+
+  // Wait until the block is on the page (for async loading)
+  const observer = new MutationObserver(() => {
+    const container = document.querySelector('.medialistingblock.medialisttest');
+    if (container) {
+      observer.disconnect();
+      sortLocations();
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Also try once on DOM ready in case it's already there
+  if (document.readyState !== 'loading') sortLocations();
+  else document.addEventListener('DOMContentLoaded', sortLocations);
+})();
 }
