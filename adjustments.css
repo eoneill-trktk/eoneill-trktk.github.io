@@ -12,6 +12,16 @@ html {
 
 }
 
+.simple-content-collection .list>.has-link.has-hover:focus, .simple-content-collection .list>.has-link.has-hover:active, .simple-content-collection .list>.has-link.has-hover:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    -o-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    box-shadow: 8px 8px 18px #888888;
+}
+
 .wwl-footer .menu-footer > ul {
 	display: block;
 }
