@@ -1758,7 +1758,7 @@ footer .wwl-footer-inner .sectionblock-grid{
   gap: 2em 14em;
 }
 
-main#main section:not(.hero-section):not(.hero):not(.homepage-section) {
+main#main.homepage section:not(.hero-section):not(.hero):not(.homepage-section) {
   padding: 0 2em;
 }
 
