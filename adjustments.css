@@ -305,6 +305,10 @@ section[data-block-id="806871"] * {
     font-family:Arial, Helvetica, sans-serif!important;
   }
   
+.contact-page .block.simplecontentcollectionblock.simple-content-collection.two-column .list div.set-padding{
+  padding: 2em
+}
+
 .menu-footer > ul > li a {
     text-decoration: none;
     color: #00074F;
