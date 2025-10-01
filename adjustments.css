@@ -1819,3 +1819,7 @@ main#main.success-columns {
     grid-column: 1 / 3;
     grid-row: 1 / 3;
 }
+
+.success-stories .wwl-aside-main.main-content>.block{
+  padding-top: 0;
+}
