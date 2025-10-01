@@ -315,6 +315,97 @@ h1.heading-bar.light,h2.heading-bar.light,h3.heading-bar.light,h4.heading-bar.li
 site-footer{
   margin-top:200px;
 }
+
+.wwl-sponsors-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.wwl-sponsors-table th {
+  background-color: #5e8ab4;
+  color: white;
+  text-align: center;
+  padding: 0.75em;
+}
+
+.wwl-sponsors-table td {
+  vertical-align: top;
+  padding: 0.75em;
+}
+
+.wwl-sponsors-table tr.alt-row td {
+  background-color: #cedce8;
+}
+
+/* --- Mobile collapse --- */
+@media (max-width: 768px) {
+  .wwl-sponsors-table,
+  .wwl-sponsors-table thead,
+  .wwl-sponsors-table tbody,
+  .wwl-sponsors-table th,
+  .wwl-sponsors-table td,
+  .wwl-sponsors-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .wwl-sponsors-table thead {
+    display: none; /* hide header row */
+  }
+
+  .wwl-sponsors-table tr {
+    margin-bottom: 1.5em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.5em;
+    background: #fff;
+  }
+
+  .wwl-sponsors-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.75em 0.5em;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .wwl-sponsors-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Inject labels from <th> based on column index */
+  .wwl-sponsors-table td:nth-child(1)::before {
+    content: "Type";
+    font-weight: bold;
+    color: #00074F;
+  }
+  .wwl-sponsors-table td:nth-child(2)::before {
+    content: "Cost";
+    font-weight: bold;
+    color: #00074F;
+  }
+  .wwl-sponsors-table td:nth-child(3)::before {
+    content: "Investment Objective";
+    font-weight: bold;
+    color: #00074F;
+  }
+  .wwl-sponsors-table td:nth-child(4)::before {
+    content: "Marketing Benefits";
+    font-weight: bold;
+    color: #00074F;
+  }
+
+  .wwl-sponsors-table td::before {
+    flex: 0 0 40%;
+    margin-right: 1em;
+  }
+
+  .wwl-sponsors-table td {
+    flex-direction: row;
+    gap: 1em;
+  }
+}
  
 
 footer .footer-grid > .block:last-child{
