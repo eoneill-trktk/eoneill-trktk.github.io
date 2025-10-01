@@ -1006,7 +1006,7 @@ body header.site-header{
 
 .row-with-icon {
   display: grid;
-  grid-template-columns: 10% 90%;
+  grid-template-columns: 10% 86%;
   gap: 2rem;
   align-items: start;
   /* max-width: 1200px; */
