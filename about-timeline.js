@@ -22,6 +22,9 @@ if (window.location.pathname.includes('/about/')) {
             padding: 0 15px;
       }
 
+      .tl-carousel-container .slick-arrow{
+      display:none!important}
+
       .tl-timeline-carousel:not(.slick-initialized) {
         opacity: 0;
         height: 0;
