@@ -1841,6 +1841,8 @@ main#main.success-columns {
     padding: 2em 0;
     max-width: 1440px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .homepage .wwl-headline-banner .title::before {
