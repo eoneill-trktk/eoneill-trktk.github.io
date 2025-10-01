@@ -1431,9 +1431,9 @@ main.success-columns main .main > aside + .wwl-aside-main.main-content > *{
 grid-column: unset;
 }
 
-main.success-columns .aside-area{
+/* main.success-columns .aside-area{
   display: none;
-}
+} */
 @media (max-width: 1000px) {
 main.success-columns .main-content.wwl-aside-main {
     grid-template-columns: 100%;
