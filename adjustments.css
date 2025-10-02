@@ -961,6 +961,16 @@ html, body {
   margin-top: 2em;
 }
 
+.wwl-hr {
+    background-color: rgba(128, 128, 128, 0.3);
+    width: 100%;
+    max-width: 1440px;
+    height: 1px;
+    border: none;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
 .statistics .basiccontentblock.bg-color .basic{
     padding: 2em;
 }
