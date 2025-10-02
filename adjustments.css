@@ -1407,6 +1407,12 @@ div.hero-button-wrapper a, .hero-button {
 
 }
 
+.testimonial table{
+  min-height: 200px;
+}
+
+.partner-with-us{}
+
 [data-block-id="822848"] td{
   padding-top: 2em;
 }
