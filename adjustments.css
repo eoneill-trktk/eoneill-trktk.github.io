@@ -1511,6 +1511,14 @@ main > section > * {
   display: inline-block;
 }
 
+.swiper-slide.hero-swiper-slide.white-text{
+  color: #fff;
+}
+
+.swiper-slide.hero-swiper-slide.overlay img.hero-slide-img{
+    filter: brightness(0.6);
+}
+
 
 .lightblue-bg{
   background-color: rgba(0, 113, 206, .2);
