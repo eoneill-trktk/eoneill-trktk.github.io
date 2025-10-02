@@ -1794,6 +1794,10 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   z-index: 8;
 }
 
+.wwl-cf-form-page .Form__Status {
+  color: #000;
+}
+
 .full-bleed-bg-color-row::before {
   content: "";
   position: absolute;
