@@ -1407,6 +1407,10 @@ div.hero-button-wrapper a, .hero-button {
 
 }
 
+[data-block-id="822848"] td{
+  padding-top: 2em;
+}
+
 .wwl-aside-main.main-content>h1 {
     padding: 0 0 0 26px;
 }
