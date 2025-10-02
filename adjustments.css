@@ -1511,7 +1511,7 @@ main > section > * {
   display: inline-block;
 }
 
-.swiper-slide.hero-swiper-slide.white-text{
+.swiper-slide.hero-swiper-slide.white-text, .swiper-slide.hero-swiper-slide.white-text h2.hero-caption-title, .swiper-slide.hero-swiper-slide.white-text a.hero-button{
   color: #fff;
 }
 
