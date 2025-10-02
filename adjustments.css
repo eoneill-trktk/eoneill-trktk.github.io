@@ -1390,7 +1390,7 @@ div.hero-button-wrapper a, .hero-button {
 
 }
 
-section.main.grid-container.personpage{
+#main > section.main.grid-container.personpage{
     max-width: 1440px;
     margin: 0 auto;
 }
