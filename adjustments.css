@@ -1485,6 +1485,15 @@ main > section > * {
 .simple-content-collection.two-column .list {
     grid-template-columns: 1fr;
 }
+
+footer #menu-header-menu{
+  padding-inline-start: 0;
+}
+
+.medialistingblock-socialmedia .container{
+      padding-left: 0;
+}
+
 }
 
 .swiper-navigation-icon{
