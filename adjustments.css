@@ -1390,6 +1390,11 @@ div.hero-button-wrapper a, .hero-button {
 
 }
 
+section.main.grid-container.personpage{
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
 .wwl-map-legend .title h2{
   border-bottom: 1px solid rgba(0, 0, 0, .1);
     margin-bottom: 1em;
