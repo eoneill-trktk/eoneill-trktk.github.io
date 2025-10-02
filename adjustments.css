@@ -1057,6 +1057,10 @@ body header.site-header{
   font-size: 1rem;
 }
 
+.wwl-training .simple-content-collection.two-column .list{
+
+}
+
 .row-with-icon .button .bttn {
   /* display: inline-block;
   background: #005fa3;
@@ -1655,6 +1659,9 @@ main > section > * {
         position: relative;
         left: auto;
     }
+    .wwl-training .simple-content-collection.two-column .list{
+          grid-template-columns: 70% 30%;
+}
 }
 
 @media (max-width: 768px) {
