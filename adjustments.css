@@ -1651,6 +1651,10 @@ main > section > * {
   .main > aside.aside-area ul.aside-menu-root.wwl-mobile-menu-hide, .main > aside.aside-area ul.aside-menu-root li ul.aside-menu-root.wwl-mobile-menu-hide {
   display: none!important;
 }
+    .wwl-blog .main > aside.aside-area label {
+        position: relative;
+        left: auto;
+    }
 }
 
 @media (max-width: 768px) {
