@@ -460,6 +460,12 @@ body p a.bttn, body p button.bttn {
       transition: transform 0.6s ease;
     }
 
+    form .Form__Status div{
+      padding: 0;
+      color: black;
+      font-size: 1.25em;
+    }
+
     .carousel-item.active {
       display: block;
     }
