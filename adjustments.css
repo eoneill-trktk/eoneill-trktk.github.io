@@ -1811,6 +1811,10 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   z-index: -1;               
 }
 
+header #sponsorus-header-link{
+  display: none;
+}
+
 .bg-color.light-blue{
   background-color: rgb(189,227,241);
 }
