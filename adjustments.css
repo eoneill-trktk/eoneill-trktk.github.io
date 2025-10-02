@@ -1466,6 +1466,26 @@ h2.hero-caption-title{
 
 } */
 
+.wwl-cf-form-page main#main{
+    background-color: #e5f0fa;
+}
+
+@media (min-width: 768px) {
+    .wwl-cf-form-page main#main .careerfairnav::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100vw;
+        height: 100%;
+        transform: translateX(-50%);
+        background: white;
+        z-index: -1;
+    }
+}
+
+careerfairnav
+
 main.success-columns main .main > aside + .wwl-aside-main.main-content > *{
 grid-column: unset;
 }
