@@ -1786,10 +1786,11 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
 }
 
 .full-bleed-bg-color-row {
-  position: relative; /* establish positioning for ::before */
+  position: relative;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 1rem; /* whatever your site’s side spacing is */
+  padding: 0 1rem; 
+  z-index: 8;
 }
 
 .full-bleed-bg-color-row::before {
