@@ -1452,6 +1452,13 @@ h2.hero-caption-title{
   background-color: rgba(0, 150, 255, 0.1);
 }
 
+.EPiServerForms input:not(.FormChoice):required:valid, .EPiServerForms textarea:required:valid {
+    background: var(--lightest) url(/static/img/icon-valid-20px.png) no-repeat 98% center;
+    box-shadow: none!important;
+    border-color: none!important;
+    padding-right: 20px;
+}
+
 /* main.success-columns .main-content.wwl-aside-main{
   grid-template-columns: 70% 30%;
   grid-column: unset!important;
