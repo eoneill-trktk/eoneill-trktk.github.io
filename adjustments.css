@@ -1761,7 +1761,8 @@ body a:not(header a):not(.aside-menu-root a):not(.horizontal-menu a):not(.wwl-he
 
 
 main .main-content>.block.careerfairnav{
-  padding: 2em 0 0 0;
+  padding: 2em;
+  background: #fcfcfc;
 }
 
 body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simple-content-collection .list>.has-link:active, .simple-content-collection .list>.has-link:hover{
