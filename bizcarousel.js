@@ -312,4 +312,6 @@
     }
 
     document.readyState==='loading'?document.addEventListener('DOMContentLoaded',loadSwiperAndInit):loadSwiperAndInit();
+    document.querySelector('.bis-carousel-container').style.margin = '0 auto';
+
 })();
