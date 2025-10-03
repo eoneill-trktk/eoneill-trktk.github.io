@@ -1825,6 +1825,10 @@ header #sponsorus-header-link{
   background-color: rgb(189,227,241);
 }
 
+.social-links-right{
+  border: none!important;
+}
+
 footer .wwl-footer-inner .sectionblock-grid:first-of-type{
     max-width: 1440px;
     margin: 0 auto;
