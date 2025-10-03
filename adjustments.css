@@ -1214,7 +1214,7 @@ body header.site-header{
 }
 } */
 
-.success-stories-lp aside.aside-area{
+body[data-content-id="815282"] aside.aside-area{
   display: none;
 }
 
