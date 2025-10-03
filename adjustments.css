@@ -68,6 +68,9 @@ div.jobboard h2{
   display: block;
   width: 100%;
   height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: top;
 }
 
 .wwl-advice-block__content {
