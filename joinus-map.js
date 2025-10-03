@@ -229,30 +229,24 @@ function initMap() {
         const filterControls = document.createElement('div');
         filterControls.className = 'map-filter-controls';
         
-        // Build category options
+        // Build category options: "All Categories" first, then others alphabetically by label
+        const categoryList = Array.from(categories).filter(c => c !== 'all').map(category => {
+            const categoryName = category.replace(/-/g, ' ');
+            // Map to display labels (keep your special names)
+            let label = categoryName;
+            if (categoryName === 'Colleges') label = 'Colleges and Universities';
+            else if (categoryName === 'Business') label = 'Business Network';
+            else if (categoryName === 'Human') label = 'Human Service Agencies';
+            else if (categoryName === 'Massachusetts') label = 'Massachusetts and RI State Agencies';
+            else if (categoryName === 'MassHire') label = 'MassHire Career Centers';
+            else if (categoryName === 'Regional') label = 'Regional Employment Collaboratives';
+            else if (categoryName === 'Youth') label = 'Youth and Young Adults';
+            return { value: category, label };
+        }).sort((a, b) => a.label.localeCompare(b.label));
+
         let categoryOptions = '<option value="all">All Categories</option>';
-        categories.forEach(category => {
-            if (category !== 'all') {
-                const categoryName = category.replace(/-/g, ' ');
-                if (categoryName === 'Colleges'){
-                   categoryOptions += `<option value="${category}">Colleges and Universities</option>`;
-                } else if (categoryName === 'Business'){
-                    categoryOptions += `<option value="${category}">Business Network</option>`;
-                } else if (categoryName === 'Human'){
-                    categoryOptions += `<option value="${category}">Human Service Agencies</option>`;
-                } else if (categoryName === 'Massachusetts'){
-                    categoryOptions += `<option value="${category}">Massachusetts and RI State Agencies</option>`;
-                } else if (categoryName === 'MassHire'){
-                    categoryOptions += `<option value="${category}">MassHire Career Centers</option>`;
-                } else if (categoryName === 'Regional'){
-                    categoryOptions += `<option value="${category}">Regional Employment Collaboratives</option>`;
-                } else if (categoryName === 'Youth'){
-                    categoryOptions += `<option value="${category}">Youth and Young Adults</option>`;
-                } else{
-                   categoryOptions += `<option value="${category}">${categoryName}</option>`;
-                }
-                // categoryOptions += `<option value="${category}">${categoryName}</option>`;
-            }
+        categoryList.forEach(({ value, label }) => {
+            categoryOptions += `<option value="${value}">${label}</option>`;
         });
         
         filterControls.innerHTML = `
@@ -499,34 +493,34 @@ function initMap() {
     
     document.head.appendChild(leafletJs);
     (function() {
-  function sortLocations() {
-    const container = document.querySelector('.medialistingblock.medialisttest');
-    if (!container) return;
+      function sortLocations() {
+        const container = document.querySelector('.medialistingblock.medialisttest');
+        if (!container) return;
 
-    const locations = Array.from(container.querySelectorAll(':scope > .location'));
+        const locations = Array.from(container.querySelectorAll(':scope > .location'));
 
-    locations.sort((a, b) => {
-      const nameA = (a.getAttribute('name') || '').toLowerCase();
-      const nameB = (b.getAttribute('name') || '').toLowerCase();
-      return nameA.localeCompare(nameB);
-    });
+        locations.sort((a, b) => {
+          const nameA = (a.getAttribute('name') || '').toLowerCase();
+          const nameB = (b.getAttribute('name') || '').toLowerCase();
+          return nameA.localeCompare(nameB);
+        });
 
-    locations.forEach(el => container.appendChild(el));
-  }
+        locations.forEach(el => container.appendChild(el));
+      }
 
-  // Wait until the block is on the page (for async loading)
-  const observer = new MutationObserver(() => {
-    const container = document.querySelector('.medialistingblock.medialisttest');
-    if (container) {
-      observer.disconnect();
-      sortLocations();
-    }
-  });
+      // Wait until the block is on the page (for async loading)
+      const observer = new MutationObserver(() => {
+        const container = document.querySelector('.medialistingblock.medialisttest');
+        if (container) {
+          observer.disconnect();
+          sortLocations();
+        }
+      });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+      observer.observe(document.body, { childList: true, subtree: true });
 
-  // Also try once on DOM ready in case it's already there
-  if (document.readyState !== 'loading') sortLocations();
-  else document.addEventListener('DOMContentLoaded', sortLocations);
-})();
+      // Also try once on DOM ready in case it's already there
+      if (document.readyState !== 'loading') sortLocations();
+      else document.addEventListener('DOMContentLoaded', sortLocations);
+    })();
 }
