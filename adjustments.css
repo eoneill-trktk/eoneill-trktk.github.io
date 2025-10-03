@@ -872,9 +872,9 @@ html, body {
             transition: background-color 0.3s;
         }
         
-        .diagram-link:hover {
+        /* .diagram-link:hover {
             background-color: rgba(0, 150, 255, 0.3);
-        }
+        } */
         
 
         #diagram {
