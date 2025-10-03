@@ -1825,7 +1825,7 @@ header #sponsorus-header-link{
   background-color: rgb(189,227,241);
 }
 
-.social-links-right{
+.social-links-right .sectionblock-grid{
   border: none!important;
 }
 
