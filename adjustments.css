@@ -1828,6 +1828,19 @@ header #sponsorus-header-link{
 footer .wwl-footer-inner .sectionblock-grid{
     max-width: 1440px;
     margin: 0 auto;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding: 1.5em;
+}
+
+
+footer .wwl-footer-inner .sectionblock-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;             /* same place as a border-top */
+  left: 20px;         /* how much "padding" you want */
+  right: 20px;        /* how much "padding" you want */
+  height: 1px;
+  background: rgba(0,0,0,.1);
 }
 
 .grid-container > [data-block-id="806861"].block.sectionblock-cols.grid-3 > section > .sectionblock-grid{

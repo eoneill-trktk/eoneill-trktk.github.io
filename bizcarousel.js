@@ -12,7 +12,8 @@
                     position: relative;
                     width: 100%;
                     height: 200px;
-                    margin: 0 auto;
+                    max-width: 1440px;
+                    margin: 0 auto!important;
                     overflow: hidden;
                 }
                 
