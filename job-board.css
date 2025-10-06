@@ -14,8 +14,8 @@
   .wwl-gallery { grid-template-columns: repeat(3, 1fr); }
 }
 
-@media (min-width: 1600px) {
-  .wwl-gallery { grid-template-columns: repeat(4, 1fr); }
+@media (min-width: 1400px) {
+  .wwl-gallery { grid-template-columns: repeat(5, 1fr); }
 }
 
 .wwl-gallery__item {
