@@ -7,7 +7,7 @@ html {
   padding-top: 0!important;
 }
 
-.zero-padding-bottom{
+.Zero-padding-bottom{
     padding-bottom: 0!important;
 
 }
@@ -56,6 +56,10 @@ div.jobboard h2{
 
 .wwl-headline-banner .title h2{
     color: #fff
+
+}
+
+div[data-block-id="819376"]{
 
 }
 
