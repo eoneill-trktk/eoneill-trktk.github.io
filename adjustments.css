@@ -12,6 +12,19 @@ html {
 
 }
 
+.bg-color.plum{
+  background-color: rgb(49, 11, 62);
+  color: #fff!important;
+}
+
+.bg-color.lime{
+  background-color: rgb(168, 197, 69);
+}
+
+/* .bg-color.{
+  background-color:;
+} */
+
 .contact-box{
       width: 50%;
     margin: 0 auto;
