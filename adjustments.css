@@ -12,6 +12,14 @@ html {
 
 }
 
+.contact-box{
+      width: 50%;
+    margin: 0 auto;
+    overflow-wrap: break-word;
+    height: 50%;
+    padding-bottom: 3em;
+}
+
 header.site-header #site-logo {
     padding-left: 1em;
     width: 200px;
