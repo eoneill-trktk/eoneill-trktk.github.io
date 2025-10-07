@@ -12,6 +12,22 @@ html {
 
 }
 
+header.site-header #site-logo {
+    padding-left: 1em;
+    width: 200px;
+}
+body header.site-header{
+  max-width: 1440px;
+  margin: 0 auto;
+  box-shadow: none;
+}
+
+#second-footer.footer2 .description {
+    margin: auto;
+    display: block;
+    max-width: 1440px;
+}
+
 .simple-content-collection .list>.has-link.has-hover:focus, .simple-content-collection .list>.has-link.has-hover:active, .simple-content-collection .list>.has-link.has-hover:hover {
     background-color: rgba(0, 0, 0, 0.04)!important;
     -o-transition: 0.5s!important;
@@ -997,21 +1013,6 @@ html, body {
 
 .statistics .basiccontentblock-layout .basic{
   padding: 2em;
-}
-
-header.site-header #site-logo {
-    padding-left: 1em;
-}
-body header.site-header{
-  max-width: 1440px;
-  margin: 0 auto;
-  box-shadow: none;
-}
-
-#second-footer.footer2 .description {
-    margin: auto;
-    display: block;
-    max-width: 1440px;
 }
 
 /* .rowwithicon .image, .rowwithicon .tab-copy{display: inline-block; width: 90%;}
