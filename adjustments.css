@@ -12,6 +12,10 @@ html {
 
 }
 
+.main-content > .EPiServerForms {
+    padding: 0!important;
+}
+
 .basiccontentblock.h1-border h1, .basiccontentblock.h2-border h2, .basiccontentblock.h3-border h3{
   border-bottom: 1px solid #00074F!important;
 }
