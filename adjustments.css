@@ -29,7 +29,7 @@ body header.site-header{
 }
 
 .FormChoice__Label{
-    display: inline-block;
+    display: inline-block!important;
 }
 
 .choice-item{
