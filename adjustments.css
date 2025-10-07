@@ -30,6 +30,14 @@ html {
   background-color: rgb(168, 197, 69);
 }
 
+.bg-color.teal{
+  background-color:#a6ebeb;
+}
+
+.bg-color.orange{
+  background-color:#efc4aa;;
+}
+
 /* .bg-color.{
   background-color:;
 } */
