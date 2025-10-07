@@ -19,7 +19,9 @@ html {
   background-color: rgb(49, 11, 62);
   color: #fff!important;
 }
-
+.main-content{
+      padding: 0 2em;
+}
 .bg-color.lime{
   background-color: rgb(168, 197, 69);
 }
