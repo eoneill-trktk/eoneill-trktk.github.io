@@ -28,6 +28,15 @@ body header.site-header{
     max-width: 1440px;
 }
 
+.FormChoice__Label{
+    display: inline-block;
+}
+
+.choice-item{
+    display: inline-block;
+    vertical-align: bottom;
+}
+
 .simple-content-collection .list>.has-link.has-hover:focus, .simple-content-collection .list>.has-link.has-hover:active, .simple-content-collection .list>.has-link.has-hover:hover {
     background-color: rgba(0, 0, 0, 0.04)!important;
     -o-transition: 0.5s!important;
