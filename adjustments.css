@@ -7,6 +7,10 @@ html {
   font-size: 1em;
 }
 
+.wwl-blog img{
+  max-width: 400px;
+}
+
 .zero-padding-top{
   padding-top: 0!important;
 }
