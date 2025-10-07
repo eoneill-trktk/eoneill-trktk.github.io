@@ -3,6 +3,10 @@ html {
     scroll-padding-top: 180px; 
 }
 
+.wwl-blog .basiccontentblock h3.subtitle{
+  font-size: 1em;
+}
+
 .zero-padding-top{
   padding-top: 0!important;
 }
