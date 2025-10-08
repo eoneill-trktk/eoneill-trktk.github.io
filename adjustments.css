@@ -3,7 +3,7 @@ html {
     scroll-padding-top: 180px; 
 }
 
-.wwl-blog .basiccontentblock h3.subtitle{
+.wwl-blog > .basiccontentblock:first-of-type .subtitle h3{
   font-size: 1em;
 }
 
