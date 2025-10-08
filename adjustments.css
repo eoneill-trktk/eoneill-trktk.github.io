@@ -11,6 +11,10 @@ html {
   max-width: 400px;
 }
 
+.hide-aside aside.aside-area{
+  display: none;
+}
+
 .zero-padding-top{
   padding-top: 0!important;
 }
