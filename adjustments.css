@@ -35,8 +35,8 @@ html {
   background-color: rgb(49, 11, 62);
   color: #fff!important;
 }
-.main-content{
-      padding: 0 2em;
+:not(.homepage-section) > .main-content {
+  padding: 0 2em;
 }
 .bg-color.lime{
   background-color: #e1ebbe;
