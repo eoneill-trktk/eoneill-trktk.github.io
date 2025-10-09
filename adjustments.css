@@ -16,7 +16,11 @@ html {
 }
 
 .wwl-blog .title h2{
-  font-size: 20px;
+  font-size: 24px;
+}
+
+.wwl-blog .description h4{
+  font-size: 18px;
 }
 
 .wwl-blog .title, .wwl-blog .description {
