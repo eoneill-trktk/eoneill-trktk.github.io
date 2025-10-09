@@ -78,8 +78,8 @@ html {
 }
 
 header.site-header #site-logo {
-    padding-left: 1em;
-    width: 200px;
+    padding-left: 0em;
+    width: 175px;
 }
 body header.site-header{
   max-width: 1080px;
