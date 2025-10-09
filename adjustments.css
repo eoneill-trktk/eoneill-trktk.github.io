@@ -76,7 +76,7 @@ header.site-header #site-logo {
     width: 200px;
 }
 body header.site-header{
-  max-width: 1440px;
+  max-width: 1000px;
   margin: 0 auto;
   box-shadow: none;
 }
@@ -84,7 +84,7 @@ body header.site-header{
 #second-footer.footer2 .description {
     margin: auto;
     display: block;
-    max-width: 1440px;
+    max-width: 1000px;
 }
 
 .FormChoice__Label{
@@ -125,7 +125,7 @@ div.jobboard h2{
 }
 /* main.homepage .bizcarouselblock, main.homepage .wwl-headline-banner, main.homepage {
     margin: 0 auto;
-    max-width: 1440px;
+    max-width: 1000px;
 } */
 
 .wwl-headline-banner .title{
@@ -277,7 +277,7 @@ section.hero-section .image-hero {
     margin: 0.5em 0;
   }
 }
-@media (max-width: 1440px) {
+@media (max-width: 1000px) {
 section.homepage-section div[data-block-id="807631"] div.description, section.homepage-section .wwl-headline-banner .title {
 padding-left: 1em;
 }
@@ -377,7 +377,7 @@ header{
 
 div[data-block-id="807631"] div.description, .biz-carousel-container{
     display: block;
-    max-width: 1440px;
+    max-width: 1000px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -489,7 +489,7 @@ body p a.bttn, body p button.bttn {
     .horizontal-menu {
       list-style: none;
       margin: 0 auto;
-      max-width: 1440px;
+      max-width: 1000px;
       padding: 0;
       display: flex;
       justify-content: end;
@@ -1064,7 +1064,7 @@ html, body {
 }
 
 .wwl-footer-inner{
-  max-width: 1440px;
+  max-width: 1000px;
   margin: 0 auto;
   margin-top: 2em;
 }
@@ -1072,7 +1072,7 @@ html, body {
 .wwl-hr {
     background-color: rgba(128, 128, 128, 0.3);
     width: 100%;
-    max-width: 1440px;
+    max-width: 1000px;
     height: 1px;
     border: none;
     margin: 0 auto;
@@ -1487,7 +1487,7 @@ div.hero-button-wrapper a, .hero-button {
 }
 
 #main > section.main.grid-container.personpage{
-    max-width: 1440px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -1885,16 +1885,16 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   background-color: #eeeeec
 }
 
-/*This sets the child basic, w/ title and desc. children, to centered, max-width 1440px*/
+/*This sets the child basic, w/ title and desc. children, to centered, max-width 1000px*/
 .row-with-icon.full-bleed-bg-color .basic{
-  max-width: 1440px;
+  max-width: 1000px;
   display: flex;
   margin: 0 auto;
 }
 
 .full-bleed-bg-color-row {
   position: relative;
-  max-width: 1440px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 1rem; 
   z-index: 8;
@@ -1930,7 +1930,7 @@ header #sponsorus-header-link{
 }
 
 footer .wwl-footer-inner .sectionblock-grid:first-of-type{
-    max-width: 1440px;
+    max-width: 1000px;
     margin: 0 auto;
     border-top: 1px solid rgba(0, 0, 0, .1);
     padding: 1.5em;
@@ -1996,7 +1996,7 @@ main#main.success-columns {
 }
 
 .success-columns section.main.shell.top-padding.grid-container{
-    max-width: 1440px;
+    max-width: 1000px;
     display: grid;
     margin: 0 auto;
 }
@@ -2030,7 +2030,7 @@ main#main.success-columns {
 .homepage .wwl-headline-banner .title {
     background-color: #00074F;
     padding: 2em 0;
-    max-width: 1440px;
+    max-width: 1000px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
