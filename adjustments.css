@@ -15,7 +15,7 @@ html {
   width: 100%;
 }
 
-.wwl-blog .title h2{
+.wwl-blog .date-posted ~ .basiccontentblock .title h2{
   font-size: 24px;
 }
 
@@ -39,7 +39,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   text-align: center;
 }
 
