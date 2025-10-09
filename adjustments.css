@@ -8,7 +8,7 @@ html {
 }
 
 .wwl-blog img{
-  max-width: 400px;
+  max-width: 300px;
 }
 
 .hide-aside aside.aside-area{
@@ -1487,6 +1487,16 @@ div.hero-button-wrapper a, .hero-button {
         grid-template-columns: auto;
     }
 
+}
+
+.wwl-blog h1{
+  color: #3b3b3b;
+  font-size: 1.75em;
+}
+
+.wwl-blog .date-posted{
+    font-size: .875em;
+    color: #8f8f8f;
 }
 
 .testimonials table{
