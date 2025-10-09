@@ -15,6 +15,10 @@ html {
   width: 100%;
 }
 
+.wwl-blog .title h2{
+  font-size: 20px;
+}
+
 .wwl-blog .title, .wwl-blog .basic {
   text-align: left;
 }
