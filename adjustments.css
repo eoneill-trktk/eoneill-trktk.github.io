@@ -1499,7 +1499,7 @@ div.hero-button-wrapper a, .hero-button {
   padding-top: 2em;
 }
 
-.wwl-aside-main.main-content>h1 {
+.wwl-aside-main.main-content>h1,.wwl-aside-main.main-content>.date-posted {
     padding: 0 0 0 26px;
 }
 
