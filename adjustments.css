@@ -92,12 +92,6 @@ body header.site-header{
     vertical-align: bottom;
 }
 
-.wwl-services .list{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-}
-
 .simple-content-collection .list>.has-link.has-hover:focus, .simple-content-collection .list>.has-link.has-hover:active, .simple-content-collection .list>.has-link.has-hover:hover {
     background-color: #bfdaf3!important;
     -o-transition: 0.5s!important;
@@ -294,6 +288,11 @@ padding-left: 1em;
   z-index: 1000;
   transition: all 0.3s ease;
 } */
+ .wwl-services .list{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
 
 
 /*Full Bleed BG color, must be assigened in BC top parent */
