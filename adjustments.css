@@ -3,6 +3,12 @@ html {
     scroll-padding-top: 180px; 
 }
 
+:root {
+    --font-sansserif: arial!important; 
+    --font-sansserif-condensed: arial!important; 
+}
+
+
 .wwl-blog .basiccontentblock:first-of-type .subtitle h3{
   font-size: 1em;
 }
