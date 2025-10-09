@@ -8,33 +8,33 @@ html {
     --font-sansserif-condensed: arial!important; 
 }
 
-.wwl-blog .basic {
+#wwl-blog-hire .basic {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
-.wwl-blog .date-posted ~ .basiccontentblock .title h2{
+#wwl-blog-hire .date-posted ~ .basiccontentblock .title h2{
   font-size: 24px;
 }
 
-.wwl-blog .description h4{
+#wwl-blog-hire .description h4{
   font-size: 18px;
 }
 
-.wwl-blog .title, .wwl-blog .description {
+#wwl-blog-hire .title, #wwl-blog-hire .description {
   text-align: left;
 }
 
-.wwl-blog .basic .image {
+#wwl-blog-hire .basic .image {
   width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.wwl-blog .basic .wwl-pair {
+#wwl-blog-hire .basic .wwl-pair {
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -43,11 +43,11 @@ html {
   text-align: center;
 }
 
-.wwl-blog .basic .image {
+#wwl-blog-hire .basic .image {
   margin-right: 20px;
 }
 
-.wwl-blog .basic .image img {
+#wwl-blog-hire .basic .image img {
   max-width: 100%;
   height: auto;
   display: block;
@@ -56,19 +56,19 @@ html {
 
 
 @media (max-width: 767px) {
-  .wwl-blog .basic {
+  #wwl-blog-hire .basic {
     flex-direction: column; 
     align-items: center;
     justify-content: center;
   }
   
-  .wwl-blog .basic .image {
+  #wwl-blog-hire .basic .image {
     width: 100%; 
     margin-right: 0;
     margin-bottom: 20px; 
   }
   
-  .wwl-blog .basic .wwl-pair {
+  #wwl-blog-hire .basic .wwl-pair {
     width: 100%; 
     text-align: center;
   }
