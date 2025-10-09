@@ -1681,7 +1681,12 @@ h2.hero-caption-title{
     }
 }
 
-careerfairnav
+@media (max-width:508px) {
+    .wwl-aside-main.main-content>.block {
+    padding: .5em;
+}
+}
+
 
 main.success-columns main .main > aside + .wwl-aside-main.main-content > *{
 grid-column: unset;
