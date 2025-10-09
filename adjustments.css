@@ -11,7 +11,7 @@ html {
   max-width: 300px;
 }
 
-.date-posted ~ h2:not(.date-posted ~ h2 ~ h2) {
+.wwl-blog .date-posted ~ h2:not(.date-posted ~ h2 ~ h2) {
   margin-top: 1em;
   font-size: 2.25em;
 }
