@@ -8,6 +8,63 @@ html {
     --font-sansserif-condensed: arial!important; 
 }
 
+.wwl-blog .basic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.wwl-blog .title, .wwl-blog .basic {
+  text-align: left;
+}
+
+.wwl-blog .basic .image {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wwl-blog .basic .wwl-pair {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.wwl-blog .basic .image {
+  margin-right: 20px;
+}
+
+.wwl-blog .basic .image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+@media (max-width: 767px) {
+  .wwl-blog .basic {
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .wwl-blog .basic .image {
+    width: 100%; 
+    margin-right: 0;
+    margin-bottom: 20px; 
+  }
+  
+  .wwl-blog .basic .wwl-pair {
+    width: 100%; 
+    text-align: center;
+  }
+}
 
 .wwl-blog .basiccontentblock:first-of-type .subtitle h3{
   font-size: 1em;
