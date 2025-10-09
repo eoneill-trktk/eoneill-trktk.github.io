@@ -33,6 +33,10 @@ html {
     padding: 0!important;
 }
 
+.EPiServerForms .Form__Status .Form__Success__Message{
+    color: #000!important
+}
+
 .basiccontentblock.h1-border h1, .basiccontentblock.h2-border h2, .basiccontentblock.h3-border h3,.simplecontentcollectionblock.h1-border h1, .simplecontentcollectionblock.h2-border h2, .simplecontentcollectionblock.h3-border h3{
   border-bottom: 1px solid #00074F!important;
 }
