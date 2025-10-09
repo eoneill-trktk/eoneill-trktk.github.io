@@ -12,7 +12,7 @@
                     position: relative;
                     width: 100%;
                     height: 200px;
-                    max-width: 1440px;
+                    max-width: 1080px;
                     margin: 0 auto;
                     overflow: hidden;
                 }
