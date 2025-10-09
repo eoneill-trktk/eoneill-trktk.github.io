@@ -497,6 +497,7 @@ body p a.bttn, body p button.bttn {
       margin: 0 auto;
       max-width: 1080px;
       padding: 0;
+      font-size: 14px;
       display: flex;
       justify-content: end;
       flex-wrap: wrap;
