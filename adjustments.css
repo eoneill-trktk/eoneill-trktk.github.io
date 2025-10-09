@@ -93,7 +93,7 @@ body header.site-header{
 }
 
 .simple-content-collection .list>.has-link.has-hover:focus, .simple-content-collection .list>.has-link.has-hover:active, .simple-content-collection .list>.has-link.has-hover:hover {
-    background-color: rgba(0, 0, 0, 0.04)!important;
+    background-color: #bfdaf3!important;
     -o-transition: 0.5s!important;
     -ms-transition: 0.5s!important;
     -moz-transition: 0.5s!important;
