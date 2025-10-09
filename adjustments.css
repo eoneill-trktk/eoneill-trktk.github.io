@@ -948,7 +948,7 @@ html, body {
 }
 /* WWL at a Glance */
 .diagram-image-container{
-    width: 1200px;
+    /* width: 1200px; */
     position: relative;
     display: inline-block;
 }
@@ -984,7 +984,7 @@ html, body {
         }
       
 
-.link-1 { top: 130px; left: 131px; width: 220px; height: 50px; }
+/* .link-1 { top: 130px; left: 131px; width: 220px; height: 50px; }
 .link-9 { top: 180px; left: 131px; width: 220px; height: 50px; } 
 
 
@@ -996,10 +996,28 @@ html, body {
 .link-4 { top: 344px; left: 88px; width: 172px; height: 80px; }
 .link-6 { top: 575px; left: 108px; width: 222px; height: 100px; }
 .link-7 { top: 675px; left: 408px; width: 360px; height: 90px; }
-.link-8 { top: 575px; left: 828px; width: 190px; height: 60px; }
+.link-8 { top: 575px; left: 828px; width: 190px; height: 60px; } */
 
+@media (min-width: 1000px) {
+    .diagram-image-container {
+        width: 1000px;
+    }
+    
+    .link-1 { top: 108.34px; left: 109.16px; width: 183.34px; height: 41.66px; }
+    .link-9 { top: 150px; left: 109.16px; width: 183.34px; height: 41.66px; } 
+    
+    .link-5 { top: 262.5px; left: 749.16px; width: 201.66px; height: 66.66px; }
+    .link-10 { top: 329.16px; left: 749.16px; width: 201.66px; height: 66.66px; }
+    
+    .link-2 { top: 26.66px; left: 364.16px; width: 250px; height: 58.34px; }
+    .link-3 { top: 101.66px; left: 672.5px; width: 166.66px; height: 83.34px; }
+    .link-4 { top: 286.66px; left: 73.34px; width: 143.34px; height: 66.66px; }
+    .link-6 { top: 479.16px; left: 90px; width: 185px; height: 83.34px; }
+    .link-7 { top: 562.5px; left: 340px; width: 300px; height: 75px; }
+    .link-8 { top: 479.16px; left: 690px; width: 158.34px; height: 50px; }
+}
 
-@media (max-width: 1199px) {
+@media (max-width: 999px) {
     .diagram-image-container {
         width: 800px;
     }
