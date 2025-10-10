@@ -4,8 +4,8 @@ html {
 }
 
 :root {
-    --font-sansserif: arial!important; 
-    --font-sansserif-condensed: arial!important; 
+    --font-sansserif: Barlow!important; 
+    --font-sansserif-condensed: Barlow!important; 
 }
 
 #main\ wwl-blog-hire .imagetextpair .basic {
@@ -541,7 +541,7 @@ section[data-block-id="806871"] * {
   } */
 
   p{
-    font-family:Arial, Helvetica, sans-serif!important;
+    font-family:Barlow, Helvetica, sans-serif!important;
   }
   
 .contact-page .block.simplecontentcollectionblock.simple-content-collection.two-column .list div.set-padding{
