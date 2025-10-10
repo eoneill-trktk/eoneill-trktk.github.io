@@ -46,7 +46,7 @@
                 }
                 
                 .bis-carousel-container .bis-carousel-image-wrapper img {
-                    max-height: 100%;
+                    max-height: 80%;
                     max-width: 100%;
                     object-fit: contain;
                     transition: transform 1s ease;
