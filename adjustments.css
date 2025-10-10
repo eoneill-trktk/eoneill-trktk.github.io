@@ -1226,7 +1226,7 @@ html, body {
 
 .row-with-icon .image img {
   width: auto;
-  max-width: 120px;
+  max-width: 80px;
   height: auto;
   padding: 0 30px;
   display: block;
