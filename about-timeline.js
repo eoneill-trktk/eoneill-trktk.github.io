@@ -15,19 +15,15 @@ if (window.location.pathname.includes('/about/')) {
     const styleTag = document.createElement('style');
     styleTag.textContent = `
       .tl-carousel-container {
-        position: relative;
-        width: 100%;
-        max-width: 1200px;
-        min-height: 800px;
-        margin: 40px auto;
-        padding: 0 20px;
-        box-sizing: border-box;
-        overflow: hidden;
+            position: relative;
+            max-width: 1080px;
+            min-height: 800px;
+            margin: 40px auto;
+            padding: 0 15px;
       }
 
       .tl-carousel-container .slick-arrow{
-        display:none!important
-      }
+      display:none!important}
 
       .tl-timeline-carousel:not(.slick-initialized) {
         opacity: 0;
@@ -44,20 +40,18 @@ if (window.location.pathname.includes('/about/')) {
 
       .tl-timeline-carousel {
         position: relative;
-        width: 100%;
-        margin: 0;
+        margin: 0 -15px;
       }
 
       .tl-timeline-carousel .tl-slide {
-        padding: 0 10px;
+        padding: 0 15px;
         outline: none;
-        box-sizing: border-box;
       }
 
       .tl-timeline-carousel .tl-slide-content {
         background: white;
         border-radius: 8px;
-        padding: 25px;
+        padding: 30px;
         height: 100%;
         box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         border: 1px solid #e0e0e0;
@@ -65,9 +59,6 @@ if (window.location.pathname.includes('/about/')) {
         flex-direction: column;
         justify-content: flex-start;
         background: rgba(229, 240, 250, .5);
-        box-sizing: border-box;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
       }
 
       .tl-slide-year {
@@ -78,24 +69,20 @@ if (window.location.pathname.includes('/about/')) {
       }
 
       .tl-slide-title {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 700;
         color: #333;
         margin-bottom: 15px;
-        line-height: 1.3;
       }
 
       .tl-slide-description {
         font-size: 12px;
         line-height: 1.5;
         color: #666;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
       }
 
       .tl-slide-description h4{
-        font-size: 18px;
-        margin: 10px 0;
+        font-size: 20px;
       }
 
       .tl-carousel-prev,
@@ -149,11 +136,11 @@ if (window.location.pathname.includes('/about/')) {
       }
 
       .tl-carousel-prev {
-        left: 10px;
+        left: 0;
       }
 
       .tl-carousel-next {
-        right: 10px;
+        right: 0;
       }
 
       .tl-timeline-carousel .slick-dots {
@@ -162,7 +149,6 @@ if (window.location.pathname.includes('/about/')) {
         list-style: none;
         padding: 0;
         margin: 30px 0 0;
-        width: 100%;
       }
 
       .tl-timeline-carousel .slick-dots li {
@@ -189,20 +175,13 @@ if (window.location.pathname.includes('/about/')) {
         border-radius: 6px;
       }
 
-      /* Responsive adjustments */
-      @media (max-width: 1200px) {
-        .tl-carousel-container {
-          max-width: 100%;
-          padding: 0 15px;
-        }
-      }
+      @media (max-width: 1440px) {
+.tl-carousel-container{
+max-width: 90vw;
+}
+  }
 
       @media (max-width: 768px) {
-        .tl-carousel-container {
-          padding: 0 10px;
-          min-height: 700px;
-        }
-
         .tl-carousel-prev {
           left: 5px;
         }
@@ -216,32 +195,13 @@ if (window.location.pathname.includes('/about/')) {
         }
 
         .tl-slide-title {
-          font-size: 16px;
+          font-size: 18px;
         }
 
         .tl-carousel-prev,
         .tl-carousel-next {
           width: 35px;
           height: 35px;
-        }
-        
-        .tl-timeline-carousel .tl-slide {
-          padding: 0 8px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .tl-carousel-container {
-          padding: 0 5px;
-          min-height: 650px;
-        }
-        
-        .tl-timeline-carousel .tl-slide {
-          padding: 0 5px;
-        }
-        
-        .tl-slide-content {
-          padding: 15px;
         }
       }
     `;
@@ -270,7 +230,7 @@ if (window.location.pathname.includes('/about/')) {
 
             if ($carousel.find('.tl-slide').length > 0) {
               $carousel.slick({
-                slidesToShow: 4,
+                slidesToShow: 5,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 6000,
@@ -287,19 +247,13 @@ if (window.location.pathname.includes('/about/')) {
                     } 
                   },
                   { 
-                    breakpoint: 900, 
-                    settings: { 
-                      slidesToShow: 3
-                    } 
-                  },
-                  { 
-                    breakpoint: 768, 
+                    breakpoint: 992, 
                     settings: { 
                       slidesToShow: 2
                     } 
                   },
                   { 
-                    breakpoint: 500, 
+                    breakpoint: 768, 
                     settings: { 
                       slidesToShow: 1
                     } 
