@@ -4,8 +4,8 @@ html {
 }
 
 :root {
-    --font-sansserif: Barlow!important; 
-    --font-sansserif-condensed: Barlow!important; 
+    --font-sansserif: Barlow; 
+    --font-sansserif-condensed: Barlow; 
 }
 
 #main\ wwl-blog-hire .imagetextpair .basic {
@@ -521,7 +521,7 @@ site-footer{
 }
 
 
- 
+ wwl-footer-inner
 
 footer .footer-grid > .block:last-child{
   background:#00074F;
