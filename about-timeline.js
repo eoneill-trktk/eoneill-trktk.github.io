@@ -7,49 +7,58 @@ if (window.location.pathname.includes('/about/')) {
   }, 100);
 
   function executeCarouselCode() {
-    // Load Slick CSS
     const slickCSS = document.createElement('link');
     slickCSS.rel = 'stylesheet';
     slickCSS.href = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css';
     document.head.appendChild(slickCSS);
 
-    const slickThemeCSS = document.createElement('link');
-    slickThemeCSS.rel = 'stylesheet';
-    slickThemeCSS.href = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css';
-    document.head.appendChild(slickThemeCSS);
-
-    // Custom styles
     const styleTag = document.createElement('style');
     styleTag.textContent = `
       .tl-carousel-container {
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 0 20px;
-        box-sizing: border-box;
+            position: relative;
+            max-width: 1080px;
+            min-height: 800px;
+            margin: 40px auto;
+            padding: 0 15px;
+      }
+
+      .tl-carousel-container .slick-arrow{
+      display:none!important}
+
+      .tl-timeline-carousel:not(.slick-initialized) {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .tl-timeline-carousel.slick-initialized {
+        opacity: 1;
+        height: auto;
+        overflow: visible;
+        transition: opacity 0.5s ease;
       }
 
       .tl-timeline-carousel {
         position: relative;
+        margin: 0 -15px;
       }
 
-      .tl-timeline-carousel .slick-list {
-        margin: 0 -10px;
+      .tl-timeline-carousel .tl-slide {
+        padding: 0 15px;
+        outline: none;
       }
 
-      .tl-timeline-carousel .slick-slide {
-        padding: 0 10px;
-        box-sizing: border-box;
-      }
-
-      .tl-slide-content {
-        background: rgba(229, 240, 250, 0.5);
-        border: 1px solid #e0e0e0;
+      .tl-timeline-carousel .tl-slide-content {
+        background: white;
         border-radius: 8px;
-        padding: 25px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        padding: 30px;
         height: 100%;
-        display: flex !important;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        border: 1px solid #e0e0e0;
+        display: flex;
         flex-direction: column;
+        justify-content: flex-start;
+        background: rgba(229, 240, 250, .5);
       }
 
       .tl-slide-year {
@@ -60,25 +69,22 @@ if (window.location.pathname.includes('/about/')) {
       }
 
       .tl-slide-title {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 700;
         color: #333;
         margin-bottom: 15px;
-        line-height: 1.3;
       }
 
       .tl-slide-description {
-        font-size: 14px;
+        font-size: 12px;
         line-height: 1.5;
         color: #666;
       }
 
-      .tl-slide-description h4 {
-        font-size: 16px;
-        margin: 10px 0;
+      .tl-slide-description h4{
+        font-size: 20px;
       }
 
-      /* Custom arrow styles */
       .tl-carousel-prev,
       .tl-carousel-next {
         position: absolute;
@@ -89,11 +95,13 @@ if (window.location.pathname.includes('/about/')) {
         border-radius: 50%;
         width: 40px;
         height: 40px;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         z-index: 10;
+        opacity: 1 !important;
+        visibility: visible !important;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       }
 
@@ -102,11 +110,16 @@ if (window.location.pathname.includes('/about/')) {
         background: #00074F;
       }
 
+      .tl-carousel-prev:hover::before,
+      .tl-carousel-next:hover::before {
+        border-color: white;
+      }
+
       .tl-carousel-prev::before,
       .tl-carousel-next::before {
         content: "";
-        width: 12px;
-        height: 12px;
+        width: 15px;
+        height: 15px;
         border-top: 3px solid #00074F;
         border-right: 3px solid #00074F;
         transition: all 0.3s ease;
@@ -114,166 +127,170 @@ if (window.location.pathname.includes('/about/')) {
 
       .tl-carousel-prev::before {
         transform: rotate(-135deg);
-        margin-right: -2px;
+        margin-right: -3px;
       }
 
       .tl-carousel-next::before {
         transform: rotate(45deg);
-        margin-left: -2px;
-      }
-
-      .tl-carousel-prev:hover::before,
-      .tl-carousel-next:hover::before {
-        border-color: white;
+        margin-left: -3px;
       }
 
       .tl-carousel-prev {
-        left: -50px;
+        left: 0;
       }
 
       .tl-carousel-next {
-        right: -50px;
+        right: 0;
       }
 
-      /* Dots customization */
       .tl-timeline-carousel .slick-dots {
-        bottom: -40px;
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 30px 0 0;
       }
 
-      .tl-timeline-carousel .slick-dots li button:before {
-        font-size: 10px;
-        color: #00074F;
+      .tl-timeline-carousel .slick-dots li {
+        margin: 0 8px;
+      }
+
+      .tl-timeline-carousel .slick-dots button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #00074F;
         opacity: 0.3;
+        border: none;
+        text-indent: -9999px;
+        overflow: hidden;
+        padding: 0;
+        cursor: pointer;
       }
 
-      .tl-timeline-carousel .slick-dots li.slick-active button:before {
+      .tl-timeline-carousel .slick-dots .slick-active button {
+        background: #00074F;
         opacity: 1;
-        color: #00074F;
+        width: 30px;
+        border-radius: 6px;
       }
 
-      /* Responsive adjustments */
-      @media (max-width: 1300px) {
-        .tl-carousel-prev {
-          left: -30px;
-        }
-        .tl-carousel-next {
-          right: -30px;
-        }
-      }
-
-      @media (max-width: 1200px) {
-        .tl-carousel-container {
-          padding: 0 40px;
-        }
-        .tl-carousel-prev {
-          left: 0;
-        }
-        .tl-carousel-next {
-          right: 0;
-        }
-      }
+      @media (max-width: 1440px) {
+.tl-carousel-container{
+max-width: 90vw;
+}
+  }
 
       @media (max-width: 768px) {
-        .tl-carousel-container {
-          padding: 0 30px;
+        .tl-carousel-prev {
+          left: 5px;
         }
-        .tl-timeline-carousel .slick-list {
-          margin: 0 -5px;
+
+        .tl-carousel-next {
+          right: 5px;
         }
-        .tl-timeline-carousel .slick-slide {
-          padding: 0 5px;
-        }
+
         .tl-slide-content {
           padding: 20px;
         }
+
+        .tl-slide-title {
+          font-size: 18px;
+        }
+
         .tl-carousel-prev,
         .tl-carousel-next {
           width: 35px;
           height: 35px;
         }
       }
-
-      @media (max-width: 480px) {
-        .tl-carousel-container {
-          padding: 0 20px;
-        }
-      }
     `;
     document.head.appendChild(styleTag);
 
-    // Load jQuery and Slick
     const jqueryScript = document.createElement('script');
     jqueryScript.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
     jqueryScript.onload = function () {
       const slickScript = document.createElement('script');
       slickScript.src = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js';
       slickScript.onload = function () {
-        // Initialize carousel after everything is loaded
-        if (document.readyState === 'complete') {
-          initializeCarousel();
-        } else {
-          $(document).ready(initializeCarousel);
-        }
-
-        function initializeCarousel() {
-          const $carousel = $('#tl-timeline-carousel');
-          
-          if ($carousel.length && $carousel.find('.tl-slide').length > 0) {
-            $carousel.slick({
-              slidesToShow: 4,
-              slidesToScroll: 1,
-              autoplay: true,
-              autoplaySpeed: 6000,
-              speed: 800,
-              arrows: true,
-              dots: true,
-              prevArrow: '<button type="button" class="tl-carousel-prev" aria-label="Previous"></button>',
-              nextArrow: '<button type="button" class="tl-carousel-next" aria-label="Next"></button>',
-              responsive: [
-                { 
-                  breakpoint: 1200, 
-                  settings: { 
-                    slidesToShow: 3
-                  } 
-                },
-                { 
-                  breakpoint: 900, 
-                  settings: { 
-                    slidesToShow: 3
-                  } 
-                },
-                { 
-                  breakpoint: 768, 
-                  settings: { 
-                    slidesToShow: 2
-                  } 
-                },
-                { 
-                  breakpoint: 500, 
-                  settings: { 
-                    slidesToShow: 1
-                  } 
-                }
-              ]
+        (function() {
+          function setEqualSlideHeights() {
+            var maxHeight = 0;
+            var $slides = $('.tl-slide-content');
+            $slides.css('height', 'auto');
+            $slides.each(function() {
+              var h = $(this).outerHeight();
+              if (h > maxHeight) maxHeight = h;
             });
-
-            // Set equal heights on init and resize
-            function setEqualHeights() {
-              let maxHeight = 0;
-              $('.tl-slide-content').css('height', 'auto').each(function() {
-                const height = $(this).outerHeight();
-                if (height > maxHeight) maxHeight = height;
-              }).css('height', maxHeight + 'px');
-            }
-
-            setEqualHeights();
-            $(window).on('resize', setEqualHeights);
-            $carousel.on('setPosition', setEqualHeights);
-
-          } else {
-            console.warn('Carousel elements not found');
+            $slides.css('height', maxHeight + 'px');
           }
-        }
+
+          function initializeCarousel() {
+            var $carousel = $('#tl-timeline-carousel');
+
+            if ($carousel.find('.tl-slide').length > 0) {
+              $carousel.slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 6000,
+                speed: 800,
+                arrows: true,
+                dots: true,
+                prevArrow: '<button type="button" class="tl-carousel-prev"></button>',
+                nextArrow: '<button type="button" class="tl-carousel-next"></button>',
+                responsive: [
+                  { 
+                    breakpoint: 1200, 
+                    settings: { 
+                      slidesToShow: 3
+                    } 
+                  },
+                  { 
+                    breakpoint: 992, 
+                    settings: { 
+                      slidesToShow: 2
+                    } 
+                  },
+                  { 
+                    breakpoint: 768, 
+                    settings: { 
+                      slidesToShow: 1
+                    } 
+                  }
+                ]
+              });
+
+              $carousel.on('setPosition', function() {
+                setEqualSlideHeights();
+              });
+
+              $('.tl-carousel-prev').click(function() {
+                $carousel.slick('slickPrev');
+              });
+
+              $('.tl-carousel-next').click(function() {
+                $carousel.slick('slickNext');
+              });
+
+              setEqualSlideHeights();
+            } else {
+              console.error('Slides not found - check HTML structure');
+            }
+          }
+
+          if (document.readyState === 'complete') {
+            setTimeout(initializeCarousel, 100);
+          } else {
+            $(window).on('load', function() {
+              setTimeout(initializeCarousel, 100);
+            });
+          }
+
+          $(window).on('resize', function() {
+            setEqualSlideHeights();
+          });
+        })();
       };
       document.body.appendChild(slickScript);
     };
