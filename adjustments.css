@@ -15,6 +15,10 @@ html {
   width: 100%;
 }
 
+#second-footer{
+  background-color: #00074F;
+}
+
 #main\ wwl-blog-hire .imagetextpair .date-posted ~ .basiccontentblock .title h2{
   font-size: 24px;
 }
