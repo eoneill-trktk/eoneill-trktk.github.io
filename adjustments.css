@@ -192,9 +192,9 @@ body header.site-header{
     vertical-align: bottom;
 }
 
-.four-column.simple-content-collection .list{
+/* .four-column.simple-content-collection .list{
   grid-template-columns: 1fr 1fr 1fr 1fr;
-}
+} */
 
 .simple-content-collection .list>.has-link.has-hover:focus, .simple-content-collection .list>.has-link.has-hover:active, .simple-content-collection .list>.has-link.has-hover:hover {
     background-color: #bfdaf3!important;
@@ -1820,7 +1820,7 @@ footer #menu-header-menu{
 }
 
 @media (max-width: 1000px) {
-.four-column.simple-content-collection .list{
+.four-column.simple-content-collection .list, .simple-content-collection .list{
   grid-template-columns: 1fr;
 }
 }
