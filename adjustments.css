@@ -15,6 +15,14 @@ html {
   width: 100%;
 }
 
+.wwl-services .four-column h3{
+  font-size: 1.25em;
+}
+
+.wwl-services .four-column .description p{
+  font-size: 16px;
+}
+
 #second-footer{
   background-color: #00074F;
 }
@@ -1815,7 +1823,7 @@ footer #menu-header-menu{
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1000px) {
 .four-column.simple-content-collection .list{
   grid-template-columns: 1fr;
 }
@@ -2157,9 +2165,9 @@ main#main.success-columns {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 100vw;            /* full viewport width */
+  width: 100vw;            
   height: 100%;
   background-color: #00074F;
-  transform: translateX(-50%); /* center the bleed */
-  z-index: -1;             /* behind the content */
+  transform: translateX(-50%); 
+  z-index: -1;             
 }
