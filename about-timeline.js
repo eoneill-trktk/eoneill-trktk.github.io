@@ -89,7 +89,7 @@ if (window.location.pathname.includes('/about/')) {
       .tl-carousel-prev,
       .tl-carousel-next {
         position: absolute;
-        top: 50%;
+        top: 30%;
         transform: translateY(-50%);
         background: white;
         border: 2px solid #00074F;
