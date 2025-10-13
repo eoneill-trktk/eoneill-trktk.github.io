@@ -231,7 +231,7 @@ max-width: 90vw;
 
             if ($carousel.find('.tl-slide').length > 0) {
               $carousel.slick({
-                slidesToShow: 5,
+                slidesToShow: 4,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 6000,
