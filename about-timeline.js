@@ -23,27 +23,6 @@ if (window.location.pathname.includes('/about/')) {
             padding: 0 15px;
       }
 
-      .tl-carousel-container {
-  position: relative;
-  inline-size: min(100%, 1080px); 
-  max-inline-size: 100vw;         
-  min-block-size: 800px;         
-  margin: 40px auto;
-  padding-inline: 15px;
-  box-sizing: border-box;
-  overflow-x: clip;             
-}
-
-.tl-carousel-container { min-width: 0; }
-
-.tl-carousel-container .slick-list { overflow: hidden; }
-.tl-carousel-container .slick-track { display: flex; }
-
-.tl-carousel-container .slick-slide { min-width: 0; }
-.tl-carousel-container img { max-width: 100%; height: auto; display: block; }
-
-.tl-carousel-container [style*="100vw"] { max-width: 100%; }
-
       .tl-carousel-container .slick-arrow{
       display:none!important}
 
