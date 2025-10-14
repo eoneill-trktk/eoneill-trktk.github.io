@@ -299,18 +299,23 @@ max-width: 70vw;
   }
 }
 
-if (location.pathname.includes('/en-partners')) {
+if (location.pathname.includes('/en-partners') || location.pathname.includes('career-fair-for-individuals-with-disabilities/career-fair-for-individuals-with-disabilities-2024/previous-career-fairs/career-fair-for-individuals-with-disabilities-2025')) {
   const poll = setInterval(() => {
-    const gallery = document.querySelector('.wwl-gallery');
-    const items = gallery?.querySelectorAll(':scope > .wwl-gallery__item');
-    if (gallery && items && items.length) {
+    const galleries = document.querySelectorAll('.wwl-gallery');
+    if (galleries.length) {
       clearInterval(poll);
-      [...items]
-        .sort((a, b) =>
-          (a.querySelector('img')?.alt || '').toLowerCase()
-            .localeCompare((b.querySelector('img')?.alt || '').toLowerCase())
-        )
-        .forEach(el => gallery.appendChild(el));
+
+      galleries.forEach(gallery => {
+        const items = [...gallery.querySelectorAll(':scope > .wwl-gallery__item')];
+        if (items.length) {
+          items
+            .sort((a, b) =>
+              (a.querySelector('img')?.alt || '').toLowerCase()
+                .localeCompare((b.querySelector('img')?.alt || '').toLowerCase())
+            )
+            .forEach(el => gallery.appendChild(el));
+        }
+      });
     }
   }, 100);
 }
