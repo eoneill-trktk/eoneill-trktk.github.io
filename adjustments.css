@@ -1153,6 +1153,10 @@ html, body {
     .link-6 { top: 239.58px; left: 45px; width: 92.5px; height: 41.67px; }
     .link-7 { top: 281.25px; left: 170px; width: 150px; height: 37.5px; }
     .link-8 { top: 239.58px; left: 345px; width: 79.17px; height: 25px; }
+        .simple-content-collection.two-column .list {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 @media (max-width: 499px) {
