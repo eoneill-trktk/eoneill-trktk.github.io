@@ -17,6 +17,7 @@
 .cf-higher-sponsors .wwl-gallery__item img, .cf-lower-sponsors .wwl-gallery__item img {
     width: 50%;
     aspect-ratio: 1 / 1;
+        margin: 0 auto;
     object-fit: contain;
     object-position: center;
 }
