@@ -1124,9 +1124,9 @@ html, body {
 .link-8 { top: 575px; left: 828px; width: 190px; height: 60px; } */
 
 @media (min-width: 1000px) {
-  .four-column.simple-content-collection .list{
+  /* .four-column.simple-content-collection .list{
     grid-template-columns: 1fr 1fr 1fr 1fr;
-}
+} */
     .diagram-image-container {
         width: 1000px;
     }
