@@ -2008,6 +2008,10 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   background-color: #eeeeec
 }
 
+[data-content-id="823706"] .basic{
+  padding: 0;
+}
+
 /*This sets the child basic, w/ title and desc. children, to centered, max-width 1000px*/
 .row-with-icon.full-bleed-bg-color .basic{
   max-width: 1080px;
