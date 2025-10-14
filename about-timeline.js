@@ -178,7 +178,7 @@ if (window.location.pathname.includes('/about/')) {
 
       @media (max-width: 1440px) {
 .tl-carousel-container{
-max-width: 90vw;
+max-width: 70vw;
 }
   }
 
