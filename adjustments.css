@@ -169,13 +169,17 @@ main.search-results{
   background-color:;
 } */
 
+.wwl-one-third img{
+  width: 200px;
+  height: auto;
+}
 
 .wwl-one-third{
-  width: 33%; vertical-align: top; text-align: center; padding: 20px;
+  display: block;width: 33%; vertical-align: top; text-align: center; padding: 20px;
 }
 
 .wwl-two-third{
-  width: 67%; vertical-align: top; padding: 20px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;
+  display: block;width: 67%; vertical-align: top; padding: 20px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;
 }
 
 .contact-box{
@@ -380,6 +384,8 @@ section.hero-section .image-hero {
 #backToTop:hover svg {
   transform: scale(1.15); /* arrow grows slightly */
 }
+
+
 
 
 /* Collapse columns into stacked rows at ≤ 768px */
