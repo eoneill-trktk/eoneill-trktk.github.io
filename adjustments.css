@@ -1739,7 +1739,7 @@ main > section > * {
 
 
 @media (max-width: 1000px) {
-.simple-content-collection.two-column .list {
+.simple-content-collection .list {
     grid-template-columns: 1fr;
 }
 
