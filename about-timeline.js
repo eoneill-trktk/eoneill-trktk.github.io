@@ -298,3 +298,19 @@ max-width: 70vw;
     document.body.appendChild(jqueryScript);
   }
 }
+
+if (location.pathname.includes('/en-partners')) {
+  const poll = setInterval(() => {
+    const gallery = document.querySelector('.wwl-gallery');
+    const items = gallery?.querySelectorAll(':scope > .wwl-gallery__item');
+    if (gallery && items && items.length) {
+      clearInterval(poll);
+      [...items]
+        .sort((a, b) =>
+          (a.querySelector('img')?.alt || '').toLowerCase()
+            .localeCompare((b.querySelector('img')?.alt || '').toLowerCase())
+        )
+        .forEach(el => gallery.appendChild(el));
+    }
+  }, 100);
+}
