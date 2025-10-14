@@ -4,8 +4,12 @@ html {
 }
 
 :root {
-    --font-sansserif: Barlow; 
-    --font-sansserif-condensed: Barlow; 
+    --font-sansserif: Barlow!important; 
+    --font-sansserif-condensed: Barlow!important; 
+}
+
+.li span{
+  font-size: 18px!important;
 }
 
 #main\ wwl-blog-hire .imagetextpair .basic {
