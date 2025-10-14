@@ -382,6 +382,13 @@ section.homepage-section div[data-block-id="807631"] div.description, section.ho
 padding-left: 1em;
 }
 }
+/*Full Bleed BG color, must be assigened in BC top parent */
+.full-bleed-bg-color{
+  width: 100vw;
+  position: relative;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
 @media (min-width: 768px) {
   .wwl-toc td {
   padding: 0 2em;
@@ -396,15 +403,6 @@ padding-left: 1em;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-}
-
-
-/*Full Bleed BG color, must be assigened in BC top parent */
-.full-bleed-bg-color{
-  width: 100vw;
-  position: relative;
-  margin-left: -50vw;
-  margin-right: -50vw;
 }
 
 .site-header.is-fixed {
