@@ -14,6 +14,15 @@
   padding: 0 20px;
 }
 
+
+@media (min-width: 800px) {
+  .success-stories-lp .wwl-gallery { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .success-stories-lp .wwl-gallery { grid-template-columns: repeat(5, 1fr); }
+}
+
 @media (min-width: 800px) {
   .wwl-gallery { grid-template-columns: repeat(2, 1fr); }
 }
