@@ -359,6 +359,10 @@ section.hero-section .image-hero {
   pointer-events: auto;
 }
 
+.main > aside.aside-area {
+	min-width: 184px;
+}
+
 /* Hover effect */
 #backToTop:hover {
   background-color: #001080; /* lighter navy */
