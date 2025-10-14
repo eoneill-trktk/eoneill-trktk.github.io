@@ -2040,6 +2040,10 @@ header #sponsorus-header-link{
   display: none;
 }
 
+[data-block-id="817019"]{
+  display: block!important;
+}
+
 .bg-color.light-blue{
   background-color: rgb(189,227,241);
 }
