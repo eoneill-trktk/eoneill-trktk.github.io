@@ -2052,7 +2052,7 @@ footer .wwl-footer-inner .sectionblock-grid:first-of-type{
     max-width: 1080px;
     margin: 0 auto;
     border-top: 1px solid rgba(0, 0, 0, .1);
-    padding: 1.5em;
+    padding: 1.5em 0;
 }
 
 .grid-container > [data-block-id="806861"].block.sectionblock-cols.grid-3 > section > .sectionblock-grid{
