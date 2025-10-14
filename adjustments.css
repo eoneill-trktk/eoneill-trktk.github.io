@@ -371,6 +371,9 @@ section.hero-section .image-hero {
 
 /* Collapse columns into stacked rows at ≤ 768px */
 @media (max-width: 768px) {
+  .contact-box{
+    height: auto;
+}
   .wwl-toc .table,
   .wwl-toc tbody,
   .wwl-toc tr,
