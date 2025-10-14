@@ -175,11 +175,11 @@ main.search-results{
 }
 
 .wwl-one-third{
-  display: block;width: 33%; vertical-align: top; text-align: center; padding: 20px;
+  width: 33%; vertical-align: top; text-align: center; padding: 20px;
 }
 
 .wwl-two-third{
-  display: block;width: 67%; vertical-align: top; padding: 20px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;
+  width: 67%; vertical-align: top; padding: 20px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;
 }
 
 .contact-box{
@@ -391,11 +391,13 @@ section.hero-section .image-hero {
 /* Collapse columns into stacked rows at ≤ 768px */
 @media (max-width: 768px) {
   .wwl-one-third{
+    display: block;
   width: 100%; 
   /* vertical-align: top; text-align: center; padding: 20px; */
 }
 
 .wwl-two-third{
+  display: block;
   width: 100%; 
   /* vertical-align: top; padding: 20px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; */
 }
