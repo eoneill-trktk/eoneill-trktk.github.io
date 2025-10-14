@@ -1822,6 +1822,7 @@ footer #menu-header-menu{
 @media (max-width: 1000px) {
 .four-column.simple-content-collection .list, .simple-content-collection .list{
   grid-template-columns: 1fr;
+  display: grid;
 }
 }
 
