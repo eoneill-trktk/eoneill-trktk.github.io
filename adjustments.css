@@ -169,6 +169,15 @@ main.search-results{
   background-color:;
 } */
 
+
+.wwl-one-third{
+  width: 33%; vertical-align: top; text-align: center; padding: 20px;
+}
+
+.wwl-two-third{
+  width: 67%; vertical-align: top; padding: 20px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;
+}
+
 .contact-box{
       width: 50%;
     margin: 0 auto;
@@ -375,6 +384,15 @@ section.hero-section .image-hero {
 
 /* Collapse columns into stacked rows at ≤ 768px */
 @media (max-width: 768px) {
+  .wwl-one-third{
+  width: 100%; 
+  /* vertical-align: top; text-align: center; padding: 20px; */
+}
+
+.wwl-two-third{
+  width: 100%; 
+  /* vertical-align: top; padding: 20px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; */
+}
   .contact-box{
     height: auto;
 }
