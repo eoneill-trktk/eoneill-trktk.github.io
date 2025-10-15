@@ -424,6 +424,20 @@ section.hero-section .image-hero {
 section.homepage-section div[data-block-id="807631"] div.description, section.homepage-section .wwl-headline-banner .title {
 padding-left: 1em;
 }
+.full-bleed-bg-color-row::before{
+    content: "";
+    position: relative;
+    width: inherit;
+    margin-left: inherit;
+    background: inherit;
+    z-index: -1;
+}
+.full-bleed-bg-color{
+  width: inherit;
+  position: relative;
+  margin-left: inherit;
+  margin-right: inherit;
+}
 }
 /*Full Bleed BG color, must be assigened in BC top parent */
 .full-bleed-bg-color{
@@ -1039,11 +1053,11 @@ section.block.sectionblock[data-block-id="806871"] {
 
 }
 
-.about .full-bleed-bg-color{
+/* .about .full-bleed-bg-color{
   width: 100%;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-}
+} */
 
 @media (max-width: 500px) {
   .business-network th h4{
