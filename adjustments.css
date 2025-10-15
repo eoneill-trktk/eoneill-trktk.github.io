@@ -2266,4 +2266,12 @@ padding-left: 1em;
   margin-left: none;
   margin-right: none;
 }
+h1.heading-bar.dark, h2.heading-bar.dark, h3.heading-bar.dark, h4.heading-bar.dark, h5.heading-bar.dark, h6.heading-bar.dark, h1.heading-bar.dark, h2.heading-bar.dark, h3.heading-bar.dark, div.heading-bar.dark {
+    width: 100%;
+    position: relative;
+    left: unset;
+    right: unset;
+    margin-left: unset;
+    margin-right: unset;
+}
 }
