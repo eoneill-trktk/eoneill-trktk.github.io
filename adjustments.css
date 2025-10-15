@@ -390,6 +390,9 @@ section.hero-section .image-hero {
 
 /* Collapse columns into stacked rows at ≤ 768px */
 @media (max-width: 768px) {
+  :not(.homepage-section) > .main-content {
+    padding: 0;
+}
   .wwl-one-third{
     display: block;
   width: 100%; 
