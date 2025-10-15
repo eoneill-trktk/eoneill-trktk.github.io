@@ -1040,6 +1040,14 @@ section.block.sectionblock[data-block-id="806871"] {
 }
 
 @media (max-width: 500px) {
+  .business-network th h4{
+  font-size: 12px;
+}
+
+.business-network tr td{
+  font-size: 10px;
+
+}
 .biz-carousel-item {
 flex: 0 0 50%; /* 2 visible */
 }
