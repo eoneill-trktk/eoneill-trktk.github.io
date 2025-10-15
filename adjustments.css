@@ -2224,3 +2224,15 @@ main#main.success-columns {
   transform: translateX(-50%); 
   z-index: -1;             
 }
+
+[data-f-element-name="__field_823642"]{
+  max-width: 568px;
+}
+
+[data-f-element-name="__field_823644"]{
+      max-width: 220px;
+}
+
+[data-f-element-name="__field_823647"]{
+  max-width: 855px;
+}
