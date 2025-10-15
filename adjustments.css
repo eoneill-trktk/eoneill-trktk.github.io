@@ -541,6 +541,7 @@ h1.heading-bar.dark,h2.heading-bar.dark,h3.heading-bar.dark,h4.heading-bar.dark,
     position: relative;
     left: 50%;
     right: 50%;
+    margin-bottom: 0;
     margin-left: -50vw;
     margin-right: -50vw;
     background: #00074F;
