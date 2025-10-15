@@ -429,24 +429,6 @@ section.hero-section .image-hero {
   margin-left: -50vw;
   margin-right: -50vw;
 }
-@media (max-width: 1000px) {
-section.homepage-section div[data-block-id="807631"] div.description, section.homepage-section .wwl-headline-banner .title {
-padding-left: 1em;
-}
-.full-bleed-bg-color-row::before{
-    content: "";
-    position: relative;
-    width: inherit;
-    margin-left: inherit;
-    z-index: -1;
-}
-.full-bleed-bg-color{
-  width: inherit;
-  position: relative;
-  margin-left: inherit;
-  margin-right: inherit;
-}
-}
 /*Full Bleed BG color, must be assigened in BC top parent */
 @media (min-width: 768px) {
   .wwl-toc td {
@@ -2265,4 +2247,23 @@ main#main.success-columns {
 
 [data-f-element-name="__field_823647"]{
   max-width: 855px;
+}
+
+@media (max-width: 1000px) {
+section.homepage-section div[data-block-id="807631"] div.description, section.homepage-section .wwl-headline-banner .title {
+padding-left: 1em;
+}
+.full-bleed-bg-color-row::before{
+    content: "";
+    position: relative;
+    width: 100%;
+    margin-left: none;
+    z-index: -1;
+}
+.full-bleed-bg-color{
+  width: 100%;
+  position: relative;
+  margin-left: none;
+  margin-right: none;
+}
 }
