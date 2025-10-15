@@ -429,7 +429,6 @@ padding-left: 1em;
     position: relative;
     width: inherit;
     margin-left: inherit;
-    background: inherit;
     z-index: -1;
 }
 .full-bleed-bg-color{
