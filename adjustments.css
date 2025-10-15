@@ -420,6 +420,12 @@ section.hero-section .image-hero {
     margin: 0.5em 0;
   }
 }
+.full-bleed-bg-color{
+  width: 100vw;
+  position: relative;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
 @media (max-width: 1000px) {
 section.homepage-section div[data-block-id="807631"] div.description, section.homepage-section .wwl-headline-banner .title {
 padding-left: 1em;
@@ -439,12 +445,6 @@ padding-left: 1em;
 }
 }
 /*Full Bleed BG color, must be assigened in BC top parent */
-.full-bleed-bg-color{
-  width: 100vw;
-  position: relative;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
 @media (min-width: 768px) {
   .wwl-toc td {
   padding: 0 2em;
