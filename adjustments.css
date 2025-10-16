@@ -2262,7 +2262,7 @@ padding-left: 1em;
     z-index: -1;
 }
 .full-bleed-bg-color{
-  width: 100%;
+  width: unset;
   position: relative;
   margin-left: none;
   margin-right: none;
