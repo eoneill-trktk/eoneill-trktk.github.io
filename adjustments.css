@@ -125,7 +125,9 @@ main.search-results{
 .hide-aside aside.aside-area{
   display: none;
 }
-
+.EPiServerForms .FormChoice label {
+    margin-left: 6px;
+}
 .zero-padding-top{
   padding-top: 0!important;
 }
