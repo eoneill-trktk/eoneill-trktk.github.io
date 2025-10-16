@@ -2250,6 +2250,10 @@ main#main.success-columns {
   max-width: 855px;
 }
 
+.bg-color .basiccontentblock.border, .basiccontentblock.border.bg-color[data-template-id="804633"] {
+    border: none;
+}
+
 @media (max-width: 1000px) {
 section.homepage-section div[data-block-id="807631"] div.description, section.homepage-section .wwl-headline-banner .title {
 padding-left: 1em;
