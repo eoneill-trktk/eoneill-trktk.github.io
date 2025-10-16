@@ -332,7 +332,7 @@ if (location.pathname.includes('career-fair-recruiter-registration-form')) {
             : (input ? fs.querySelector(`label[for="${input.id}"]`) : null);
 
           const wrapper = document.createElement('div');
-          wrapper.style.display = 'block';
+          wrapper.style.display = 'flex';
           wrapper.style.width  = '100%';
 
           fs.insertBefore(wrapper, span);
