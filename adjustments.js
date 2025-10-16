@@ -320,25 +320,26 @@ if (location.pathname.includes('/en-partners') || location.pathname.includes('ca
   }, 100);
 }
 
-if (location.pathname.includes('career-fair-recruiter-registration-form')){
-  document.querySelectorAll('.Form__Element.FormChoice fieldset').forEach(fs => {
-  fs.querySelectorAll(':scope > span.choice-item').forEach(span => {
-    const input = span.querySelector('input');
-    let label = span.nextElementSibling?.matches('label.FormChoice__Label')
-      ? span.nextElementSibling
-      : (input ? fs.querySelector(`label[for="${input.id}"]`) : null);
+if (location.pathname.includes('career-fair-recruiter-registration-form')) {
+  const fieldsets = document.querySelectorAll('.Form__Element.FormChoice fieldset');
+  if (!fieldsets.length) return; // stop if none found
 
+  fieldsets.forEach(fs => {
+    fs.querySelectorAll(':scope > span.choice-item').forEach(span => {
+      const input = span.querySelector('input');
+      const label = span.nextElementSibling?.matches('label.FormChoice__Label')
+        ? span.nextElementSibling
+        : (input ? fs.querySelector(`label[for="${input.id}"]`) : null);
 
-    const wrapper = document.createElement('div');
-    wrapper.style.display = 'inline-block';
-    wrapper.style.width = '100%';
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'inline-block';
+      wrapper.style.width = '100%';
 
-    fs.insertBefore(wrapper, span);    
-    wrapper.appendChild(span);          
-    if (label && label.parentNode === fs) {
-      wrapper.appendChild(label);       
-    }
+      fs.insertBefore(wrapper, span);
+      wrapper.appendChild(span);
+      if (label && label.parentNode === fs) {
+        wrapper.appendChild(label);
+      }
+    });
   });
-});
-
 }
