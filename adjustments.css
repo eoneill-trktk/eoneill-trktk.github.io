@@ -41,19 +41,6 @@ main.search-results{
   font-size: 24px;
 }
 
-.full-bleed-bg-color-row::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    background: inherit;
-    z-index: -1;
-}
-
 #main\ wwl-blog-hire .imagetextpair .description h4{
   font-size: 18px;
 }
@@ -426,12 +413,6 @@ section.hero-section .image-hero {
   .wwl-toc td p {
     margin: 0.5em 0;
   }
-}
-.full-bleed-bg-color{
-  width: 100vw;
-  position: relative;
-  margin-left: -50vw;
-  margin-right: -50vw;
 }
 /*Full Bleed BG color, must be assigened in BC top parent */
 @media (min-width: 768px) {
@@ -1170,6 +1151,34 @@ html, body {
   /* .four-column.simple-content-collection .list{
     grid-template-columns: 1fr 1fr 1fr 1fr;
 } */
+
+.full-bleed-bg-color{
+  width: 100vw;
+  position: relative;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.full-bleed-bg-color-row {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1rem; 
+  z-index: 8;
+}
+
+.full-bleed-bg-color-row::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: inherit;
+    z-index: -1;
+}
     .diagram-image-container {
         width: 1000px;
     }
@@ -2082,29 +2091,8 @@ body.benefits-counseling .simple-content-collection .list>.has-link:focus, .simp
   margin: 0 auto;
 }
 
-.full-bleed-bg-color-row {
-  position: relative;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 1rem; 
-  z-index: 8;
-}
-
 .wwl-cf-form-page .Form__Status {
   color: #000;
-}
-
-.full-bleed-bg-color-row::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;              
-  margin-left: calc(-50vw + 50%); 
-  background: inherit;      
-  z-index: -1;               
 }
 
 header #sponsorus-header-link{
@@ -2261,19 +2249,6 @@ main#main.success-columns {
 @media (max-width: 1000px) {
 section.homepage-section div[data-block-id="807631"] div.description, section.homepage-section .wwl-headline-banner .title {
 padding-left: 1em;
-}
-.full-bleed-bg-color-row::before{
-    content: "";
-    position: relative;
-    width: 100%;
-    margin-left: none;
-    z-index: -1;
-}
-.full-bleed-bg-color{
-  width: unset;
-  position: relative;
-  margin-left: none;
-  margin-right: none;
 }
 /* h1.heading-bar.dark, h2.heading-bar.dark, h3.heading-bar.dark, h4.heading-bar.dark, h5.heading-bar.dark, h6.heading-bar.dark, h1.heading-bar.dark, h2.heading-bar.dark, h3.heading-bar.dark, div.heading-bar.dark {
     width: 100%;
