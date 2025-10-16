@@ -1096,7 +1096,7 @@ right: 10px;
 
 html, body {
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
 }
 .swiper-pagination.hero-swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal{
   position: sticky;
