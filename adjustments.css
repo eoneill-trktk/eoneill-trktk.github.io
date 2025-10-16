@@ -140,7 +140,9 @@ main.search-results{
 }
 
 .EPiServerForms .Form__Status .Form__Success__Message{
-    color: #000!important
+    color: #468847!important;
+    border: 1px solid #D6E9C6;
+    background-color: #EFE;
 }
 
 .basiccontentblock.h1-border h1, .basiccontentblock.h2-border h2, .basiccontentblock.h3-border h3,.simplecontentcollectionblock.h1-border h1, .simplecontentcollectionblock.h2-border h2, .simplecontentcollectionblock.h3-border h3{
