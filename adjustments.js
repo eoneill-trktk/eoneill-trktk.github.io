@@ -299,6 +299,7 @@ max-width: 70vw;
   }
 }
 
+if (location.pathname.includes('/en-partners') || location.pathname.includes('career-fair-for-individuals-with-disabilities/career-fair-for-individuals-with-disabilities-2024/previous-career-fairs/career-fair-for-individuals-with-disabilities-2025')) {
   const poll = setInterval(() => {
     const galleries = document.querySelectorAll('.wwl-gallery');
     if (galleries.length) {
@@ -317,8 +318,9 @@ max-width: 70vw;
       });
     }
   }, 100);
+}
 
-if (location.pathname.includes('career-fair-recruiter-registration-form')) {
+if (location.pathname.includes('career-fair-recruiter-registration-form' || location.pathname.includes('invoice-form'))) {
   const poll = setInterval(() => {
     const fieldsets = document.querySelectorAll('.Form__Element.FormChoice fieldset');
     if (fieldsets.length) {
