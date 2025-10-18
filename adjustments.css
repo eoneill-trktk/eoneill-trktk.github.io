@@ -131,8 +131,8 @@
         .parent-navy .nw-hero-button,
         .parent-black .nw-hero-button,
         .parent-dark .nw-hero-button {
-            background-color: #FFFFFF;
-            color: #00074F;
+            background-color: #00074F;
+            color: #fff;
         }
 
         .nw-hero-button {
