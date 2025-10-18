@@ -79,7 +79,7 @@
         }
 
         .nw-hero-caption-title a {
-            text-decoration: none;
+            text-decoration: none!important;
         }
 
         /* Description styling - dynamic colors */
