@@ -317,8 +317,6 @@ html {
   display: inline-flex; align-items: center; gap: 0.5rem;
 }
 
-.nw-hero-caption, .nw-hero-button-wrapper { padding: 0 50px; }		
-
 .nw-wwl-hero-carousel .nw-hero-swiper-slide .nw-hero-slide-img {
   grid-column: 2; grid-row: 1 / -1;
   width: auto; max-height: 360px;
@@ -818,6 +816,8 @@ h2.nw-hero-caption-title a{
 }
 /*Full Bleed BG color, must be assigened in BC top parent */
 @media (min-width: 768px) {
+  .nw-hero-caption, .nw-hero-button-wrapper { padding: 0 50px; }		
+
   .wwl-toc td {
   padding: 0 2em;
   }
