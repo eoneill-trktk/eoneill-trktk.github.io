@@ -135,9 +135,13 @@
             color: #00074F;
         }
 
-        .nw-hero-button:hover {
+        .nw-hero-button {
             background-color: #001a7a;
         }
+
+        .nw-wwl-hero-carousel a {
+    text-decoration: none!important;
+}
 
         .parent-navy .nw-hero-button:hover,
         .parent-black .nw-hero-button:hover,
