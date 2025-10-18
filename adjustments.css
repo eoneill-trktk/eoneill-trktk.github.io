@@ -71,10 +71,10 @@
             color: #00074F; /* Default dark text */
         }
 
-        .parent-navy .nw-hero-caption-title,
-        .parent-black .nw-hero-caption-title,
-        .parent-dark .nw-hero-caption-title,
-        [data-parent-class="parent-navy"] .nw-hero-caption-title, [data-parent-class="parent-black"] .nw-hero-caption-title, [data-parent-class="parent-dark"] .nw-hero-caption-title{
+        .parent-navy .nw-hero-caption-title a,
+        .parent-black .nw-hero-caption-title a,
+        .parent-dark .nw-hero-caption-title a,
+        [data-parent-class="parent-navy"] .nw-hero-caption-title a, [data-parent-class="parent-black"] .nw-hero-caption-title a, [data-parent-class="parent-dark"] .nw-hero-caption-title a{
             color: #FFFFFF!important; /* White text on dark backgrounds */
         }
 
