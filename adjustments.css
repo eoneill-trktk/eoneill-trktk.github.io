@@ -73,9 +73,8 @@
 
         .parent-navy .nw-hero-caption-title,
         .parent-black .nw-hero-caption-title,
-        .parent-dark .nw-hero-caption-title,
-        [data-parent-class="parent-navy"] {
-            color: #FFFFFF; /* White text on dark backgrounds */
+        .parent-dark .nw-hero-caption-title{
+            color: #FFFFFF!important; /* White text on dark backgrounds */
         }
 
         .nw-hero-caption-title a {
