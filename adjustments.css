@@ -73,7 +73,8 @@
 
         .parent-navy .nw-hero-caption-title,
         .parent-black .nw-hero-caption-title,
-        .parent-dark .nw-hero-caption-title {
+        .parent-dark .nw-hero-caption-title,
+        [data-parent-class="parent-navy"] {
             color: #FFFFFF; /* White text on dark backgrounds */
         }
 
@@ -334,7 +335,8 @@ html {
 .nw-wwl-hero-carousel .nw-hero-caption-title {
   font-family: "Arial Black", Arial Black, Arial, sans-serif;
   font-weight: 900;
-  color: inherit; text-decoration: none;
+  /* color: inherit;  */
+  text-decoration: none;
   font-size: 36px;
   margin-bottom: .5rem;
   text-align: left;	
