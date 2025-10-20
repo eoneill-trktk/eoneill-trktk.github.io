@@ -896,6 +896,7 @@ h2.nw-hero-caption-title a{
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1000;
 }
 
 body header.site-header::before {
