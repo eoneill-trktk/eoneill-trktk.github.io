@@ -1596,6 +1596,15 @@ html, body {
     margin: 0 auto;
 }
 
+.block.sectionblock.grid.grid-50-50 .section{
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+[data-block-id="817021"] .basic{
+  padding-right: 1em;
+}
+
 /* .link-1 { top: 130px; left: 131px; width: 220px; height: 50px; }
 .link-9 { top: 180px; left: 131px; width: 220px; height: 50px; } 
 
