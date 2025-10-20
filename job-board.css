@@ -49,7 +49,11 @@
   .cf-lower-sponsors.wwl-gallery { grid-template-columns: repeat(4, 1fr); }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 500px) {
+  .wwl-gallery { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 700px) {
   .wwl-gallery { grid-template-columns: repeat(3, 1fr); }
 }
 
