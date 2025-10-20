@@ -362,6 +362,13 @@ html {
   text-decoration: none; 
 }
 
+  .nw-wwl-hero-carousel.parent-blue .nw-hero-button-wrapper a { background-color: #00074F!important; }
+  .nw-wwl-hero-carousel.parent-green .nw-hero-button-wrapper a{ background-color: #00074F!important; }
+  .nw-wwl-hero-carousel.parent-white .nw-hero-button-wrapper a{ background-color: #00074F!important; }
+  .nw-wwl-hero-carousel.parent-navy .nw-hero-button-wrapper a{ background-color: #FFFFFF!important; }
+  .nw-wwl-hero-carousel.parent-black .nw-hero-button-wrapper a{ background-color: #FFFFFF!important; }
+  .nw-wwl-hero-carousel.parent-dark .nw-hero-button-wrapper a{ background-color: #FFFFFF!important; }
+
 .nw-mobile-only { display: none; visibility: hidden; }
 
 @media (max-width: 768px) {
