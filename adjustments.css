@@ -2683,6 +2683,10 @@ main#main.homepage section:not(.hero-section):not(.hero):not(.homepage-section) 
   }
 }
 
+.basiccontentblock-fullwidthbanner .wwl-fw-text-banner{
+  text-align: center;
+}
+
 main#main.success-columns {
     display: grid;
     grid-template-columns: auto !important;
