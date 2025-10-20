@@ -356,18 +356,18 @@ html {
   font-family: arial; 
   padding: 10px 15px; 
   background: #00074F; 
-  color: transparent;  
+  color: #fff;  
   border-radius: 8px; 
   font-size: 16px; 
   text-decoration: none; 
 }
 
-  .nw-wwl-hero-carousel.parent-blue .nw-hero-button-wrapper a { background-color: #00074F!important; }
-  .nw-wwl-hero-carousel.parent-green .nw-hero-button-wrapper a{ background-color: #00074F!important; }
-  .nw-wwl-hero-carousel.parent-white .nw-hero-button-wrapper a{ background-color: #00074F!important; }
-  .nw-wwl-hero-carousel.parent-navy .nw-hero-button-wrapper a{ background-color: #FFFFFF!important; }
-  .nw-wwl-hero-carousel.parent-black .nw-hero-button-wrapper a{ background-color: #FFFFFF!important; }
-  .nw-wwl-hero-carousel.parent-dark .nw-hero-button-wrapper a{ background-color: #FFFFFF!important; }
+  .nw-wwl-hero-carousel.parent-blue .nw-hero-button-wrapper a {color: #fff; background-color: #00074F!important; }
+  .nw-wwl-hero-carousel.parent-green .nw-hero-button-wrapper a{color: #fff;  background-color: #00074F!important; }
+  .nw-wwl-hero-carousel.parent-white .nw-hero-button-wrapper a{color: #fff;  background-color: #00074F!important; }
+  .nw-wwl-hero-carousel.parent-navy .nw-hero-button-wrapper a{color: #000;  background-color: #FFFFFF!important; }
+  .nw-wwl-hero-carousel.parent-black .nw-hero-button-wrapper a{color: #000; background-color: #FFFFFF!important; }
+  .nw-wwl-hero-carousel.parent-dark .nw-hero-button-wrapper a{color: #000; background-color: #FFFFFF!important; }
 
 .nw-mobile-only { display: none; visibility: hidden; }
 
