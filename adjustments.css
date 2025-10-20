@@ -1592,6 +1592,10 @@ html, body {
 .link-7 { top: 675px; left: 408px; width: 360px; height: 90px; }
 .link-8 { top: 575px; left: 828px; width: 190px; height: 60px; } */
 
+.Form__Element__Caption{
+  font-weight: 700!important;
+}
+
 @media (min-width: 1000px) {
   /* .four-column.simple-content-collection .list{
     grid-template-columns: 1fr 1fr 1fr 1fr;
