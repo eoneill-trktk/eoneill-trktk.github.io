@@ -2307,6 +2307,11 @@ footer #menu-header-menu{
   background: transparent; 
 } */
 
+h2.wwl-staff-heading{
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
 .wwl-fw-text-banner span {
   font-size: 2rem;
   font-weight: 600;
