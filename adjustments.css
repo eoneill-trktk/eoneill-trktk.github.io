@@ -2675,6 +2675,10 @@ main#main.success-columns {
   transform: translateX(-50%); 
   z-index: -1;             
 }
+
+.wwl-aside-main .jobboard{
+  min-width: 100%
+}
 /* 
 [data-f-element-name="__field_823642"]{
   max-width: 568px;
