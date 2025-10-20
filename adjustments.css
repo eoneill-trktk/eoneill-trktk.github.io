@@ -1,6 +1,9 @@
 .grid-container > .block.homepagecarousel-v2 > * {
     grid-column: 1 / 13!important;
 }
+[data-block-id="815407"].basiccontentblock .basic {
+        padding: 0;
+    }
 .nw-wwl-hero-carousel {
             width: 100%;
             overflow: hidden;
