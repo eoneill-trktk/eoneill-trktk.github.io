@@ -2675,7 +2675,7 @@ main#main.success-columns {
   transform: translateX(-50%); 
   z-index: -1;             
 }
-
+/* 
 [data-f-element-name="__field_823642"]{
   max-width: 568px;
 }
@@ -2686,7 +2686,7 @@ main#main.success-columns {
 
 [data-f-element-name="__field_823647"]{
   max-width: 855px;
-}
+} */
 
 .bg-color .basiccontentblock.border, .basiccontentblock.border.bg-color[data-template-id="804633"] {
     border: none;
