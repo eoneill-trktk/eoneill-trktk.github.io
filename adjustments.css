@@ -2444,6 +2444,8 @@ section.section .sectionblock-grid{
     align-items: center;
     flex-wrap: wrap;
     font-size: 1em;
+    max-width: 1080px;
+    margin: 0 auto;
 }
 
  .cf-nav-container a {
