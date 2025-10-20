@@ -1596,7 +1596,7 @@ html, body {
   font-weight: 700!important;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1000px), (min-device-width: 768px) and (max-device-width: 1024px) {
   /* .four-column.simple-content-collection .list{
     grid-template-columns: 1fr 1fr 1fr 1fr;
 } */
