@@ -1601,14 +1601,14 @@ html, body {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 } */
 
-.full-bleed-bg-color{
+/* .full-bleed-bg-color{
   width: 100vw;
   position: relative;
   margin-left: -50vw;
   margin-right: -50vw;
-}
+} */
 
-.full-bleed-bg-color-row {
+/* .full-bleed-bg-color-row {
   position: relative;
   max-width: 1080px;
   margin: 0 auto;
@@ -1627,7 +1627,7 @@ html, body {
     margin-left: calc(-50vw + 50%);
     background: inherit;
     z-index: -1;
-}
+} */
     .diagram-image-container {
         width: 1000px;
     }
