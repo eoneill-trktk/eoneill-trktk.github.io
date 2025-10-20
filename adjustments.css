@@ -2402,7 +2402,7 @@ h2.wwl-staff-heading{
 }
 }
 
-/* .benefits-counseling h1{
+.benefits-counseling h1{
     margin-top: 0;
     margin-bottom: 1.25em;
     text-align: center;
@@ -2416,7 +2416,7 @@ h2.wwl-staff-heading{
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-} */
+}
 
 .benefits-counseling .image-hero{
   padding-bottom: 0
