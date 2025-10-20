@@ -404,8 +404,8 @@ html {
   }
   .nw-wwl-hero-carousel .nw-hero-swiper-slide .nw-hero-slide-img {
     order: 3 ;
-    height: auto ;
-    max-height: 180px ;
+    height: auto;
+    width: 100%;
     object-fit: contain ;
   }
   img.nw-hero-slide-img { width: auto; height: 150px }
@@ -419,14 +419,13 @@ html {
 @media (max-width: 768px) {
   .nw-wwl-hero-carousel .nw-hero-swiper-slide .nw-hero-slide-img {
     order: 3;
-    max-height: auto;
+    max-height: 100%;
     object-fit: contain;
   }
   
   .nw-wwl-hero-carousel .nw-hero-slide-img {
-    width: auto;
     height: auto;
-    max-height: 150px;
+    width: 100%;
   }
 
   .nw-wwl-hero-carousel,
