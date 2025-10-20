@@ -1602,7 +1602,13 @@ html, body {
 }
 
 [data-block-id="817021"] .basic{
-  padding-right: 1em;
+  margin-right: 1em;
+}
+
+[data-block-id="817017"].basiccontentblock.bg-color .basic{
+    padding: inherit;
+    max-width: inherit;
+    margin: inherit;
 }
 
 /* .link-1 { top: 130px; left: 131px; width: 220px; height: 50px; }
