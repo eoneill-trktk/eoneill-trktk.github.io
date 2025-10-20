@@ -419,7 +419,7 @@ html {
 @media (max-width: 768px) {
   .nw-wwl-hero-carousel .nw-hero-swiper-slide .nw-hero-slide-img {
     order: 3;
-    max-height: 180px;
+    max-height: auto;
     object-fit: contain;
   }
   
