@@ -320,7 +320,7 @@ if (location.pathname.includes('/en-partners') || location.pathname.includes('ca
   }, 100);
 }
 
-if (location.pathname.includes('career-fair-recruiter-registration-form' || location.pathname.includes('invoice-form'))) {
+if (location.pathname.includes('career-fair-recruiter-registration-form') || location.pathname.includes('invoice-form')) {
   const poll = setInterval(() => {
     const fieldsets = document.querySelectorAll('.Form__Element.FormChoice fieldset');
     if (fieldsets.length) {
