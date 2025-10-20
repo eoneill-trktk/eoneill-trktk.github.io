@@ -2329,6 +2329,12 @@ h2.wwl-staff-heading{
 }
 
 .wwl-fw-text-banner span {
+    width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.wwl-fw-text-banner span {
   font-size: 2rem;
   font-weight: 600;
   margin: 0;
