@@ -1592,6 +1592,7 @@ html, body {
     grid-template-rows: auto;
     gap: 2em;
     max-width: 1080px;
+    padding: 0 2em;
     margin: 0 auto;
 }
 
