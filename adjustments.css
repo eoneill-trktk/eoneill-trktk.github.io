@@ -563,9 +563,9 @@ main.search-results{
 
 }
 
-.main-content > .EPiServerForms {
+/* .main-content > .EPiServerForms {
     padding: 0!important;
-}
+} */
 
 .EPiServerForms .Form__Status .Form__Success__Message{
     color: #468847!important;
