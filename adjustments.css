@@ -2334,6 +2334,12 @@ h2.wwl-staff-heading{
     text-align: center;
 }
 
+.block.basiccontentblock.basiccontentblock-layout.footer2 .basic{
+  max-width: 1080px;
+    display: block;
+    width: 100%;
+}
+
 .simple-content-collection .list{
       max-width: 1080px;
     margin: 0 auto;
