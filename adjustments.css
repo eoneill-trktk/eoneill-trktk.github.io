@@ -2334,6 +2334,10 @@ h2.wwl-staff-heading{
     text-align: center;
 }
 
+.wwl-map-final.block.basiccontentblock .basic{
+  margin: unset;
+}
+
 .block.basiccontentblock.basiccontentblock-layout.footer2 .basic{
   max-width: 1080px;
     display: block;
