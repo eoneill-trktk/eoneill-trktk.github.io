@@ -2334,6 +2334,11 @@ h2.wwl-staff-heading{
     text-align: center;
 }
 
+.simple-content-collection .list{
+      max-width: 1080px;
+    margin: 0 auto;
+}
+
 .wwl-fw-text-banner span {
   font-size: 2rem;
   font-weight: 600;
