@@ -599,6 +599,11 @@ main.search-results{
   background-color:;
 } */
 
+.Form__MainBody{
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
 .wwl-one-third img{
   width: 200px;
   height: auto;
