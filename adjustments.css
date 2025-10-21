@@ -549,6 +549,13 @@ main.search-results{
   }
 }
 
+@media (max-width: 900px) {
+    body .main.grid-container>aside+.main-content {
+        grid-column: 1 / 12;
+        grid-row: 11 / 12;
+    }
+  }
+
 
 @media (max-width: 767px) {
   #main\ wwl-blog-hire .imagetextpair .basic {
