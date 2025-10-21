@@ -515,7 +515,7 @@ main.search-results{
   margin: 0 auto;
 }
 
-.wwl-phone .basic{
+.wwl-phone.basiccontentblock .basic{
   padding: 0;
 }
 
