@@ -520,33 +520,33 @@ main.search-results{
 }
 
 @media (min-width: 900px) {
-  .main.shell.top-padding.grid-container .wwl-aside-main {
+  .success-columns .main.shell.top-padding.grid-container .wwl-aside-main {
     display: block;
   }
 
-  .main.shell.top-padding.grid-container .wwl-aside-main > .block {
+  .success-columns .main.shell.top-padding.grid-container .wwl-aside-main > .block {
     display: block;
     grid-column: auto;
     grid-row: auto;
   }
 
-  .wwl-aside-main > .advicecontentblock {
+  .success-columns .wwl-aside-main > .advicecontentblock {
     float: right;
     width: 320px;
     margin: 0 0 1.5rem 1.5rem;
   }
 
-  .wwl-aside-main > [data-block-id="815304"] {
+  .success-columns .wwl-aside-main > [data-block-id="815304"] {
     min-width: 0;
   }
 
-  .wwl-aside-main::after {
+  .success-columns .wwl-aside-main::after {
     content: "";
     display: block;
     clear: both;
   }
 
-  .wwl-aside-main .wwl-advice-block__image img {
+  .success-columns .wwl-aside-main .wwl-advice-block__image img {
     display: block;
     max-width: 100%;
     height: auto;
