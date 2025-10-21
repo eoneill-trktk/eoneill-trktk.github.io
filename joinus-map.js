@@ -1,5 +1,4 @@
 if (window.location.pathname.includes('community-employer-partners')) {
-    // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMap);
     } else {
@@ -19,25 +18,18 @@ function scrollToMap() {
 }
 
 function initMap() {
-    // Check if head element exists
     if (!document.head) {
         console.error('Document head is not available');
         return;
     }
-    
-    // Add Leaflet CSS
     const leafletCss = document.createElement('link');
     leafletCss.rel = 'stylesheet';
     leafletCss.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
     document.head.appendChild(leafletCss);
-
-    // Add Slick Carousel CSS
     const slickCSS = document.createElement('link');
     slickCSS.rel = 'stylesheet';
     slickCSS.href = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css';
     document.head.appendChild(slickCSS);
-
-    // Add custom styles
     const styleTag = document.createElement('style');
     styleTag.textContent = `
         #map {
@@ -134,7 +126,6 @@ function initMap() {
         .location-address div {
             margin-bottom: 0.25rem;
         }
-        /* Custom scrollbar for popup */
         .leaflet-popup-content::-webkit-scrollbar {
             width: 6px;
         }
@@ -144,7 +135,6 @@ function initMap() {
         .leaflet-popup-content::-webkit-scrollbar-thumb {
             background: #888;
         }
-        /* Filter controls */
         .map-filter-controls {
             display: flex;
             gap: 1rem;
@@ -164,7 +154,6 @@ function initMap() {
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        /* Pagination styles */
         .locations-pagination {
             display: flex;
             justify-content: center;
@@ -191,48 +180,31 @@ function initMap() {
         }
     `;
     document.head.appendChild(styleTag);
-
-    // Add Leaflet JS
     const leafletJs = document.createElement('script');
     leafletJs.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
     leafletJs.onload = function() {
-        // Initialize the map
         const map = L.map('map').setView([42.4072, -71.3824], 8);
-
-        // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
-        // Create an object to store markers by name for easy access
         const markers = {};
         let currentPage = 1;
-        let itemsPerPage = 25; // Changed from 2 to 5
+        let itemsPerPage = 25;
         let currentCategory = 'all';
         let visibleLocations = [];
-
-        // Get all location elements
         const locationElements = document.querySelectorAll('.location');
-        
-        // Get unique categories from location elements
         const categories = new Set(['all']);
         locationElements.forEach(locationEl => {
             const category = locationEl.classList[1] || '';
             if (category) {
-                // Extract the base category name (before any hyphens)
                 const baseCategory = category.split('-')[0];
                 categories.add(baseCategory);
             }
         });
-        
-        // Create filter controls
         const filterControls = document.createElement('div');
         filterControls.className = 'map-filter-controls';
-        
-        // Build category options: "All Categories" first, then others alphabetically by label
         const categoryList = Array.from(categories).filter(c => c !== 'all').map(category => {
             const categoryName = category.replace(/-/g, ' ');
-            // Map to display labels (keep your special names)
             let label = categoryName;
             if (categoryName === 'Colleges') label = 'Colleges and Universities';
             else if (categoryName === 'Business') label = 'Business Network';
@@ -243,40 +215,26 @@ function initMap() {
             else if (categoryName === 'Youth') label = 'Youth and Young Adults';
             return { value: category, label };
         }).sort((a, b) => a.label.localeCompare(b.label));
-
         let categoryOptions = '<option value="all">All Categories</option>';
         categoryList.forEach(({ value, label }) => {
             categoryOptions += `<option value="${value}">${label}</option>`;
         });
-        
         filterControls.innerHTML = `
             <select id="category-filter">
                 ${categoryOptions}
             </select>
         `;
-        
-        // Insert filter controls before the map
         const mapContainer = document.getElementById('map').parentNode;
         mapContainer.insertBefore(filterControls, document.getElementById('map'));
-        
-        // Create pagination container
         const paginationContainer = document.createElement('div');
         paginationContainer.className = 'locations-pagination';
         document.querySelector('.locations-list').parentNode.appendChild(paginationContainer);
-        
-        // Function to update pagination
         function updatePagination() {
-            // Get visible locations
             visibleLocations = Array.from(locationElements).filter(locationEl => 
                 !locationEl.classList.contains('hidden')
             );
-            
-            // Calculate total pages
             const totalPages = Math.ceil(visibleLocations.length / itemsPerPage);
-            
-            // Update pagination buttons
             paginationContainer.innerHTML = '';
-            
             for (let i = 1; i <= totalPages; i++) {
                 const pageBtn = document.createElement('button');
                 pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
@@ -288,49 +246,32 @@ function initMap() {
                 });
                 paginationContainer.appendChild(pageBtn);
             }
-            
-            // Update visible items
             updateVisibleItems();
         }
-        
-        // Function to update visible items based on current page
         function updateVisibleItems() {
-            // First remove all page-hidden classes
             locationElements.forEach(locationEl => {
                 locationEl.classList.remove('page-hidden');
             });
-            
-            // Then apply page-hidden to items not on current page
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
-            
             visibleLocations.forEach((locationEl, index) => {
                 if (index < startIndex || index >= endIndex) {
                     locationEl.classList.add('page-hidden');
                 }
             });
         }
-        
-        // Function to format contact information with line breaks
         function formatContactInfo(text) {
             if (!text) return text;
-            
-            // Add line breaks before Contact, Email, and Phone if they exist
             return text
                 .replace(/\bContact:\s*/g, '<br><strong>Contact:</strong> ')
                 .replace(/\bEmail:\s*/g, '<br><strong>Email:</strong> ')
                 .replace(/\bPhone:\s*/g, '<br><strong>Phone:</strong> ');
         }
-        
-        // Loop through each location element
         locationElements.forEach(locationEl => {
-            // Extract data from the element
             const geo = locationEl.getAttribute('geo');
             const name = locationEl.getAttribute('name');
             const category = locationEl.classList[1] || '';
-            
-            // Determine icon based on category
-            let iconUrl = '/siteassets/markers/marker_gray.png'; // Default
+            let iconUrl = '/siteassets/markers/marker_gray.png';
             if (category.startsWith('Colleges')) iconUrl = '/siteassets/markers/marker_green.png';
             else if (category.startsWith('Human')) iconUrl = '/siteassets/markers/marker_orange.png';
             else if (category.startsWith('Business')) iconUrl = '/siteassets/markers/marker_purple.png';
@@ -338,77 +279,46 @@ function initMap() {
             else if (category.startsWith('MassHire')) iconUrl = '/siteassets/markers/marker_gray.png';
             else if (category.startsWith('Regional')) iconUrl = '/siteassets/markers/marker_pink.png';
             else if (category.startsWith('Youth')) iconUrl = '/siteassets/markers/marker_red.png';
-            
-            // Create custom icon
             const customIcon = L.icon({
                 iconUrl: iconUrl,
                 iconSize: [25, 41],
                 iconAnchor: [12, 41],
                 popupAnchor: [1, -34]
             });
-            
-            // Extract image source if available
             const imgElement = locationEl.querySelector('.location-image img');
             const image = imgElement ? imgElement.src : '';
-            
-            // Extract description
             const descriptionElement = locationEl.querySelector('.location-description');
             const description = descriptionElement ? descriptionElement.textContent.trim() : '';
-            
-            // Extract address
             const addressElement = locationEl.querySelector('.location-address');
             const address = addressElement ? addressElement.textContent.trim() : '';
-            
-            // Extract contact info
             const contactInfoElement = locationEl.querySelector('.location-contact');
             let contactInfo = contactInfoElement ? contactInfoElement.innerHTML.trim() : '';
-            
-            // Format contact info with line breaks
             contactInfo = formatContactInfo(contactInfo);
-            
-            // Parse coordinates
             const [lat, lng] = geo.split(',').map(coord => parseFloat(coord.trim()));
-            
-            // Create popup content (without description limiter)
             let popupContent = `<div class="location-popup">`;
-            
             if (image) {
                 popupContent += `<img src="${image}" alt="${name}">`;
             }
-            
             popupContent += `<h3>${name}</h3>`;
-            
             if (category) {
                 const categoryName = category.replace(/-/g, ' ');
                 popupContent += `<p><strong>Category:</strong> ${categoryName}</p>`;
             }
-                
             if (description) {
                 popupContent += `<p>${description}</p>`;
             }
-            
             if (address) {
                 popupContent += `<p class="address"><strong>Address:</strong> ${address}</p>`;
             }
-            
             if (contactInfo) {
                 popupContent += `<div class="contact-info">${contactInfo}</div>`;
             }
-            
             popupContent += `</div>`;
-            
-            // Create marker with custom icon
             const marker = L.marker([lat, lng], {icon: customIcon}).addTo(map);
             marker.bindPopup(popupContent);
-            
-            // Store marker for later reference - use the exact name from the attribute
             markers[name] = {marker, element: locationEl, category};
-            
-            // Add geo and name attributes to the marker icon and popup
             marker._icon.setAttribute('geo', geo);
             marker._icon.setAttribute('name', name);
-            
-            // Add event listener to set attributes on popup when it opens
             marker.on('popupopen', function() {
                 const popup = marker.getPopup();
                 const popupElement = popup.getElement();
@@ -417,98 +327,62 @@ function initMap() {
                     popupElement.setAttribute('name', name);
                 }
             });
-            
-            // Make location elements clickable to open corresponding popup and scroll to map
             locationEl.addEventListener('click', function() {
                 map.setView([lat, lng], 13);
                 marker.openPopup();
-                
-                // Add a small delay to ensure the map is fully rendered before scrolling
                 setTimeout(scrollToMap, 100);
             });
         });
-        
-        // Add filtering functionality
         const categoryFilter = document.getElementById('category-filter');
-        
         function filterLocations() {
             const categoryValue = categoryFilter.value;
             currentCategory = categoryValue;
-            currentPage = 1; // Reset to first page when filtering
-            
-            // First, reset all locations and markers
+            currentPage = 1;
             locationElements.forEach(locationEl => {
                 locationEl.classList.remove('hidden');
             });
-            
             Object.values(markers).forEach(({marker}) => {
                 map.addLayer(marker);
             });
-            
-            // If "all" is selected, show everything
             if (categoryValue === 'all') {
                 updatePagination();
                 return;
             }
-            
-            // Filter locations and markers based on category
             locationElements.forEach(locationEl => {
                 const name = locationEl.getAttribute('name');
-                
-                // Get the marker for this location - use the exact name from the attribute
                 const markerInfo = markers[name];
                 if (!markerInfo) return;
-                
-                // Extract base category for matching
                 const baseCategory = markerInfo.category.split('-')[0];
-                
-                // Check if category matches (or if "all" is selected)
                 const categoryMatch = categoryValue === 'all' || baseCategory === categoryValue;
-                
                 if (categoryMatch) {
-                    // Show this location and marker
                     locationEl.classList.remove('hidden');
                     map.addLayer(markerInfo.marker);
                 } else {
-                    // Hide this location and marker
                     locationEl.classList.add('hidden');
                     map.removeLayer(markerInfo.marker);
                 }
             });
-            
-            // Update pagination after filtering
             updatePagination();
         }
-        
-        // Add event listener
         categoryFilter.addEventListener('change', filterLocations);
-        
-        // Initialize pagination
         updatePagination();
     };
-    
     leafletJs.onerror = function() {
         console.error('Failed to load Leaflet library');
     };
-    
     document.head.appendChild(leafletJs);
     (function() {
       function sortLocations() {
         const container = document.querySelector('.medialistingblock.medialisttest');
         if (!container) return;
-
         const locations = Array.from(container.querySelectorAll(':scope > .location'));
-
         locations.sort((a, b) => {
           const nameA = (a.getAttribute('name') || '').toLowerCase();
           const nameB = (b.getAttribute('name') || '').toLowerCase();
           return nameA.localeCompare(nameB);
         });
-
         locations.forEach(el => container.appendChild(el));
       }
-
-      // Wait until the block is on the page (for async loading)
       const observer = new MutationObserver(() => {
         const container = document.querySelector('.medialistingblock.medialisttest');
         if (container) {
@@ -516,10 +390,7 @@ function initMap() {
           sortLocations();
         }
       });
-
       observer.observe(document.body, { childList: true, subtree: true });
-
-      // Also try once on DOM ready in case it's already there
       if (document.readyState !== 'loading') sortLocations();
       else document.addEventListener('DOMContentLoaded', sortLocations);
     })();
