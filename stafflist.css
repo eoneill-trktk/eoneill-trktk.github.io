@@ -6,7 +6,6 @@
     font-weight: 600; 
 }
 
-/* Grid Container */
 .wwl-staff-list {
   list-style: none;
   display: grid;
@@ -28,11 +27,8 @@
   .wwl-staff-list { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* Each Card */
 .wwl-list-item {
-  /* background: #fff; */
   border-radius: 8px;
-  /* box-shadow: 0 2px 8px rgba(0,0,0,0.05); */
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -40,14 +36,12 @@
   text-align: center;
 }
 
-/* Person Wrapper */
 .wwl-person {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Image */
 .wwl-image {
   width: 180px;
   height: 180px;
@@ -67,7 +61,6 @@
   object-fit: cover;
 }
 
-/* Name */
 .wwl-displayname {
   font-size: 1.1rem;
   font-weight: 600;
@@ -84,7 +77,6 @@
   text-decoration: underline;
 }
 
-/* Summary */
 .wwl-summary {
   font-size: 0.9rem;
   color: #444;
@@ -93,13 +85,11 @@
   gap: 5px;
 }
 
-/* Titles */
 .wwl-person-title {
   font-weight: 500;
   color: #333;
 }
 
-/* Email */
 .wwl-email a {
   color: #0073e6;
   text-decoration: none;
@@ -110,7 +100,6 @@
   text-decoration: underline;
 }
 
-/* Phone */
 .wwl-phone a {
   color: #444;
   text-decoration: none;
@@ -120,7 +109,6 @@
   color: #0073e6;
 }
 
-/* Website Links */
 .wwl-person-sites a {
   display: inline-block;
   margin: 2px 5px;

@@ -1,11 +1,9 @@
 (function() {
-    // Inject Swiper CSS
     const swiperCSS = document.createElement('link');
     swiperCSS.rel = 'stylesheet';
     swiperCSS.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
     document.head.appendChild(swiperCSS);
     
-    // Inject custom styles
     const customStyles = document.createElement('style');
     customStyles.textContent = `
         .bis-carousel-container {
@@ -252,7 +250,6 @@
     `;
     document.head.appendChild(customStyles);
 
-    // --- Sort slides before Swiper builds ---
     const categoryOrder = { gold:1, silver:2, bronze:3 };
     const getName = el => (el.getAttribute('name')||el.querySelector('img')?.alt||'').trim().toLowerCase();
 
@@ -307,7 +304,7 @@
                 },
                 initialSlide:0
             });
-            swiper.slideToLoop(0,0,false); // make slide 1 really active
+            swiper.slideToLoop(0,0,false);
         }
     }
 
