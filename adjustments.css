@@ -515,6 +515,10 @@ main.search-results{
   margin: 0 auto;
 }
 
+.wwl-phone .basic{
+  padding: 0;
+}
+
 @media (min-width: 900px) {
   .main.shell.top-padding.grid-container .wwl-aside-main {
     display: block;
