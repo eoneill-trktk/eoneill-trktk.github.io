@@ -23,9 +23,9 @@
             }
             .content-type-btn {
                 padding: 10px 20px;
-                border: 2px solid #0071ce;
+                border: 2px solid #333872;
                 background: white;
-                color: #0071ce;
+                color: #333872;
                 border-radius: 6px;
                 cursor: pointer;
                 font-size: 16px;
@@ -49,7 +49,7 @@
             .facetwp-dropdown:focus {
                 outline: none;
                 border-color: #0071ce;
-                box-shadow: 0 0 0 2px rgba(0, 113, 206, 0.2);
+                box-shadow: 0 0 0 2px #0071ce;
             }
             .publications-dropdown.hidden,
             .perspectives-dropdown.hidden {
