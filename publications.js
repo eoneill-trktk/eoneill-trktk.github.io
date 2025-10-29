@@ -22,8 +22,8 @@
             }
             .content-type-btn {
                 padding: 10px 20px;
-                border: 2px solid #0071ce;
-                background: white;
+                border: 2px solid #333872;
+                background: #333872;
                 color: #0071ce;
                 border-radius: 6px;
                 cursor: pointer;
@@ -34,6 +34,7 @@
             .content-type-btn.active,
             .content-type-btn:hover {
                 background: #0071ce;
+                border: 2px solid #0071ce;
                 color: white;
             }
             .facetwp-dropdown {
