@@ -1,3 +1,12 @@
+.facetwp-dropdown{
+    margin: 0 auto;
+    display: block;
+}
+
+.content-type-buttons {
+    justify-content: center;
+}
+
 img:is([sizes="auto" i],[sizes^="auto," i]) {
     contain-intrinsic-size: 3000px 1500px
 }
