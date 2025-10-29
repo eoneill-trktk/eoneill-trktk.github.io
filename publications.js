@@ -6,7 +6,6 @@
         const gridItems = document.querySelectorAll('.gb-grid-column.gb-query-loop-item');
         
         if (contentTypeButtons.length === 0 || !publicationsDropdown || !perspectivesDropdown || gridItems.length === 0) {
-            console.log('Waiting for filter elements to load...');
             setTimeout(initFilter, 100);
             return;
         }
@@ -23,9 +22,9 @@
             }
             .content-type-btn {
                 padding: 10px 20px;
-                border: 2px solid #333872;
-                background: #333872;
-                color: white;
+                border: 2px solid #0071ce;
+                background: white;
+                color: #0071ce;
                 border-radius: 6px;
                 cursor: pointer;
                 font-size: 16px;
@@ -35,7 +34,6 @@
             .content-type-btn.active,
             .content-type-btn:hover {
                 background: #0071ce;
-                border: 2px solid #0071ce;
                 color: white;
             }
             .facetwp-dropdown {
@@ -50,7 +48,7 @@
             .facetwp-dropdown:focus {
                 outline: none;
                 border-color: #0071ce;
-                box-shadow: 0 0 0 2px #0071ce;
+                box-shadow: 0 0 0 2px rgba(0, 113, 206, 0.2);
             }
             .publications-dropdown.hidden,
             .perspectives-dropdown.hidden {
@@ -71,11 +69,13 @@
             if (contentType === 'publications') {
                 document.querySelector('.publications-dropdown').classList.remove('hidden');
                 document.querySelector('.perspectives-dropdown').classList.add('hidden');
-                perspectivesDropdown.value = 'perspectives';
+                publicationsDropdown.value = '';
+                applyFilter('');
             } else {
                 document.querySelector('.publications-dropdown').classList.add('hidden');
                 document.querySelector('.perspectives-dropdown').classList.remove('hidden');
-                publicationsDropdown.value = '';
+                perspectivesDropdown.value = 'perspectives';
+                applyFilter('perspectives');
             }
             
             contentTypeButtons.forEach(btn => {
@@ -85,8 +85,6 @@
                     btn.classList.remove('active');
                 }
             });
-            
-            applyFilter(currentContentType === 'perspectives' ? 'perspectives' : currentFilter);
         }
 
         function applyFilter(filterValue) {
