@@ -24,8 +24,8 @@
             .content-type-btn {
                 padding: 10px 20px;
                 border: 2px solid #333872;
-                background: white;
-                color: #333872;
+                background: #333872;
+                color: white;
                 border-radius: 6px;
                 cursor: pointer;
                 font-size: 16px;
