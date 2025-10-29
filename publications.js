@@ -35,6 +35,7 @@
             .content-type-btn.active,
             .content-type-btn:hover {
                 background: #0071ce;
+                border: 2px solid #0071ce;
                 color: white;
             }
             .facetwp-dropdown {
