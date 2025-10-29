@@ -1,9 +1,11 @@
 (function() {
     function initFilter() {
-        const dropdown = document.querySelector('.facetwp-dropdown');
+        const contentTypeButtons = document.querySelectorAll('.content-type-btn');
+        const publicationsDropdown = document.querySelector('.publications-dropdown .facetwp-dropdown');
+        const perspectivesDropdown = document.querySelector('.perspectives-dropdown .facetwp-dropdown');
         const gridItems = document.querySelectorAll('.gb-grid-column.gb-query-loop-item');
         
-        if (!dropdown || gridItems.length === 0) {
+        if (contentTypeButtons.length === 0 || !publicationsDropdown || !perspectivesDropdown || gridItems.length === 0) {
             console.log('Waiting for filter elements to load...');
             setTimeout(initFilter, 100);
             return;
@@ -11,42 +13,119 @@
 
         const style = document.createElement('style');
         style.textContent = `
-            .gb-grid-column.hidden {
-                display: none;
+            .content-type-selector {
+                margin-bottom: 20px;
+            }
+            .content-type-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .content-type-btn {
+                padding: 10px 20px;
+                border: 2px solid #0071ce;
+                background: white;
+                color: #0071ce;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+            .content-type-btn.active,
+            .content-type-btn:hover {
+                background: #0071ce;
+                color: white;
             }
             .facetwp-dropdown {
-                padding: 8px 12px;
+                padding: 10px 15px;
                 border: 1px solid #ccc;
                 border-radius: 4px;
                 font-size: 16px;
                 background-color: white;
                 cursor: pointer;
+                min-width: 250px;
             }
             .facetwp-dropdown:focus {
                 outline: none;
                 border-color: #0071ce;
                 box-shadow: 0 0 0 2px rgba(0, 113, 206, 0.2);
             }
+            .publications-dropdown.hidden,
+            .perspectives-dropdown.hidden {
+                display: none;
+            }
+            .gb-grid-column.hidden {
+                display: none;
+            }
         `;
         document.head.appendChild(style);
 
-        function filterItems(category) {
-            gridItems.forEach(item => {
-                if (category === '' || item.classList.contains(category)) {
-                    item.classList.remove('hidden');
+        let currentContentType = 'publications';
+        let currentFilter = '';
+
+        function filterByContentType(contentType) {
+            currentContentType = contentType;
+            
+            if (contentType === 'publications') {
+                document.querySelector('.publications-dropdown').classList.remove('hidden');
+                document.querySelector('.perspectives-dropdown').classList.add('hidden');
+                perspectivesDropdown.value = '';
+            } else {
+                document.querySelector('.publications-dropdown').classList.add('hidden');
+                document.querySelector('.perspectives-dropdown').classList.remove('hidden');
+                publicationsDropdown.value = '';
+            }
+            
+            contentTypeButtons.forEach(btn => {
+                if (btn.dataset.type === contentType) {
+                    btn.classList.add('active');
                 } else {
-                    item.classList.add('hidden');
+                    btn.classList.remove('active');
+                }
+            });
+            
+            applyFilter(currentFilter);
+        }
+
+        function applyFilter(filterValue) {
+            currentFilter = filterValue;
+            
+            gridItems.forEach(item => {
+                if (currentContentType === 'publications') {
+                    if (filterValue === '' || item.classList.contains(filterValue)) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                } else {
+                    if (filterValue === '' && item.classList.contains('perspectives')) {
+                        item.classList.remove('hidden');
+                    } else if (filterValue === 'perspectives' && item.classList.contains('perspectives')) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
                 }
             });
         }
         
-        dropdown.addEventListener('change', function() {
-            const category = this.value;
-            filterItems(category);
+        contentTypeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const contentType = this.dataset.type;
+                filterByContentType(contentType);
+            });
         });
         
-        // Initialize with all items visible
-        filterItems('');
+        publicationsDropdown.addEventListener('change', function() {
+            applyFilter(this.value);
+        });
+        
+        perspectivesDropdown.addEventListener('change', function() {
+            applyFilter(this.value);
+        });
+        
+        filterByContentType('publications');
     }
 
     initFilter();
