@@ -24,7 +24,7 @@
                 padding: 10px 20px;
                 border: 2px solid #333872;
                 background: #333872;
-                color: #0071ce;
+                color: white;
                 border-radius: 6px;
                 cursor: pointer;
                 font-size: 16px;
