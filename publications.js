@@ -70,7 +70,7 @@
             if (contentType === 'publications') {
                 document.querySelector('.publications-dropdown').classList.remove('hidden');
                 document.querySelector('.perspectives-dropdown').classList.add('hidden');
-                perspectivesDropdown.value = '';
+                perspectivesDropdown.value = 'perspectives';
             } else {
                 document.querySelector('.publications-dropdown').classList.add('hidden');
                 document.querySelector('.perspectives-dropdown').classList.remove('hidden');
@@ -85,7 +85,7 @@
                 }
             });
             
-            applyFilter(currentFilter);
+            applyFilter(currentContentType === 'perspectives' ? 'perspectives' : currentFilter);
         }
 
         function applyFilter(filterValue) {
@@ -99,9 +99,7 @@
                         item.classList.add('hidden');
                     }
                 } else {
-                    if (filterValue === '' && item.classList.contains('perspectives')) {
-                        item.classList.remove('hidden');
-                    } else if (filterValue === 'perspectives' && item.classList.contains('perspectives')) {
+                    if (item.classList.contains('perspectives')) {
                         item.classList.remove('hidden');
                     } else {
                         item.classList.add('hidden');
@@ -122,7 +120,7 @@
         });
         
         perspectivesDropdown.addEventListener('change', function() {
-            applyFilter(this.value);
+            applyFilter('perspectives');
         });
         
         filterByContentType('publications');
