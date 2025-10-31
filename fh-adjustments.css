@@ -62,17 +62,17 @@
 
 .list:has(.set-padding:first-child:nth-last-child(2)),
 .list:has(.set-padding:first-child:nth-last-child(2) ~ .set-padding) {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(50%, 1fr));
 }
 
 .list:has(.set-padding:first-child:nth-last-child(3)),
 .list:has(.set-padding:first-child:nth-last-child(3) ~ .set-padding) {
-    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, minmax(33%, 1fr));
 }
 
 .list:has(.set-padding:first-child:nth-last-child(4)),
 .list:has(.set-padding:first-child:nth-last-child(4) ~ .set-padding) {
-    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, minmax(25%, 1fr));
 }
 
 @media (max-width: 768px) {
