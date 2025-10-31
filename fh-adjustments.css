@@ -42,11 +42,13 @@
 
 .simplecontentcollectionblock */
 
-.simplecontentcollectionblock .list{
+.simplecontentcollectionblock .list, .simplecontentcollectionblock .text-container{
     display: grid;
     margin: 0 auto;
     width: 100%;
 }
+
+
 
 .mw-900 > .text-container,
 .mw-900 > .list {
