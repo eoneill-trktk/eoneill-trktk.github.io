@@ -1,8 +1,8 @@
 .bg-white{background: var(--white);}
-.bg-black{background: var(--black);}
-.bg-navy-blue{background: var(--navy-blue);}
+.bg-black{background: var(--black);color: white;}
+.bg-navy-blue{background: var(--navy-blue);color: white}
 .bg-sky-blue{background: var(--sky-blue);}
-.bg-umass-blue{background: var(--umass-blue);}
+.bg-umass-blue{background: var(--umass-blue);color: white}
 .bg-yellow{background: var(--yellow);}
 .bg-light-blue{background: var(--light-blue);}
 .bg-warm-gray{background: var(--warm-gray);}
@@ -10,15 +10,15 @@
 .bg-sky-blue-200{background: var(--sky-blue-200);}
 .bg-warm-grey-100{background: var(--warm-grey-100);}
 .bg-warm-grey-200{background: var(--warm-grey-200);}
-.bg-warm-grey-300{background: var(--warm-grey-300);}
+.bg-warm-grey-300{background: var(--warm-grey-300);color: white}
 .bg-yelllow-100{background: var(--yelllow-100);}
 .bg-light-blue-100{background: var(--light-blue-100);}
 .bg-sky-blue-800{background: var(--sky-blue-800);}
 .bg-sky-blue-900{background: var(--sky-blue-900);}
-.bg-navy-blue-500{background: var(--navy-blue-500);}
-.bg-purple{background: var(--purple);}
-.bg-green{background: var(--green);}
-.bg-orange{background: var(--orange);}
+.bg-navy-blue-500{background: var(--navy-blue-500);color: white}
+.bg-purple{background: var(--purple);color: white}
+.bg-green{background: var(--green);color: white}
+.bg-orange{background: var(--orange);color: white}
 .bg-light-blue-200{background: var(--light-blue-200);}
 
 /* .mw-900{
