@@ -92,19 +92,14 @@
             currentFilter = filterValue;
             
             gridItems.forEach(item => {
-                const isPerspective = item.classList.contains('perspectives');
-                const isPublication = !isPerspective;
-                
                 if (currentContentType === 'publications') {
-                    if (isPerspective) {
-                        item.classList.add('hidden');
-                    } else if (filterValue === '' || item.classList.contains(filterValue)) {
+                    if (filterValue === '' || item.classList.contains(filterValue)) {
                         item.classList.remove('hidden');
                     } else {
                         item.classList.add('hidden');
                     }
                 } else {
-                    if (isPerspective) {
+                    if (item.classList.contains('perspectives')) {
                         item.classList.remove('hidden');
                     } else {
                         item.classList.add('hidden');
