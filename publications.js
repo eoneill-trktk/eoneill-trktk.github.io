@@ -5,11 +5,13 @@
         const perspectivesDropdown = document.querySelector('.perspectives-dropdown .facetwp-dropdown');
         const gridItems = document.querySelectorAll('.gb-grid-column.gb-query-loop-item');
         
-        if (contentTypeButtons.length === 0 || !publicationsDropdown || !perspectivesDropdown || gridItems.length === 0) {
+        if (contentTypeButtons.length === 0) {
+            console.log('Content type buttons not found, retrying...');
             setTimeout(initFilter, 100);
             return;
         }
 
+        // Add CSS styles
         const style = document.createElement('style');
         style.textContent = `
             .content-type-selector {
@@ -56,7 +58,7 @@
                 display: none;
             }
             .gb-grid-column.hidden {
-                display: none;
+                display: none !important;
             }
         `;
         document.head.appendChild(style);
@@ -70,12 +72,12 @@
             if (contentType === 'publications') {
                 document.querySelector('.publications-dropdown').classList.remove('hidden');
                 document.querySelector('.perspectives-dropdown').classList.add('hidden');
-                publicationsDropdown.value = '';
+                if (publicationsDropdown) publicationsDropdown.value = '';
                 applyFilter('');
             } else {
                 document.querySelector('.publications-dropdown').classList.add('hidden');
                 document.querySelector('.perspectives-dropdown').classList.remove('hidden');
-                perspectivesDropdown.value = 'perspectives';
+                if (perspectivesDropdown) perspectivesDropdown.value = 'perspectives';
                 applyFilter('perspectives');
             }
             
@@ -115,16 +117,24 @@
             });
         });
         
-        publicationsDropdown.addEventListener('change', function() {
-            applyFilter(this.value);
-        });
+        if (publicationsDropdown) {
+            publicationsDropdown.addEventListener('change', function() {
+                applyFilter(this.value);
+            });
+        }
         
-        perspectivesDropdown.addEventListener('change', function() {
-            applyFilter('perspectives');
-        });
+        if (perspectivesDropdown) {
+            perspectivesDropdown.addEventListener('change', function() {
+                applyFilter('perspectives');
+            });
+        }
         
         filterByContentType('publications');
     }
 
-    initFilter();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFilter);
+    } else {
+        initFilter();
+    }
 })();
