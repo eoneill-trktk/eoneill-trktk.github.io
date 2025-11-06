@@ -1,0 +1,12 @@
+.footer-grid section section.section, nav.menu-bar,div[data-items="primary"]{
+    max-width: 1290px;
+    display: block;
+    margin: 0 auto;
+}
+
+main section div.main-content.grid-container, div.medialistingblock-socialmedia ul.image-list.social-media{
+    max-width: 1290px;
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+}
