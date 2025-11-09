@@ -145,6 +145,7 @@
     }
     .perspectives-pill {
         background-color: #333872 !important;
+        padding: .25em .75em !important;
         color: #fff !important;
     }
         `;
