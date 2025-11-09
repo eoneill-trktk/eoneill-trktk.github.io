@@ -112,9 +112,11 @@
         flex-wrap: wrap;
         gap: 4px;
     }
+        .gb-headline.gb-headline-text.gb-headline-news-grid-title a{
+        font-size:20px!important;
+        }
     .post-term-item {
-        padding: .25em .75em !important;
-        font-size: 13px !important;
+        font-size: 16px !important;
         border-radius: 16px !important;
         display: inline-block !important;
         margin-right: 4px;
@@ -125,14 +127,17 @@
     .better-access-pill {
         background-color: #f36f16 !important;
         color: #00074f !important;
+        padding: .25em .75em !important;
     }
     .better-knowledge-pill {
         background-color: #633092 !important;
         color: #fff !important;
+        padding: .25em .75em !important;
     }
     .better-performance-pill {
         background-color: #3c8221 !important;
         color: #fff !important;
+        padding: .25em .75em !important;
     }
     .default-pill {
         background-color: #ccc !important;
