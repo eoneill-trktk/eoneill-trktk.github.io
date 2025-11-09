@@ -11,6 +11,7 @@
             return;
         }
 
+        // Add CSS styles
         const style = document.createElement('style');
         style.textContent = `
             .content-type-selector {
@@ -76,8 +77,8 @@
             } else {
                 document.querySelector('.publications-dropdown').classList.add('hidden');
                 document.querySelector('.perspectives-dropdown').classList.remove('hidden');
-                if (perspectivesDropdown) perspectivesDropdown.value = 'perspectives';
-                applyFilter('perspectives');
+                if (perspectivesDropdown) perspectivesDropdown.value = '';
+                applyFilter('');
             }
             
             contentTypeButtons.forEach(btn => {
@@ -96,6 +97,7 @@
                 const isPerspectives = item.classList.contains('perspectives') || item.getAttribute('data-content-type') === 'perspectives';
                 
                 if (currentContentType === 'publications') {
+                    // Show publications (non-perspectives items)
                     if (filterValue === '' && !isPerspectives) {
                         item.classList.remove('hidden');
                     } else if (filterValue !== '' && item.classList.contains(filterValue) && !isPerspectives) {
@@ -104,8 +106,19 @@
                         item.classList.add('hidden');
                     }
                 } else {
+                    // Show perspectives items (from both perspectives and services folders)
                     if (isPerspectives) {
-                        item.classList.remove('hidden');
+                        if (filterValue === '') {
+                            // Show all perspectives items when "All" is selected
+                            item.classList.remove('hidden');
+                        } else {
+                            // Show only items that have the selected category class
+                            if (item.classList.contains(filterValue)) {
+                                item.classList.remove('hidden');
+                            } else {
+                                item.classList.add('hidden');
+                            }
+                        }
                     } else {
                         item.classList.add('hidden');
                     }
@@ -128,7 +141,7 @@
         
         if (perspectivesDropdown) {
             perspectivesDropdown.addEventListener('change', function() {
-                applyFilter('perspectives');
+                applyFilter(this.value);
             });
         }
         
