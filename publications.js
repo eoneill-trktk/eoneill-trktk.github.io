@@ -11,7 +11,6 @@
             return;
         }
 
-        // Add CSS styles
         const style = document.createElement('style');
         style.textContent = `
             .content-type-selector {
@@ -94,14 +93,18 @@
             currentFilter = filterValue;
             
             gridItems.forEach(item => {
+                const isPerspectives = item.classList.contains('perspectives') || item.getAttribute('data-content-type') === 'perspectives';
+                
                 if (currentContentType === 'publications') {
-                    if (filterValue === '' || item.classList.contains(filterValue)) {
+                    if (filterValue === '' && !isPerspectives) {
+                        item.classList.remove('hidden');
+                    } else if (filterValue !== '' && item.classList.contains(filterValue) && !isPerspectives) {
                         item.classList.remove('hidden');
                     } else {
                         item.classList.add('hidden');
                     }
                 } else {
-                    if (item.classList.contains('perspectives')) {
+                    if (isPerspectives) {
                         item.classList.remove('hidden');
                     } else {
                         item.classList.add('hidden');

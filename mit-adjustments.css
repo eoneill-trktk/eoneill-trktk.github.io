@@ -10,3 +10,11 @@ main section div.main-content.grid-container, div.medialistingblock-socialmedia 
     width: 100%;
     margin: 0 auto;
 }
+
+nav ul{
+    z-index: 3;
+}
+
+main.site-main .main-content > .hero-section > .entry-header {
+    z-index: 2;
+}
