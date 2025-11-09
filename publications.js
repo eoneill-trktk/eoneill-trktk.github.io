@@ -60,6 +60,84 @@
             .gb-grid-column.hidden {
                 display: none !important;
             }
+            .content-type-selector {
+        margin-bottom: 20px;
+    }
+    .content-type-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    .content-type-btn {
+        padding: 10px 20px;
+        border: 2px solid #333872;
+        background: #333872;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    .content-type-btn.active,
+    .content-type-btn:hover {
+        background: #0071ce;
+        border: 2px solid #0071ce;
+        color: white;
+    }
+    .facetwp-dropdown {
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        cursor: pointer;
+        min-width: 250px;
+    }
+    .facetwp-dropdown:focus {
+        outline: none;
+        border-color: #0071ce;
+        box-shadow: 0 0 0 2px rgba(0, 113, 206, 0.2);
+    }
+    .publications-dropdown.hidden,
+    .perspectives-dropdown.hidden {
+        display: none;
+    }
+    .gb-grid-column.hidden {
+        display: none !important;
+    }
+    /* Category pill styles */
+    .gb-headline-eyebrow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    .post-term-item {
+        padding: .25em .75em !important;
+        font-size: 13px !important;
+        border-radius: 16px !important;
+        display: inline-block !important;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+    .better-access-pill {
+        background-color: #f36f16 !important;
+        color: #00074f !important;
+    }
+    .better-knowledge-pill {
+        background-color: #633092 !important;
+        color: #fff !important;
+    }
+    .better-performance-pill {
+        background-color: #3c8221 !important;
+        color: #fff !important;
+    }
+    .default-pill {
+        background-color: #ccc !important;
+        color: #000 !important;
+    }
         `;
         document.head.appendChild(style);
 
@@ -97,7 +175,6 @@
                 const isPerspectives = item.classList.contains('perspectives') || item.getAttribute('data-content-type') === 'perspectives';
                 
                 if (currentContentType === 'publications') {
-                    // Show publications (non-perspectives items)
                     if (filterValue === '' && !isPerspectives) {
                         item.classList.remove('hidden');
                     } else if (filterValue !== '' && item.classList.contains(filterValue) && !isPerspectives) {
@@ -106,13 +183,10 @@
                         item.classList.add('hidden');
                     }
                 } else {
-                    // Show perspectives items (from both perspectives and services folders)
                     if (isPerspectives) {
                         if (filterValue === '') {
-                            // Show all perspectives items when "All" is selected
                             item.classList.remove('hidden');
                         } else {
-                            // Show only items that have the selected category class
                             if (item.classList.contains(filterValue)) {
                                 item.classList.remove('hidden');
                             } else {
