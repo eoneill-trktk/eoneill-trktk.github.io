@@ -143,6 +143,10 @@
         background-color: #ccc !important;
         color: #000 !important;
     }
+    .perspectives-pill {
+        background-color: #333872 !important;
+        color: #fff !important;
+    }
         `;
         document.head.appendChild(style);
 
