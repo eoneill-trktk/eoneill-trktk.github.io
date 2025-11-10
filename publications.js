@@ -148,12 +148,6 @@
                     if (isPerspectives) {
                         if (filterValue === '') {
                             item.classList.remove('hidden');
-                        } else if (filterValue === 'better-access' || filterValue === 'better-knowledge' || filterValue === 'better-performance') {
-                            if (item.classList.contains(filterValue)) {
-                                item.classList.remove('hidden');
-                            } else {
-                                item.classList.add('hidden');
-                            }
                         } else {
                             const itemTitle = item.querySelector('.gb-headline-news-grid-title a').textContent.trim().toLowerCase();
                             const filterText = filterValue.replace(/-/g, ' ').toLowerCase();
