@@ -11,7 +11,6 @@
             return;
         }
 
-        // Add CSS styles
         const style = document.createElement('style');
         style.textContent = `
             .content-type-selector {
@@ -60,94 +59,47 @@
             .gb-grid-column.hidden {
                 display: none !important;
             }
-            .content-type-selector {
-        margin-bottom: 20px;
-    }
-    .content-type-buttons {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 15px;
-    }
-    .content-type-btn {
-        padding: 10px 20px;
-        border: 2px solid #333872;
-        background: #333872;
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    .content-type-btn.active,
-    .content-type-btn:hover {
-        background: #0071ce;
-        border: 2px solid #0071ce;
-        color: white;
-    }
-    .facetwp-dropdown {
-        padding: 10px 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-        background-color: white;
-        cursor: pointer;
-        min-width: 250px;
-    }
-    .facetwp-dropdown:focus {
-        outline: none;
-        border-color: #0071ce;
-        box-shadow: 0 0 0 2px rgba(0, 113, 206, 0.2);
-    }
-    .publications-dropdown.hidden,
-    .perspectives-dropdown.hidden {
-        display: none;
-    }
-    .gb-grid-column.hidden {
-        display: none !important;
-    }
-    /* Category pill styles */
-    .gb-headline-eyebrow {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-    }
-        .gb-headline.gb-headline-text.gb-headline-news-grid-title a{
-        font-size:20px!important;
-        }
-    .post-term-item {
-        font-size: 16px !important;
-        border-radius: 16px !important;
-        display: inline-block !important;
-        margin-right: 4px;
-        margin-bottom: 4px;
-        font-weight: 600;
-        line-height: 1.2;
-    }
-    .better-access-pill {
-        background-color: #f36f16 !important;
-        color: #00074f !important;
-        padding: .25em .75em !important;
-    }
-    .better-knowledge-pill {
-        background-color: #633092 !important;
-        color: #fff !important;
-        padding: .25em .75em !important;
-    }
-    .better-performance-pill {
-        background-color: #3c8221 !important;
-        color: #fff !important;
-        padding: .25em .75em !important;
-    }
-    .default-pill {
-        background-color: #ccc !important;
-        color: #000 !important;
-    }
-    .perspectives-pill {
-        background-color: #333872 !important;
-        padding: .25em .75em !important;
-        color: #fff !important;
-    }
+            .gb-headline-eyebrow {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+            .gb-headline.gb-headline-text.gb-headline-news-grid-title a{
+                font-size:20px!important;
+            }
+            .post-term-item {
+                font-size: 16px !important;
+                border-radius: 16px !important;
+                display: inline-block !important;
+                margin-right: 4px;
+                margin-bottom: 4px;
+                font-weight: 600;
+                line-height: 1.2;
+            }
+            .better-access-pill {
+                background-color: #f36f16 !important;
+                color: #00074f !important;
+                padding: .25em .75em !important;
+            }
+            .better-knowledge-pill {
+                background-color: #633092 !important;
+                color: #fff !important;
+                padding: .25em .75em !important;
+            }
+            .better-performance-pill {
+                background-color: #3c8221 !important;
+                color: #fff !important;
+                padding: .25em .75em !important;
+            }
+            .default-pill {
+                background-color: #ccc !important;
+                color: #000 !important;
+            }
+            .perspectives-pill {
+                background-color: #333872 !important;
+                padding: .25em .75em !important;
+                color: #fff !important;
+            }
         `;
         document.head.appendChild(style);
 
@@ -196,8 +148,16 @@
                     if (isPerspectives) {
                         if (filterValue === '') {
                             item.classList.remove('hidden');
-                        } else {
+                        } else if (filterValue === 'better-access' || filterValue === 'better-knowledge' || filterValue === 'better-performance') {
                             if (item.classList.contains(filterValue)) {
+                                item.classList.remove('hidden');
+                            } else {
+                                item.classList.add('hidden');
+                            }
+                        } else {
+                            const itemTitle = item.querySelector('.gb-headline-news-grid-title a').textContent.trim().toLowerCase();
+                            const filterText = filterValue.replace(/-/g, ' ').toLowerCase();
+                            if (itemTitle.includes(filterText)) {
                                 item.classList.remove('hidden');
                             } else {
                                 item.classList.add('hidden');
