@@ -18,3 +18,65 @@ nav ul{
 main.site-main .main-content > .hero-section > .entry-header {
     z-index: 2;
 }
+
+.simplecontentcollectionblock .list, .simplecontentcollectionblock .text-container{
+    display: grid;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mw-900 > .text-container,
+.mw-900 > .list {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.mw-900 > .list {
+    gap: calc((100% - 900px) / 3);
+}
+
+.mw-1250 > .text-container,
+.mw-1250 > .list {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.mw-1250 > .list {
+    gap: calc((100% - 1200px) / 3);
+}
+
+.mw-1440 > .text-container,
+.mw-1440 > .list {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.mw-1440 > .list {
+    gap: calc((100% - 1440px) / 3);
+}
+
+.list:has(.set-padding:only-child) {
+    grid-template-columns: minmax(200px, 1fr);
+}
+
+.list:has(.set-padding:first-child:nth-last-child(2)),
+.list:has(.set-padding:first-child:nth-last-child(2) ~ .set-padding) {
+    grid-template-columns: repeat(2, minmax(50%, 1fr));
+}
+
+.list:has(.set-padding:first-child:nth-last-child(3)),
+.list:has(.set-padding:first-child:nth-last-child(3) ~ .set-padding) {
+    grid-template-columns: repeat(3, minmax(33%, 1fr));
+}
+
+.list:has(.set-padding:first-child:nth-last-child(4)),
+.list:has(.set-padding:first-child:nth-last-child(4) ~ .set-padding) {
+    grid-template-columns: repeat(4, minmax(25%, 1fr));
+}
+
+@media (max-width: 768px) {
+    .list {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+}
