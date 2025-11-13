@@ -15646,9 +15646,9 @@ form.searchwp-form input.swp-toggle-checkbox:active+.swp-toggle-switch,form.sear
     height: 100%
 }
 
-/* .gb-grid-wrapper>.gb-grid-column-55e6bb3d {
+.gb-grid-wrapper>.gb-grid-column-55e6bb3d {
     width: 25%
-} */
+}
 
 .gb-grid-wrapper>.gb-grid-column-55e6bb3d>.gb-container {
     display: flex;
