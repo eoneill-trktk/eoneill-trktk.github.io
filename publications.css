@@ -15650,6 +15650,10 @@ form.searchwp-form input.swp-toggle-checkbox:active+.swp-toggle-switch,form.sear
     width: 25%
 }
 
+.pagelistingblock.newsmenuitems .gb-grid-wrapper>.gb-grid-column-55e6bb3d {
+    width: 100%;
+}
+
 .gb-grid-wrapper>.gb-grid-column-55e6bb3d>.gb-container {
     display: flex;
     flex-direction: column;
