@@ -19,7 +19,7 @@ main.site-main .main-content > .hero-section > .entry-header {
     z-index: 2;
 }
 
-.simplecontentcollectionblock .list, .simplecontentcollectionblock .text-container{
+.list, .text-container{
     display: grid;
     margin: 0 auto;
     width: 100%;
@@ -79,4 +79,15 @@ main.site-main .main-content > .hero-section > .entry-header {
         grid-template-columns: 1fr !important;
         gap: 20px;
     }
+}
+
+footer [data-block-id="826127"].basiccontentblock .basic h2{
+    margin: 0;
+    font-size: 1.21rem;
+    line-height: 1em;
+    display: block;
+    margin-block-start: 1.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    color: #000;
 }
