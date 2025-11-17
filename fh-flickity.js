@@ -47,7 +47,6 @@ function initializeFlickitySlider(sliderId) {
             adaptiveHeight: true,
             imagesLoaded: true,
             freeScroll: false,
-            groupCells: '80%',
             cellSelector: '.carousel-cell',
             resize: true,
             setGallerySize: true,
