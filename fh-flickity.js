@@ -24,8 +24,20 @@ function initializeFlickitySlider(sliderId) {
             return;
         }
 
+        let groupCells = 1;
+    
+    if (window.matchMedia('(min-width: 768px)').matches) {
+        groupCells = 2;
+    }
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+        groupCells = 3;
+    }
+    if (window.matchMedia('(min-width: 1200px)').matches) {
+        groupCells = 4;
+    }
+
         const defaultOptions = {
-            cellAlign: 'center',
+            cellAlign: 'left',
             contain: true,
             groupCells: true,
             pageDots: false,
@@ -33,7 +45,13 @@ function initializeFlickitySlider(sliderId) {
             draggable: true,
             wrapAround: false,
             adaptiveHeight: true,
-            imagesLoaded: true
+            imagesLoaded: true,
+            freeScroll: false,
+            groupCells: '80%',
+            cellSelector: '.carousel-cell',
+            resize: true,
+            setGallerySize: true,
+            percentPosition: false
         };
 
         const dataOptions = sliderElement.getAttribute('data-flickity');
