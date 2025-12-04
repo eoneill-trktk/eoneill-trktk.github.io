@@ -1,8 +1,5 @@
 (function() {
-  function alphabetizeGallery() {
-    const gallery = document.querySelector('.wwl-gallery');
-    if (!gallery) return;
-    
+  function alphabetizeGallery(gallery) {
     const items = Array.from(gallery.querySelectorAll('.wwl-gallery__item'));
     if (items.length === 0) return;
     
@@ -15,12 +12,19 @@
     items.forEach(item => gallery.appendChild(item));
   }
   
-  if (document.querySelector('.wwl-gallery')) {
-    alphabetizeGallery();
+  function alphabetizeAllGalleries() {
+    const galleries = document.querySelectorAll('.wwl-gallery');
+    galleries.forEach(gallery => alphabetizeGallery(gallery));
+  }
+  
+  const galleries = document.querySelectorAll('.wwl-gallery');
+  if (galleries.length > 0) {
+    alphabetizeAllGalleries();
   } else {
     const observer = new MutationObserver(function() {
-      if (document.querySelector('.wwl-gallery')) {
-        alphabetizeGallery();
+      const foundGalleries = document.querySelectorAll('.wwl-gallery');
+      if (foundGalleries.length > 0) {
+        alphabetizeAllGalleries();
         observer.disconnect();
       }
     });
