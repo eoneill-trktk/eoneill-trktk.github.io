@@ -18,14 +18,14 @@
   if (document.querySelector('.wwl-gallery')) {
     alphabetizeGallery();
   } else {
-    const observer = new MutationObserver(function(mutations, obs) {
+    const observer = new MutationObserver(function() {
       if (document.querySelector('.wwl-gallery')) {
         alphabetizeGallery();
-        obs.disconnect();
+        observer.disconnect();
       }
     });
     
-    observer.observe(document.body, {
+    observer.observe(document.documentElement, {
       childList: true,
       subtree: true
     });
