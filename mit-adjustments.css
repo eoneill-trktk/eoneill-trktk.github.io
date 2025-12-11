@@ -91,3 +91,7 @@ footer [data-block-id="826127"].basiccontentblock .basic h2{
     margin-inline-end: 0px;
     color: #000;
 }
+
+ul li a.child-item{
+    text-align: left;
+}
