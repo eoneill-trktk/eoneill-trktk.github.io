@@ -246,7 +246,7 @@
                 if (!noResultsMsg) {
                     noResultsMsg = document.createElement('div');
                     noResultsMsg.className = 'no-results-message';
-                    noResultsMsg.textContent = 'No publications found matching your criteria.';
+                    noResultsMsg.textContent = 'No publications found.';
                     const gridWrapper = document.querySelector('.gb-grid-wrapper');
                     if (gridWrapper) {
                         gridWrapper.appendChild(noResultsMsg);
