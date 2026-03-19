@@ -15,8 +15,6 @@
         // Clear existing dropdowns
         contentTypeSelector.innerHTML = '';
         
-        const servicesDropdown = document.querySelector('.facetwp-facet-services_type .facetwp-dropdown');
-        const typesDropdown = document.querySelector('.facetwp-facet-publication_types .facetwp-dropdown');
         const gridItems = document.querySelectorAll('.gb-grid-column.gb-query-loop-item');
         
         // Service options (alphabetically sorted)
@@ -36,9 +34,8 @@
             { value: 'third-party-liability-and-benefit-coordination', label: 'Third Party Liability and Benefit Coordination' }
         ];
         
-        // Publication type options
+        // Publication type options with display labels
         const typeOptions = [
-            { value: '', label: 'All Types' },
             { value: 'journal-article', label: 'Journal Article' },
             { value: 'peer-reviewed-journal-article', label: 'Peer Reviewed Journal Article' },
             { value: 'webcast', label: 'Webcast' },
@@ -66,7 +63,7 @@
                 <div class="filter-group" style="flex: 1; min-width: 250px;">
                     <label for="types-dropdown" style="display: block; margin-bottom: 5px; font-weight: 600; color: #333872;">Publication Type</label>
                     <select id="types-dropdown" class="facetwp-dropdown" style="width: 100%;">
-                        ${typeOptions.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}
+                        <option value="">All Types</option>
                     </select>
                 </div>
             </div>
@@ -184,12 +181,12 @@
         function getAvailableTypesForService(serviceValue) {
             const availableTypes = new Set();
             
+            // FIXED: Don't check for hidden class - check all items
             gridItems.forEach(item => {
-                if (item.classList.contains('hidden')) return;
-                
                 const itemService = item.getAttribute('data-service') || '';
                 const itemType = item.getAttribute('data-type') || '';
                 
+                // If serviceValue is empty (All Services) or matches the item's service
                 if (serviceValue === '' || itemService === serviceValue) {
                     if (itemType) {
                         availableTypes.add(itemType);
@@ -202,14 +199,13 @@
 
         function updateTypesDropdown(serviceValue) {
             const availableTypes = getAvailableTypesForService(serviceValue);
-            const currentTypeValue = typesSelect.value;
             
             // Clear all options except "All Types"
             typesSelect.innerHTML = '<option value="">All Types</option>';
             
-            // Add available types
+            // Add available types in the same order as typeOptions
             typeOptions.forEach(opt => {
-                if (opt.value && availableTypes.includes(opt.value)) {
+                if (availableTypes.includes(opt.value)) {
                     const option = document.createElement('option');
                     option.value = opt.value;
                     option.textContent = opt.label;
@@ -217,13 +213,9 @@
                 }
             });
             
-            // Try to restore previous selection if still available
-            if (currentTypeValue && availableTypes.includes(currentTypeValue)) {
-                typesSelect.value = currentTypeValue;
-            } else {
-                typesSelect.value = '';
-                currentType = '';
-            }
+            // Reset type selection when service changes
+            typesSelect.value = '';
+            currentType = '';
         }
 
         function applyFilters() {
@@ -251,7 +243,10 @@
                     noResultsMsg = document.createElement('div');
                     noResultsMsg.className = 'no-results-message';
                     noResultsMsg.textContent = 'No publications found matching your criteria.';
-                    document.querySelector('.gb-grid-wrapper').appendChild(noResultsMsg);
+                    const gridWrapper = document.querySelector('.gb-grid-wrapper');
+                    if (gridWrapper) {
+                        gridWrapper.appendChild(noResultsMsg);
+                    }
                 }
             } else if (noResultsMsg) {
                 noResultsMsg.remove();
