@@ -164,10 +164,14 @@
                 text-align: center;
                 padding: 40px;
                 background: #f5f5f5;
+                margin: 0 auto;
                 border-radius: 8px;
                 color: #666;
                 font-size: 18px;
-                margin: 20px 0;
+                
+            }
+            .site-footer{
+            margin-top: 2em!important
             }
         `;
         document.head.appendChild(style);
