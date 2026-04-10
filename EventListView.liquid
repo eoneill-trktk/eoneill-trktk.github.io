@@ -1,19 +1,43 @@
-<ul class="resource-items">
-{%- if Model.Pages and Model.Pages.size > 0 -%}
+<ul class="event-items">
   {%- for page in Model.Pages -%}
+  <li class="event">
+    <div class="description">
 
-  {%- assign yearbreak1 = page.PublishedDate | date: "%Y" -%}
-  {%- if forloop.index0 == 0 -%}
-    <li class="year-break"><span>{{ yearbreak1 }}</span></li>
-  {%- elsif yearbreak1 != yearbreak2 -%}
-    <li class="year-break"><span>{{ yearbreak1 }}</span></li>
-  {%- endif -%}
+      <a href="{{ page.PageLink | friendly_url }}">
+        <h3>
+          {%- if page.PageTitle != null and page.PageTitle != "" -%}
+            {{ page.PageTitle }}
+          {%- else -%}
+            {{ page.PageName }}
+          {%- endif -%}
+        </h3>
+      </a>
 
-  <li class="resource-item">
+      {%- if page.PageCategories != null -%}
+      <div class="event-cats">
+        {%- for item in page.PageCategories -%}
+          <div class="cat-tag">{{ item.Name }}</div>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      {%- if page.PageOverview != null -%}
+      <div class="teaser line-clamp line-clamp-teaser">
+        <h4>Description</h4>
+        {{ Property.For(page.PageOverview, "PageOverview") }}
+      </div>
+      {%- elsif page.PageSummary != null -%}
+      <div class="teaser line-clamp line-clamp-teaser">
+        {{ page.PageSummary }}
+      </div>
+      {%- endif -%}
+
+    </div>
+
     {%- if page.PageImage != null -%}
       {%- assign img = page.PageImage | get_image -%}
       {%- if img != null -%}
-      <div class="resource-image">
+      <div class="event-image">
         {%- if img.FileExt == ".svg" -%}
           {%- assign svgImage = page.PageImage | get_vector_image -%}
           {{ svgImage.SvgData }}
@@ -24,47 +48,10 @@
       {%- endif -%}
     {%- endif -%}
 
-    <div class="resource-description">
-      <div class="resource-date">
-        <time datetime="{{ page.PublishedDate }}">
-          {{ page.PublishedDate | date: "%b %-d, %Y" }}
-        </time>
-      </div>
-
-      <a href="{{ page.PageLink }}">
-        <h3>
-          {%- if page.PageTitle != null -%}
-            {{ page.PageTitle }}
-          {%- else -%}
-            {{ page.PageName }}
-          {%- endif -%}
-        </h3>
-      </a>
-
-      {%- if page.PageCategories != null -%}
-      <div class="resource-cats">
-        {%- for item in page.PageCategories -%}
-          {%- assign parentCat = ContentLoader.GetParent(item.ContentLink) -%}
-          {%- if parentCat != null -%}
-          <div class="cat-tag">{{ item.Name }}</div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-      {%- endif -%}
-
-      {%- if page.PageSummary != null -%}
-      <div class="teaser line-clamp line-clamp-teaser">
-        {{ page.PageSummary }}
-      </div>
-      {%- endif -%}
-    </div>
   </li>
-
-  {%- assign yearbreak2 = page.PublishedDate | date: "%Y" -%}
-  {%- endfor -%}
-{%- else -%}
+  {%- else -%}
   <li class="no-results">
     <p>No resources found matching your criteria. Please try adjusting your filters.</p>
   </li>
-{%- endif -%}
+  {%- endfor -%}
 </ul>

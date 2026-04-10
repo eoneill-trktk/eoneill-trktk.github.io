@@ -18,8 +18,8 @@
         {% include templatePath
           , Model: Model %}
 
-        {% assign contentViewPath = Model.ExtendedPageProperties["PageListingModel"].ActiveViewPath.LiquidTemplateRelativePath | get_templatepath %}
-        {% include contentViewPath
+        {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
+        {% include templatePath
           , Model: Model.ExtendedPageProperties["PageListingModel"] %}
       </div>
 

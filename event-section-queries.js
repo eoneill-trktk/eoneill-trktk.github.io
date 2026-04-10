@@ -1,12 +1,17 @@
 (function () {
+    var _initialized = false;
+
     const initEventFilter = () => {
+        if (_initialized) return;
+        _initialized = true;
+
         let selecteditemsparent = document.getElementById("selecteditemsbox");
         if (!selecteditemsparent) return;
         selecteditemsparent.classList.add("hide");
 
         let path = window.location.href.split('?')[0];
 
-        // Parse current query string into a map
+        // Parse current query string
         let qd = {};
         if (location.search) {
             location.search.substr(1).split("&").forEach(function (item) {
@@ -17,63 +22,42 @@
             });
         }
 
-        // Always carry viewType=list
+        // Base — viewType only, no startDate (resources are not date-based)
         var appendQueryString = "?viewType=list";
 
-        // Preserve searchTerm in filter links
-        if (qd.searchTerm && qd.searchTerm.length > 0) {
+        // Preserve active search term in filter links
+        if (qd.searchTerm && qd.searchTerm.length > 0 && qd.searchTerm[0] !== "") {
             appendQueryString += "&searchTerm=" + encodeURIComponent(qd.searchTerm[0]);
         }
 
         // Re-apply active category filters
         if (qd.categoryFilter && qd.categoryFilter.length > 0) {
             for (let i = 0; i < qd.categoryFilter.length; i++) {
-                appendQueryString += "&categoryFilter=" + qd.categoryFilter[i];
-                setSelectedCat(qd.categoryFilter[i]);
+                if (qd.categoryFilter[i] !== "") {
+                    appendQueryString += "&categoryFilter=" + qd.categoryFilter[i];
+                    setSelectedCat(qd.categoryFilter[i]);
+                }
             }
             selecteditemsparent.classList.remove("hide");
         }
 
-        // Re-apply active year filter (single value)
-        if (qd.year && qd.year.length > 0) {
-            appendQueryString += "&year=" + qd.year[0];
-            setSelectedYear(qd.year[0]);
-            selecteditemsparent.classList.remove("hide");
-        }
-
-        // Wire up all filter anchor hrefs
+        // Wire up all filter anchor hrefs (they start as href="" in the liquid)
         let filterPanel = document.getElementById("event-filter");
         if (!filterPanel) return;
         let anchors = filterPanel.getElementsByTagName("a");
 
         for (var i = 0; i < anchors.length; i++) {
             let anchor = anchors[i];
-            let catid  = anchor.dataset.catid;
-            let yearid = anchor.dataset.yearid;
+            let catid = anchor.dataset.catid;
+            if (!catid) continue;
 
-            if (catid) {
-                if (qd.categoryFilter && qd.categoryFilter.includes(catid)) {
-                    // already selected – disable
-                    anchor.href = "javascript: void(0)";
-                } else {
-                    anchor.href = path + appendQueryString + "&categoryFilter=" + catid + "#eventsectionpage";
-                }
-            }
-
-            if (yearid) {
-                if (qd.year && qd.year.includes(yearid)) {
-                    // already selected – disable
-                    anchor.href = "javascript: void(0)";
-                } else {
-                    // Year is single-select: swap out any existing year param
-                    let yearQuery = appendQueryString.replace(/&year=[^&]*/g, "") + "&year=" + yearid;
-                    anchor.href = path + yearQuery + "#eventsectionpage";
-                }
+            if (qd.categoryFilter && qd.categoryFilter.includes(catid)) {
+                anchor.href = "javascript: void(0)";
+            } else {
+                anchor.href = path + appendQueryString + "&categoryFilter=" + catid + "#eventsectionpage";
             }
         }
     };
-
-    // ── Selected-item helpers ────────────────────────────────────────────────
 
     function setSelectedCat(catid) {
         let item = document.getElementById("catitem_" + catid);
@@ -82,30 +66,16 @@
         item.setAttribute("aria-pressed", "true");
         item.setAttribute("aria-disabled", "true");
         item.href = "javascript: void(0)";
-        addSelectedChip(item.textContent.trim(), "removeselection('" + catid + "', 'cat')");
-    }
 
-    function setSelectedYear(year) {
-        let item = document.getElementById("yearitem_" + year);
-        if (!item) return;
-        item.classList.add("active");
-        item.setAttribute("aria-pressed", "true");
-        item.setAttribute("aria-disabled", "true");
-        item.href = "javascript: void(0)";
-        addSelectedChip(year, "removeselection('" + year + "', 'year')");
-    }
-
-    function addSelectedChip(label, onclickStr) {
         let box = document.getElementById("selecteditems");
         if (!box) return;
         box.parentElement.classList.remove("hide");
         var chip = document.createElement("div");
-        chip.setAttribute("onclick", onclickStr);
-        chip.innerHTML = label + " <i class='fa-solid fa-xmark'></i>";
+        chip.dataset.catid = item.id;
+        chip.setAttribute("onclick", "removeselection('" + catid + "')");
+        chip.innerHTML = item.textContent.trim() + " <i class='fa-solid fa-xmark'></i>";
         box.appendChild(chip);
     }
-
-    // ── Boot ────────────────────────────────────────────────────────────────
 
     if (document.readyState === "complete" || document.readyState === "interactive") {
         initEventFilter();
@@ -113,8 +83,6 @@
         window.addEventListener("DOMContentLoaded", initEventFilter);
     }
 })();
-
-// ── Global helpers (called from inline onclick attributes) ───────────────────
 
 function removesearchterm() {
     var newurl = removeQueryStringElement(window.location.href, "searchTerm");
@@ -128,33 +96,25 @@ function removeQueryStringElement(url, paramName) {
     return urlObj.toString();
 }
 
-/**
- * Remove a single filter selection.
- * @param {string} dataid  – the category content-link id, or year string
- * @param {string} type    – "cat" | "year"
- */
-function removeselection(dataid, type) {
-    var newurl;
-    if (type === "year") {
-        newurl = removeQueryStringElement(window.location.href, "year");
-    } else {
-        // Remove the specific categoryFilter value from the query string
-        newurl = window.location.href.replace("&categoryFilter=" + dataid, "");
+function removeselection(dataid) {
+    var newurl = window.location.href
+        .split("#")[0]
+        .replace("&categoryFilter=" + dataid, "")
+        + "#eventsectionpage";
+    if (!newurl.includes("&categoryFilter")) {
+        hideselectionbox();
     }
-    // Trim trailing anchor then re-anchor
-    newurl = newurl.split("#")[0] + "#eventsectionpage";
     window.location = newurl;
 }
 
 function clearselection() {
     hideselectionbox();
-    var url    = window.location.href.split("#")[0];
-    var parts  = url.split("?");
+    var url = window.location.href.split("#")[0];
+    var parts = url.split("?");
     if (parts.length >= 2) {
         var pars = parts[1].split(/[&;]/g);
         for (var i = pars.length; i-- > 0;) {
-            if (pars[i].lastIndexOf("categoryFilter=", 0) !== -1 ||
-                pars[i].lastIndexOf("year=", 0) !== -1) {
+            if (pars[i].lastIndexOf("categoryFilter=", 0) !== -1) {
                 pars.splice(i, 1);
             }
         }
