@@ -1,0 +1,35 @@
+{% assign templatePath = "includes/SiteHeaderLayout.liquid" | get_templatepath %}
+{% include templatePath
+  , Model: Model %}
+
+<main id="main" class="site-main clean-n-simple">
+  <section>
+    <div class="main-content grid-container">
+      {%- if Model.PageTitle != null -%}
+        <h1 class="standard-width" {{ CmsHelper.EditAttributes("PageTitle") }}>{{ Model.PageTitle }}</h1>
+      {%- endif -%}
+      {{ Property.For(Model=Model.MainContentArea
+        , PropertyName = "MainContentArea"
+        , HasContainer=false
+        , UseItemContainer=false) }}
+
+      <div id="eventsectionpage" class="event-list standard-width">
+        {% assign templatePath = "includes/events/eventHeader.liquid" | get_templatepath %}
+        {% include templatePath
+          , Model: Model %}
+
+        {% assign contentViewPath = Model.ExtendedPageProperties["PageListingModel"].ActiveViewPath.LiquidTemplateRelativePath | get_templatepath %}
+        {% include contentViewPath
+          , Model: Model.ExtendedPageProperties["PageListingModel"] %}
+      </div>
+
+    </div>
+    {% assign templatePath = "includes/RelatedLinks.liquid" | get_templatepath %}
+    {% include templatePath
+      , Model: Model.RelatedLinks %}
+  </section>
+</main>
+
+{% assign templatePath = "includes/footer.liquid" | get_templatepath %}
+{% include templatePath
+  , Model: Model %}

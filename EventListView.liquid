@@ -1,0 +1,70 @@
+<ul class="resource-items">
+{%- if Model.Pages and Model.Pages.size > 0 -%}
+  {%- for page in Model.Pages -%}
+
+  {%- assign yearbreak1 = page.PublishedDate | date: "%Y" -%}
+  {%- if forloop.index0 == 0 -%}
+    <li class="year-break"><span>{{ yearbreak1 }}</span></li>
+  {%- elsif yearbreak1 != yearbreak2 -%}
+    <li class="year-break"><span>{{ yearbreak1 }}</span></li>
+  {%- endif -%}
+
+  <li class="resource-item">
+    {%- if page.PageImage != null -%}
+      {%- assign img = page.PageImage | get_image -%}
+      {%- if img != null -%}
+      <div class="resource-image">
+        {%- if img.FileExt == ".svg" -%}
+          {%- assign svgImage = page.PageImage | get_vector_image -%}
+          {{ svgImage.SvgData }}
+        {%- else -%}
+          <img src="{{ img.Url }}" alt="{{ img.ImgAlt }}" loading="lazy" decoding="async" />
+        {%- endif -%}
+      </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="resource-description">
+      <div class="resource-date">
+        <time datetime="{{ page.PublishedDate }}">
+          {{ page.PublishedDate | date: "%b %-d, %Y" }}
+        </time>
+      </div>
+
+      <a href="{{ page.PageLink }}">
+        <h3>
+          {%- if page.PageTitle != null -%}
+            {{ page.PageTitle }}
+          {%- else -%}
+            {{ page.PageName }}
+          {%- endif -%}
+        </h3>
+      </a>
+
+      {%- if page.PageCategories != null -%}
+      <div class="resource-cats">
+        {%- for item in page.PageCategories -%}
+          {%- assign parentCat = ContentLoader.GetParent(item.ContentLink) -%}
+          {%- if parentCat != null -%}
+          <div class="cat-tag">{{ item.Name }}</div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      {%- if page.PageSummary != null -%}
+      <div class="teaser line-clamp line-clamp-teaser">
+        {{ page.PageSummary }}
+      </div>
+      {%- endif -%}
+    </div>
+  </li>
+
+  {%- assign yearbreak2 = page.PublishedDate | date: "%Y" -%}
+  {%- endfor -%}
+{%- else -%}
+  <li class="no-results">
+    <p>No resources found matching your criteria. Please try adjusting your filters.</p>
+  </li>
+{%- endif -%}
+</ul>

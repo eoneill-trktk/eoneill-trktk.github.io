@@ -1,0 +1,92 @@
+{%- assign currentRoute = Model.ExtendedPageProperties["PageListingModel"].ActivePageRoute | friendly_url -%}
+{%- assign currentSearchTerm = Model.ExtendedPageProperties["PageListingModel"].CurrentSearchTerm -%}
+{%- assign currentYear = Model.ExtendedPageProperties["PageListingModel"].ActiveYearFilter -%}
+
+{%- assign categories = "" -%}
+{%- if Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds != null and Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds.size > 0 -%}
+  {%- for contref in Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds -%}
+    {%- assign categories = categories | append: "&categoryFilter=" | append: contref -%}
+  {%- endfor -%}
+{%- endif -%}
+
+<div class="resource-header">
+  <div class="search-views-bar">
+    <div class="resource-header-searchbar">
+      <form id="event-form" method="get" action="{{ currentRoute }}">
+        <label for="search-term" class="sr-only">Search Term</label>
+        <input id="search-term" type="text" name="searchTerm" value="{{ currentSearchTerm }}" placeholder="Search resources…" />
+        <input type="hidden" name="viewType" value="list" />
+        <button type="submit">Search</button>
+        {%- if currentSearchTerm and currentSearchTerm != "" -%}
+          <button class="btn-clear" onclick="removesearchterm(); return false;">Clear Search</button>
+        {%- endif -%}
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="event-filter" class="event-filter">
+  <h2>Filters</h2>
+  <div id="selecteditemsbox" class="hide">
+    <header>Selected Items</header>
+    <span onclick="clearselection()">clear <i class="fa-solid fa-xmark"></i></span>
+    <div id="selecteditems"></div>
+  </div>
+  <ul>
+
+    {{- /* ── YEAR FILTER ─────────────────────────────────────────────────── */ -}}
+    {{- /* Model.ExtendedPageProperties["PageListingModel"].AvailableYears    */ -}}
+    {{- /* is the expected property. Adjust the path if your model differs.   */ -}}
+    {%- assign availableYears = Model.ExtendedPageProperties["PageListingModel"].AvailableYears -%}
+    {%- if availableYears and availableYears.size > 0 -%}
+    <li>
+      <div class="parent">
+        <span>Year </span>
+        <i class="fa fa-plus" onclick="opencategorylist(document.getElementById('yearlist'), this)"></i>
+      </div>
+      <ul id="yearlist" class="chiln closed">
+        {%- for year in availableYears -%}
+        <li>
+          <a href=""
+             data-yearid="{{ year }}"
+             id="yearitem_{{ year }}"
+             role="button"
+             aria-pressed="false"
+             aria-disabled="false">{{ year }}</a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </li>
+    {%- endif -%}
+
+    {{- /* ── TOPICS / CATEGORY FILTER ───────────────────────────────────── */ -}}
+    {{- /* AvailableFilterBy on the page drives the accordion groups,        */ -}}
+    {{- /* identical to how BH Clearinghouse populates Event Categories.     */ -}}
+    {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
+      {%- assign cat = ContentLoader.Get(catref) -%}
+      {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
+      {%- assign ulchildid = "childid" | append: forloop.index0 -%}
+      <li>
+        <div class="parent">
+          <span>{{ cat.Name }} </span>
+          <i class="fa fa-plus" onclick="opencategorylist(document.getElementById('{{ ulchildid }}'), this)"></i>
+        </div>
+        {%- if catChildList and catChildList.size > 0 -%}
+        <ul id="{{ ulchildid }}" class="chiln closed">
+          {%- for catChild in catChildList -%}
+          <li>
+            <a href=""
+               data-catid="{{ catChild.ContentLink }}"
+               id="catitem_{{ catChild.ContentLink }}"
+               role="button"
+               aria-pressed="false"
+               aria-disabled="false">{{ catChild.Name }}</a>
+          </li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+
+  </ul>
+</div>
