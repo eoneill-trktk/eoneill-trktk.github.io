@@ -18,80 +18,87 @@
             });
         }
 
-        // Resource pages have no future EventStartDate so the server returns
-        // nothing without a past startDate. Redirect once on bare page load.
+        // Resource pages have no future EventStartDate — redirect once with
+        // a far-past startDate so the server returns all resources.
         if (!qd.startDate || qd.startDate[0] === '') {
             var redirectUrl = path + '?viewType=list&startDate=2020-01-01';
             if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
                 redirectUrl += '&searchTerm=' + encodeURIComponent(qd.searchTerm[0]);
             }
-            if (qd.categoryFilter) {
-                qd.categoryFilter.forEach(function (c) {
-                    if (c !== '') redirectUrl += '&categoryFilter=' + c;
-                });
-            }
-            if (qd.year && qd.year[0] && qd.year[0] !== '') {
-                redirectUrl += '&year=' + qd.year[0];
-            }
             window.location.replace(redirectUrl);
             return;
         }
 
-        // ── Restore form state from URL ──────────────────────────────────────
-
-        // Category select
-        if (qd.categoryFilter && qd.categoryFilter[0] && qd.categoryFilter[0] !== '') {
-            var catSelect = document.getElementById('category-filter');
-            if (catSelect) catSelect.value = qd.categoryFilter[0];
-        }
-
-        // Year select (client-side only — server ignores this param)
-        var activeYear = '';
-        if (qd.year && qd.year[0] && qd.year[0] !== '') {
-            activeYear = qd.year[0];
-            var yearSelect = document.getElementById('year-filter');
-            if (yearSelect) yearSelect.value = activeYear;
-        }
-
-        // Search input
+        // ── Restore search input from URL ────────────────────────────────────
         if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
             var searchInput = document.getElementById('search-filter');
             if (searchInput) searchInput.value = qd.searchTerm[0];
         }
 
         // ── Show/hide Clear All ──────────────────────────────────────────────
-        var hasFilters = (qd.categoryFilter && qd.categoryFilter[0] !== '') ||
-                         (qd.year && qd.year[0] !== '') ||
-                         (qd.searchTerm && qd.searchTerm[0] !== '');
+        var hasFilters = (qd.searchTerm && qd.searchTerm[0] !== '');
         var clearBtn = document.getElementById('clear-filters');
-        if (clearBtn && hasFilters) {
-            clearBtn.style.display = '';
-        }
+        if (clearBtn && hasFilters) clearBtn.style.display = '';
 
-        // ── Client-side year filtering ───────────────────────────────────────
-        if (activeYear !== '') {
-            applyYearFilter(activeYear);
-        }
+        // ── Wire up client-side filtering ────────────────────────────────────
+        var catSelect  = document.getElementById('category-filter');
+        var yearSelect = document.getElementById('year-filter');
 
-    };
+        function applyFilters() {
+            var selectedCat  = catSelect  ? catSelect.value  : '';
+            var selectedYear = yearSelect ? yearSelect.value : '';
 
-    // Filter rendered cards by year client-side
-    function applyYearFilter(year) {
-        var cards = document.querySelectorAll('.resource-card');
-        var anyVisible = false;
-        cards.forEach(function (card) {
-            if (year === '' || card.dataset.year === year) {
-                card.style.display = '';
-                anyVisible = true;
-            } else {
-                card.style.display = 'none';
+            var cards = document.querySelectorAll('.resource-card');
+            var anyVisible = false;
+
+            cards.forEach(function (card) {
+                var catMatch  = true;
+                var yearMatch = true;
+
+                if (selectedCat !== '') {
+                    var ids = (card.dataset.categoryIds || '').split(',');
+                    catMatch = ids.indexOf(selectedCat) !== -1;
+                }
+
+                if (selectedYear !== '') {
+                    yearMatch = card.dataset.year === selectedYear;
+                }
+
+                var visible = catMatch && yearMatch;
+                card.style.display = visible ? '' : 'none';
+                if (visible) anyVisible = true;
+            });
+
+            var noResults = document.getElementById('no-results-message');
+            if (noResults) noResults.style.display = anyVisible ? 'none' : '';
+
+            // Show/hide clear button
+            var clearBtn = document.getElementById('clear-filters');
+            if (clearBtn) {
+                clearBtn.style.display = (selectedCat !== '' || selectedYear !== '') ? '' : 'none';
             }
-        });
-        var noResults = document.getElementById('no-results-message');
-        if (noResults) {
-            noResults.style.display = anyVisible ? 'none' : '';
         }
-    }
+
+        if (catSelect)  catSelect.addEventListener('change', applyFilters);
+        if (yearSelect) yearSelect.addEventListener('change', applyFilters);
+
+        // Clear All resets selects and shows all cards
+        var clearBtn2 = document.getElementById('clear-filters');
+        if (clearBtn2) {
+            clearBtn2.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (catSelect)  catSelect.value  = '';
+                if (yearSelect) yearSelect.value = '';
+                applyFilters();
+                // Also clear search and reload without searchTerm
+                var searchInput = document.getElementById('search-filter');
+                if (searchInput && searchInput.value !== '') {
+                    searchInput.value = '';
+                    window.location.replace(path + '?viewType=list&startDate=2020-01-01');
+                }
+            });
+        }
+    };
 
     if (document.readyState === "complete" || document.readyState === "interactive") {
         initResourceFilter();
@@ -100,20 +107,3 @@
     }
 
 })();
-
-// ── Global helpers ───────────────────────────────────────────────────────────
-
-function opencategorylist(thischild, ele) {
-    if (!thischild) return;
-    if (thischild.classList.contains("closed")) {
-        thischild.classList.remove("closed");
-        thischild.classList.add("opened");
-        ele.classList.remove("fa-plus");
-        ele.classList.add("fa-minus");
-    } else {
-        thischild.classList.remove("opened");
-        thischild.classList.add("closed");
-        ele.classList.add("fa-plus");
-        ele.classList.remove("fa-minus");
-    }
-}
