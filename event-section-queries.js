@@ -5,14 +5,10 @@
         if (_initialized) return;
         _initialized = true;
 
-        let selecteditemsparent = document.getElementById("selecteditemsbox");
-        if (!selecteditemsparent) return;
-        selecteditemsparent.classList.add("hide");
-
-        let path = window.location.href.split('?')[0];
+        var path = window.location.href.split('?')[0];
 
         // Parse current query string
-        let qd = {};
+        var qd = {};
         if (location.search) {
             location.search.substr(1).split("&").forEach(function (item) {
                 var s = item.split("="),
@@ -22,52 +18,76 @@
             });
         }
 
-        // Base — viewType only, no startDate (resources are not date-based)
-        var appendQueryString = "?viewType=list";
+        // KEY FIX: Resource pages have no future EventStartDate.
+        // The Event Section Page defaults to "today forward" and finds nothing.
+        // If there is no startDate in the URL, redirect once with a far-past
+        // startDate so the server returns all resources (published since 2020+).
+        if (!qd.startDate || qd.startDate[0] === '') {
+            var redirectUrl = path + '?viewType=list&startDate=2020-01-01';
+            if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
+                redirectUrl += '&searchTerm=' + encodeURIComponent(qd.searchTerm[0]);
+            }
+            if (qd.categoryFilter) {
+                qd.categoryFilter.forEach(function (c) {
+                    if (c !== '') redirectUrl += '&categoryFilter=' + c;
+                });
+            }
+            redirectUrl += '#eventsectionpage';
+            window.location.replace(redirectUrl);
+            return;
+        }
+
+        var selecteditemsparent = document.getElementById("selecteditemsbox");
+        if (!selecteditemsparent) return;
+        selecteditemsparent.classList.add("hide");
+
+        // Base query — carry startDate forward so it persists through filtering
+        var startDate = qd.startDate[0];
+        var appendQueryString = '?viewType=list&startDate=' + startDate;
 
         // Preserve active search term in filter links
-        if (qd.searchTerm && qd.searchTerm.length > 0 && qd.searchTerm[0] !== "") {
-            appendQueryString += "&searchTerm=" + encodeURIComponent(qd.searchTerm[0]);
+        if (qd.searchTerm && qd.searchTerm.length > 0 && qd.searchTerm[0] !== '') {
+            appendQueryString += '&searchTerm=' + encodeURIComponent(qd.searchTerm[0]);
         }
 
         // Re-apply active category filters
         if (qd.categoryFilter && qd.categoryFilter.length > 0) {
-            for (let i = 0; i < qd.categoryFilter.length; i++) {
-                if (qd.categoryFilter[i] !== "") {
-                    appendQueryString += "&categoryFilter=" + qd.categoryFilter[i];
+            for (var i = 0; i < qd.categoryFilter.length; i++) {
+                if (qd.categoryFilter[i] !== '') {
+                    appendQueryString += '&categoryFilter=' + qd.categoryFilter[i];
                     setSelectedCat(qd.categoryFilter[i]);
                 }
             }
             selecteditemsparent.classList.remove("hide");
         }
 
-        // Wire up all filter anchor hrefs (they start as href="" in the liquid)
-        let filterPanel = document.getElementById("event-filter");
+        // Wire up all filter anchor hrefs (they start as href="" in liquid)
+        var filterPanel = document.getElementById("event-filter");
         if (!filterPanel) return;
-        let anchors = filterPanel.getElementsByTagName("a");
+        var anchors = filterPanel.getElementsByTagName("a");
 
-        for (var i = 0; i < anchors.length; i++) {
-            let anchor = anchors[i];
-            let catid = anchor.dataset.catid;
+        for (var j = 0; j < anchors.length; j++) {
+            var anchor = anchors[j];
+            var catid = anchor.dataset.catid;
             if (!catid) continue;
 
             if (qd.categoryFilter && qd.categoryFilter.includes(catid)) {
                 anchor.href = "javascript: void(0)";
             } else {
-                anchor.href = path + appendQueryString + "&categoryFilter=" + catid + "#eventsectionpage";
+                anchor.href = path + appendQueryString + '&categoryFilter=' + catid + '#eventsectionpage';
             }
         }
     };
 
     function setSelectedCat(catid) {
-        let item = document.getElementById("catitem_" + catid);
+        var item = document.getElementById("catitem_" + catid);
         if (!item) return;
         item.classList.add("active");
         item.setAttribute("aria-pressed", "true");
         item.setAttribute("aria-disabled", "true");
         item.href = "javascript: void(0)";
 
-        let box = document.getElementById("selecteditems");
+        var box = document.getElementById("selecteditems");
         if (!box) return;
         box.parentElement.classList.remove("hide");
         var chip = document.createElement("div");
@@ -97,14 +117,12 @@ function removeQueryStringElement(url, paramName) {
 }
 
 function removeselection(dataid) {
-    var newurl = window.location.href
-        .split("#")[0]
-        .replace("&categoryFilter=" + dataid, "")
-        + "#eventsectionpage";
-    if (!newurl.includes("&categoryFilter")) {
+    var url = window.location.href.split("#")[0];
+    url = url.replace("&categoryFilter=" + dataid, "");
+    if (!url.includes("&categoryFilter")) {
         hideselectionbox();
     }
-    window.location = newurl;
+    window.location = url + "#eventsectionpage";
 }
 
 function clearselection() {
