@@ -1,26 +1,19 @@
 {%- assign currentRoute = Model.ExtendedPageProperties["PageListingModel"].ActivePageRoute | friendly_url -%}
 {%- assign currentSearchTerm = Model.ExtendedPageProperties["PageListingModel"].CurrentSearchTerm -%}
-{%- assign currentCategoryFilter = "" -%}
-{%- if Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds != null and Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds.size > 0 -%}
-  {%- assign currentCategoryFilter = Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds | first -%}
-{%- endif -%}
 
 <form id="resource-filter-form" class="resource-filters" method="get" action="{{ currentRoute }}">
 
-  <select id="category-filter" name="categoryFilter" class="filter-select">
+  <select id="category-filter" class="filter-select">
     <option value="">All Topics</option>
     {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
       {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
       {%- for catChild in catChildList -%}
-        <option value="{{ catChild.ContentLink }}"
-          {%- if currentCategoryFilter == catChild.ContentLink %} selected="selected"{%- endif -%}>
-          {{ catChild.Name }}
-        </option>
+        <option value="{{ catChild.ContentLink }}">{{ catChild.Name }}</option>
       {%- endfor -%}
     {%- endfor -%}
   </select>
 
-  <select id="year-filter" name="year" class="filter-select">
+  <select id="year-filter" class="filter-select">
     <option value="">All Years</option>
     <option value="2026">2026</option>
     <option value="2025">2025</option>
