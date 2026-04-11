@@ -73,21 +73,6 @@
             applyYearFilter(activeYear);
         }
 
-        // ── Form submit: inject startDate so server stays happy ──────────────
-        var form = document.getElementById('resource-filter-form');
-        if (form) {
-            form.addEventListener('submit', function (e) {
-                // Ensure startDate hidden input is present
-                var existing = form.querySelector('input[name="startDate"]');
-                if (!existing) {
-                    var sd = document.createElement('input');
-                    sd.type = 'hidden';
-                    sd.name = 'startDate';
-                    sd.value = '2020-01-01';
-                    form.appendChild(sd);
-                }
-            });
-        }
     };
 
     // Filter rendered cards by year client-side
