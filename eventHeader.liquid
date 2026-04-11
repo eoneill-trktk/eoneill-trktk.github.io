@@ -1,63 +1,39 @@
-{%- assign currentViewName = "list" -%}
-{%- assign nulldate = "0001-01-01 00:00:00Z" | date: "%s" -%}
-{%- assign datenow = 'now' | date: '%Y-%m-%d' -%}
-{%- assign categories = "" -%}
-{%- if Model.ExtendedPageProperties["PageListingModel"].ActiveViewPath.ContentViewName != null -%}
-  {%- assign currentViewName = Model.ExtendedPageProperties["PageListingModel"].ActiveViewPath.ContentViewName | downcase -%}
-{%- endif -%}
-{%- if Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds != null and Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds.size > 0 -%}
-  {%- for contref in Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds -%}
-    {%- assign categories = categories | append: "&categoryFilter=" | append: contref -%}
-  {%- endfor -%}
-{%- endif -%}
-
 {%- assign currentRoute = Model.ExtendedPageProperties["PageListingModel"].ActivePageRoute | friendly_url -%}
 {%- assign currentSearchTerm = Model.ExtendedPageProperties["PageListingModel"].CurrentSearchTerm -%}
+{%- assign currentCategoryFilter = "" -%}
+{%- if Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds != null and Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds.size > 0 -%}
+  {%- assign currentCategoryFilter = Model.ExtendedPageProperties["PageListingModel"].SelectedCategoryIds | first -%}
+{%- endif -%}
 
-<div class="event-header">
-  <div class="search-views-bar">
-    <div class="event-header-searchbar">
-      <form id="event-form" method="get" action="{{ currentRoute }}">
-        <label for="search-term" class="sr-only">Search Term</label>
-        <input id="search-term" type="text" name="searchTerm" value="{{ currentSearchTerm }}" placeholder="Search resources…" />
-        <input type="hidden" name="viewType" value="list" />
-        <button type="submit">Search</button>
-        {%- if currentSearchTerm and currentSearchTerm != "" -%}
-          <button class="btn-clear" onclick="removesearchterm(); return false;">Clear Search</button>
-        {%- endif -%}
-      </form>
-    </div>
-  </div>
-</div>
+<form id="resource-filter-form" class="resource-filters" method="get" action="{{ currentRoute }}">
 
-<div id="event-filter" class="event-filter">
-  <h2>Filters</h2>
-  <div id="selecteditemsbox" class="hide">
-    <header>Selected Items</header>
-    <span onclick="clearselection()">clear <i class="fa-solid fa-xmark"></i></span>
-    <div id="selecteditems"></div>
-  </div>
-  <ul>
-    {%- assign baseViewQueryString = "?viewType=list" -%}
+  <select id="category-filter" name="categoryFilter" class="filter-select">
+    <option value="">All Topics</option>
     {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
-      {%- assign cat = ContentLoader.Get(catref) -%}
       {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
-      {%- assign ulchildid = "childid" | append: forloop.index0 -%}
-      <li>
-        <div class="parent">
-          <span>{{ cat.Name }} </span>
-          <i class="fa fa-plus" onclick="opencategorylist({{ ulchildid }}, this)"></i>
-        </div>
-        {%- if catChildList and catChildList.size > 0 -%}
-        <ul id="{{ ulchildid }}" class="chiln closed">
-          {%- for catChild in catChildList -%}
-          <li>
-            <a href="" data-catid="{{ catChild.ContentLink }}" id="catitem_{{ catChild.ContentLink }}" role="button" aria-pressed="false" aria-disabled="false">{{ catChild.Name }}</a>
-          </li>
-          {%- endfor -%}
-        </ul>
-        {%- endif -%}
-      </li>
+      {%- for catChild in catChildList -%}
+        <option value="{{ catChild.ContentLink }}"
+          {%- if currentCategoryFilter == catChild.ContentLink %} selected="selected"{%- endif -%}>
+          {{ catChild.Name }}
+        </option>
+      {%- endfor -%}
     {%- endfor -%}
-  </ul>
-</div>
+  </select>
+
+  <select id="year-filter" name="year" class="filter-select">
+    <option value="">All Years</option>
+    <option value="2026">2026</option>
+    <option value="2025">2025</option>
+    <option value="2024">2024</option>
+  </select>
+
+  <input type="search" id="search-filter" name="searchTerm" placeholder="Search resources…"
+    value="{{ currentSearchTerm }}" class="filter-search-input">
+
+  <input type="hidden" name="viewType" value="list">
+
+  <button type="submit" id="filter-button" class="filter-button">Filter</button>
+
+  <a href="{{ currentRoute }}" id="clear-filters" class="clear-button" style="display:none;">Clear All</a>
+
+</form>
