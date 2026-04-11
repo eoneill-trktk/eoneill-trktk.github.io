@@ -49,10 +49,20 @@
           , Model: Model
           , pageContext: pageContext %}
 
-        {%- if pageContext == "topics" or pageContext == "category" -%}
+        {%- if pageContext == "topics" -%}
           {% assign templatePath = "includes/events/TopicListView.liquid" | get_templatepath %}
           {% include templatePath
             , Model: Model %}
+
+        {%- elsif pageContext == "category" -%}
+          {% assign templatePath = "includes/events/CategoryListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model %}
+
+        {%- elsif pageContext == "news" -%}
+          {% assign templatePath = "includes/events/NewsListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model.ExtendedPageProperties["PageListingModel"] %}
 
         {%- elsif pageContext == "archives" -%}
           {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}

@@ -1,5 +1,14 @@
 {%- comment %} pageContext passed in from EventSectionPage.liquid {%- endcomment %}
 
+{%- comment %} ── Context-aware labels ─────────────────────────────────── {%- endcomment %}
+{%- assign allLabel         = "All Topics" -%}
+{%- assign searchPlaceholder = "Search resources…" -%}
+{%- if pageContext == "news" or pageContext == "category" -%}
+  {%- assign allLabel          = "All MTF News" -%}
+  {%- assign searchPlaceholder = "Search this News category…" -%}
+{%- endif -%}
+
+{%- comment %} ── Route and search term ────────────────────────────────── {%- endcomment %}
 {%- if pageContext == "archives" or pageContext == "topics" or pageContext == "category" -%}
   {%- assign currentRoute      = Model.CurrentPage | url -%}
   {%- assign currentSearchTerm = "" -%}
@@ -14,11 +23,13 @@
   {%- endif -%}
 {%- endif -%}
 
+{%- comment %} ── Topic/category slug from URLSegment ──────────────────── {%- endcomment %}
 {%- assign topicSlug = "" -%}
 {%- if pageContext == "topics" or pageContext == "category" -%}
   {%- assign topicSlug = Model.CurrentPage.URLSegment | downcase -%}
 {%- endif -%}
 
+{%- comment %} ── Dynamic year calculation ─────────────────────────────── {%- endcomment %}
 {%- assign currentYear    = 'now' | date: "%Y" | plus: 0 -%}
 {%- assign priorYear      = currentYear | minus: 1 -%}
 {%- assign archiveMaxYear = currentYear | minus: 2 -%}
@@ -29,9 +40,9 @@
   data-current-year="{{ currentYear }}">
 
   <select id="category-filter" class="filter-select">
-    <option value="">All Topics</option>
+    <option value="">{{ allLabel }}</option>
     {%- if pageContext == "topics" or pageContext == "category" -%}
-      {%- comment %} Topics: use page Categories (parent = filter group) {%- endcomment %}
+      {%- comment %} Use page Categories (parent = filter group) {%- endcomment %}
       {%- for catRef in Model.CurrentPage.Categories -%}
         {%- assign catChildList = ContentLoader.GetChildren(catRef) -%}
         {%- if catChildList and catChildList.size > 0 -%}
@@ -42,7 +53,7 @@
         {%- endif -%}
       {%- endfor -%}
     {%- elsif Model.CurrentPage.AvailableFilterBy != null and Model.CurrentPage.AvailableFilterBy.size > 0 -%}
-      {%- comment %} Resources/Archives/News: use AvailableFilterBy if configured {%- endcomment %}
+      {%- comment %} Use AvailableFilterBy if configured in CMS {%- endcomment %}
       {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
         {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
         {%- for catChild in catChildList -%}
@@ -51,7 +62,7 @@
         {%- endfor -%}
       {%- endfor -%}
     {%- else -%}
-      {%- comment %} Fallback: use page Categories (works for archives with Resources tagged) {%- endcomment %}
+      {%- comment %} Fallback: use page Categories (archives/news with category group tagged) {%- endcomment %}
       {%- for catRef in Model.CurrentPage.Categories -%}
         {%- assign catChildList = ContentLoader.GetChildren(catRef) -%}
         {%- if catChildList and catChildList.size > 0 -%}
@@ -80,7 +91,8 @@
     {%- endif -%}
   </select>
 
-  <input type="search" id="search-filter" name="searchTerm" placeholder="Search resources…"
+  <input type="search" id="search-filter" name="searchTerm"
+    placeholder="{{ searchPlaceholder }}"
     value="{{ currentSearchTerm }}" class="filter-search-input">
 
   <input type="hidden" name="viewType" value="list">

@@ -1,0 +1,86 @@
+{%- comment %}
+  NewsListView.liquid
+  Used by /all-mtf-news/ — lists news pages via PageListingModel (same
+  mechanism as EventListView for resources). Cards share identical markup.
+{%- endcomment %}
+<div id="resource-grid-container" class="resource-grid">
+  {%- for page in Model.Pages -%}
+    {%- assign pageData = page.PageData -%}
+    {%- if pageData == null -%}{%- continue -%}{%- endif -%}
+
+    {%- assign pageYear = pageData.ContentPostedDate | date: "%Y" -%}
+    {%- if pageYear == null or pageYear == "" -%}
+      {%- assign linkParts = page.PageLink | friendly_url | split: "/" -%}
+      {%- for part in linkParts -%}
+        {%- assign partNum = part | plus: 0 -%}
+        {%- if partNum >= 2000 and partNum <= 2100 -%}
+          {%- assign pageYear = part -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- assign catIds = "" -%}
+    {%- if page.PageCategories != null -%}
+      {%- for item in page.PageCategories -%}
+        {%- if catIds != "" -%}{%- assign catIds = catIds | append: "," -%}{%- endif -%}
+        {%- assign catIds = catIds | append: item.ContentLink -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- assign pageTitle = page.PageName -%}
+    {%- if page.PageTitle != null and page.PageTitle != "" -%}
+      {%- assign pageTitle = page.PageTitle -%}
+    {%- endif -%}
+
+    <article class="resource-card"
+      data-year="{{ pageYear }}"
+      data-category-ids="{{ catIds }}"
+      data-title="{{ pageTitle | downcase }}"
+      data-excerpt="">
+
+      {%- assign img = null -%}
+      {%- if page.PageImage != null -%}
+        {%- assign img = page.PageImage | get_image -%}
+      {%- endif -%}
+      {%- assign thumbSrc = "/siteassets/images/mtf-logo-bg2x-100-600x400.jpg" -%}
+      {%- assign thumbAlt = "MTF logo" -%}
+      {%- if img != null and img.Url != null and img.Url != "" -%}
+        {%- assign thumbSrc = img.Url -%}
+        {%- assign thumbAlt = img.ImgAlt -%}
+      {%- endif -%}
+      <a class="resource-thumb" href="{{ page.PageLink | friendly_url }}">
+        <img loading="lazy" src="{{ thumbSrc }}" class="resource-thumb__img"
+          alt="{{ thumbAlt }}" style="object-fit: cover;">
+      </a>
+
+      <div class="resource-body">
+        {%- if page.PageCategories != null and page.PageCategories.size > 0 -%}
+        <div class="resource-badges">
+          {%- for item in page.PageCategories -%}
+            {%- assign badgeSlug = item.Name | downcase | replace: " ", "-" -%}
+            <span class="resource-badge cat-{{ badgeSlug }}">{{ item.Name }}</span>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+
+        <h3 class="resource-title">
+          <a href="{{ page.PageLink | friendly_url }}">{{ pageTitle }}</a>
+        </h3>
+
+        {%- if page.PageSummary != null and page.PageSummary != "" -%}
+        <div class="resource-excerpt">{{ page.PageSummary }}</div>
+        {%- else -%}
+        <div class="resource-excerpt"></div>
+        {%- endif -%}
+
+        <div class="resource-date">{{ pageData.ContentPostedDate | date: "%B %-d, %Y" }}</div>
+      </div>
+
+    </article>
+  {%- endfor -%}
+</div>
+
+<div id="no-results-message" class="no-results" style="display:none;">
+  <p style="color: #FF0000;">No content found.</p>
+</div>
