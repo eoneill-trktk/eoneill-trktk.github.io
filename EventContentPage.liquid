@@ -111,15 +111,17 @@
           {%- if hasTopicLinks -%}
           <div class="ctl">
             <span><b>Topic/s:</b></span>
-            <ul class="custom-taxonomy-list">
+            <span class="custom-taxonomy-list">
+              {%- assign topicIndex = 0 -%}
               {%- for item in pagedata.Categories -%}
                 {%- assign parentCat = ContentLoader.Get(item.ParentLink) -%}
                 {%- if parentCat != null and parentCat.Name == catGroupName -%}
                   {%- assign itemSlug = item.Name | downcase | replace: " ", "-" -%}
-                  <li><a href="{{ sidebarBase }}{{ itemSlug }}/">{{ item.Name }}</a></li>
+                  {%- if topicIndex > 0 -%},&nbsp;{% endif %}<a href="{{ sidebarBase }}{{ itemSlug }}/">{{ item.Name }}</a>
+                  {%- assign topicIndex = topicIndex | plus: 1 -%}
                 {%- endif -%}
               {%- endfor -%}
-            </ul>
+            </span>
           </div>
           {%- endif -%}
 
@@ -155,12 +157,14 @@
             </div>
           {%- endif -%}
 
-          {%- comment %} ── Preview image ─────────────────────────────────── {%- endcomment %}
-          {%- if Model.PreviewImageFile != null or CmsContext.IsInEditMode -%}
-            {%- assign pageImg = Model.PreviewImageFile | get_image -%}
-            <div class="event-image" {{ CmsHelper.EditAttributes("PreviewImageFile") }}>
+          {%- comment %} ── Hero image (only if uploaded — no placeholder fallback) ── {%- endcomment %}
+          {%- if Model.HeroImageFile != null or CmsContext.IsInEditMode -%}
+            {%- assign pageImg = Model.HeroImageFile | get_image -%}
+            {%- if pageImg != null -%}
+            <div class="event-image" {{ CmsHelper.EditAttributes("HeroImageFile") }}>
               <img src="{{ pageImg.Url }}" alt="{{ pageImg.ImgAlt }}" loading="lazy">
             </div>
+            {%- endif -%}
           {%- endif -%}
 
           {%- comment %} ── Main content ──────────────────────────────────── {%- endcomment %}
