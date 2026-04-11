@@ -31,6 +31,7 @@
   <select id="category-filter" class="filter-select">
     <option value="">All Topics</option>
     {%- if pageContext == "topics" or pageContext == "category" -%}
+      {%- comment %} Topics: use page Categories (parent = filter group) {%- endcomment %}
       {%- for catRef in Model.CurrentPage.Categories -%}
         {%- assign catChildList = ContentLoader.GetChildren(catRef) -%}
         {%- if catChildList and catChildList.size > 0 -%}
@@ -40,13 +41,25 @@
           {%- endfor -%}
         {%- endif -%}
       {%- endfor -%}
-    {%- else -%}
+    {%- elsif Model.CurrentPage.AvailableFilterBy != null and Model.CurrentPage.AvailableFilterBy.size > 0 -%}
+      {%- comment %} Resources/Archives/News: use AvailableFilterBy if configured {%- endcomment %}
       {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
         {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
         {%- for catChild in catChildList -%}
           {%- assign catSlug = catChild.Name | downcase | replace: " ", "-" -%}
           <option value="{{ catChild.ContentLink }}" data-slug="{{ catSlug }}">{{ catChild.Name }}</option>
         {%- endfor -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment %} Fallback: use page Categories (works for archives with Resources tagged) {%- endcomment %}
+      {%- for catRef in Model.CurrentPage.Categories -%}
+        {%- assign catChildList = ContentLoader.GetChildren(catRef) -%}
+        {%- if catChildList and catChildList.size > 0 -%}
+          {%- for catChild in catChildList -%}
+            {%- assign catSlug = catChild.Name | downcase | replace: " ", "-" -%}
+            <option value="{{ catChild.ContentLink }}" data-slug="{{ catSlug }}">{{ catChild.Name }}</option>
+          {%- endfor -%}
+        {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
   </select>

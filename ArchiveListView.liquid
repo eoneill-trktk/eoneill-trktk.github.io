@@ -29,15 +29,20 @@
       data-title="{{ pageTitle | downcase }}"
       data-excerpt="">
 
+      {%- assign img = null -%}
       {%- if page.PreviewImageFile != null -%}
         {%- assign img = page.PreviewImageFile | get_image -%}
-        {%- if img != null -%}
-        <a class="resource-thumb" href="{{ page.LinkURL }}">
-          <img loading="lazy" src="{{ img.Url }}" class="resource-thumb__img"
-            alt="{{ img.ImgAlt }}" style="object-fit: cover;">
-        </a>
-        {%- endif -%}
       {%- endif -%}
+      {%- assign thumbSrc = "/siteassets/images/mtf-logo-bg2x-100-600x400.jpg" -%}
+      {%- assign thumbAlt = "MTF logo" -%}
+      {%- if img != null and img.Url != null and img.Url != "" -%}
+        {%- assign thumbSrc = img.Url -%}
+        {%- assign thumbAlt = img.ImgAlt -%}
+      {%- endif -%}
+      <a class="resource-thumb" href="{{ page.LinkURL }}">
+        <img loading="lazy" src="{{ thumbSrc }}" class="resource-thumb__img"
+          alt="{{ thumbAlt }}" style="object-fit: cover;">
+      </a>
 
       <div class="resource-body">
 
