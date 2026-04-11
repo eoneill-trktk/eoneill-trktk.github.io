@@ -2,7 +2,7 @@
   {%- for page in Model.Pages -%}
     {%- assign pageLink = page.PageLink | friendly_url -%}
     {%- assign linkParts = pageLink | split: "/" -%}
-    {%- assign pageYear = linkParts[2] -%}
+    {%- assign pageYear = linkParts[1] -%}
 
     {%- assign catIds = "" -%}
     {%- if page.PageCategories != null -%}
