@@ -55,8 +55,9 @@
             , Model: Model %}
 
         {%- elsif pageContext == "archives" -%}
-          {%- comment %} DEBUG: Inspect model before building archive list {%- endcomment %}
-          {{ CmsHelper.Debug(Model) }}
+          {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model.ExtendedPageProperties["PageListingModel"] %}
 
         {%- else -%}
           {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
