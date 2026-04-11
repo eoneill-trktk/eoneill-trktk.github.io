@@ -13,12 +13,10 @@
   {%- assign pageContext = "category" -%}
 {%- endif -%}
 
-{%- comment %} ── Topic slug from URL (e.g. /topics/additional-programs/) ─ {%- endcomment %}
+{%- comment %} ── Topic slug — use URLSegment directly, no URL parsing needed ─ {%- endcomment %}
 {%- assign topicSlug = "" -%}
 {%- if pageContext == "topics" or pageContext == "category" -%}
-  {%- assign routeParts = currentRoute | split: "/" -%}
-  {%- comment %} /topics/slug/ → ["", "topics", "slug", ""] → index 2 {%- endcomment %}
-  {%- assign topicSlug = routeParts[2] -%}
+  {%- assign topicSlug = Model.CurrentPage.URLSegment | downcase -%}
 {%- endif -%}
 
 {%- comment %} ── Dynamic year calculation ─────────────────────────────── {%- endcomment %}
