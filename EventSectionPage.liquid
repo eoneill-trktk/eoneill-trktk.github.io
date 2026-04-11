@@ -43,6 +43,10 @@
         , UseItemContainer=false) }}
 
       <div id="resourcesection" class="resource-list standard-width">
+        <style>
+          #resource-grid-container { opacity: 0; transition: opacity 0.15s ease-in; }
+          #resource-grid-container.js-ready { opacity: 1; }
+        </style>
 
         {% assign templatePath = "includes/events/eventHeader.liquid" | get_templatepath %}
         {% include templatePath

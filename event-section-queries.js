@@ -78,12 +78,13 @@
         var clearBtn = document.getElementById('clear-filters');
         if (clearBtn && hasFilters) clearBtn.style.display = '';
 
-        // ── Apply all filters (runs immediately on load) ─────────────────────
+        // ── Apply all filters then reveal grid ───────────────────────────────
         applyFilters();
+        revealGrid();
 
         // ── Wire up change listeners ─────────────────────────────────────────
-        if (catSelect)  catSelect.addEventListener('change', applyFilters);
-        if (yearSelect) yearSelect.addEventListener('change', applyFilters);
+        if (catSelect)  catSelect.addEventListener('change',  function() { applyFilters(); revealGrid(); });
+        if (yearSelect) yearSelect.addEventListener('change', function() { applyFilters(); revealGrid(); });
 
         // ── Clear All ────────────────────────────────────────────────────────
         var clearBtn2 = document.getElementById('clear-filters');
@@ -100,6 +101,14 @@
                 }
             });
         }
+
+        function revealGrid() {
+            var grid = document.getElementById('resource-grid-container');
+            if (grid) grid.classList.add('js-ready');
+        }
+
+        // Safety fallback — reveal grid after 1s even if something above failed
+        setTimeout(function() { revealGrid(); }, 1000);
 
         // ── applyFilters ─────────────────────────────────────────────────────
         function applyFilters() {
