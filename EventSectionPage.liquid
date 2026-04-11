@@ -2,11 +2,34 @@
 {% include templatePath
   , Model: Model %}
 
+{%- comment %} ── Detect page context from URL ────────────────────────── {%- endcomment %}
+{%- assign currentRoute = Model.ExtendedPageProperties["PageListingModel"].ActivePageRoute | friendly_url -%}
+{%- assign pageContext = "resources" -%}
+{%- if currentRoute contains "/resource-library-archives" -%}
+  {%- assign pageContext = "archives" -%}
+{%- elsif currentRoute contains "/topics/" -%}
+  {%- assign pageContext = "topics" -%}
+{%- elsif currentRoute contains "/news/" -%}
+  {%- assign pageContext = "news" -%}
+{%- elsif currentRoute contains "/category/" -%}
+  {%- assign pageContext = "category" -%}
+{%- endif -%}
+
 <main id="main" class="site-main clean-n-simple">
   <section>
     <div class="main-content grid-container">
-      {%- if Model.PageTitle != null -%}
-        <h1 class="standard-width" {{ CmsHelper.EditAttributes("PageTitle") }}>{{ Model.PageTitle }}</h1>
+      {%- if Model.PageTitle != null or CmsContext.IsInEditMode -%}
+        <div class="zak-page-header zak-style-1">
+          <div class="zak-container">
+            <div class="zak-row">
+              <div class="zak-page-header__title">
+                <h1 class="zak-page-title">
+                  <span {{ CmsHelper.EditAttributes("PageTitle") }}>{{ Model.PageTitle }}</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
       {%- endif -%}
       {{ Property.For(Model=Model.MainContentArea
         , PropertyName = "MainContentArea"
@@ -14,13 +37,23 @@
         , UseItemContainer=false) }}
 
       <div id="resourcesection" class="resource-list standard-width">
+
         {% assign templatePath = "includes/events/eventHeader.liquid" | get_templatepath %}
         {% include templatePath
           , Model: Model %}
 
-        {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
-        {% include templatePath
-          , Model: Model.ExtendedPageProperties["PageListingModel"] %}
+        {%- if pageContext == "topics" or pageContext == "category" -%}
+          {%- comment %} Topics: pull from resources via ContentLoader, not PageListingModel {%- endcomment %}
+          {% assign templatePath = "includes/events/TopicListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model %}
+        {%- else -%}
+          {%- comment %} Resources / Archives / News: use standard PageListingModel {%- endcomment %}
+          {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model.ExtendedPageProperties["PageListingModel"] %}
+        {%- endif -%}
+
       </div>
 
     </div>

@@ -1,0 +1,109 @@
+{%- comment %}
+  TopicListView.liquid
+  Used by /topics/* pages. Traverses up the page tree to find /resources/,
+  gets its children via ContentLoader, and renders them as resource cards.
+  All filtering is client-side via event-section-queries.js.
+{%- endcomment %}
+
+{%- comment %} Walk up: topic page → /topics/ folder → site root → find /resources/ {%- endcomment %}
+{%- assign topicsFolder  = ContentLoader.Get(Model.CurrentPage.ParentLink) -%}
+{%- assign siteRootRef   = topicsFolder.ParentLink -%}
+{%- assign siteChildren  = ContentLoader.GetChildren(siteRootRef) -%}
+{%- assign resourcesRef  = null -%}
+{%- for child in siteChildren -%}
+  {%- if child.URLSegment == "resources" -%}
+    {%- assign resourcesRef = child.ContentLink -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign yearFolders = ContentLoader.GetChildren(resourcesRef) -%}
+
+<div id="resource-grid-container" class="resource-grid">
+{%- for yearFolder in yearFolders -%}
+  {%- assign folderYear  = yearFolder.URLSegment -%}
+  {%- assign yearPages   = ContentLoader.GetChildren(yearFolder.ContentLink) -%}
+
+  {%- for page in yearPages -%}
+
+    {%- comment %} Build category ID list for data attribute {%- endcomment %}
+    {%- assign catIds = "" -%}
+    {%- if page.Categories != null -%}
+      {%- for catRef in page.Categories -%}
+        {%- assign cat = ContentLoader.Get(catRef) -%}
+        {%- if cat != null -%}
+          {%- if catIds != "" -%}{%- assign catIds = catIds | append: "," -%}{%- endif -%}
+          {%- assign catIds = catIds | append: cat.ContentLink -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- comment %} Page title {%- endcomment %}
+    {%- assign pageTitle = page.Name -%}
+    {%- if page.PageTitle != null and page.PageTitle != "" -%}
+      {%- assign pageTitle = page.PageTitle -%}
+    {%- endif -%}
+
+    <article class="resource-card"
+      data-year="{{ folderYear }}"
+      data-category-ids="{{ catIds }}"
+      data-title="{{ pageTitle | downcase }}"
+      data-excerpt="">
+
+      {%- if page.PreviewImageFile != null -%}
+        {%- assign img = page.PreviewImageFile | get_image -%}
+        {%- if img != null -%}
+        <a class="resource-thumb" href="{{ page.LinkURL }}">
+          <img loading="lazy" src="{{ img.Url }}" class="resource-thumb__img"
+            alt="{{ img.ImgAlt }}" style="object-fit: cover;">
+        </a>
+        {%- endif -%}
+      {%- endif -%}
+
+      <div class="resource-body">
+
+        {%- comment %} Render badges directly — no string concat to avoid HTML escaping {%- endcomment %}
+        {%- assign hasCategories = false -%}
+        {%- if page.Categories != null -%}
+          {%- for catRef in page.Categories -%}
+            {%- assign cat = ContentLoader.Get(catRef) -%}
+            {%- if cat != null -%}
+              {%- assign hasCategories = true -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if hasCategories -%}
+        <div class="resource-badges">
+          {%- for catRef in page.Categories -%}
+            {%- assign cat = ContentLoader.Get(catRef) -%}
+            {%- if cat != null -%}
+              {%- assign badgeSlug = cat.Name | downcase | replace: " ", "-" -%}
+              <span class="resource-badge topic-{{ badgeSlug }}">{{ cat.Name }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+
+        <h3 class="resource-title">
+          <a href="{{ page.LinkURL }}">{{ pageTitle }}</a>
+        </h3>
+
+        {%- if page.PageSummary != null and page.PageSummary != "" -%}
+        <div class="resource-excerpt">{{ page.PageSummary }}</div>
+        {%- else -%}
+        <div class="resource-excerpt"></div>
+        {%- endif -%}
+
+        <div class="resource-date">{{ page.ContentPostedDate | date: "%B %-d, %Y" }}</div>
+
+      </div>
+    </article>
+
+  {%- endfor -%}
+{%- endfor -%}
+</div>
+
+<div id="no-results-message" class="no-results" style="display:none;">
+  <p>No resources found matching your criteria. Please try adjusting your filters.</p>
+</div>

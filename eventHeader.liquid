@@ -31,13 +31,27 @@
 
   <select id="category-filter" class="filter-select">
     <option value="">All Topics</option>
-    {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
-      {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
-      {%- for catChild in catChildList -%}
-        {%- assign catSlug = catChild.Name | downcase | replace: " ", "-" -%}
-        <option value="{{ catChild.ContentLink }}" data-slug="{{ catSlug }}">{{ catChild.Name }}</option>
+    {%- if pageContext == "topics" or pageContext == "category" -%}
+      {%- comment %} Topics pages: build from page Categories (parent folder = Resources group) {%- endcomment %}
+      {%- for catRef in Model.CurrentPage.Categories -%}
+        {%- assign catChildList = ContentLoader.GetChildren(catRef) -%}
+        {%- if catChildList and catChildList.size > 0 -%}
+          {%- for catChild in catChildList -%}
+            {%- assign catSlug = catChild.Name | downcase | replace: " ", "-" -%}
+            <option value="{{ catChild.ContentLink }}" data-slug="{{ catSlug }}">{{ catChild.Name }}</option>
+          {%- endfor -%}
+        {%- endif -%}
       {%- endfor -%}
-    {%- endfor -%}
+    {%- else -%}
+      {%- comment %} All other pages: use AvailableFilterBy as configured in CMS {%- endcomment %}
+      {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
+        {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
+        {%- for catChild in catChildList -%}
+          {%- assign catSlug = catChild.Name | downcase | replace: " ", "-" -%}
+          <option value="{{ catChild.ContentLink }}" data-slug="{{ catSlug }}">{{ catChild.Name }}</option>
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- endif -%}
   </select>
 
   <select id="year-filter" class="filter-select">
