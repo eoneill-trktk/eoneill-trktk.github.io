@@ -1,23 +1,63 @@
 {%- assign currentRoute = Model.ExtendedPageProperties["PageListingModel"].ActivePageRoute | friendly_url -%}
 {%- assign currentSearchTerm = Model.ExtendedPageProperties["PageListingModel"].CurrentSearchTerm -%}
 
-<form id="resource-filter-form" class="resource-filters" method="get" action="{{ currentRoute }}">
+{%- comment %} ── Page context detection ───────────────────────────────── {%- endcomment %}
+{%- assign pageContext = "resources" -%}
+{%- if currentRoute contains "/resource-library-archives" -%}
+  {%- assign pageContext = "archives" -%}
+{%- elsif currentRoute contains "/topics/" -%}
+  {%- assign pageContext = "topics" -%}
+{%- elsif currentRoute contains "/news/" -%}
+  {%- assign pageContext = "news" -%}
+{%- elsif currentRoute contains "/category/" -%}
+  {%- assign pageContext = "category" -%}
+{%- endif -%}
+
+{%- comment %} ── Topic slug from URL (e.g. /topics/additional-programs/) ─ {%- endcomment %}
+{%- assign topicSlug = "" -%}
+{%- if pageContext == "topics" or pageContext == "category" -%}
+  {%- assign routeParts = currentRoute | split: "/" -%}
+  {%- comment %} /topics/slug/ → ["", "topics", "slug", ""] → index 2 {%- endcomment %}
+  {%- assign topicSlug = routeParts[2] -%}
+{%- endif -%}
+
+{%- comment %} ── Dynamic year calculation ─────────────────────────────── {%- endcomment %}
+{%- assign currentYear = 'now' | date: "%Y" | plus: 0 -%}
+{%- assign priorYear = currentYear | minus: 1 -%}
+{%- assign archiveMaxYear = currentYear | minus: 2 -%}
+
+<form id="resource-filter-form" class="resource-filters" method="get" action="{{ currentRoute }}"
+  data-page-context="{{ pageContext }}"
+  data-topic-slug="{{ topicSlug }}"
+  data-current-year="{{ currentYear }}">
 
   <select id="category-filter" class="filter-select">
     <option value="">All Topics</option>
     {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
       {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
       {%- for catChild in catChildList -%}
-        <option value="{{ catChild.ContentLink }}">{{ catChild.Name }}</option>
+        {%- assign catSlug = catChild.Name | downcase | replace: " ", "-" -%}
+        <option value="{{ catChild.ContentLink }}" data-slug="{{ catSlug }}">{{ catChild.Name }}</option>
       {%- endfor -%}
     {%- endfor -%}
   </select>
 
   <select id="year-filter" class="filter-select">
     <option value="">All Years</option>
-    <option value="2026">2026</option>
-    <option value="2025">2025</option>
-    <option value="2024">2024</option>
+    {%- if pageContext == "archives" -%}
+      {%- comment %} Archives: show archiveMaxYear (e.g. 2024) down to 2020 {%- endcomment %}
+      {%- assign y = archiveMaxYear -%}
+      {%- for i in (1..10) -%}
+        {%- if y >= 2020 -%}
+          <option value="{{ y }}">{{ y }}</option>
+          {%- assign y = y | minus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment %} Resources/Topics/News: current year and prior year only {%- endcomment %}
+      <option value="{{ currentYear }}">{{ currentYear }}</option>
+      <option value="{{ priorYear }}">{{ priorYear }}</option>
+    {%- endif -%}
   </select>
 
   <input type="search" id="search-filter" name="searchTerm" placeholder="Search resources…"
