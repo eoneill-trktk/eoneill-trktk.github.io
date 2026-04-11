@@ -1,0 +1,312 @@
+{%- assign pagedata = Model.CurrentPage | get_page -%}
+{%- assign templatePath = "includes/SiteHeaderLayout.liquid" | get_templatepath -%}
+{%- include templatePath, Model: Model -%}
+
+{%- comment %} ── Date/time setup ─────────────────────────────────────── {%- endcomment %}
+{%- assign startd  = Model.CurrentPage.EventStartDate | date: "%Y-%m-%d" -%}
+{%- assign startdd = Model.CurrentPage.EventStartTime | time_zone: "America/New_York" | date: "%H:%M:%S" -%}
+{%- assign endd    = Model.CurrentPage.EventEndDate   | date: "%Y-%m-%d" -%}
+{%- assign enddd   = Model.CurrentPage.EventEndTime   | time_zone: "America/New_York" | date: "%H:%M:%S" -%}
+{%- if Model.CurrentPage.EventSeries != null -%}
+  {%- for item in Model.CurrentPage.EventSeries reversed -%}
+    {%- assign endd       = item.EventItemStartDate | date: "%Y-%m-%d" -%}
+    {%- assign enddd      = item.EventItemEndTime   | time_zone: "America/New_York" | date: "%H:%M:%S" -%}
+    {%- assign fullendate = endd | append: 'T' | append: enddd | append: "Z" -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- assign fullendate = endd | append: 'T' | append: enddd | append: "Z" -%}
+{%- endif -%}
+{%- assign compareendate = fullendate | date: "%s" | times: 1 -%}
+{%- assign nowunix       = 'now'      | date: "%s" | times: 1 -%}
+{%- assign zone          = startzone  | time_zone: "America/New_York" | date: "%Z" -%}
+{%- assign path          = Model.CurrentPage | url -%}
+{%- assign domain        = Model.CurrentPage | domain_url -%}
+{%- assign website       = domain | append: path -%}
+
+{%- comment %} ── Section detection: resources vs news ─────────────────── {%- endcomment %}
+{%- assign yearFolder    = ContentLoader.Get(Model.CurrentPage.ParentLink) -%}
+{%- assign sectionPage   = ContentLoader.Get(yearFolder.ParentLink) -%}
+{%- assign sectionSegment = sectionPage.URLSegment | downcase -%}
+{%- assign pageSection   = "resources" -%}
+{%- if sectionSegment == "all-mtf-news" -%}
+  {%- assign pageSection = "news" -%}
+{%- endif -%}
+
+{%- comment %} ── Sidebar: find /topics/ or /category/ folder from site root ── {%- endcomment %}
+{%- assign siteRootChildren = ContentLoader.GetChildren(sectionPage.ParentLink) -%}
+{%- assign sidebarRef   = null -%}
+{%- assign sidebarTitle = "Topics" -%}
+{%- assign sidebarBase  = "/topics/" -%}
+{%- assign sectionLabel = "Resource Library" -%}
+{%- assign sectionUrl   = "/resources/" -%}
+{%- if pageSection == "news" -%}
+  {%- assign sidebarTitle = "News Categories" -%}
+  {%- assign sidebarBase  = "/category/" -%}
+  {%- assign sectionLabel = "MTF News" -%}
+  {%- assign sectionUrl   = "/all-mtf-news/" -%}
+  {%- for child in siteRootChildren -%}
+    {%- if child.URLSegment == "category" -%}
+      {%- assign sidebarRef = child.ContentLink -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- for child in siteRootChildren -%}
+    {%- if child.URLSegment == "topics" -%}
+      {%- assign sidebarRef = child.ContentLink -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign sidebarPages = ContentLoader.GetChildren(sidebarRef) -%}
+
+{%- comment %} ── Determine the relevant category parent name ──────────── {%- endcomment %}
+{%- assign catGroupName = "Resources" -%}
+{%- if pageSection == "news" -%}
+  {%- assign catGroupName = "News" -%}
+{%- endif -%}
+
+<main id="main" class="site-main event-page clean-n-simple">
+  <section>
+    <div class="main-content grid-container" itemscope itemtype="http://schema.org/Event">
+      {{ Property.For(Model=Model.CascadingContent["crumbtrail"]
+            , PropertyName = "crumbtrail"
+            , HasContainer=false
+            , UseItemContainer=false) }}
+
+      {%- if compareendate != 0 and compareendate < nowunix -%}
+        <div class="event-passed standard-width">This event has passed.</div>
+      {%- endif -%}
+
+      <div class="zak-page-header zak-style-1">
+        <div class="zak-container">
+          <div class="zak-row">
+            <div class="zak-page-header__title">
+              <h1 class="zak-page-title">
+                {%- if Model.PageTitle != null or CmsContext.IsInEditMode -%}
+                  <span {{ CmsHelper.EditAttributes("PageTitle") }}>{{ Model.PageTitle }}</span>
+                {%- endif -%}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%- comment %} ── Two-column layout ────────────────────────────────── {%- endcomment %}
+      <div class="event-content-layout standard-width">
+
+        <div class="event-content-main">
+
+          {%- comment %} ── Topic/s: line ─────────────────────────────────── {%- endcomment %}
+          {%- assign hasTopicLinks = false -%}
+          {%- if pagedata.Categories != null -%}
+            {%- for item in pagedata.Categories -%}
+              {%- assign parentCat = ContentLoader.Get(item.ParentLink) -%}
+              {%- if parentCat != null and parentCat.Name == catGroupName -%}
+                {%- assign hasTopicLinks = true -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {%- if hasTopicLinks -%}
+          <div class="ctl">
+            <span><b>Topic/s:</b></span>
+            <ul class="custom-taxonomy-list">
+              {%- for item in pagedata.Categories -%}
+                {%- assign parentCat = ContentLoader.Get(item.ParentLink) -%}
+                {%- if parentCat != null and parentCat.Name == catGroupName -%}
+                  {%- assign itemSlug = item.Name | downcase | replace: " ", "-" -%}
+                  <li><a href="{{ sidebarBase }}{{ itemSlug }}/">{{ item.Name }}</a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+          {%- endif -%}
+
+          {%- comment %} ── Date / sessions ──────────────────────────────── {%- endcomment %}
+          <div class="date-posted">
+            {%- if Model.CurrentPage.EventSeries != null or CmsContext.IsInEditMode -%}
+              {%- if Model.CurrentPage.EventSeries.size > 1 or CmsContext.IsInEditMode -%}
+                <div class="session title">Sessions</div>
+              {%- endif -%}
+              <ul class="sessions" {{ CmsHelper.EditAttributes("EventSeries") }}>
+                {%- for item in Model.CurrentPage.EventSeries -%}
+                  {%- assign startd  = item.EventItemStartDate | date: "%Y-%m-%d" -%}
+                  {%- assign startdd = item.EventItemStartTime | time_zone: "America/New_York" | date: "%H:%M:%S" -%}
+                  {%- assign endd    = item.EventItemStartDate | date: "%Y-%m-%d" -%}
+                  {%- assign enddd   = item.EventItemEndTime   | time_zone: "America/New_York" | date: "%H:%M:%S" -%}
+                  <li>
+                    <time datetime="{{ startd }}T{{ startdd }}Z" doorTime="{{ startd }}T{{ startdd }}Z" endDate="{{ endd }}T{{ enddd }}Z">
+                      {{ startd | date: "%b %d, %Y" }} @
+                      {{ startdd | date: "%I:%M %P" }} -
+                      {{ enddd   | date: "%I:%M %P" }}
+                      {%- if zone == "-04:00" -%}&nbsp;EDT{%- elsif zone == "-05:00" -%}&nbsp;EST{%- endif -%}
+                    </time>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- else -%}
+              <time datetime="{{ startd }}T{{ startdd }}Z" doorTime="{{ startd }}T{{ startdd }}Z" endDate="{{ endd }}T{{ enddd }}Z">
+                {{ startd | date: "%b %d, %Y" }} @
+                {{ startdd | date: "%I:%M %P" }} -
+                {{ enddd   | date: "%I:%M %P" }}
+                {%- if zone == "-04:00" -%}&nbsp;EDT{%- elsif zone == "-05:00" -%}&nbsp;EST{%- endif -%}
+              </time>
+            {%- endif -%}
+
+            {%- if pagedata.Categories != null or CmsContext.IsInEditMode -%}
+              <div class="event-cats" {{ CmsHelper.EditAttributes("Categories") }}>
+                {%- for item in pagedata.Categories -%}
+                  {%- if item.Name == "Virtual" -%}
+                    <div class="virtual">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M80.3 44C69.8 69.9 64 98.2 64 128s5.8 58.1 16.3 84c6.6 16.4-1.3 35-17.7 41.7s-35-1.3-41.7-17.7C7.4 202.6 0 166.1 0 128S7.4 53.4 20.9 20C27.6 3.6 46.2-4.3 62.6 2.3S86.9 27.6 80.3 44zM555.1 20C568.6 53.4 576 89.9 576 128s-7.4 74.6-20.9 108c-6.6 16.4-25.3 24.3-41.7 17.7S489.1 228.4 495.7 212c10.5-25.9 16.3-54.2 16.3-84s-5.8-58.1-16.3-84C489.1 27.6 497 9 513.4 2.3s35 1.3 41.7 17.7zM352 128c0 23.7-12.9 44.4-32 55.4L320 480c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-296.6c-19.1-11.1-32-31.7-32-55.4c0-35.3 28.7-64 64-64s64 28.7 64 64zM170.6 76.8C163.8 92.4 160 109.7 160 128s3.8 35.6 10.6 51.2c7.1 16.2-.3 35.1-16.5 42.1s-35.1-.3-42.1-16.5c-10.3-23.6-16-49.6-16-76.8s5.7-53.2 16-76.8c7.1-16.2 25.9-23.6 42.1-16.5s23.6 25.9 16.5 42.1zM464 51.2c10.3 23.6 16 49.6 16 76.8s-5.7 53.2-16 76.8c-7.1 16.2-25.9 23.6-42.1 16.5s-23.6-25.9-16.5-42.1c6.8-15.6 10.6-32.9 10.6-51.2s-3.8-35.6-10.6-51.2c-7.1-16.2 .3-35.1 16.5-42.1s35.1 .3 42.1 16.5z"/></svg>
+                      {{ item.Name }}
+                    </div>
+                  {%- endif -%}
+                  {%- assign parent = ContentLoader.Get(item.ParentLink).Name -%}
+                  {%- if parent == "Event Series" -%}
+                    <div class="series">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z"/></svg>
+                      Event Series (<a href="/training/events/?viewType=list&categoryFilter={{ item.ContentLink }}">see all</a>)
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- comment %} ── Location ─────────────────────────────────────── {%- endcomment %}
+          {%- if Model.CurrentPage.EventSeries != null -%}
+            {%- for item in Model.CurrentPage.EventSeries -%}
+              {%- if item.EventItemLocationData != null -%}
+                {%- assign eventlocation = ContentLoader.Get(item.EventItemLocationData) -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {%- if eventlocation != null -%}
+            <div class="location">
+              <h4>Location</h4>
+              <div class="location-name">
+                <span>{{ eventlocation.LocationDisplayName }}</span>
+                {%- if eventlocation.MapUrl != null -%}
+                  {%- assign target = "_self" -%}
+                  {%- if eventlocation.MapUrl.LinkTarget != null -%}{%- assign target = eventlocation.MapUrl.LinkTarget -%}{%- endif -%}
+                  <a href="{{ eventlocation.MapUrl.LinkDetailUrl | url }}" target="{{ target }}" title="find location on map">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4C558.9 123.4 576 135 576 152l0 270.8c0 9.8-6 18.6-15.1 22.3L416 503l0-302.6zM137.6 138.3c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6l0 251.4L32.9 502.7C17.1 509 0 497.4 0 480.4L0 209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77l0 249.3L192 449.4 192 255c20.5 31.3 42.3 59.6 56.2 77c20.5 25.6 59.1 25.6 79.6 0zM288 152a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>
+                  </a>
+                {%- endif -%}
+              </div>
+              <div class="location-address">
+                {%- if eventlocation.LocationAddress != null -%}<span>{{ eventlocation.LocationAddress }}</span>{%- endif -%}
+                {%- if eventlocation.LocationCity != null -%}<span>, {{ eventlocation.LocationCity }}</span>{%- endif -%}
+                {%- if eventlocation.LocationStateProvince != null -%}<span> {{ eventlocation.LocationStateProvince }}</span>{%- endif -%}
+                {%- if eventlocation.LocationPostalCode != null -%}<span>, {{ eventlocation.LocationPostalCode }}</span>{%- endif -%}
+                {%- if eventlocation.LocationCountry != null -%}<span> {{ eventlocation.LocationCountry }}</span>{%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- comment %} ── Preview image ─────────────────────────────────── {%- endcomment %}
+          {%- if Model.PreviewImageFile != null or CmsContext.IsInEditMode -%}
+            {%- assign pageImg = Model.PreviewImageFile | get_image -%}
+            <div class="event-image" {{ CmsHelper.EditAttributes("PreviewImageFile") }}>
+              <img src="{{ pageImg.Url }}" alt="{{ pageImg.ImgAlt }}" loading="lazy">
+            </div>
+          {%- endif -%}
+
+          {%- comment %} ── Main content ──────────────────────────────────── {%- endcomment %}
+          {{ Property.For(Model=Model.MainContentArea
+            , PropertyName = "MainContentArea"
+            , HasContainer=false
+            , UseItemContainer=false) }}
+
+          {%- comment %} ── Registration link ─────────────────────────────── {%- endcomment %}
+          {%- assign target = "_self" -%}
+          {%- if Model.CurrentPage.EventLinkitem != null or CmsContext.IsInEditMode -%}
+            {%- if Model.CurrentPage.EventLinkitem.Target != null -%}
+              {%- assign target = Model.CurrentPage.EventLinkitem.Target -%}
+            {%- endif -%}
+            <div class="registration" {{ CmsHelper.EditAttributes("EventLinkitem") }}>
+              <a class="bttn" href="{{ Model.CurrentPage.EventLinkitem.Href }}"
+                title="{{ Model.CurrentPage.EventLinkitem.Title }}" target="{{ target }}">
+                {{ Model.CurrentPage.EventLinkitem.Text }}
+              </a>
+            </div>
+          {%- endif -%}
+
+          {%- comment %} ── Add to calendar ───────────────────────────────── {%- endcomment %}
+          <div>
+            {%- if Model.CurrentPage.EventSeries != null -%}
+              <add-to-calendar-button
+                name="{{ Model.PageTitle }}"
+                options="'Apple','Google','iCal','Outlook.com','Yahoo'"
+                location="{{ eventlocation.LocationDisplayName }}"
+                dates='[
+                {%- for item in Model.CurrentPage.EventSeries -%}
+                  {%- assign startd  = item.EventItemStartDate | date: "%Y-%m-%d" -%}
+                  {%- assign startdd = item.EventItemStartTime | time_zone: "America/New_York" | date: "%H:%M:%S" -%}
+                  {%- assign endd    = item.EventItemStartDate | date: "%Y-%m-%d" -%}
+                  {%- assign enddd   = item.EventItemEndTime   | time_zone: "America/New_York" | date: "%H:%M:%S" -%}
+                  {
+                    "name":"{{ item.EventItemName }}",
+                    "description":"[url]{{ website }}|Event details page[/url]",
+                    "startDate":"{{ startd }}",
+                    "startTime":"{{ startdd }}",
+                    "endTime":"{{ enddd }}"
+                  }{% if forloop.last != true %},{% endif %}
+                {%- endfor -%}
+                ]'
+                timeZone="America/New_York">
+              </add-to-calendar-button>
+            {%- else -%}
+              <add-to-calendar-button
+                name="{{ Model.PageTitle }}"
+                options="'Apple','Google','iCal','Outlook.com','Yahoo'"
+                location="{{ eventlocation.LocationDisplayName }}"
+                startDate="{{ startd }}"
+                endDate="{{ endd }}"
+                startTime="{{ startdd }}"
+                endTime="{{ enddd }}"
+                timeZone="America/New_York"
+                description="[url]{{ website }}|Event details page[/url]">
+              </add-to-calendar-button>
+            {%- endif -%}
+          </div>
+
+          {%- comment %} ── Posted on / Posted in ─────────────────────────── {%- endcomment %}
+          <div class="zak-entry-meta">
+            <span class="zak-posted-on">Posted on
+              <time>{{ pagedata.ContentPostedDate | date: "%B %-d, %Y" }}</time>
+            </span>
+            <span class="zak-cat-links">Posted in
+              <a href="{{ sectionUrl }}">{{ sectionLabel }}</a>
+            </span>
+          </div>
+
+        </div>{%- comment %} /.event-content-main {%- endcomment %}
+
+        {%- comment %} ── Sidebar ───────────────────────────────────────── {%- endcomment %}
+        <aside class="event-content-sidebar">
+          <h2 class="sidebar-title">{{ sidebarTitle }}</h2>
+          {%- if sidebarPages != null and sidebarPages.size > 0 -%}
+          <ul class="sidebar-topics-list">
+            {%- for sidebarPage in sidebarPages -%}
+            <li>
+              <a href="{{ sidebarBase }}{{ sidebarPage.URLSegment }}/">{{ sidebarPage.Name }}</a>
+            </li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+        </aside>
+
+      </div>{%- comment %} /.event-content-layout {%- endcomment %}
+
+    </div>
+    {% assign templatePath = "includes/RelatedLinks.liquid" | get_templatepath %}
+    {% include templatePath, Model: Model %}
+  </section>
+</main>
+
+{% assign templatePath = "includes/footer.liquid" | get_templatepath %}
+{% include templatePath, Model: Model %}
