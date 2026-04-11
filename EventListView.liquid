@@ -1,8 +1,20 @@
 <div id="resource-grid-container" class="resource-grid">
   {%- for page in Model.Pages -%}
+    {%- assign pageData = page.PageData -%}
+    {%- if pageData == null -%}{%- continue -%}{%- endif -%}
+
     {%- assign pageLink = page.PageLink | friendly_url -%}
-    {%- assign linkParts = pageLink | split: "/" -%}
-    {%- assign pageYear = linkParts[1] -%}
+    {%- assign pageYear = pageData.ContentPostedDate | date: "%Y" -%}
+    {%- if pageYear == null or pageYear == "" -%}
+      {%- assign linkParts = pageLink | split: "/" -%}
+      {%- for part in linkParts -%}
+        {%- assign partNum = part | plus: 0 -%}
+        {%- if partNum >= 2000 and partNum <= 2100 -%}
+          {%- assign pageYear = part -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
 
     {%- assign catIds = "" -%}
     {%- if page.PageCategories != null -%}

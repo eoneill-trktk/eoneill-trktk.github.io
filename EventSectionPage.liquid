@@ -47,8 +47,13 @@
           {% assign templatePath = "includes/events/TopicListView.liquid" | get_templatepath %}
           {% include templatePath
             , Model: Model %}
+        {%- elsif pageContext == "archives" -%}
+          {%- comment %} Archives: ContentLoader traversal — bypasses PageListingModel which 500s on Event Container types {%- endcomment %}
+          {% assign templatePath = "includes/events/ArchiveListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model %}
         {%- else -%}
-          {%- comment %} Resources / Archives / News: use standard PageListingModel {%- endcomment %}
+          {%- comment %} Resources / News: use standard PageListingModel {%- endcomment %}
           {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
           {% include templatePath
             , Model: Model.ExtendedPageProperties["PageListingModel"] %}

@@ -26,9 +26,10 @@
         var priorYear   = currentYear - 1;
         var archiveMaxYear = currentYear - 2; // e.g. 2024 when currentYear=2026
 
-        // Resource pages have no future EventStartDate — redirect once with
-        // a far-past startDate so the server returns all resources.
-        if (!qd.startDate || qd.startDate[0] === '') {
+        // Resource/news/topics pages have no future EventStartDate — redirect once
+        // with a far-past startDate so the server returns all pages.
+        // Archives bypasses PageListingModel entirely so no redirect needed.
+        if (pageContext !== 'archives' && (!qd.startDate || qd.startDate[0] === '')) {
             var redirectUrl = path + '?viewType=list&startDate=2020-01-01';
             if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
                 redirectUrl += '&searchTerm=' + encodeURIComponent(qd.searchTerm[0]);
