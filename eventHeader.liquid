@@ -1,27 +1,30 @@
-{%- assign currentRoute = Model.ExtendedPageProperties["PageListingModel"].ActivePageRoute | friendly_url -%}
-{%- assign currentSearchTerm = Model.ExtendedPageProperties["PageListingModel"].CurrentSearchTerm -%}
+{%- comment %} pageContext is passed in from EventSectionPage.liquid {%- endcomment %}
 
-{%- comment %} ── Page context detection ───────────────────────────────── {%- endcomment %}
-{%- assign pageContext = "resources" -%}
-{%- if currentRoute contains "/resource-library-archives" -%}
-  {%- assign pageContext = "archives" -%}
-{%- elsif currentRoute contains "/topics/" -%}
-  {%- assign pageContext = "topics" -%}
-{%- elsif currentRoute contains "/news/" -%}
-  {%- assign pageContext = "news" -%}
-{%- elsif currentRoute contains "/category/" -%}
-  {%- assign pageContext = "category" -%}
+{%- comment %} ── Route and search term — skip PageListingModel for archives ── {%- endcomment %}
+{%- if pageContext == "archives" or pageContext == "topics" or pageContext == "category" -%}
+  {%- comment %} These contexts use ContentLoader, never PageListingModel {%- endcomment %}
+  {%- assign currentRoute = Model.CurrentPage | url -%}
+  {%- assign currentSearchTerm = "" -%}
+{%- else -%}
+  {%- assign listingModel = Model.ExtendedPageProperties["PageListingModel"] -%}
+  {%- if listingModel != null -%}
+    {%- assign currentRoute = listingModel.ActivePageRoute | friendly_url -%}
+    {%- assign currentSearchTerm = listingModel.CurrentSearchTerm -%}
+  {%- else -%}
+    {%- assign currentRoute = Model.CurrentPage | url -%}
+    {%- assign currentSearchTerm = "" -%}
+  {%- endif -%}
 {%- endif -%}
 
-{%- comment %} ── Topic slug — use URLSegment directly, no URL parsing needed ─ {%- endcomment %}
+{%- comment %} ── Topic slug — use URLSegment directly ─────────────────── {%- endcomment %}
 {%- assign topicSlug = "" -%}
 {%- if pageContext == "topics" or pageContext == "category" -%}
   {%- assign topicSlug = Model.CurrentPage.URLSegment | downcase -%}
 {%- endif -%}
 
 {%- comment %} ── Dynamic year calculation ─────────────────────────────── {%- endcomment %}
-{%- assign currentYear = 'now' | date: "%Y" | plus: 0 -%}
-{%- assign priorYear = currentYear | minus: 1 -%}
+{%- assign currentYear  = 'now' | date: "%Y" | plus: 0 -%}
+{%- assign priorYear    = currentYear | minus: 1 -%}
 {%- assign archiveMaxYear = currentYear | minus: 2 -%}
 
 <form id="resource-filter-form" class="resource-filters" method="get" action="{{ currentRoute }}"
@@ -32,7 +35,6 @@
   <select id="category-filter" class="filter-select">
     <option value="">All Topics</option>
     {%- if pageContext == "topics" or pageContext == "category" -%}
-      {%- comment %} Topics pages: build from page Categories (parent folder = Resources group) {%- endcomment %}
       {%- for catRef in Model.CurrentPage.Categories -%}
         {%- assign catChildList = ContentLoader.GetChildren(catRef) -%}
         {%- if catChildList and catChildList.size > 0 -%}
@@ -43,7 +45,6 @@
         {%- endif -%}
       {%- endfor -%}
     {%- else -%}
-      {%- comment %} All other pages: use AvailableFilterBy as configured in CMS {%- endcomment %}
       {%- for catref in Model.CurrentPage.AvailableFilterBy -%}
         {%- assign catChildList = ContentLoader.GetChildren(catref) -%}
         {%- for catChild in catChildList -%}
@@ -57,7 +58,6 @@
   <select id="year-filter" class="filter-select">
     <option value="">All Years</option>
     {%- if pageContext == "archives" -%}
-      {%- comment %} Archives: show archiveMaxYear (e.g. 2024) down to 2020 {%- endcomment %}
       {%- assign y = archiveMaxYear -%}
       {%- for i in (1..10) -%}
         {%- if y >= 2020 -%}
@@ -66,7 +66,6 @@
         {%- endif -%}
       {%- endfor -%}
     {%- else -%}
-      {%- comment %} Resources/Topics/News: current year and prior year only {%- endcomment %}
       <option value="{{ currentYear }}">{{ currentYear }}</option>
       <option value="{{ priorYear }}">{{ priorYear }}</option>
     {%- endif -%}
@@ -76,7 +75,9 @@
     value="{{ currentSearchTerm }}" class="filter-search-input">
 
   <input type="hidden" name="viewType" value="list">
+  {%- if pageContext != "archives" and pageContext != "topics" and pageContext != "category" -%}
   <input type="hidden" name="startDate" value="2020-01-01">
+  {%- endif -%}
 
   <button type="submit" id="filter-button" class="filter-button">Filter</button>
 

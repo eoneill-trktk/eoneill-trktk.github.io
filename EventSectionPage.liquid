@@ -2,17 +2,23 @@
 {% include templatePath
   , Model: Model %}
 
-{%- comment %} ── Detect page context from URL ────────────────────────── {%- endcomment %}
-{%- assign currentRoute = Model.ExtendedPageProperties["PageListingModel"].ActivePageRoute | friendly_url -%}
+{%- comment %} ── Page context detection via URLSegment — no PageListingModel dependency ── {%- endcomment %}
+{%- assign urlSegment    = Model.CurrentPage.URLSegment | downcase -%}
+{%- assign parentPage    = ContentLoader.Get(Model.CurrentPage.ParentLink) -%}
+{%- assign parentSegment = "" -%}
+{%- if parentPage != null -%}
+  {%- assign parentSegment = parentPage.URLSegment | downcase -%}
+{%- endif -%}
+
 {%- assign pageContext = "resources" -%}
-{%- if currentRoute contains "/resource-library-archives" -%}
+{%- if urlSegment == "resource-library-archives" -%}
   {%- assign pageContext = "archives" -%}
-{%- elsif currentRoute contains "/topics/" -%}
+{%- elsif parentSegment == "topics" -%}
   {%- assign pageContext = "topics" -%}
-{%- elsif currentRoute contains "/news/" -%}
-  {%- assign pageContext = "news" -%}
-{%- elsif currentRoute contains "/category/" -%}
+{%- elsif parentSegment == "category" or parentSegment == "categories" -%}
   {%- assign pageContext = "category" -%}
+{%- elsif urlSegment == "all-mtf-news" or parentSegment == "all-mtf-news" -%}
+  {%- assign pageContext = "news" -%}
 {%- endif -%}
 
 <main id="main" class="site-main clean-n-simple">
@@ -40,20 +46,18 @@
 
         {% assign templatePath = "includes/events/eventHeader.liquid" | get_templatepath %}
         {% include templatePath
-          , Model: Model %}
+          , Model: Model
+          , pageContext: pageContext %}
 
         {%- if pageContext == "topics" or pageContext == "category" -%}
-          {%- comment %} Topics: pull from resources via ContentLoader, not PageListingModel {%- endcomment %}
           {% assign templatePath = "includes/events/TopicListView.liquid" | get_templatepath %}
           {% include templatePath
             , Model: Model %}
         {%- elsif pageContext == "archives" -%}
-          {%- comment %} Archives: ContentLoader traversal — bypasses PageListingModel which 500s on Event Container types {%- endcomment %}
           {% assign templatePath = "includes/events/ArchiveListView.liquid" | get_templatepath %}
           {% include templatePath
             , Model: Model %}
         {%- else -%}
-          {%- comment %} Resources / News: use standard PageListingModel {%- endcomment %}
           {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
           {% include templatePath
             , Model: Model.ExtendedPageProperties["PageListingModel"] %}
