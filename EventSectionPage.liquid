@@ -53,10 +53,11 @@
           {% assign templatePath = "includes/events/TopicListView.liquid" | get_templatepath %}
           {% include templatePath
             , Model: Model %}
+
         {%- elsif pageContext == "archives" -%}
-          {% assign templatePath = "includes/events/ArchiveListView.liquid" | get_templatepath %}
-          {% include templatePath
-            , Model: Model %}
+          {%- comment %} DEBUG: Inspect model before building archive list {%- endcomment %}
+          {{ CmsHelper.Debug(Model) }}
+
         {%- else -%}
           {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
           {% include templatePath
