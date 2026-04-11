@@ -1,0 +1,73 @@
+/* Make the whole card title feel clickable */
+.resource-card .resource-title a {
+  display: inline-block;
+}
+
+/* Badge base style */
+.resource-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid #d9d9d9;
+  background: #ffffff;
+  margin-right: 4px;
+  margin-bottom: 6px;
+}
+
+/* Topic color variations */
+.resource-badge.topic-additional-program {
+  background: #eef6ff;
+  border-color: #cfe3ff;
+}
+.resource-badge.topic-general-resource {
+  background: #f4f6f8;
+  border-color: #e1e6ea;
+}
+.resource-badge.topic-health-connector {
+  background: #eefbf3;
+  border-color: #cfeedd;
+}
+.resource-badge.topic-health-safety-net {
+  background: #fff4ea;
+  border-color: #ffe0c7;
+}
+.resource-badge.topic-learning-opportunities {
+  background: #f4efff;
+  border-color: #e2d6ff;
+}
+.resource-badge.topic-masshealth {
+  background: #eaf7ff;
+  border-color: #cfeaff;
+}
+.resource-badge.topic-masshealth-provider-services {
+  background: #fff0f4;
+  border-color: #ffd0de;
+}
+.resource-badge.topic-medicare {
+  background: #fff9e6;
+  border-color: #ffe7a8;
+}
+
+/* News category badge colors */
+.resource-badge.cat-all-mtf-updates {
+  background: #eef6ff;
+  border-color: #cfe3ff;
+}
+.resource-badge.cat-health-connector {
+  background: #eefbf3;
+  border-color: #cfeedd;
+}
+.resource-badge.cat-masshealth-news {
+  background: #eaf7ff;
+  border-color: #cfeaff;
+}
+.resource-badge.cat-masshealth-provider-services {
+  background: #fff0f4;
+  border-color: #ffd0de;
+}
+.resource-badge.cat-other {
+  background: #f4f6f8;
+  border-color: #e1e6ea;
+}

@@ -39,6 +39,16 @@
       {%- endif -%}
 
       <div class="resource-body">
+
+        {%- if page.PageCategories != null and page.PageCategories.size > 0 -%}
+        <div class="resource-badges">
+          {%- for item in page.PageCategories -%}
+            {%- assign badgeClass = item.Name | downcase | replace: " ", "-" -%}
+            <span class="resource-badge topic-{{ badgeClass }}">{{ item.Name }}</span>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+
         <h3 class="resource-title">
           <a href="{{ page.PageLink | friendly_url }}">{{ pageTitle }}</a>
         </h3>
