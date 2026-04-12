@@ -1,0 +1,58 @@
+/* ── Mobile sub-menu: only applies below 771px ──────────────────────────── */
+@media (max-width: 770px) {
+
+  /* Keep li as block — no flex, no reflow */
+  #menu-header-menu > li.nav-item {
+    position: relative;
+  }
+
+  /* Position the toggle button at the right edge of the li */
+  .sub-menu-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    min-height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .sub-menu-toggle.sub-open {
+    transform: rotate(180deg);
+  }
+
+  /* Child <ul> hidden by default on mobile */
+  #menu-header-menu > li.nav-item > ul {
+    display: none;
+    padding-left: 1rem;
+    margin: 0;
+    list-style: none;
+  }
+
+  /* Revealed when toggled */
+  #menu-header-menu > li.nav-item > ul.sub-open {
+    display: block;
+  }
+
+  /* Child item link styling */
+  #menu-header-menu > li.nav-item > ul li a {
+    display: block;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+}
+
+/* ── Desktop: hide toggle button, do NOT touch ul display ───────────────── */
+@media (min-width: 771px) {
+  .sub-menu-toggle {
+    display: none !important;
+  }
+}

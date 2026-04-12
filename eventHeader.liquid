@@ -41,7 +41,7 @@
 
   <select id="category-filter" class="filter-select">
     <option value="">{{ allLabel }}</option>
-    {%- if pageContext == "topics" or pageContext == "category" -%}
+    {%- if pageContext == "topics" or pageContext == "category" or pageContext == "news" -%}
       {%- comment %} Use page Categories (parent = filter group) {%- endcomment %}
       {%- for catRef in Model.CurrentPage.Categories -%}
         {%- assign catChildList = ContentLoader.GetChildren(catRef) -%}
