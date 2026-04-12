@@ -35,6 +35,7 @@
 
     <article class="resource-card"
       data-year="{{ pageYear }}"
+      data-date="{{ pageData.ContentPostedDate | date: "%Y-%m-%d" }}"
       data-category-ids="{{ catIds }}"
       data-title="{{ pageTitle | downcase }}"
       data-excerpt="">

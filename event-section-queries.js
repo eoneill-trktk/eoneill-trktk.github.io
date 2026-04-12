@@ -81,6 +81,7 @@
         // ── Apply all filters then reveal grid ───────────────────────────────
         applyFilters();
         revealGrid();
+        cleanUrl();
 
         // ── Wire up change listeners ─────────────────────────────────────────
         if (catSelect)  catSelect.addEventListener('change',  function() { applyFilters(); revealGrid(); });
@@ -105,6 +106,16 @@
         function revealGrid() {
             var grid = document.getElementById('resource-grid-container');
             if (grid) grid.classList.add('js-ready');
+        }
+
+        function cleanUrl() {
+            if (!window.history || !window.history.replaceState) return;
+            var params = new URLSearchParams(window.location.search);
+            params.delete('viewType');
+            params.delete('startDate');
+            var clean = window.location.pathname;
+            if (params.toString()) clean += '?' + params.toString();
+            window.history.replaceState({}, '', clean);
         }
 
         // Safety fallback — reveal grid after 1s even if something above failed
@@ -149,6 +160,18 @@
 
             var noResults = document.getElementById('no-results-message');
             if (noResults) noResults.style.display = anyVisible ? 'none' : '';
+
+            // ── Sort visible cards by date descending (newest first) ──────────
+            var grid = document.getElementById('resource-grid-container');
+            if (grid && anyVisible) {
+                var allCards = Array.prototype.slice.call(grid.querySelectorAll('.resource-card'));
+                allCards.sort(function (a, b) {
+                    var da = a.dataset.date || '';
+                    var db = b.dataset.date || '';
+                    return db.localeCompare(da);
+                });
+                allCards.forEach(function (card) { grid.appendChild(card); });
+            }
 
             // Show/hide clear button
             var btn = document.getElementById('clear-filters');
