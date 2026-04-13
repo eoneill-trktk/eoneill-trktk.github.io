@@ -1,0 +1,44 @@
+{%- assign templatePath = "includes/SiteHeaderLayout.liquid" | get_templatepath -%}
+{%- include templatePath, Model: Model -%}
+
+<main id="main" class="site-main">
+
+  <section class="hero-split index-bg" aria-label="Hero">
+    <div class="hero-split__span">
+      <div class="hero-split__content">
+        <h1>News</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-news" aria-label="News">
+    <div class="featured-news-container">
+
+      <ul class="featured-news-grid" id="news-grid-target"></ul>
+
+    </div>
+  </section>
+
+  {{ Property.For(Model=Model.CascadingContentArea
+      , PropertyName = "CascadingContentArea"
+      , HasContainer=false
+      , UseItemContainer=false) }}
+
+  {%- if Model.CategoryLinks.LinkItems != null -%}
+  <div class="tags" style="display:none;">
+    <h3>Tags</h3>
+    <ul class="tag-list">
+      {%- for item in Model.CategoryLinks.LinkItems -%}
+      <li><a href="/blog/{{ item.LinkUrl }}">{{ item | json }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
+
+  {%- assign templatePath = "includes/RelatedLinks.liquid" | get_templatepath -%}
+  {%- include templatePath, Model: Model -%}
+
+</main>
+
+{%- assign templatePath = "includes/footer.liquid" | get_templatepath -%}
+{%- include templatePath, Model: Model -%}

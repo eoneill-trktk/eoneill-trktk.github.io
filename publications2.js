@@ -22,8 +22,6 @@
 
     allItems = Array.from(target.querySelectorAll('.featured-insight-item'));
 
-    syncHeroToFirstCard();
-
     var searchInput   = document.getElementById('featured-insights-search');
     var typeSelect    = document.getElementById('featured-insights-type');
     var serviceSelect = document.getElementById('featured-insights-services');
@@ -34,32 +32,6 @@
 
     filteredItems = allItems.slice();
     renderPage();
-  }
-
-  function syncHeroToFirstCard() {
-    var firstItem = allItems[0];
-    if (!firstItem) return;
-
-    var firstLink  = firstItem.querySelector('.featured-insight-card');
-    var firstH3    = firstItem.querySelector('h3');
-    var firstImg   = firstItem.querySelector('.featured-insight-media img');
-    var firstBadge = firstItem.querySelector('.featured-insight-badge');
-    var firstType  = firstItem.querySelector('.featured-insight-type span:last-child');
-
-    var heroCard    = document.querySelector('.featured-insights-hero-card');
-    var heroH2      = document.querySelector('.featured-insights-hero-content h2');
-    var heroService = document.querySelector('.featured-insights-hero-service');
-    var heroType    = document.querySelector('.featured-type');
-    var heroImg     = document.querySelector('.featured-insights-hero-media img');
-
-    if (heroCard && firstLink)     heroCard.href = firstLink.href;
-    if (heroH2 && firstH3)         heroH2.textContent = firstH3.textContent;
-    if (heroService && firstBadge) heroService.textContent = firstBadge.textContent;
-    if (heroType && firstType)     heroType.textContent = firstType.textContent;
-    if (heroImg && firstImg) {
-      heroImg.src = firstImg.src;
-      heroImg.alt = firstImg.alt;
-    }
   }
 
   function applyFilters() {

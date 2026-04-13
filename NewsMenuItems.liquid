@@ -1,0 +1,70 @@
+<ul class="featured-news-grid">
+  {%- if Model.Pages and Model.Pages.size > 0 -%}
+    {%- assign folderSlugs = "news" | split: "," -%}
+
+    {%- for page in Model.Pages -%}
+      {%- assign skipPage = false -%}
+      {%- assign pageUrl = page.PageLink | downcase | strip -%}
+
+      {%- for slug in folderSlugs -%}
+        {%- assign slugPath = "/news/" | append: slug | append: "/" -%}
+        {%- if pageUrl == slugPath -%}
+          {%- assign skipPage = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- unless skipPage -%}
+        {%- assign postedDate = page.PostedDate -%}
+        {%- if postedDate == blank -%}
+          {%- assign postedDate = "November 20, 2024" -%}
+        {%- else -%}
+          {%- assign postedDate = postedDate | date: "%B %d, %Y" -%}
+        {%- endif -%}
+
+        <li class="featured-news-item">
+          <a href="{{ page.PageLink }}" class="featured-news-card">
+
+            <div class="featured-news-media">
+              {%- if page.PageImage -%}
+                {%- assign img = page.PageImage | get_image -%}
+                {%- if img -%}
+                  {%- if img.FileExt == ".svg" -%}
+                    {{ page.PageImage | get_vector_image | map: "SvgData" }}
+                  {%- else -%}
+                    <img width="800" height="450"
+                         src="{{ img.Url }}"
+                         alt="{{ img.ImgAlt }}"
+                         decoding="async"
+                         loading="lazy">
+                  {%- endif -%}
+                {%- else -%}
+                  <img width="800" height="450"
+                       src="https://gfcshrewsbury.org/wp-content/uploads/2020/02/888x500text16_9.png"
+                       alt=""
+                       decoding="async"
+                       loading="lazy">
+                {%- endif -%}
+              {%- else -%}
+                <img width="800" height="450"
+                     src="https://gfcshrewsbury.org/wp-content/uploads/2020/02/888x500text16_9.png"
+                     alt=""
+                     decoding="async"
+                     loading="lazy">
+              {%- endif -%}
+            </div>
+
+            <div class="featured-news-content">
+              <h2>{{ page.PageTitle | default: page.PageName }}</h2>
+              <div class="featured-news-meta">
+                <div class="featured-news-date">{{ postedDate }}</div>
+              </div>
+            </div>
+
+          </a>
+        </li>
+
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+</ul>
