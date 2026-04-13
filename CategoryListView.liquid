@@ -58,6 +58,7 @@
       <div class="resource-body">
         {%- if page.Categories != null and page.Categories.size > 0 -%}
         <div class="resource-badges">
+          <span class="resource-badge cat-all-mtf-updates">All MTF News</span>
           {%- for catRef in page.Categories -%}
             {%- assign cat = ContentLoader.Get(catRef) -%}
             {%- if cat != null -%}
@@ -67,6 +68,10 @@
               <span class="resource-badge cat-{{ badgeSlug }}">{{ cat.Name }}</span>
             {%- endif -%}
           {%- endfor -%}
+        </div>
+        {%- else -%}
+        <div class="resource-badges">
+          <span class="resource-badge cat-all-mtf-updates">All MTF News</span>
         </div>
         {%- endif -%}
 

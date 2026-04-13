@@ -58,10 +58,15 @@
       <div class="resource-body">
         {%- if page.PageCategories != null and page.PageCategories.size > 0 -%}
         <div class="resource-badges">
+          <span class="resource-badge cat-all-mtf-updates">All MTF News</span>
           {%- for item in page.PageCategories -%}
             {%- assign badgeSlug = item.Name | downcase | replace: " ", "-" -%}
             <span class="resource-badge cat-{{ badgeSlug }}">{{ item.Name }}</span>
           {%- endfor -%}
+        </div>
+        {%- else -%}
+        <div class="resource-badges">
+          <span class="resource-badge cat-all-mtf-updates">All MTF News</span>
         </div>
         {%- endif -%}
 
