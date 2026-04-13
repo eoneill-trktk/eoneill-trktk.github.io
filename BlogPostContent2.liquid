@@ -1,0 +1,129 @@
+{%- assign templatePath = "includes/SiteHeaderLayout.liquid" | get_templatepath -%}
+{%- include templatePath, Model: Model -%}
+
+<main id="main" class="site-main">
+
+  <section class="hero-split index-bg" aria-label="Hero">
+    <div class="hero-split__span">
+      <div class="hero-split__content">
+        <h1>Insights</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-insights" aria-label="Featured insights">
+    <div class="featured-insights-container">
+
+      <article class="featured-insights-hero">
+        <a href="#" class="featured-insights-hero-card">
+
+          <div class="featured-insights-hero-media">
+            <img decoding="async"
+                 src="/siteassets/blog/masshealthreport_2024-1024x764.jpg"
+                 alt="Featured insight">
+          </div>
+
+          <div class="featured-insights-hero-content">
+            <div class="featured-insights-hero-labels">
+              <span class="featured-label">Featured</span>
+              <span class="featured-type">Case Study</span>
+            </div>
+
+            <h2>A shared vision for better outcomes across healthcare organizations</h2>
+
+            <p>Explore how a healthcare organization aligned strategy, operations,
+               and stakeholder engagement to improve outcomes, strengthen performance,
+               and create long-term impact.</p>
+
+            <div class="featured-insights-hero-meta">
+              <div class="featured-insights-hero-service">Justice &amp; Health Equity</div>
+              <div class="featured-insights-hero-date">April 3, 2025</div>
+            </div>
+          </div>
+
+        </a>
+      </article>
+
+      <div class="featured-insights-filters" aria-label="Search and filter insights">
+        <form class="featured-insights-filter-form" action="#" method="get">
+
+          <div class="featured-insights-filter-search">
+            <label class="screen-reader-text" for="featured-insights-search">Search insights</label>
+            <input type="search"
+                   id="featured-insights-search"
+                   name="search"
+                   placeholder="Search by keywords"
+                   autocomplete="off">
+          </div>
+
+          <div class="featured-insights-filter-select">
+            <label class="screen-reader-text" for="featured-insights-type">Filter by insight type</label>
+            <select id="featured-insights-type" name="type">
+              <option value="">Insight Type</option>
+              <option value="perspective">Perspective</option>
+              <option value="journal-article">Journal Article</option>
+              <option value="peer-reviewed-journal-article">Peer Reviewed Journal Article</option>
+              <option value="technical-report">Technical Report</option>
+              <option value="poster">Poster</option>
+              <option value="presentation">Presentation</option>
+              <option value="case-study">Case Study</option>
+              <option value="white-paper">White Paper</option>
+              <option value="webinar">Webinar</option>
+              <option value="webcast">Webcast</option>
+              <option value="video">Video</option>
+              <option value="issue-brief">Issue Brief</option>
+              <option value="infographic">Infographic</option>
+              <option value="multimedia">Multimedia</option>
+            </select>
+          </div>
+
+          <div class="featured-insights-filter-select">
+            <label class="screen-reader-text" for="featured-insights-services">Filter by service</label>
+            <select id="featured-insights-services" name="service">
+              <option value="">Services</option>
+              <option value="clinical-pharmacy-services">Clinical Pharmacy Services</option>
+              <option value="disability-determination-services">Disability Determination Services</option>
+              <option value="employment-equity-and-workforce-development">Employment Equity &amp; Workforce Development</option>
+              <option value="healthcare-operations-and-regulatory-compliance">Healthcare Operations &amp; Regulatory Compliance</option>
+              <option value="justice-and-health-equity">Justice &amp; Health Equity</option>
+              <option value="long-term-services-and-supports">Long-Term Services &amp; Supports</option>
+              <option value="medicaid-waiver-evaluation">Medicaid Waiver Evaluation</option>
+              <option value="newborn-screening-services">Newborn Screening Services</option>
+              <option value="school-based-services">School-Based Services</option>
+              <option value="state-supplement-program">State Supplement Program</option>
+              <option value="survey-research">Survey Research</option>
+              <option value="third-party-liability-and-benefit-coordination">Third Party Liability &amp; Benefit Coordination</option>
+            </select>
+          </div>
+
+        </form>
+      </div>
+
+      <ul class="featured-insights-grid" id="insights-grid-target"></ul>
+
+    </div>
+  </section>
+
+  {{ Property.For(Model=Model.CascadingContentArea
+      , PropertyName = "CascadingContentArea"
+      , HasContainer=false
+      , UseItemContainer=false) }}
+
+  {%- if Model.CategoryLinks.LinkItems != null -%}
+  <div class="tags" style="display:none;">
+    <h3>Tags</h3>
+    <ul class="tag-list">
+      {%- for item in Model.CategoryLinks.LinkItems -%}
+      <li><a href="/blog/{{ item.LinkUrl }}">{{ item | json }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
+
+  {%- assign templatePath = "includes/RelatedLinks.liquid" | get_templatepath -%}
+  {%- include templatePath, Model: Model -%}
+
+</main>
+
+{%- assign templatePath = "includes/footer.liquid" | get_templatepath -%}
+{%- include templatePath, Model: Model -%}

@@ -7,13 +7,20 @@
   var allItems = [];
 
   function init() {
-    var grid = document.querySelector('.featured-insights-grid');
-    if (!grid) {
+    var target = document.getElementById('insights-grid-target');
+    if (!target) {
       setTimeout(init, 100);
       return;
     }
 
-    allItems = Array.from(grid.querySelectorAll('.featured-insight-item'));
+    var orphans = document.querySelectorAll(
+      '.featured-insight-item:not(#insights-grid-target .featured-insight-item)'
+    );
+    orphans.forEach(function (item) {
+      target.appendChild(item);
+    });
+
+    allItems = Array.from(target.querySelectorAll('.featured-insight-item'));
 
     var searchInput   = document.getElementById('featured-insights-search');
     var typeSelect    = document.getElementById('featured-insights-type');
@@ -77,16 +84,16 @@
   }
 
   function renderNoResults() {
-    var grid = document.querySelector('.featured-insights-grid');
-    if (!grid) return;
-    var existing = grid.querySelector('.no-results-message');
+    var target = document.getElementById('insights-grid-target');
+    if (!target) return;
+    var existing = target.querySelector('.no-results-message');
 
     if (filteredItems.length === 0) {
       if (!existing) {
         var msg = document.createElement('li');
         msg.className = 'no-results-message';
         msg.textContent = 'No publications match your search or filters.';
-        grid.appendChild(msg);
+        target.appendChild(msg);
       }
     } else {
       if (existing) existing.parentNode.removeChild(existing);
@@ -103,7 +110,7 @@
     if (totalPages <= 1) return;
 
     var nav = document.createElement('nav');
-    nav.className  = 'featured-insights-pagination';
+    nav.className = 'featured-insights-pagination';
     nav.setAttribute('aria-label', 'Insights pagination');
 
     var pages = buildPageNumbers(currentPage, totalPages);
@@ -133,8 +140,8 @@
       btn.addEventListener('click', function () {
         currentPage = parseInt(this.getAttribute('data-page'), 10);
         renderPage();
-        var grid = document.querySelector('.featured-insights-grid');
-        if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var target = document.getElementById('insights-grid-target');
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
