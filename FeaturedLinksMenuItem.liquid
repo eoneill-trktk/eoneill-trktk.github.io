@@ -1,0 +1,38 @@
+{%- assign imgUrl = "" -%}
+{%- if Model.ImageContentRef != null -%}
+  {%- assign img = Model.ImageContentRef | get_image -%}
+  {%- if img != null -%}
+    {%- assign imgUrl = img.Url -%}
+  {%- endif -%}
+{%- elsif Model.ImageFile != null -%}
+  {%- assign imgUrl = Model.ImageFile.Url -%}
+{%- endif -%}
+
+{%- assign description = Model.TeaserText -%}
+{%- if description == blank -%}
+  {%- assign description = "Comprehensive solutions designed to improve outcomes and deliver lasting value for the people we serve." -%}
+{%- endif -%}
+
+{%- assign atarget = "_self" -%}
+{%- if Model.WindowTarget != null -%}
+  {%- assign atarget = Model.WindowTarget -%}
+{%- endif -%}
+
+<div class="service-cards-slider__slide">
+  <a href="{{ Model.Url | friendly_url }}"
+     target="{{ atarget }}"
+     class="service-card"
+     style="--service-card-image: url('{{ imgUrl }}');">
+    <div class="service-card__overlay">
+      <div class="service-card__content">
+        <h3 class="service-card__title">{{ Model.DisplayText }}</h3>
+        <p class="service-card__description">{{ description }}</p>
+      </div>
+      <span class="service-card__action" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.6269 12.6484L4.5 12.6484L4.5 11.1484L16.6269 11.1484L10.9308 5.45225L12 4.39844L19.5 11.8984L12 19.3984L10.9308 18.3446L16.6269 12.6484Z" fill="white"/>
+        </svg>
+      </span>
+    </div>
+  </a>
+</div>
