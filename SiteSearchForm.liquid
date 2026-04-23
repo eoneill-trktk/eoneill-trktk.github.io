@@ -1,0 +1,59 @@
+<div class="fh-top-bar">
+  <div class="fh-top-bar__container">
+    <div class="fh-top-bar__left">
+      <form action="/Search-Results/" class="fh-top-bar__form" method="post" role="search">
+        <label for="fh-top-search" class="sr-only">{{ CmsHelper.Translate("/mainnavigation/searchfor") }}</label>
+        <input
+          type="search"
+          name="q"
+          id="fh-top-search"
+          value=""
+          placeholder="{{ CmsHelper.Translate('/mainnavigation/searchfor') }}..."
+          class="fh-top-bar__input"
+          title="{{ CmsHelper.Translate('/mainnavigation/searchphrase') }}"
+        />
+        <button type="submit" class="fh-top-bar__submit" aria-label="Search">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.8,13.7L12,11c0.9-1.2,1.5-2.6,1.5-4.2c0-3.7-3-6.8-6.8-6.8S0,3,0,6.8s3,6.8,6.8,6.8c1.6,0,3.1-0.6,4.2-1.5l2.8,2.8c0.1,0.1,0.3,0.2,0.5,0.2s0.4-0.1,0.5-0.2C15.1,14.5,15.1,14,14.8,13.7z M1.5,6.8c0-2.9,2.4-5.2,5.2-5.2S12,3.9,12,6.8S9.6,12,6.8,12S1.5,9.6,1.5,6.8z" fill="#00074F"/>
+          </svg>
+        </button>
+        {% antiforgerytoken %}
+      </form>
+    </div>
+    <div class="fh-top-bar__right">
+      <a href="#" class="fh-top-bar__partner-link" target="_blank" rel="noopener">
+        Visit the MassHealth Website
+        <img src="/siteassets/logos/masshealth-logo.png" alt="MassHealth" class="fh-top-bar__partner-logo" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<label class="sr-only">
+  <span>Search Button</span>
+</label>
+<button id="search-button" type="button" class="nav-search-button" aria-expanded="false">
+  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <title>Open Search</title>
+    <path d="M14.8,13.7L12,11c0.9-1.2,1.5-2.6,1.5-4.2c0-3.7-3-6.8-6.8-6.8S0,3,0,6.8s3,6.8,6.8,6.8c1.6,0,3.1-0.6,4.2-1.5l2.8,2.8c0.1,0.1,0.3,0.2,0.5,0.2s0.4-0.1,0.5-0.2C15.1,14.5,15.1,14,14.8,13.7z M1.5,6.8c0-2.9,2.4-5.2,5.2-5.2S12,3.9,12,6.8S9.6,12,6.8,12S1.5,9.6,1.5,6.8z" fill="white"></path>
+  </svg>
+</button>
+<div class="search-container" aria-expanded="false" aria-hidden="true">
+  <div class="exit-container">
+    <svg class="search-container-exit-button" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <title>Close Search</title>
+      <rect width="40" height="40" fill="#00074F"></rect>
+      <path d="M26 14L14 26M14 14L26 26" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </div>
+  <form action="/Search-Results/" class="search-form" method="post" role="search">
+    <label for="q">
+      <span class="screen-reader-text">{{ CmsHelper.Translate("/mainnavigation/searchfor" ) }}</span>
+    </label>
+    <input type="text" title="{{ CmsHelper.Translate('/mainnavigation/searchphrase') }}" name="q" value="" id="q" placeholder="{{ CmsHelper.Translate('/mainnavigation/searchfor') }}..." class="search__field" />
+    <button type="submit" class="search_btn" title="Search">
+      Search
+    </button>
+    {% antiforgerytoken %}
+  </form>
+</div>

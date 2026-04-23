@@ -1,0 +1,66 @@
+<nav class="menu-bar" aria-expanded="true">
+    <ul id="menu-header-menu" class="menu nav-list">
+        {%- for menuItem in Model.RootItems -%}
+            {%- assign showChildren = true -%}
+            {%- assign atarget = "_self" -%}
+            {%- if menuItem.IsActiveAncestor == true or menuItem.IsActiveItem == true -%}
+                {%- assign showChildren = true -%}
+            {%- endif -%}
+            {%- assign classValues = "" -%}
+            {%- if menuItem.IsActiveAncestor == true -%}
+                {%- assign classValues = "active-page-ancestor" -%}
+            {%- endif -%}
+            {%- if menuItem.IsActiveItem == true -%}
+                {%- assign classValues = "active-page" -%}
+            {%- endif -%}
+            {%- if menuItem.IsActivePageParent == true -%}
+                {%- assign classValues = "active-page-parent" -%}
+            {%- endif -%}
+            {%- if menuItem.ChildItems.size > 0 -%}
+                {%- assign classValues = classValues | append: " has-children" -%}
+            {%- endif -%}
+        <li id="{{ menuItem.MenuItemId }}" class="nav-item {{ classValues }} {{ menuItem.MenuItemClassString }} ">
+            {%- if menuItem.Url != null -%}
+                {%- if Model.WindowTarget != null -%}
+                    {%- assign atarget = Model.WindowTarget -%}
+                {%- endif -%}  
+                <a href="{{ menuItem.Url | friendly_url }}" class="nav-link" target="{{ atarget }}">
+            {%- else -%}
+                <button type="button" class="nav-button">                
+            {%- endif -%}            
+            {%- if menuItem.ImageContentRef != null -%}
+                {%- assign contentImage = menuItem.ImageContentRef | get_image -%}
+                {%- assign svgImage = menuItem.ImageContentRef | get_vector_image -%}
+                {%- if contentImage != "" -%}                
+                    {%- if svgImage != null and contentImage.FileExt == "svg" -%}
+                        {{ svgImage.SvgData }}
+                    {%- else -%}
+                        <img
+                        src="{{ contentImage.Url }}"
+                        alt="{{ contentImage.ImgAlt }}"
+                        decoding="async" />
+                    {%- endif -%}	
+                {%- endif -%}                
+                {%- else -%}
+                    {{ menuItem.DisplayText }}
+            {%- endif -%}
+            {%- if menuItem.Url != null -%}
+                </a>
+            {%- else -%}
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.4432 0.438023L12.5032 1.49902L6.7262 7.27802C6.63364 7.37118 6.52356 7.44511 6.40231 7.49555C6.28106 7.546 6.15103 7.57197 6.0197 7.57197C5.88838 7.57197 5.75835 7.546 5.6371 7.49555C5.51585 7.44511 5.40577 7.37118 5.3132 7.27802L-0.466797 1.49902L0.593203 0.439023L6.0182 5.86302L11.4432 0.438023Z" fill="#3F3F46" fill-opacity="1"/>
+                    </svg> 
+                </button>      
+            {%- endif -%}
+            {%- if menuItem.ChildItems.size > 0 -%}
+                <ul>
+                {%- for childItem in menuItem.ChildItems -%}
+{%- assign templatePath = "MenuItem.liquid" | get_templatepath -%}
+{%- include templatePath, Model: childItem -%}
+                {%- endfor -%}
+                </ul>
+            {%- endif -%}
+        </li>
+        {%- endfor -%}
+    </ul>
+</nav>

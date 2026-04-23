@@ -1,5 +1,7 @@
 (function () {
     var _initialized = false;
+    var CARDS_PER_PAGE = 12;
+    var currentPage = 1;
 
     const initResourceFilter = () => {
         if (_initialized) return;
@@ -7,7 +9,6 @@
 
         var path = window.location.href.split('?')[0];
 
-        // Parse current query string
         var qd = {};
         if (location.search) {
             location.search.substr(1).split("&").forEach(function (item) {
@@ -18,16 +19,13 @@
             });
         }
 
-        // Read page context from the form data attributes (set in eventHeader.liquid)
         var form        = document.getElementById('resource-filter-form');
         var pageContext = form ? form.dataset.pageContext  : 'resources';
         var topicSlug   = form ? form.dataset.topicSlug   : '';
         var currentYear = form ? parseInt(form.dataset.currentYear) : new Date().getFullYear();
         var priorYear   = currentYear - 1;
-        var archiveMaxYear = currentYear - 2; // e.g. 2024 when currentYear=2026
+        var archiveMaxYear = currentYear - 2;
 
-        // Pages have no future EventStartDate — redirect once with a far-past
-        // startDate so the server returns all content.
         if (!qd.startDate || qd.startDate[0] === '') {
             var redirectUrl = path + '?viewType=list&startDate=2020-01-01';
             if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
@@ -40,13 +38,11 @@
         var catSelect  = document.getElementById('category-filter');
         var yearSelect = document.getElementById('year-filter');
 
-        // ── Restore search input from URL ────────────────────────────────────
         if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
             var searchInput = document.getElementById('search-filter');
             if (searchInput) searchInput.value = qd.searchTerm[0];
         }
 
-        // ── Topics/Category context: auto-select from URL slug ───────────────
         if ((pageContext === 'topics' || pageContext === 'category') && topicSlug !== '') {
             if (catSelect) {
                 var opts = catSelect.querySelectorAll('option[data-slug]');
@@ -59,35 +55,31 @@
             }
         }
 
-        // ── Restore category from URL (manual filter applied) ────────────────
         if (qd.categoryFilter && qd.categoryFilter[0] && qd.categoryFilter[0] !== '') {
             if (catSelect) catSelect.value = qd.categoryFilter[0];
         }
 
-        // ── Restore year from URL ────────────────────────────────────────────
         var activeYear = '';
         if (qd.year && qd.year[0] && qd.year[0] !== '') {
             activeYear = qd.year[0];
             if (yearSelect) yearSelect.value = activeYear;
         }
 
-        // ── Show/hide Clear All ──────────────────────────────────────────────
         var hasFilters = (qd.searchTerm && qd.searchTerm[0] !== '') ||
                          (catSelect && catSelect.value !== '') ||
                          (activeYear !== '');
         var clearBtn = document.getElementById('clear-filters');
         if (clearBtn && hasFilters) clearBtn.style.display = '';
 
-        // ── Apply all filters then reveal grid ───────────────────────────────
+        ensurePaginationContainer();
+
         applyFilters();
         revealGrid();
         cleanUrl();
 
-        // ── Wire up change listeners ─────────────────────────────────────────
-        if (catSelect)  catSelect.addEventListener('change',  function() { applyFilters(); revealGrid(); });
-        if (yearSelect) yearSelect.addEventListener('change', function() { applyFilters(); revealGrid(); });
+        if (catSelect)  catSelect.addEventListener('change',  function () { applyFilters(); });
+        if (yearSelect) yearSelect.addEventListener('change', function () { applyFilters(); });
 
-        // ── Clear All ────────────────────────────────────────────────────────
         var clearBtn2 = document.getElementById('clear-filters');
         if (clearBtn2) {
             clearBtn2.addEventListener('click', function (e) {
@@ -118,52 +110,38 @@
             window.history.replaceState({}, '', clean);
         }
 
-        // Safety fallback — reveal grid after 1s even if something above failed
-        setTimeout(function() { revealGrid(); }, 1000);
+        setTimeout(function () { revealGrid(); }, 1000);
 
-        // ── applyFilters ─────────────────────────────────────────────────────
         function applyFilters() {
             var selectedCat  = catSelect  ? catSelect.value  : '';
             var selectedYear = yearSelect ? yearSelect.value : '';
             var cards = document.querySelectorAll('.resource-card');
-            var anyVisible = false;
 
             cards.forEach(function (card) {
                 var catMatch  = true;
                 var yearMatch = true;
                 var cardYear  = parseInt(card.dataset.year) || 0;
 
-                // Category filter
                 if (selectedCat !== '') {
                     var ids = (card.dataset.categoryIds || '').split(',');
                     catMatch = ids.indexOf(selectedCat) !== -1;
                 }
 
-                // Year filter — explicit dropdown selection
                 if (selectedYear !== '') {
                     yearMatch = card.dataset.year === selectedYear;
                 } else {
-                    // No dropdown selection — apply context-based default range
                     if (pageContext === 'archives') {
-                        // Archives: only show archiveMaxYear (e.g. 2024) and before
                         yearMatch = cardYear <= archiveMaxYear;
                     } else {
-                        // Resources / topics / news: only show current + prior year
                         yearMatch = (cardYear === currentYear || cardYear === priorYear);
                     }
                 }
 
-                var visible = catMatch && yearMatch;
-                card.style.display = visible ? '' : 'none';
-                if (visible) anyVisible = true;
+                card.dataset.filterVisible = (catMatch && yearMatch) ? 'true' : 'false';
             });
 
-            var noResults = document.getElementById('no-results-message');
-            if (noResults) noResults.style.display = anyVisible ? 'none' : '';
-
-            // ── Sort visible cards by date descending (newest first) ──────────
             var grid = document.getElementById('resource-grid-container');
-            if (grid && anyVisible) {
+            if (grid) {
                 var allCards = Array.prototype.slice.call(grid.querySelectorAll('.resource-card'));
                 allCards.sort(function (a, b) {
                     var da = a.dataset.date || '';
@@ -173,11 +151,89 @@
                 allCards.forEach(function (card) { grid.appendChild(card); });
             }
 
-            // Show/hide clear button
             var btn = document.getElementById('clear-filters');
             if (btn) {
                 btn.style.display = (selectedCat !== '' || selectedYear !== '') ? '' : 'none';
             }
+
+            currentPage = 1;
+            renderPage();
+        }
+
+        function ensurePaginationContainer() {
+            if (document.getElementById('mtf-pagination')) return;
+            var nav = document.createElement('nav');
+            nav.id = 'mtf-pagination';
+            nav.className = 'pagination';
+            var noResults = document.getElementById('no-results-message');
+            var grid      = document.getElementById('resource-grid-container');
+            if (noResults && noResults.parentNode) {
+                noResults.parentNode.insertBefore(nav, noResults.nextSibling);
+            } else if (grid && grid.parentNode) {
+                grid.parentNode.insertBefore(nav, grid.nextSibling);
+            }
+        }
+
+        function renderPage() {
+            var allCards     = Array.prototype.slice.call(document.querySelectorAll('.resource-card'));
+            var visibleCards = allCards.filter(function (c) { return c.dataset.filterVisible === 'true'; });
+            var totalVisible = visibleCards.length;
+            var totalPages   = Math.max(1, Math.ceil(totalVisible / CARDS_PER_PAGE));
+
+            if (currentPage > totalPages) currentPage = 1;
+
+            var startIdx = (currentPage - 1) * CARDS_PER_PAGE;
+            var endIdx   = startIdx + CARDS_PER_PAGE;
+
+            allCards.forEach(function (card) { card.style.display = 'none'; });
+            visibleCards.forEach(function (card, i) {
+                card.style.display = (i >= startIdx && i < endIdx) ? '' : 'none';
+            });
+
+            var noResults = document.getElementById('no-results-message');
+            if (noResults) noResults.style.display = totalVisible === 0 ? '' : 'none';
+
+            renderPaginationNav(totalPages, totalVisible);
+        }
+
+        function renderPaginationNav(totalPages, totalVisible) {
+            var nav = document.getElementById('mtf-pagination');
+            if (!nav) return;
+
+            if (totalPages <= 1) {
+                nav.innerHTML = '';
+                return;
+            }
+
+            var html = '';
+
+            if (currentPage > 1) {
+                html += '<a class="prev page-numbers" href="#" data-page="' + (currentPage - 1) + '">« Previous</a>';
+            }
+
+            for (var p = 1; p <= totalPages; p++) {
+                if (p === currentPage) {
+                    html += '<span aria-current="page" class="page-numbers current">' + p + '</span>';
+                } else {
+                    html += '<a class="page-numbers" href="#" data-page="' + p + '">' + p + '</a>';
+                }
+            }
+
+            if (currentPage < totalPages) {
+                html += '<a class="next page-numbers" href="#" data-page="' + (currentPage + 1) + '">Next »</a>';
+            }
+
+            nav.innerHTML = html;
+
+            nav.querySelectorAll('a[data-page]').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    currentPage = parseInt(this.dataset.page);
+                    renderPage();
+                    var section = document.getElementById('resourcesection');
+                    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
         }
     };
 
@@ -188,8 +244,6 @@
     }
 
 })();
-
-// ── Global helpers ────────────────────────────────────────────────────────────
 
 function opencategorylist(thischild, ele) {
     if (!thischild) return;
