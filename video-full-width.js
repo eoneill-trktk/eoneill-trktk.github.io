@@ -1,7 +1,7 @@
 (function() {
   const url = window.location.href;
 
-  if (url.includes('resources') || url.includes('news')) {
+  if (url.includes('resource') || url.includes('new')) {
     const iframes = document.querySelectorAll('iframe[src*="youtube.com/embed"]');
 
     if (!iframes.length) return;
