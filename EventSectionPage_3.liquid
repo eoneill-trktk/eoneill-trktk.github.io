@@ -1,0 +1,98 @@
+{% assign templatePath = "includes/SiteHeaderLayout.liquid" | get_templatepath %}
+{% include templatePath
+  , Model: Model %}
+
+{%- comment %} ── Page context detection via URLSegment — no PageListingModel dependency ── {%- endcomment %}
+{%- assign urlSegment    = Model.CurrentPage.URLSegment | downcase -%}
+{%- assign parentPage    = ContentLoader.Get(Model.CurrentPage.ParentLink) -%}
+{%- assign parentSegment = "" -%}
+{%- if parentPage != null -%}
+  {%- assign parentSegment = parentPage.URLSegment | downcase -%}
+{%- endif -%}
+
+{%- assign pageContext = "resources" -%}
+{%- if urlSegment == "resource-library-archives" -%}
+  {%- assign pageContext = "archives" -%}
+{%- elsif parentSegment == "topics" -%}
+  {%- assign pageContext = "topics" -%}
+{%- elsif parentSegment == "category" or parentSegment == "categories" -%}
+  {%- assign pageContext = "category" -%}
+{%- elsif urlSegment == "all-mtf-news" or parentSegment == "all-mtf-news" -%}
+  {%- assign pageContext = "news" -%}
+{%- endif -%}
+
+<main id="main" class="site-main clean-n-simple">
+  <section>
+    <div class="main-content grid-container">
+      {%- if Model.PageTitle != null or CmsContext.IsInEditMode -%}
+        <div class="zak-page-header zak-style-1">
+          <div class="zak-container">
+            <div class="zak-row">
+              <div class="zak-page-header__title">
+                {%- if pageContext == "topics" -%}
+                  <span class="page-context-pill page-context-pill--topic">TOPIC</span>
+                {%- elsif pageContext == "category" -%}
+                  <span class="page-context-pill page-context-pill--category">CATEGORY</span>
+                {%- endif -%}
+                <h1 class="zak-page-title">
+                  <span {{ CmsHelper.EditAttributes("PageTitle") }}>{{ Model.PageTitle }}</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+      {{ Property.For(Model=Model.MainContentArea
+        , PropertyName = "MainContentArea"
+        , HasContainer=false
+        , UseItemContainer=false) }}
+
+      <div id="resourcesection" class="resource-list standard-width">
+        <style>
+          #resource-grid-container { opacity: 0; transition: opacity 0.15s ease-in; }
+          #resource-grid-container.js-ready { opacity: 1; }
+        </style>
+
+        {% assign templatePath = "includes/events/eventHeader.liquid" | get_templatepath %}
+        {% include templatePath
+          , Model: Model
+          , pageContext: pageContext %}
+
+        {%- if pageContext == "topics" -%}
+          {% assign templatePath = "includes/events/TopicListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model %}
+
+        {%- elsif pageContext == "category" -%}
+          {% assign templatePath = "includes/events/CategoryListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model %}
+
+        {%- elsif pageContext == "news" -%}
+          {% assign templatePath = "includes/events/NewsListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model.ExtendedPageProperties["PageListingModel"] %}
+
+        {%- elsif pageContext == "archives" -%}
+          {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model.ExtendedPageProperties["PageListingModel"] %}
+
+        {%- else -%}
+          {% assign templatePath = "includes/events/EventListView.liquid" | get_templatepath %}
+          {% include templatePath
+            , Model: Model.ExtendedPageProperties["PageListingModel"] %}
+        {%- endif -%}
+
+      </div>
+
+    </div>
+    {% assign templatePath = "includes/RelatedLinks.liquid" | get_templatepath %}
+    {% include templatePath
+      , Model: Model.RelatedLinks %}
+  </section>
+</main>
+
+{% assign templatePath = "includes/footer.liquid" | get_templatepath %}
+{% include templatePath
+  , Model: Model %}
