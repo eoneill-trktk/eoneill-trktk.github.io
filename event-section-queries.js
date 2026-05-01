@@ -10,14 +10,10 @@
         var path = window.location.href.split('?')[0];
 
         var qd = {};
-        if (location.search) {
-            location.search.substr(1).split("&").forEach(function (item) {
-                var s = item.split("="),
-                    k = s[0],
-                    v = s[1] && decodeURIComponent(s[1]);
-                (qd[k] = qd[k] || []).push(v);
-            });
-        }
+        var params = new URLSearchParams(location.search);
+        params.forEach(function(v, k) {
+            (qd[k] = qd[k] || []).push(v);
+        });
 
         var form        = document.getElementById('resource-filter-form');
         var pageContext = form ? form.dataset.pageContext  : 'resources';
@@ -122,11 +118,11 @@
 
         function cleanUrl() {
             if (!window.history || !window.history.replaceState) return;
-            var params = new URLSearchParams(window.location.search);
-            params.delete('viewType');
-            params.delete('startDate');
+            var urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete('viewType');
+            urlParams.delete('startDate');
             var clean = window.location.pathname;
-            if (params.toString()) clean += '?' + params.toString();
+            if (urlParams.toString()) clean += '?' + urlParams.toString();
             window.history.replaceState({}, '', clean);
         }
 
