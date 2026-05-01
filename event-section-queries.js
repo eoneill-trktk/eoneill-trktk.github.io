@@ -46,10 +46,21 @@
         if ((pageContext === 'topics' || pageContext === 'category') && topicSlug !== '') {
             if (catSelect) {
                 var opts = catSelect.querySelectorAll('option[data-slug]');
+                var matched = false;
                 for (var i = 0; i < opts.length; i++) {
                     if (opts[i].dataset.slug === topicSlug) {
                         catSelect.value = opts[i].value;
+                        matched = true;
                         break;
+                    }
+                }
+                if (!matched) {
+                    var singularSlug = topicSlug.replace(/s$/, '');
+                    for (var i = 0; i < opts.length; i++) {
+                        if (opts[i].dataset.slug === singularSlug) {
+                            catSelect.value = opts[i].value;
+                            break;
+                        }
                     }
                 }
             }
