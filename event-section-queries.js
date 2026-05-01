@@ -26,17 +26,19 @@
         var priorYear   = currentYear - 1;
         var archiveMaxYear = currentYear - 2;
 
-        if (!qd.startDate || qd.startDate[0] === '') {
-            var redirectUrl = path + '?viewType=list&startDate=2020-01-01';
-            if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
-                redirectUrl += '&searchTerm=' + encodeURIComponent(qd.searchTerm[0]);
+        if (pageContext !== 'archives' && pageContext !== 'topics' && pageContext !== 'category') {
+            if (!qd.startDate || qd.startDate[0] === '') {
+                var redirectUrl = path + '?viewType=list&startDate=2020-01-01';
+                if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
+                    redirectUrl += '&searchTerm=' + encodeURIComponent(qd.searchTerm[0]);
+                }
+                window.location.replace(redirectUrl);
+                return;
             }
-            window.location.replace(redirectUrl);
-            return;
         }
 
-        var catSelect  = document.getElementById('category-filter');
-        var yearSelect = document.getElementById('year-filter');
+        var catSelect   = document.getElementById('category-filter');
+        var yearSelect  = document.getElementById('year-filter');
         var searchInput = document.getElementById('search-filter');
 
         if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
@@ -89,6 +91,13 @@
         revealGrid();
         cleanUrl();
 
+        if (form && (pageContext === 'archives' || pageContext === 'topics' || pageContext === 'category')) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                applyFilters();
+            });
+        }
+
         if (catSelect)  catSelect.addEventListener('change',  function () { applyFilters(); });
         if (yearSelect) yearSelect.addEventListener('change', function () { applyFilters(); });
 
@@ -100,7 +109,9 @@
                 if (yearSelect)  yearSelect.value = '';
                 if (searchInput) searchInput.value = '';
                 applyFilters();
-                window.location.replace(path + '?viewType=list&startDate=2020-01-01');
+                if (pageContext !== 'archives' && pageContext !== 'topics' && pageContext !== 'category') {
+                    window.location.replace(path + '?viewType=list&startDate=2020-01-01');
+                }
             });
         }
 
@@ -172,8 +183,8 @@
 
             var btn = document.getElementById('clear-filters');
             if (btn) {
-                var searchTerm = searchInput ? searchInput.value.trim() : '';
-                btn.style.display = (selectedCat !== '' || selectedYear !== '' || searchTerm !== '') ? '' : 'none';
+                var currentSearch = searchInput ? searchInput.value.trim() : '';
+                btn.style.display = (selectedCat !== '' || selectedYear !== '' || currentSearch !== '') ? '' : 'none';
             }
 
             currentPage = 1;
