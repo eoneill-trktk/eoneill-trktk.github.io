@@ -132,6 +132,8 @@
                 } else {
                     if (pageContext === 'archives') {
                         yearMatch = cardYear <= archiveMaxYear;
+                    } else if (pageContext === 'topics') {
+                        yearMatch = true;
                     } else {
                         yearMatch = (cardYear === currentYear || cardYear === priorYear);
                     }
