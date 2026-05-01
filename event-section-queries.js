@@ -37,9 +37,9 @@
 
         var catSelect  = document.getElementById('category-filter');
         var yearSelect = document.getElementById('year-filter');
+        var searchInput = document.getElementById('search-filter');
 
         if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
-            var searchInput = document.getElementById('search-filter');
             if (searchInput) searchInput.value = qd.searchTerm[0];
         }
 
@@ -76,7 +76,8 @@
             if (yearSelect) yearSelect.value = activeYear;
         }
 
-        var hasFilters = (qd.searchTerm && qd.searchTerm[0] !== '') ||
+        var searchTermFromUrl = (qd.searchTerm && qd.searchTerm[0]) ? qd.searchTerm[0] : '';
+        var hasFilters = (searchTermFromUrl !== '') ||
                          (catSelect && catSelect.value !== '') ||
                          (activeYear !== '');
         var clearBtn = document.getElementById('clear-filters');
@@ -95,14 +96,11 @@
         if (clearBtn2) {
             clearBtn2.addEventListener('click', function (e) {
                 e.preventDefault();
-                if (catSelect)  catSelect.value = '';
-                if (yearSelect) yearSelect.value = '';
+                if (catSelect)   catSelect.value = '';
+                if (yearSelect)  yearSelect.value = '';
+                if (searchInput) searchInput.value = '';
                 applyFilters();
-                var searchInput = document.getElementById('search-filter');
-                if (searchInput && searchInput.value !== '') {
-                    searchInput.value = '';
-                    window.location.replace(path + '?viewType=list&startDate=2020-01-01');
-                }
+                window.location.replace(path + '?viewType=list&startDate=2020-01-01');
             });
         }
 
@@ -126,12 +124,14 @@
         function applyFilters() {
             var selectedCat  = catSelect  ? catSelect.value  : '';
             var selectedYear = yearSelect ? yearSelect.value : '';
+            var searchTerm   = searchInput ? searchInput.value.trim().toLowerCase() : '';
             var cards = document.querySelectorAll('.resource-card');
 
             cards.forEach(function (card) {
-                var catMatch  = true;
-                var yearMatch = true;
-                var cardYear  = parseInt(card.dataset.year) || 0;
+                var catMatch    = true;
+                var yearMatch   = true;
+                var searchMatch = true;
+                var cardYear    = parseInt(card.dataset.year) || 0;
 
                 if (selectedCat !== '') {
                     var ids = (card.dataset.categoryIds || '').split(',');
@@ -150,7 +150,13 @@
                     }
                 }
 
-                card.dataset.filterVisible = (catMatch && yearMatch) ? 'true' : 'false';
+                if (searchTerm !== '') {
+                    var title   = (card.dataset.title   || '').toLowerCase();
+                    var excerpt = (card.dataset.excerpt || '').toLowerCase();
+                    searchMatch = title.includes(searchTerm) || excerpt.includes(searchTerm);
+                }
+
+                card.dataset.filterVisible = (catMatch && yearMatch && searchMatch) ? 'true' : 'false';
             });
 
             var grid = document.getElementById('resource-grid-container');
@@ -166,7 +172,8 @@
 
             var btn = document.getElementById('clear-filters');
             if (btn) {
-                btn.style.display = (selectedCat !== '' || selectedYear !== '') ? '' : 'none';
+                var searchTerm = searchInput ? searchInput.value.trim() : '';
+                btn.style.display = (selectedCat !== '' || selectedYear !== '' || searchTerm !== '') ? '' : 'none';
             }
 
             currentPage = 1;
