@@ -77,6 +77,8 @@
 
       buildDots();
       flkty.resize();
+      flickityEl.classList.add('is-ready'); // add this
+
     });
   }
 
