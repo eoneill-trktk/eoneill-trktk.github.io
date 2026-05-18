@@ -3,6 +3,18 @@
 
   if (!window.location.pathname.includes('our-philosophy')) return;
 
+  function waitForElement(selector, callback) {
+    var el = document.querySelector(selector);
+    if (el) { callback(); return; }
+    var observer = new MutationObserver(function () {
+      if (document.querySelector(selector)) {
+        observer.disconnect();
+        callback();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
   function init() {
     var carousels = document.querySelectorAll('.zen-carousel');
     if (!carousels.length) return;
@@ -20,7 +32,6 @@
       var autoPlayTimer = null;
       var autoPlayDelay = 8000;
 
-      // Respect whichever slide Liquid marked is-active on render
       slides.forEach(function (slide, i) {
         if (slide.classList.contains('is-active')) current = i;
       });
@@ -91,13 +102,16 @@
 
       wireDots();
       startAutoPlay();
+      carousel.classList.add('js-ready');
     });
   }
 
-  if (document.readyState === 'complete') {
-    init();
-  } else {
-    window.addEventListener('load', init);
-  }
+  waitForElement('.zen-carousel', function () {
+    if (document.readyState === 'complete') {
+      init();
+    } else {
+      window.addEventListener('load', init);
+    }
+  });
 
 }());
