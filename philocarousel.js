@@ -30,7 +30,7 @@
       var count         = slides.length;
       var current       = 0;
       var autoPlayTimer = null;
-      var autoPlayDelay = 8000;
+      var autoPlayDelay = 20000;
 
       slides.forEach(function (slide, i) {
         if (slide.classList.contains('is-active')) current = i;
@@ -97,16 +97,12 @@
         });
       }
 
-      carousel.addEventListener('mouseenter', stopAutoPlay);
-      carousel.addEventListener('mouseleave', startAutoPlay);
-
       wireDots();
       startAutoPlay();
       carousel.classList.add('js-ready');
     });
   }
 
-  // After:
   waitForElement('.zen-carousel', init);
 
 }());
