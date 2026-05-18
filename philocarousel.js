@@ -106,12 +106,7 @@
     });
   }
 
-  waitForElement('.zen-carousel', function () {
-    if (document.readyState === 'complete') {
-      init();
-    } else {
-      window.addEventListener('load', init);
-    }
-  });
+  // After:
+  waitForElement('.zen-carousel', init);
 
 }());
