@@ -14,17 +14,17 @@
       if (!flickityEl) return;
 
       var flkty = new Flickity(flickityEl, {
-        cellAlign:          'left',
-        contain:             true,
-        wrapAround:          true,
-        autoPlay:            10000,
-        pauseAutoPlayOnHover: true,
-        prevNextButtons:     false,
-        pageDots:            false,
-        friction:            1,
-        selectedAttraction:  1,
-        adaptiveHeight:      false
-      });
+        cellAlign:            'left',
+        contain:               true,
+        wrapAround:            true,
+        autoPlay:              10000,
+        pauseAutoPlayOnHover:  true,
+        prevNextButtons:       false,
+        pageDots:              false,
+        friction:              0.28,
+        selectedAttraction:    0.025,
+        adaptiveHeight:        false
+        });
 
       function buildDots() {
         if (!dotsWrap) return;
