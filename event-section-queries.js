@@ -206,19 +206,11 @@
         }
 
         function pushPageToUrl(p) {
-            if (!window.history || !window.history.pushState) return;
-            var urlParams = new URLSearchParams(window.location.search);
-            urlParams.delete('viewType');
-            urlParams.delete('startDate');
-            if (p <= 1) {
-                urlParams.delete('page');
-            } else {
-                urlParams.set('page', p);
-            }
-            var newUrl = window.location.pathname;
-            if (urlParams.toString()) newUrl += '?' + urlParams.toString();
-            window.history.pushState({ page: p }, '', newUrl);
-        }
+    if (!window.history || !window.history.pushState) return;
+    var newUrl = window.location.pathname;
+    if (p > 1) newUrl += '?page=' + p;
+    window.history.pushState({ page: p }, '', newUrl);
+}
 
         function renderPage() {
             var allCards     = Array.prototype.slice.call(document.querySelectorAll('.resource-card'));
