@@ -7,10 +7,10 @@
         if (_initialized) return;
         _initialized = true;
 
-        var path = window.location.href.split('?')[0];
+        var path = window.location.pathname;
 
-        var qd = {};
         var params = new URLSearchParams(location.search);
+        var qd = {};
         params.forEach(function(v, k) {
             (qd[k] = qd[k] || []).push(v);
         });
@@ -29,6 +29,12 @@
             }
             window.location.replace(redirectUrl);
             return;
+        }
+
+        // Read page from URL on load
+        if (qd.page && qd.page[0]) {
+            var parsed = parseInt(qd.page[0]);
+            if (!isNaN(parsed) && parsed > 0) currentPage = parsed;
         }
 
         var catSelect   = document.getElementById('category-filter');
@@ -80,7 +86,6 @@
         if (clearBtn && hasFilters) clearBtn.style.display = '';
 
         ensurePaginationContainer();
-
         applyFilters();
         revealGrid();
         cleanUrl();
@@ -88,12 +93,13 @@
         if (form && (pageContext === 'archives' || pageContext === 'topics' || pageContext === 'category')) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
+                currentPage = 1;
                 applyFilters();
             });
         }
 
-        if (catSelect)  catSelect.addEventListener('change',  function () { applyFilters(); });
-        if (yearSelect) yearSelect.addEventListener('change', function () { applyFilters(); });
+        if (catSelect)  catSelect.addEventListener('change',  function () { currentPage = 1; applyFilters(); });
+        if (yearSelect) yearSelect.addEventListener('change', function () { currentPage = 1; applyFilters(); });
 
         var clearBtn2 = document.getElementById('clear-filters');
         if (clearBtn2) {
@@ -102,6 +108,7 @@
                 if (catSelect)   catSelect.value = '';
                 if (yearSelect)  yearSelect.value = '';
                 if (searchInput) searchInput.value = '';
+                currentPage = 1;
                 applyFilters();
                 window.location.replace(path + '?viewType=list&startDate=2020-01-01');
             });
@@ -117,6 +124,8 @@
             var urlParams = new URLSearchParams(window.location.search);
             urlParams.delete('viewType');
             urlParams.delete('startDate');
+            // Keep page param if > 1
+            if (currentPage <= 1) urlParams.delete('page');
             var clean = window.location.pathname;
             if (urlParams.toString()) clean += '?' + urlParams.toString();
             window.history.replaceState({}, '', clean);
@@ -179,7 +188,6 @@
                 btn.style.display = (selectedCat !== '' || selectedYear !== '' || currentSearch !== '') ? '' : 'none';
             }
 
-            currentPage = 1;
             renderPage();
         }
 
@@ -195,6 +203,21 @@
             } else if (grid && grid.parentNode) {
                 grid.parentNode.insertBefore(nav, grid.nextSibling);
             }
+        }
+
+        function pushPageToUrl(p) {
+            if (!window.history || !window.history.pushState) return;
+            var urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete('viewType');
+            urlParams.delete('startDate');
+            if (p <= 1) {
+                urlParams.delete('page');
+            } else {
+                urlParams.set('page', p);
+            }
+            var newUrl = window.location.pathname;
+            if (urlParams.toString()) newUrl += '?' + urlParams.toString();
+            window.history.pushState({ page: p }, '', newUrl);
         }
 
         function renderPage() {
@@ -252,12 +275,20 @@
                 link.addEventListener('click', function (e) {
                     e.preventDefault();
                     currentPage = parseInt(this.dataset.page);
+                    pushPageToUrl(currentPage);
                     renderPage();
                     var section = document.getElementById('resourcesection');
                     if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             });
         }
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', function (e) {
+            var p = (e.state && e.state.page) ? e.state.page : 1;
+            currentPage = p;
+            renderPage();
+        });
     };
 
     if (document.readyState === "complete" || document.readyState === "interactive") {
