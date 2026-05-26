@@ -153,6 +153,8 @@
                 e.preventDefault();
                 if (pageContext === 'category') {
                     window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
+                } else if (pageContext === 'topics') {
+                    window.location.replace('/resources/?viewType=list&startDate=2020-01-01');
                 } else {
                     window.location.replace(path + '?viewType=list&startDate=2020-01-01');
                 }
