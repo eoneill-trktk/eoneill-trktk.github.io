@@ -27,6 +27,10 @@
             if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
                 redirectUrl += '&searchTerm=' + encodeURIComponent(qd.searchTerm[0]);
             }
+            // Preserve year through the redirect so it isn't lost
+            if (qd.year && qd.year[0] && qd.year[0] !== '') {
+                redirectUrl += '&year=' + encodeURIComponent(qd.year[0]);
+            }
             window.location.replace(redirectUrl);
             return;
         }
@@ -81,8 +85,7 @@
         var searchTermFromUrl = (qd.searchTerm && qd.searchTerm[0]) ? qd.searchTerm[0] : '';
 
         // ── Clear All visibility on load ────────────────────────────────────────
-        // For category and topics pages the pre-selected value is the page itself,
-        // not a user-applied filter — don't show Clear All until the user acts.
+        // category and topics: pre-selected value is the page context, not a user filter
         var hasFilters;
         if (pageContext === 'category' || pageContext === 'topics') {
             var initSlug = catSelect && catSelect.selectedIndex >= 0
@@ -106,22 +109,25 @@
         cleanUrl();
 
         // ── Submit handler ──────────────────────────────────────────────────────
-        if (form && (pageContext === 'archives' || pageContext === 'topics' || pageContext === 'category' || pageContext === 'news')) {
+        if (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                // For news and category pages, a selected category navigates to
-                // that category's own URL rather than filtering in place.
+                // news and category: category selection navigates to that category's URL,
+                // carrying year and searchTerm forward so they survive the startDate redirect
                 if ((pageContext === 'news' || pageContext === 'category') && catSelect) {
                     var selectedOpt = catSelect.options[catSelect.selectedIndex];
                     var slug = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
                     if (slug && slug !== topicSlug) {
-                        var dest = '/category/' + slug + '/';
-                        var params = [];
-                        if (yearSelect && yearSelect.value) params.push('year=' + encodeURIComponent(yearSelect.value));
-                        if (searchInput && searchInput.value.trim()) params.push('searchTerm=' + encodeURIComponent(searchInput.value.trim()));
-                        if (params.length) dest += '?' + params.join('&');
-                        window.location.href = dest;
+                        // Include startDate so the redirect doesn't fire and wipe our params
+                        var destParams = ['viewType=list', 'startDate=2020-01-01'];
+                        if (yearSelect && yearSelect.value) {
+                            destParams.push('year=' + encodeURIComponent(yearSelect.value));
+                        }
+                        if (searchInput && searchInput.value.trim()) {
+                            destParams.push('searchTerm=' + encodeURIComponent(searchInput.value.trim()));
+                        }
+                        window.location.href = '/category/' + slug + '/?' + destParams.join('&');
                         return;
                     }
                     if (!slug && pageContext === 'category') {
@@ -135,10 +141,7 @@
             });
         }
 
-        // ── Change listeners ────────────────────────────────────────────────────
-        // news and category contexts: no auto-filter on change — user must click Filter
-        if (catSelect  && pageContext !== 'news' && pageContext !== 'category') catSelect.addEventListener('change',  function () { currentPage = 1; applyFilters(); });
-        if (yearSelect && pageContext !== 'news' && pageContext !== 'category') yearSelect.addEventListener('change', function () { currentPage = 1; applyFilters(); });
+        // ── Change listeners removed — Filter button required on all pages ──────
 
         // ── Clear All ───────────────────────────────────────────────────────────
         var clearBtn2 = document.getElementById('clear-filters');
