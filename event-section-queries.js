@@ -90,17 +90,38 @@
         revealGrid();
         cleanUrl();
 
-        if (form && (pageContext === 'archives' || pageContext === 'topics' || pageContext === 'category')) {
+        // ── Submit handler ──────────────────────────────────────────────────────
+        if (form && (pageContext === 'archives' || pageContext === 'topics' || pageContext === 'category' || pageContext === 'news')) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
+
+                // For news and category pages, a selected category navigates to
+                // that category's own URL rather than filtering in place.
+                if ((pageContext === 'news' || pageContext === 'category') && catSelect) {
+                    var selectedOpt = catSelect.options[catSelect.selectedIndex];
+                    var slug = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
+                    if (slug) {
+                        window.location.href = '/category/' + slug + '/';
+                        return;
+                    }
+                    // Nothing selected on a category page → back to All MTF News
+                    if (pageContext === 'category') {
+                        window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
+                        return;
+                    }
+                }
+
                 currentPage = 1;
                 applyFilters();
             });
         }
 
-        if (catSelect)  catSelect.addEventListener('change',  function () { currentPage = 1; applyFilters(); });
-        if (yearSelect) yearSelect.addEventListener('change', function () { currentPage = 1; applyFilters(); });
+        // ── Change listeners ────────────────────────────────────────────────────
+        // news context: no auto-filter on change — user must click Filter
+        if (catSelect  && pageContext !== 'news') catSelect.addEventListener('change',  function () { currentPage = 1; applyFilters(); });
+        if (yearSelect && pageContext !== 'news') yearSelect.addEventListener('change', function () { currentPage = 1; applyFilters(); });
 
+        // ── Clear All ───────────────────────────────────────────────────────────
         var clearBtn2 = document.getElementById('clear-filters');
         if (clearBtn2) {
             clearBtn2.addEventListener('click', function (e) {
@@ -110,7 +131,12 @@
                 if (searchInput) searchInput.value = '';
                 currentPage = 1;
                 applyFilters();
-                window.location.replace(path + '?viewType=list&startDate=2020-01-01');
+                // Category pages clear back to All MTF News
+                if (pageContext === 'category') {
+                    window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
+                } else {
+                    window.location.replace(path + '?viewType=list&startDate=2020-01-01');
+                }
             });
         }
 
@@ -124,7 +150,6 @@
             var urlParams = new URLSearchParams(window.location.search);
             urlParams.delete('viewType');
             urlParams.delete('startDate');
-            // Keep page param if > 1
             if (currentPage <= 1) urlParams.delete('page');
             var clean = window.location.pathname;
             if (urlParams.toString()) clean += '?' + urlParams.toString();
@@ -206,11 +231,11 @@
         }
 
         function pushPageToUrl(p) {
-    if (!window.history || !window.history.pushState) return;
-    var newUrl = window.location.pathname;
-    if (p > 1) newUrl += '?page=' + p;
-    window.history.pushState({ page: p }, '', newUrl);
-}
+            if (!window.history || !window.history.pushState) return;
+            var newUrl = window.location.pathname;
+            if (p > 1) newUrl += '?page=' + p;
+            window.history.pushState({ page: p }, '', newUrl);
+        }
 
         function renderPage() {
             var allCards     = Array.prototype.slice.call(document.querySelectorAll('.resource-card'));
