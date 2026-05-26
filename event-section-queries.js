@@ -83,19 +83,9 @@
         var searchTermFromUrl = (qd.searchTerm && qd.searchTerm[0]) ? qd.searchTerm[0] : '';
 
         // ── Clear All visibility on load ────────────────────────────────────────
-        var hasFilters;
-        if (pageContext === 'category' || pageContext === 'topics') {
-            var initSlug = catSelect && catSelect.selectedIndex >= 0
-                ? (catSelect.options[catSelect.selectedIndex].getAttribute('data-slug') || '')
-                : '';
-            hasFilters = (searchTermFromUrl !== '') ||
-                         (initSlug !== '' && initSlug !== topicSlug) ||
-                         (activeYear !== '');
-        } else {
-            hasFilters = (searchTermFromUrl !== '') ||
-                         (catSelect && catSelect.value !== '') ||
-                         (activeYear !== '');
-        }
+        var hasFilters = (searchTermFromUrl !== '') ||
+                 (catSelect && catSelect.value !== '') ||
+                 (activeYear !== '');
         var clearBtn = document.getElementById('clear-filters');
         if (clearBtn && hasFilters) clearBtn.style.display = '';
 
@@ -231,19 +221,14 @@
             // ── Clear All visibility after filter runs ──────────────────────────
             var btn = document.getElementById('clear-filters');
             if (btn) {
-                var currentSearch = searchInput ? searchInput.value.trim() : '';
-                var showClear;
                 if (pageContext === 'category' || pageContext === 'topics') {
-                    var currentSlug = catSelect && catSelect.selectedIndex >= 0
-                        ? (catSelect.options[catSelect.selectedIndex].getAttribute('data-slug') || '')
-                        : '';
-                    showClear = currentSearch !== '' ||
-                                (currentSlug !== '' && currentSlug !== topicSlug) ||
-                                selectedYear !== '';
+                    // Always visible on these pages — landing here is itself a navigational choice
+                    btn.style.display = '';
                 } else {
-                    showClear = selectedCat !== '' || selectedYear !== '' || currentSearch !== '';
+                    var currentSearch = searchInput ? searchInput.value.trim() : '';
+                    var showClear = selectedCat !== '' || selectedYear !== '' || currentSearch !== '';
+                    btn.style.display = showClear ? '' : 'none';
                 }
-                btn.style.display = showClear ? '' : 'none';
             }
 
             renderPage();
