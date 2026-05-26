@@ -116,7 +116,12 @@
                     var selectedOpt = catSelect.options[catSelect.selectedIndex];
                     var slug = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
                     if (slug && slug !== topicSlug) {
-                        window.location.href = '/category/' + slug + '/';
+                        var dest = '/category/' + slug + '/';
+                        var params = [];
+                        if (yearSelect && yearSelect.value) params.push('year=' + encodeURIComponent(yearSelect.value));
+                        if (searchInput && searchInput.value.trim()) params.push('searchTerm=' + encodeURIComponent(searchInput.value.trim()));
+                        if (params.length) dest += '?' + params.join('&');
+                        window.location.href = dest;
                         return;
                     }
                     if (!slug && pageContext === 'category') {
