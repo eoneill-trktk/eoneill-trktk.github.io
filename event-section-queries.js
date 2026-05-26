@@ -22,15 +22,12 @@
         var priorYear   = currentYear - 1;
         var archiveMaxYear = currentYear - 2;
 
+        // startDate redirect — preserves all meaningful params so back/bookmark navigation works
         if (!qd.startDate || qd.startDate[0] === '') {
             var redirectUrl = path + '?viewType=list&startDate=2020-01-01';
-            if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
-                redirectUrl += '&searchTerm=' + encodeURIComponent(qd.searchTerm[0]);
-            }
-            // Preserve year through the redirect so it isn't lost
-            if (qd.year && qd.year[0] && qd.year[0] !== '') {
-                redirectUrl += '&year=' + encodeURIComponent(qd.year[0]);
-            }
+            if (qd.searchTerm    && qd.searchTerm[0]    && qd.searchTerm[0]    !== '') redirectUrl += '&searchTerm='    + encodeURIComponent(qd.searchTerm[0]);
+            if (qd.year          && qd.year[0]          && qd.year[0]          !== '') redirectUrl += '&year='          + encodeURIComponent(qd.year[0]);
+            if (qd.categoryFilter && qd.categoryFilter[0] && qd.categoryFilter[0] !== '') redirectUrl += '&categoryFilter=' + encodeURIComponent(qd.categoryFilter[0]);
             window.location.replace(redirectUrl);
             return;
         }
@@ -45,6 +42,7 @@
         var yearSelect  = document.getElementById('year-filter');
         var searchInput = document.getElementById('search-filter');
 
+        // Restore form state from URL params
         if (qd.searchTerm && qd.searchTerm[0] && qd.searchTerm[0] !== '') {
             if (searchInput) searchInput.value = qd.searchTerm[0];
         }
@@ -85,7 +83,6 @@
         var searchTermFromUrl = (qd.searchTerm && qd.searchTerm[0]) ? qd.searchTerm[0] : '';
 
         // ── Clear All visibility on load ────────────────────────────────────────
-        // category and topics: pre-selected value is the page context, not a user filter
         var hasFilters;
         if (pageContext === 'category' || pageContext === 'topics') {
             var initSlug = catSelect && catSelect.selectedIndex >= 0
@@ -99,7 +96,6 @@
                          (catSelect && catSelect.value !== '') ||
                          (activeYear !== '');
         }
-
         var clearBtn = document.getElementById('clear-filters');
         if (clearBtn && hasFilters) clearBtn.style.display = '';
 
@@ -108,51 +104,53 @@
         revealGrid();
         cleanUrl();
 
-        // ── Submit handler ──────────────────────────────────────────────────────
+        // ── Submit handler — always navigates with URL params ───────────────────
         if (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                // news and category: category selection navigates to that category's URL,
-                // carrying year and searchTerm forward so they survive the startDate redirect
-                if ((pageContext === 'news' || pageContext === 'category') && catSelect) {
-                    var selectedOpt = catSelect.options[catSelect.selectedIndex];
-                    var slug = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
+                var selectedOpt = catSelect ? catSelect.options[catSelect.selectedIndex] : null;
+                var slug   = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
+                var catVal = catSelect ? catSelect.value : '';
+                var yearVal   = yearSelect  ? yearSelect.value        : '';
+                var searchVal = searchInput ? searchInput.value.trim() : '';
+
+                // Base params that bypass the startDate redirect on the destination page
+                var destParams = ['viewType=list', 'startDate=2020-01-01'];
+                if (yearVal)   destParams.push('year='       + encodeURIComponent(yearVal));
+                if (searchVal) destParams.push('searchTerm=' + encodeURIComponent(searchVal));
+
+                // news / category: category dropdown drives navigation to category URL
+                if (pageContext === 'news' || pageContext === 'category') {
                     if (slug && slug !== topicSlug) {
-                        // Include startDate so the redirect doesn't fire and wipe our params
-                        var destParams = ['viewType=list', 'startDate=2020-01-01'];
-                        if (yearSelect && yearSelect.value) {
-                            destParams.push('year=' + encodeURIComponent(yearSelect.value));
-                        }
-                        if (searchInput && searchInput.value.trim()) {
-                            destParams.push('searchTerm=' + encodeURIComponent(searchInput.value.trim()));
-                        }
+                        // Different category selected — go to that category's page
                         window.location.href = '/category/' + slug + '/?' + destParams.join('&');
                         return;
                     }
                     if (!slug && pageContext === 'category') {
-                        window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
+                        // "All MTF News" selected on a category page — back to news landing
+                        window.location.replace('/all-mtf-news/?' + destParams.join('&'));
                         return;
                     }
+                    // Same category (or no category change on news landing): reload with params
+                    window.location.href = path + '?' + destParams.join('&');
+                    return;
                 }
 
-                currentPage = 1;
-                applyFilters();
+                // All other contexts (topics, resources, archives):
+                // reload current page with params so state is in the URL
+                if (catVal) destParams.push('categoryFilter=' + encodeURIComponent(catVal));
+                window.location.href = path + '?' + destParams.join('&');
             });
         }
 
-        // ── Change listeners removed — Filter button required on all pages ──────
+        // ── Change listeners removed — Filter/Enter required everywhere ─────────
 
         // ── Clear All ───────────────────────────────────────────────────────────
         var clearBtn2 = document.getElementById('clear-filters');
         if (clearBtn2) {
             clearBtn2.addEventListener('click', function (e) {
                 e.preventDefault();
-                if (catSelect)   catSelect.value = '';
-                if (yearSelect)  yearSelect.value = '';
-                if (searchInput) searchInput.value = '';
-                currentPage = 1;
-                applyFilters();
                 if (pageContext === 'category') {
                     window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
                 } else {
