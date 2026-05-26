@@ -79,9 +79,24 @@
         }
 
         var searchTermFromUrl = (qd.searchTerm && qd.searchTerm[0]) ? qd.searchTerm[0] : '';
-        var hasFilters = (searchTermFromUrl !== '') ||
+
+        // ── Clear All visibility on load ────────────────────────────────────────
+        // For category and topics pages the pre-selected value is the page itself,
+        // not a user-applied filter — don't show Clear All until the user acts.
+        var hasFilters;
+        if (pageContext === 'category' || pageContext === 'topics') {
+            var initSlug = catSelect && catSelect.selectedIndex >= 0
+                ? (catSelect.options[catSelect.selectedIndex].getAttribute('data-slug') || '')
+                : '';
+            hasFilters = (searchTermFromUrl !== '') ||
+                         (initSlug !== '' && initSlug !== topicSlug) ||
+                         (activeYear !== '');
+        } else {
+            hasFilters = (searchTermFromUrl !== '') ||
                          (catSelect && catSelect.value !== '') ||
                          (activeYear !== '');
+        }
+
         var clearBtn = document.getElementById('clear-filters');
         if (clearBtn && hasFilters) clearBtn.style.display = '';
 
@@ -98,28 +113,28 @@
                 // For news and category pages, a selected category navigates to
                 // that category's own URL rather than filtering in place.
                 if ((pageContext === 'news' || pageContext === 'category') && catSelect) {
-    var selectedOpt = catSelect.options[catSelect.selectedIndex];
-    var slug = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
-    if (slug && slug !== topicSlug) {
-        // Different category selected — navigate to it
-        window.location.href = '/category/' + slug + '/';
-        return;
-    }
-    if (!slug && pageContext === 'category') {
-        // "All MTF News" selected on a category page — back to landing
-        window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
-        return;
-    }
-}
-currentPage = 1;
-applyFilters();
+                    var selectedOpt = catSelect.options[catSelect.selectedIndex];
+                    var slug = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
+                    if (slug && slug !== topicSlug) {
+                        window.location.href = '/category/' + slug + '/';
+                        return;
+                    }
+                    if (!slug && pageContext === 'category') {
+                        window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
+                        return;
+                    }
+                }
+
+                currentPage = 1;
+                applyFilters();
             });
         }
 
         // ── Change listeners ────────────────────────────────────────────────────
-        // news context: no auto-filter on change — user must click Filter
+        // news and category contexts: no auto-filter on change — user must click Filter
         if (catSelect  && pageContext !== 'news' && pageContext !== 'category') catSelect.addEventListener('change',  function () { currentPage = 1; applyFilters(); });
         if (yearSelect && pageContext !== 'news' && pageContext !== 'category') yearSelect.addEventListener('change', function () { currentPage = 1; applyFilters(); });
+
         // ── Clear All ───────────────────────────────────────────────────────────
         var clearBtn2 = document.getElementById('clear-filters');
         if (clearBtn2) {
@@ -130,7 +145,6 @@ applyFilters();
                 if (searchInput) searchInput.value = '';
                 currentPage = 1;
                 applyFilters();
-                // Category pages clear back to All MTF News
                 if (pageContext === 'category') {
                     window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
                 } else {
@@ -206,10 +220,22 @@ applyFilters();
                 allCards.forEach(function (card) { grid.appendChild(card); });
             }
 
+            // ── Clear All visibility after filter runs ──────────────────────────
             var btn = document.getElementById('clear-filters');
             if (btn) {
                 var currentSearch = searchInput ? searchInput.value.trim() : '';
-                btn.style.display = (selectedCat !== '' || selectedYear !== '' || currentSearch !== '') ? '' : 'none';
+                var showClear;
+                if (pageContext === 'category' || pageContext === 'topics') {
+                    var currentSlug = catSelect && catSelect.selectedIndex >= 0
+                        ? (catSelect.options[catSelect.selectedIndex].getAttribute('data-slug') || '')
+                        : '';
+                    showClear = currentSearch !== '' ||
+                                (currentSlug !== '' && currentSlug !== topicSlug) ||
+                                selectedYear !== '';
+                } else {
+                    showClear = selectedCat !== '' || selectedYear !== '' || currentSearch !== '';
+                }
+                btn.style.display = showClear ? '' : 'none';
             }
 
             renderPage();
