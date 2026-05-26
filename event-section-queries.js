@@ -98,29 +98,28 @@
                 // For news and category pages, a selected category navigates to
                 // that category's own URL rather than filtering in place.
                 if ((pageContext === 'news' || pageContext === 'category') && catSelect) {
-                    var selectedOpt = catSelect.options[catSelect.selectedIndex];
-                    var slug = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
-                    if (slug) {
-                        window.location.href = '/category/' + slug + '/';
-                        return;
-                    }
-                    // Nothing selected on a category page → back to All MTF News
-                    if (pageContext === 'category') {
-                        window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
-                        return;
-                    }
-                }
-
-                currentPage = 1;
-                applyFilters();
+    var selectedOpt = catSelect.options[catSelect.selectedIndex];
+    var slug = selectedOpt ? (selectedOpt.getAttribute('data-slug') || '') : '';
+    if (slug && slug !== topicSlug) {
+        // Different category selected — navigate to it
+        window.location.href = '/category/' + slug + '/';
+        return;
+    }
+    if (!slug && pageContext === 'category') {
+        // "All MTF News" selected on a category page — back to landing
+        window.location.replace('/all-mtf-news/?viewType=list&startDate=2020-01-01');
+        return;
+    }
+}
+currentPage = 1;
+applyFilters();
             });
         }
 
         // ── Change listeners ────────────────────────────────────────────────────
         // news context: no auto-filter on change — user must click Filter
-        if (catSelect  && pageContext !== 'news') catSelect.addEventListener('change',  function () { currentPage = 1; applyFilters(); });
-        if (yearSelect && pageContext !== 'news') yearSelect.addEventListener('change', function () { currentPage = 1; applyFilters(); });
-
+        if (catSelect  && pageContext !== 'news' && pageContext !== 'category') catSelect.addEventListener('change',  function () { currentPage = 1; applyFilters(); });
+        if (yearSelect && pageContext !== 'news' && pageContext !== 'category') yearSelect.addEventListener('change', function () { currentPage = 1; applyFilters(); });
         // ── Clear All ───────────────────────────────────────────────────────────
         var clearBtn2 = document.getElementById('clear-filters');
         if (clearBtn2) {
