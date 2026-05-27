@@ -35,8 +35,12 @@
     target.innerHTML = '';
 
     // Sort newest-first once; filter results inherit this order.
-    allData.sort(function (a, b) { return b.date - a.date; });
-
+    allData.sort(function(a, b) {
+        var aFull = (a.service !== '' && a.type !== '') ? 1 : 0;
+        var bFull = (b.service !== '' && b.type !== '') ? 1 : 0;
+        if (bFull !== aFull) return bFull - aFull;
+        return b.date - a.date;
+    });
     // ── Restore state from URL ──────────────────────────────────────────────
     var qp          = new URLSearchParams(location.search);
     var initType    = qp.get('type')    || '';
