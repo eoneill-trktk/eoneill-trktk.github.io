@@ -28,6 +28,7 @@
             if (qd.searchTerm    && qd.searchTerm[0]    && qd.searchTerm[0]    !== '') redirectUrl += '&searchTerm='    + encodeURIComponent(qd.searchTerm[0]);
             if (qd.year          && qd.year[0]          && qd.year[0]          !== '') redirectUrl += '&year='          + encodeURIComponent(qd.year[0]);
             if (qd.categoryFilter && qd.categoryFilter[0] && qd.categoryFilter[0] !== '') redirectUrl += '&categoryFilter=' + encodeURIComponent(qd.categoryFilter[0]);
+            if (qd.page          && qd.page[0]          && parseInt(qd.page[0]) > 1)   redirectUrl += '&page='          + encodeURIComponent(qd.page[0]);
             window.location.replace(redirectUrl);
             return;
         }
