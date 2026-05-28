@@ -165,7 +165,7 @@
             if (currentPage <= 1) urlParams.delete('page');
             var clean = window.location.pathname;
             if (urlParams.toString()) clean += '?' + urlParams.toString();
-            window.history.replaceState({}, '', clean);
+                window.history.replaceState({ page: currentPage }, '', clean);
         }
 
         setTimeout(function () { revealGrid(); }, 1000);
@@ -321,7 +321,9 @@
 
         // Handle browser back/forward
         window.addEventListener('popstate', function (e) {
-            var p = (e.state && e.state.page) ? e.state.page : 1;
+            var urlParams = new URLSearchParams(window.location.search);
+            var urlPage = parseInt(urlParams.get('page') || '1', 10) || 1;
+            var p = (e.state && e.state.page) ? e.state.page : urlPage;
             currentPage = p;
             renderPage();
         });
