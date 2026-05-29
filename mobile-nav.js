@@ -12,7 +12,7 @@
                 if (navIconContainer !== null) toggleClass(navIconContainer, "open");
             });
 
-            // ── Sub-menu toggle handlers (buttons already rendered in HTML) ──
+            // ── Sub-menu toggle click handlers ───────────────────────────────
             document.querySelectorAll("#menu-header-menu > li.nav-item .sub-menu-toggle").forEach(function (btn) {
                 const parentLi = btn.closest("li.nav-item");
                 if (!parentLi) return;
