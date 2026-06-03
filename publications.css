@@ -9115,9 +9115,9 @@ h4,h5,h6 {
     margin-bottom: 20px
 }
 
-ol,ul {
+/* ol,ul {
     margin: 0 0 1.5em 3em
-}
+} */
 
 ul {
     list-style: disc
