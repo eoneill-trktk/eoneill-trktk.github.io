@@ -85,7 +85,9 @@ function insightsClearSelection() {
   window.location = url;
 }
 
-function insightsOpenFilter(thischild, ele) {
+function insightsOpenFilter(childId, ele) {
+  var thischild = document.getElementById(childId);
+  if (!thischild) return;
   if (thischild.classList.contains('closed')) {
     thischild.classList.remove('closed');
     thischild.classList.add('opened');
