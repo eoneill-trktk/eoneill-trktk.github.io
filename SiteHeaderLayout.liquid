@@ -1,0 +1,38 @@
+{%- assign headerclass = "site-header" -%}
+{%- if Model.CurrentPage.PageTypeName == "TenantStartPage" -%}
+   {%- assign headerclass = "site-header homepage" -%}
+{%- endif -%}
+<a href="#main" class="btn sr-only sr-only-focusable">Skip to content</a>
+<a href="#site-search-form" class="btn sr-only sr-only-focusable">Go to search</a>
+<a href="#menu-header-menu" class="btn sr-only sr-only-focusable">Go to main menu</a>
+<div class="fh-header-wrapper">
+<header class="{{ headerclass }}">
+
+    <div class="fh-branding">
+        <div class="block sitelogoblock" data-block-id="809469" data-content-id="809469" data-template-id="804645" id="site-logo">
+            <span class="img-container">
+                <a title="Open the website" href="/">
+                    <img class="site-logo fh-logotype" src="https://i.imgur.com/NIgUMbP.png" alt="fh_logo.png">
+                </a>
+            </span>
+        </div>
+    </div>
+
+    <div class="responsive-menu-toggle">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </div>
+
+    {% assign templatePath = "MainNavbar.liquid" | get_templatepath %}
+    {% include templatePath, Model: Model.PageMainMenu %}
+
+    <div class="fh-search-wrap" id="site-search-form">
+        {{ Property.For(Model=Model.MergedHeaderContent["site-search-form"]
+          , PropertyName = "SiteSearchForm"
+          , HasContainer=false
+          , UseItemContainer=false) }}
+    </div>
+
+</header>
+</div>

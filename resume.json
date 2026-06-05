@@ -1,0 +1,138 @@
+{
+  "selectedTemplate": 9,
+  "headings": {
+    "skills": "",
+    "awards": ""
+  },
+  "basics": {
+    "phone": "2674555383",
+    "website": "",
+    "location": {
+      "address": "Philadelphia, PA"
+    },
+    "name": "Eric O'Neill",
+    "email": "oneill.j.eric@gmail.com"
+  },
+  "education": [
+    {
+      "institution": "",
+      "location": "",
+      "area": "",
+      "studyType": "",
+      "startDate": "",
+      "endDate": "",
+      "gpa": ""
+    }
+  ],
+  "work": [
+    {
+      "highlights": [
+        "Lead, coordinate and regularly maintain web projects with key stakeholders",
+        "Creating A-Z web apps using the React framework, built on GCP and AWS cloud platforms, using CI/CD integration to deploy pages using Github source control",
+        "Shipping quality code with set guidelines including SEO, Data & Analytics, UI/UX best practices",
+        "Strong command of essential front-end web technologies, including HTML, CSS, Vanilla JavaScript, some JS Libraries, AJAX, JSON, DOM manipulation, accessibility, best practices, and standards"
+      ],
+      "company": "IKEA",
+      "startDate": "October 2023",
+      "endDate": "Present",
+      "location": "Conshohocken, PA",
+      "position": "Software Engineer"
+    },{
+      "highlights": [
+        "Ensure flawless A/B testing software development across several different platforms of the HBO Max streaming service (ie. testing eComm or in-app platforms, across a variety of countries within LATAM, EMEA, USA - coordinating with Project Managers, UX, analysts and other key stakeholders as needed)",
+        "Work both independently and collaboratively to set up, develop, code review, and QA complex A/B and multivariate testing, using tools including but not limited to React, Node.js, HTML and SCSS",
+        "Leveraging Optimizely, Google Analytics to ensure accurate setup and development of tests to deliver high-quality statistical results",
+        "Won Optimizely's \"BEST EXPERIMENTATION PRACTICE\" award in collaboration with our robust, diversely talented experimentation team at WarnerMedia.",
+        "Consult with clients and non-technical team members on complex technical issues"
+      ],
+      "company": "WarnerMedia - HBO Max",
+      "position": "Software Engineer (Multivariate testing)",
+      "location": "New York, NY",
+      "startDate": "January 2022",
+      "endDate": "October 2023"
+    },{
+      "company": "Creative Circle",
+      "location": "Philadelphia, PA",
+      "website": "",
+      "startDate": "February 2020",
+      "endDate": "January 2022",
+      "highlights": [
+        "Served as development support & lead on the front end for websites using Javascript, React, Angular, PHP & SCSS",
+        "Led marketing projects with several Project Managers over several unique ecommerce projects",
+        "Working within an agile and digital pipeline using HTML5, CSS3 and Javascript frameworks in order to build web apps & prioritize tracking with embedded Google Analytics integration ",
+        "Working knowledge of tag managers and web analytics implementation (Google Tag Manager, Adobe Launch, Adobe Analytics, Google Analytics, etc.)"
+      ],
+      "position": "Web Developer"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Development",
+      "level": "",
+      "keywords": [
+        "React",
+        "Javascript",
+        "Node.js",
+        "HTML5",
+        "CSS3",
+        "DevOps",
+        "Optimizely"
+      ]
+    },
+    {
+      "keywords": [
+        "Gitlab",
+        "Github",
+        "Bitbucket",
+        "Visual Studio Code"
+      ],
+      "name": "Source control"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Find an IKEA Location",
+      "description": "The purpose of this project was to provide a responsive store finder application, allowing users to view their local store’s hours, set their preferred store and more. Also using the Google Maps API, SCSS framework, and more. Furthermore, ensured my project manager’s ability to edit any content seen on this page such as store hours with a javascript algorithm which fetches the JSON database.",
+      "url": "https://www.ikea.com/us/en/stores/",
+      "keywords": [
+        "Javascript",
+        "JSON",
+        "SCSS",
+        "HTML5",
+        "GitLab",
+        "CI/CD, etc."
+      ]
+    },
+    {
+      "keywords": [
+        "React",
+        "Node.js",
+        "SQL",
+        "HTML5",
+        "REST API",
+        "SCSS",
+        "DevOps, etc."
+      ],
+      "name": "Swipe Fright",
+      "url": "https://swipefright.netlify.app/",
+      "description": "This is a project I built while I was learning web development. It was always a dream of mine to create a website catered to horror film fans, so I did it with swipe fright as a pet project. It is using tools including the React framework, SQL database, REST API in order to fetch the movies database, and plenty more. I took advantage of many open source APIs and libraries, often binding them together as dependent to one another (a methodology which I would eventually integrate to my IKEA stores web application)."
+    }
+  ],
+  "awards": [
+    {
+      "title": "",
+      "date": "",
+      "awarder": "",
+      "summary": ""
+    }
+  ],
+  "sections": [
+    "templates",
+    "profile",
+    "education",
+    "work",
+    "skills",
+    "projects",
+    "awards"
+  ]
+}

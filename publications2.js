@@ -21,16 +21,11 @@
         html:        item.outerHTML,
         service:     item.getAttribute('data-service') || '',
         type:        item.getAttribute('data-type')    || '',
-        date:        parseDateValue(item),
         searchText:  buildSearchText(item)
       };
     });
 
     target.innerHTML = '';
-
-    allData.sort(function(a, b) {
-      return b.date - a.date;
-    });
 
     var qp          = new URLSearchParams(location.search);
     var initType    = qp.get('type')    || '';
@@ -40,69 +35,23 @@
     if (isNaN(initPage) || initPage < 1) initPage = 1;
     currentPage = initPage;
 
-    var searchInput = document.getElementById('featured-insights-search');
-    if (searchInput && initSearch) searchInput.value = initSearch;
+    var searchInput   = document.getElementById('featured-insights-search');
+    var typeSelect    = document.getElementById('featured-insights-type');
+    var serviceSelect = document.getElementById('featured-insights-services');
 
-    // Set active state on accordion filter items from URL params
-    if (initType || initService) {
-      var filterLinks = document.querySelectorAll('#insights-filter a[data-catname]');
-      filterLinks.forEach(function(link) {
-        var parent = (link.getAttribute('data-catparent') || '').toLowerCase();
-        var name   = link.getAttribute('data-catname') || '';
-        var handle = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        if ((parent === 'type' && handle === initType) ||
-            (parent === 'service' && handle === initService)) {
-          setActiveCatLink(link);
-        }
-      });
-    }
+    if (searchInput   && initSearch)  searchInput.value   = initSearch;
+    if (typeSelect    && initType)    typeSelect.value     = initType;
+    if (serviceSelect && initService) serviceSelect.value  = initService;
 
-    // Wire accordion filter links
-    document.querySelectorAll('#insights-filter a[data-catname]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        var parent  = (link.getAttribute('data-catparent') || '').toLowerCase();
-        var name    = link.getAttribute('data-catname') || '';
-        var handle  = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        var searchInput = document.getElementById('featured-insights-search');
-
-        // Toggle off if already active
-        if (link.getAttribute('aria-pressed') === 'true') {
-          link.setAttribute('aria-pressed', 'false');
-          link.classList.remove('active');
-          removeSelectedItem(link.id);
-          currentPage = 1;
-          runFilters(true);
-          return;
-        }
-
-        // Clear any existing filter of same parent group first
-        document.querySelectorAll('#insights-filter a[data-catparent="' + link.getAttribute('data-catparent') + '"]').forEach(function(sibling) {
-          sibling.setAttribute('aria-pressed', 'false');
-          sibling.classList.remove('active');
-          removeSelectedItem(sibling.id);
-        });
-
-        setActiveCatLink(link);
-        currentPage = 1;
-        runFilters(true);
-      });
-    });
-
-    if (searchInput) searchInput.addEventListener('input', onFilterChange);
+    if (searchInput)   searchInput.addEventListener('input',  onFilterChange);
+    if (typeSelect)    typeSelect.addEventListener('change',  onFilterChange);
+    if (serviceSelect) serviceSelect.addEventListener('change', onFilterChange);
 
     window.addEventListener('popstate', function () {
       var p = new URLSearchParams(location.search);
-      if (searchInput) searchInput.value = p.get('q') || '';
-      // Reset all active states
-      document.querySelectorAll('#insights-filter a[data-catname]').forEach(function(l) {
-        l.setAttribute('aria-pressed', 'false');
-        l.classList.remove('active');
-      });
-      var selBox = document.getElementById('insights-selecteditems');
-      if (selBox) selBox.innerHTML = '';
-      var selParent = document.getElementById('insights-selecteditemsbox');
-      if (selParent) selParent.classList.add('hide');
+      if (searchInput)   searchInput.value   = p.get('q')       || '';
+      if (typeSelect)    typeSelect.value     = p.get('type')    || '';
+      if (serviceSelect) serviceSelect.value  = p.get('service') || '';
       currentPage = parseInt(p.get('page') || '1', 10) || 1;
       runFilters(false);
     });
@@ -110,80 +59,36 @@
     runFilters(false);
   }
 
-  function setActiveCatLink(link) {
-    link.setAttribute('aria-pressed', 'true');
-    link.classList.add('active');
-    var selBox    = document.getElementById('insights-selecteditems');
-    var selParent = document.getElementById('insights-selecteditemsbox');
-    if (selBox && selParent) {
-      selParent.classList.remove('hide');
-      var existing = selBox.querySelector('[data-refid="' + link.id + '"]');
-      if (!existing) {
-        var div = document.createElement('div');
-        div.setAttribute('data-refid', link.id);
-        div.innerHTML = link.textContent + " <i class='fa-solid fa-xmark'></i>";
-        div.addEventListener('click', function() {
-          link.setAttribute('aria-pressed', 'false');
-          link.classList.remove('active');
-          removeSelectedItem(link.id);
-          currentPage = 1;
-          runFilters(true);
-        });
-        selBox.appendChild(div);
-      }
-    }
-  }
-
-  function removeSelectedItem(linkId) {
-    var selBox = document.getElementById('insights-selecteditems');
-    if (!selBox) return;
-    var existing = selBox.querySelector('[data-refid="' + linkId + '"]');
-    if (existing) existing.parentNode.removeChild(existing);
-    if (selBox.children.length === 0) {
-      var selParent = document.getElementById('insights-selecteditemsbox');
-      if (selParent) selParent.classList.add('hide');
-    }
-  }
-
   function onFilterChange() {
     currentPage = 1;
     runFilters(true);
   }
 
-  function getActiveFilters() {
-    var typeVal = '';
-    var svcVal  = '';
-    document.querySelectorAll('#insights-filter a[aria-pressed="true"]').forEach(function(link) {
-      var parent = (link.getAttribute('data-catparent') || '').toLowerCase();
-      var name   = link.getAttribute('data-catname') || '';
-      var handle = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-      if (parent === 'type')    typeVal = handle;
-      if (parent === 'service') svcVal  = handle;
-    });
-    return { typeVal: typeVal, svcVal: svcVal };
-  }
-
   function runFilters(push) {
-    var searchInput = document.getElementById('featured-insights-search');
-    var q = searchInput ? searchInput.value.trim().toLowerCase() : '';
-    var active = getActiveFilters();
+    var searchInput   = document.getElementById('featured-insights-search');
+    var typeSelect    = document.getElementById('featured-insights-type');
+    var serviceSelect = document.getElementById('featured-insights-services');
+
+    var q       = searchInput   ? searchInput.value.trim().toLowerCase() : '';
+    var typeVal = typeSelect    ? typeSelect.value                        : '';
+    var svcVal  = serviceSelect ? serviceSelect.value                    : '';
 
     filteredData = allData.filter(function (d) {
-      return (!active.svcVal  || d.service === active.svcVal)
-          && (!active.typeVal || d.type    === active.typeVal)
-          && (!q              || d.searchText.indexOf(q) !== -1);
+      return (!svcVal  || d.service === svcVal)
+          && (!typeVal || d.type    === typeVal)
+          && (!q       || d.searchText.indexOf(q) !== -1);
     });
 
-    if (push) syncUrl(active.typeVal, active.svcVal, q, currentPage);
+    if (push) syncUrl(typeVal, svcVal, q, currentPage);
     renderPage();
   }
 
   function syncUrl(type, service, q, page) {
     var params = new URLSearchParams();
-    if (type)    params.set('type',    type);
-    if (service) params.set('service', service);
-    if (q)       params.set('q',       q);
-    if (page > 1) params.set('page',   page);
+    if (type)     params.set('type',    type);
+    if (service)  params.set('service', service);
+    if (q)        params.set('q',       q);
+    if (page > 1) params.set('page',    page);
     var url = location.pathname + (params.toString() ? '?' + params.toString() : '');
     history.pushState({ type: type, service: service, q: q, page: page }, '', url);
   }
@@ -247,10 +152,13 @@
     nav.querySelectorAll('.page-link[data-page]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         currentPage = parseInt(this.getAttribute('data-page'), 10);
-        var active  = getActiveFilters();
-        var searchInput = document.getElementById('featured-insights-search');
-        var q = searchInput ? searchInput.value.trim().toLowerCase() : '';
-        syncUrl(active.typeVal, active.svcVal, q, currentPage);
+        var typeSelect    = document.getElementById('featured-insights-type');
+        var serviceSelect = document.getElementById('featured-insights-services');
+        var searchInput   = document.getElementById('featured-insights-search');
+        var typeVal = typeSelect    ? typeSelect.value                        : '';
+        var svcVal  = serviceSelect ? serviceSelect.value                    : '';
+        var q       = searchInput   ? searchInput.value.trim().toLowerCase() : '';
+        syncUrl(typeVal, svcVal, q, currentPage);
         renderPage();
         var t = document.getElementById('insights-grid-target');
         if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -258,13 +166,6 @@
     });
 
     container.appendChild(nav);
-  }
-
-  function parseDateValue(item) {
-    var el = item.querySelector('.featured-insight-date');
-    if (!el) return 0;
-    var d = new Date(el.textContent.trim());
-    return isNaN(d.getTime()) ? 0 : d.getTime();
   }
 
   function buildSearchText(item) {

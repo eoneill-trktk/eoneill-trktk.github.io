@@ -1,0 +1,85 @@
+{%- assign templatePath = "includes/SiteHeaderLayout.liquid" | get_templatepath -%}
+{%- include templatePath, Model: Model -%}
+{%- assign pageIcontent = Model | get_page -%}
+{%- assign authors = Model.ContentAuthors -%}
+
+{%- comment %} ── Publication types only — everything else is the service ── {%- endcomment %}
+{%- assign publicationTypes = "technical-report,poster,presentation,journal-article,peer-reviewed-journal-article,case-study,white-paper,video,webinar,webcast,issue-brief,infographic,perspective,multimedia" | split: "," -%}
+
+{%- assign typeLabel   = "" -%}
+{%- assign typeClass   = "" -%}
+{%- assign serviceLabel = "" -%}
+
+{%- if Model.ContentCategoryNames and Model.ContentCategoryNames.size > 0 -%}
+  {%- for category in Model.ContentCategoryNames -%}
+    {%- assign catSlug = category | handleize -%}
+    {%- if publicationTypes contains catSlug -%}
+      {%- if typeLabel == "" -%}
+        {%- assign typeLabel = category -%}
+        {%- assign typeClass = catSlug -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- if serviceLabel == "" -%}
+        {%- assign serviceLabel = category -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+<main id="main" class="site-main newscontentpage">
+    <section class="main shell top-padding">
+      <div class="main-content">
+        <div class="standard-content-layout-heading">
+            <div class="category-pills-container">
+              {%- if serviceLabel != "" -%}
+                <span class="post-term-item service-pill">{{ serviceLabel }}</span>
+              {%- endif -%}
+              {%- if typeLabel != "" -%}
+                <span class="post-term-item term-type">{{ typeLabel }}</span>
+              {%- endif -%}
+            </div>
+
+            {%- assign currentUrl = request.path -%}
+            {%- if currentUrl contains "/news/" -%}
+              <div class="tags">
+                <ul>
+                  <li><a href="/news/">News</a></li>
+                </ul>
+              </div>
+            {%- endif -%}
+
+            <h1 {{ CmsHelper.EditAttributes("PageTitle") }}>{{ Model.PageTitle }}</h1>
+            <div class="date-posted" {{ CmsHelper.EditAttributes("ContentPostedDate") }}>{{ Model.ContentPosted | date: "%b %d, %Y" }}</div>
+            {%- if authors != null and authors.size > 0 -%}
+            <div class="author">
+              <ul>
+              {%- for author in authors -%}
+                <li>
+                  <span class="authname">{{ author.Name }}</span>
+                  <span class="authdesc">{{ author.Description }}</span>
+                </li>
+              {%- endfor -%}
+              </ul>
+            </div>
+            {%- endif -%}
+            </div>
+            {%- assign pageImg = Model.HeroImage | get_image -%}
+            {%- if pageImg != null -%}
+            <div {{ CmsHelper.EditAttributes("HeroImageFile") }} class="page-img">
+            <img src="{{ pageImg.Url }}" alt="{{ pageImg.Imgalt }}" loading="lazy" />
+            </div>
+            {%- endif -%}
+            {{ Property.For(Model=Model.MainContentArea
+              , PropertyName = "MainContentArea"
+              , HasContainer=false
+              , UseItemContainer=false) }}
+              </div>
+
+{% assign templatePath = "includes/RelatedLinks.liquid" | get_templatepath %}
+{% include templatePath, Model: Model %}
+
+    </section>
+</main>
+
+{% assign templatePath = "includes/footer.liquid" | get_templatepath %}
+{% include templatePath, Model: Model %}

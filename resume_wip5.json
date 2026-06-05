@@ -1,0 +1,111 @@
+{
+  "selectedTemplate": 1,
+  "headings": {
+    "skills": "Core Competencies",
+    "awards": ""
+  },
+  "basics": {
+    "phone": "(267) 455-5383",
+    "website": "",
+    "location": {
+      "address": "Philadelphia, PA"
+    },
+    "name": "Eric O'Neill",
+    "email": "ericoneill34@gmail.com",
+    "summary": "Digital e-commerce professional with 6+ years at IKEA US, specializing in online performance analysis, conversion optimization, and data-driven storytelling. Proven track record translating ContentSquare and Google Analytics insights into measurable improvements across the customer funnel, with hands-on experience leading A/B testing, campaign reporting, and customer journey mapping at scale. Uniquely combines a content strategy background with front-end technical proficiency to bridge the gap between insights and execution."
+  },
+  "education": [
+    {
+      "institution": "",
+      "location": "",
+      "area": "",
+      "studyType": "",
+      "startDate": "",
+      "endDate": "",
+      "gpa": ""
+    }
+  ],
+  "work": [
+    {
+      "company": "IKEA US",
+      "position": "Online Content Specialist",
+      "location": "Conshohocken, PA",
+      "startDate": "August 2020",
+      "endDate": "Present",
+      "highlights": [
+        "Owned end-to-end digital content strategy and performance for key business areas including (but not limited to) IKEA Offers pages, IKEA Food, IKEA Family, and IKEA Finance, ensuring alignment with commercial priorities and customer experience goals across IKEA.com",
+        "Routinely presented and shared campaign performance reporting to the full marketing function, synthesizing ContentSquare and Google Analytics data into executive-ready narratives covering major seasonal campaigns (Summer Sale, Winter Sale, and other major campaigns)",
+        "Built and maintained customer journey maps to identify friction points, gaps across the e-commerce funnel, translating qualitative and quantitative insights into actionable site improvements",
+        "Led A/B testing initiatives to validate optimization hypotheses and improve on-site conversion, partnering with communication specialists, business stakeholders, and UX to scope, execute, and analyze experiments",
+        "Leveraged technical proficiency in HTML, CSS, and JavaScript to implement front-end content enhancements independently, reducing reliance on development teams and accelerating time-to-publish for high-priority marketing initiatives",
+        "Managed the full lifecycle of promotional offer content on IKEA.us. From launch through expiration, ensuring accuracy, timeliness, and compliance with campaign schedules across multiple concurrent promotions",
+        "Served as a cross-functional bridge between marketing, business, and digital teams. Regularly aligning local priorities with global platform standards and CMS governance via Publicera"
+      ]
+    },
+    {
+      "company": "IKEA US",
+      "position": "Web Developer (Contract - Creative Circle)",
+      "location": "Conshohocken, PA",
+      "startDate": "May 2019",
+      "endDate": "August 2020",
+      "highlights": [
+        "Designed and developed the IKEA US Store Finder (ikea.com/us/en/stores/), a responsive, customer-facing application integrating the Google Maps API, real-time store hours via a JSON-driven algorithm, and SCSS-based UI (This page remained live thru May 2026)",
+        "Implemented Google Analytics tracking and contributed to early A/B testing efforts, establishing a foundation in data-informed digital development within a large-scale retail e-commerce environment",
+        "Collaborated with marketing and content stakeholders to deliver front-end solutions aligned with SEO, accessibility, and analytics best practices"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Analytics & Optimization",
+      "keywords": [
+        "Google Analytics",
+        "ContentSquare",
+        "A/B Testing",
+        "Customer Journey Mapping"
+      ]
+    },
+    {
+      "name": "Digital & E-Commerce",
+      "keywords": [
+        "E-Commerce Strategy",
+        "Campaign Reporting",
+        "Stakeholder Alignment"
+      ]
+    },
+    {
+      "name": "Technical",
+      "keywords": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Google Tag Manager",
+        "Google Maps API"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "keywords": [
+        null
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "",
+      "date": "",
+      "awarder": "",
+      "summary": ""
+    }
+  ],
+  "sections": [
+    "templates",
+    "profile",
+    "education",
+    "work",
+    "skills",
+    "projects",
+    "awards"
+  ]
+}

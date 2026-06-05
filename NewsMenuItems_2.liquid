@@ -1,8 +1,9 @@
 <ul class="featured-news-grid">
   {%- if Model.Pages and Model.Pages.size > 0 -%}
     {%- assign folderSlugs = "news" | split: "," -%}
+    {%- assign sortedPages = Model.Pages | sort: "PagePostedDate" | reverse -%}
 
-    {%- for page in Model.Pages -%}
+    {%- for page in sortedPages -%}
       {%- assign skipPage = false -%}
       {%- assign pageUrl = page.PageLink | downcase | strip -%}
 
@@ -15,10 +16,10 @@
       {%- endfor -%}
 
       {%- unless skipPage -%}
-        {%- assign postedDate = page.PostedDate -%}
-        {%- unless postedDate == blank -%}
-          {%- assign postedDate = postedDate | date: "%B %d, %Y" -%}
-        {%- endunless -%}
+        {%- assign postedDate = page.PageData.ContentPostedDate -%}
+        {%- if postedDate == blank -%}
+          {%- assign postedDate = page.PagePostedDate -%}
+        {%- endif -%}
 
         <li class="featured-news-item">
           <a href="{{ page.PageLink }}" class="featured-news-card">
@@ -56,7 +57,7 @@
               <h2>{{ page.PageTitle | default: page.PageName }}</h2>
               <div class="featured-news-meta">
                 {%- unless postedDate == blank -%}
-                  <div class="featured-news-date">{{ postedDate }}</div>
+                  <div class="featured-news-date">{{ postedDate | date: "%B %-d, %Y" }}</div>
                 {%- endunless -%}
               </div>
             </div>

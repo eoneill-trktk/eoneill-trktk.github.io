@@ -15,7 +15,7 @@
       {%- endfor -%}
 
       {%- unless skipPage -%}
-        {%- assign postedDate = page.PostedDate -%}
+        {%- assign postedDate = page.ContentPosted -%}
         {%- unless postedDate == blank -%}
           {%- assign postedDate = postedDate | date: "%B %d, %Y" -%}
         {%- endunless -%}
